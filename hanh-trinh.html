@@ -129,6 +129,13 @@
   .practice-triad{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
   .practice-triad .body-text{margin-top:0;}
 
+  .companion-section{background:var(--paper);border:2px solid var(--teal);border-radius:20px;padding:20px;}
+  .companion-section h3{font-size:17px;color:#1a8c7f;display:flex;align-items:center;gap:8px;}
+  .companion-section .body-text{font-size:14px;line-height:1.7;color:var(--ink);margin-top:10px;font-weight:600;}
+  .companion-item{margin-top:20px;padding-top:18px;border-top:2px dashed var(--border);}
+  .companion-item:first-of-type{margin-top:16px;padding-top:0;border-top:none;}
+  .companion-item h4{font-size:15.5px;color:var(--gold-dark);display:flex;align-items:center;gap:6px;font-family:'Baloo 2','Nunito',sans-serif;}
+
   .cta-card{background:var(--gold-tint);border:2px solid var(--gold);border-radius:20px;padding:20px;text-align:center;margin-top:6px;}
   .cta-card .price{font-family:'Baloo 2',sans-serif;font-size:24px;color:var(--gold-dark);margin-top:4px;}
   .cta-card .price s{color:var(--ink-soft);font-size:15px;margin-right:8px;}
@@ -245,6 +252,7 @@
         <div class="combined-box" id="section-combined"></div>
         <div class="philosophy-section" id="section-philosophy"></div>
         <div class="practice-section" id="section-practice"></div>
+        <div class="companion-section" id="section-companion"></div>
       </div>
 
       <div class="cta-card">
@@ -726,7 +734,7 @@
 
   var ROOTS = [
     "<b>Mỗi đứa trẻ là một quặng mỏ, không phải một sản phẩm lỗi.</b> Giá trị không nằm sẵn trên bề mặt — cần thời gian và sự kiên nhẫn để khai mở, như tìm một viên châu ngọc trong lòng đất. So sánh chỉ làm mờ châu ngọc, không làm nó sáng hơn: nhịp của con không cần giống nhịp của bạn nào khác.",
-    "<b>Đồng hành, không đồng hoá.</b> Minewise và Vietwise tin mỗi con là một vì sao riêng — vai trò của ba mẹ là giúp con toả sáng theo đúng hình dạng của mình, không phải uốn con theo một khuôn mẫu \"đứa trẻ ngoan\" chung.",
+    "<b>Đồng hành, không đồng hoá.</b> Minewise tin mỗi con là một vì sao riêng — vai trò của ba mẹ là giúp con toả sáng theo đúng hình dạng của mình, không phải uốn con theo một khuôn mẫu \"đứa trẻ ngoan\" chung.",
     "<b>Khiêm nhường mới tự tin, không phải giỏi mới tự tin.</b> Con không cần giỏi nhất mới được tự tin — chỉ cần được nhìn nhận đúng nỗ lực thật của mình. Ngôi Sao Trong Tim sáng lên từ hành động cụ thể, không phải từ lời khen suông.",
     "<b>Công nhận cảm xúc trước, dạy sau.</b> Khi con buồn, giận, hay sợ, điều con cần đầu tiên không phải một bài học đạo lý — mà là được ở cùng cảm xúc đó, trước khi ba mẹ nói tiếp điều gì.",
     "<b>Học là phải vui, và buông tay đúng lúc cũng là một hình thức yêu thương.</b> Một hoạt động khiến con né tránh thường là dấu hiệu cần đổi cách tiếp cận, không phải bằng chứng con \"lười\". Tin tưởng con đủ để con tự vấp ngã và tự đứng lên — đó là món quà, không phải sự lơ là.",
@@ -798,8 +806,8 @@
 
     var philEl = document.getElementById("section-philosophy");
     var philIntro = (rc && rp)
-      ? 'Từ kết quả “' + rc.name + '” của con và giai đoạn “' + rp.name + '” của ba mẹ ở trên, đây là những điều gốc rễ hơn mà Minewise và Vietwise tin đúng cho <b>mọi</b> con trong độ tuổi 4-10 — không chỉ riêng con của nhà mình:'
-      : 'Ngoài kết quả trắc nghiệm ở trên, đây là những điều gốc rễ hơn mà Minewise và Vietwise vẫn luôn nhắc ba mẹ, áp dụng cho mọi con trong độ tuổi 4-10, không chỉ riêng con của nhà mình:';
+      ? 'Từ kết quả “' + rc.name + '” của con và giai đoạn “' + rp.name + '” của ba mẹ ở trên, đây là những điều gốc rễ hơn mà Minewise và <b>VietWise</b> — chương trình đồng hành nuôi dạy con mà Minewise học hỏi và phát triển tiếp — tin đúng cho <b>mọi</b> con trong độ tuổi 4-10, không chỉ riêng con của nhà mình:'
+      : 'Ngoài kết quả trắc nghiệm ở trên, đây là những điều gốc rễ hơn mà Minewise và <b>VietWise</b> — chương trình đồng hành nuôi dạy con mà Minewise học hỏi và phát triển tiếp — vẫn luôn nhắc ba mẹ, áp dụng cho mọi con trong độ tuổi 4-10, không chỉ riêng con của nhà mình:';
     philEl.innerHTML =
       '<h3>🌱 Gốc Rễ Đằng Sau Mọi Điều Minewise Làm</h3>' +
       '<div class="body-text">' + philIntro + '</div>' +
@@ -810,19 +818,118 @@
 
     var practiceEl = document.getElementById("section-practice");
     practiceEl.innerHTML =
-      '<h3>🪞 Nhìn Con Sửa Mình — Một Thực Hành Từ VietWise</h3>' +
-      '<div class="body-text">Nguyên tắc cuối cùng ở trên — trải nghiệm thật, lặp lại nhỏ mỗi tuần — nghe thì dễ đồng ý, nhưng áp dụng cụ thể ra sao? VietWise gọi cách áp dụng này là <b>Ẩn Dụ Tấm Gương</b>: phần lớn những gì con thể hiện ra ngoài, kể cả những điều ba mẹ chưa hiểu vì sao, thường đang phản chiếu lại một điều gì đó từ chính ba mẹ — một thói quen, một cách phản ứng, một điều ba mẹ vô tình truyền đạt mà chưa để ý.</div>' +
+      '<h3>🪞 Nhìn Con Sửa Mình</h3>' +
+      '<div class="body-text">Nguyên tắc cuối cùng ở trên — trải nghiệm thật, lặp lại nhỏ mỗi tuần — nghe thì dễ đồng ý, nhưng áp dụng cụ thể ra sao? Minewise gọi cách áp dụng này là <b>Ẩn Dụ Tấm Gương</b>: phần lớn những gì con thể hiện ra ngoài, kể cả những điều ba mẹ chưa hiểu vì sao, thường đang phản chiếu lại một điều gì đó từ chính ba mẹ — một thói quen, một cách phản ứng, một điều ba mẹ vô tình truyền đạt mà chưa để ý.</div>' +
       '<div class="practice-example">' +
-        '<div class="plabel">Ví dụ thật từ VietWise</div>' +
+        '<div class="plabel">Ví dụ thật</div>' +
         'Một bé dùng khăn lau mặt của mình để lau tường, ba mẹ vội mắng con nghịch bẩn. Nhưng khi hỏi lại, con trả lời hồn nhiên: "Con lau mặt cho bạn tường." Hoá ra con không nghịch — con đang làm đúng điều ba mẹ vẫn dạy: yêu thương và chăm sóc mọi thứ xung quanh mình, chỉ là con hiểu theo cách ngây thơ của một đứa trẻ. Cái "sai" ban đầu ba mẹ nhìn thấy, thật ra là một cách truyền đạt của ba mẹ chưa đủ rõ, chứ không phải lỗi của con.' +
       '</div>' +
-      '<div class="body-text">Vì vậy, trước khi kết luận con "hư" hay "sai", VietWise mời ba mẹ dừng lại một nhịp và nhìn vào tấm gương đó trước — không phải để tự trách, mà để hiểu đúng gốc rễ.</div>' +
+      '<div class="body-text">Vì vậy, trước khi kết luận con "hư" hay "sai", hãy thử dừng lại một nhịp và nhìn vào tấm gương đó trước — không phải để tự trách, mà để hiểu đúng gốc rễ.</div>' +
       '<div class="practice-exercise">' +
         '<div class="plabel">Thực hành mỗi tuần</div>' +
         'Lần tới khi con làm điều gì khiến ba mẹ muốn phản ứng ngay, hãy thử dừng lại vài giây và hỏi con: <b>"Con làm vậy vì sao thế?"</b> — hỏi trước khi kết luận đúng hay sai. Câu trả lời của con thường sẽ cho ba mẹ thấy một góc nhìn khác, và đôi khi, một phần phản chiếu của chính mình.' +
       '</div>' +
-      '<div class="body-text" style="margin-top:14px;">Gốc rễ của thực hành này chính là 3 Bản Chất Cao Quý mà Vietwise và Minewise vẫn cùng con nuôi dưỡng mỗi tuần trong CLB Sao Sáng: <b>Yêu thương</b> (như hoa thơm, toả ra một cách tự nhiên), <b>Khiêm nhường</b> (như đại dương, luôn thấp hơn mọi dòng sông để đón nhận), và <b>Phụng sự</b> (như mặt trời, cho đi mà không cần được nhìn thấy). Khi ba mẹ thực hành nhìn con sửa mình, đó cũng chính là đang sống ba bản chất này, chứ không chỉ dạy con bằng lời.</div>' +
+      '<div class="body-text" style="margin-top:14px;">Gốc rễ của thực hành này chính là 3 Bản Chất Cao Quý mà Minewise vẫn cùng con nuôi dưỡng mỗi tuần trong CLB Sao Sáng: <b>Yêu thương</b> (như hoa thơm, toả ra một cách tự nhiên), <b>Khiêm nhường</b> (như đại dương, luôn thấp hơn mọi dòng sông để đón nhận), và <b>Phụng sự</b> (như mặt trời, cho đi mà không cần được nhìn thấy). Khi ba mẹ thực hành nhìn con sửa mình, đó cũng chính là đang sống ba bản chất này, chứ không chỉ dạy con bằng lời.</div>' +
       '<div class="body-text" style="margin-top:10px;">Ba mẹ có thể thử ngay tuần này, không cần chờ khoá học nào cả.</div>';
+
+    var companionEl = document.getElementById("section-companion");
+    companionEl.innerHTML =
+      '<h3>🧭 10 Khoảnh Khắc Đồng Hành Mỗi Ngày</h3>' +
+      '<div class="body-text">Đây là 10 khoảnh khắc rất đời thường mà ba mẹ nào cũng gặp — mỗi khoảnh khắc có một cách cụ thể để ba mẹ thử ngay, không cần đợi buổi học nào.</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>🧊 Khi con giận, không muốn nói chuyện</h4>' +
+        '<div class="body-text">Cho con đứng góc, úp mặt vào tường hay phạt phòng riêng để "tự bình tĩnh một mình" nghe có vẻ hợp lý, nhưng cách này (gọi là time-out) dễ khiến con hiểu nhầm mình đang bị bỏ lại. Cách thay thế là time-in: vẫn cho con không gian, nhưng không cắt đứt kết nối.</div>' +
+        '<div class="practice-example">' +
+          '<div class="plabel">Kịch bản cụ thể</div>' +
+          'Con đang giận, không muốn nói chuyện. Ba mẹ hỏi: "Con muốn ba/mẹ ở lại hay ra ngoài?" Nếu con muốn ở một mình, cứ tôn trọng — nhưng trước khi ra, nói rõ: "Ba/mẹ không muốn đi chút nào, nhưng ba/mẹ tôn trọng lựa chọn của con. Khi nào con sẵn sàng, cứ gọi ba/mẹ." Ra ngoài một chút, quay lại hỏi lại, lặp lại đều đặn, không cáu, không ép. Thường chỉ sau vài lần, chính con sẽ chủ động tìm lại ba mẹ.' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>💧 Khi con khóc</h4>' +
+        '<div class="body-text">Quyền được khóc là một quyền rất cơ bản, nhưng lại thường bị tước đi sớm nhất ngay trong chính ngôi nhà của mình — nhất là với các bé trai. Thay vì tìm mọi cách dỗ con nín càng nhanh càng tốt, hãy thử để con khóc trọn vẹn, có ba mẹ ở bên. Một cảm xúc được đi hết một vòng thường qua nhanh hơn một cảm xúc bị chặn lại giữa chừng.</div>' +
+        '<div class="practice-example">' +
+          '<div class="plabel">Thử nói với con câu này</div>' +
+          'Thay vì "Nín đi, có gì đâu mà khóc", thử nói: "Con cứ khóc đi, ba/mẹ ở đây với con." Không cần dỗ cho hết ngay — chỉ cần có mặt.' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>🎢 Khi con sợ thử điều gì đó, hoặc lỡ làm hỏng đồ</h4>' +
+        '<div class="body-text">Rất dễ mắng ngay khi con làm đổ, làm hỏng — nhưng lỡ tay hay thử-sai chính là cách con học được điều gì đó mới. Càng để con "mất nhỏ khi còn nhỏ" (thử, sai, rút kinh nghiệm lúc rủi ro còn thấp), con càng đỡ phải "mất lớn khi lớn".</div>' +
+        '<div class="practice-example">' +
+          '<div class="plabel">Cách áp dụng</div>' +
+          'Với một nỗi sợ cụ thể (sợ cầu thang, sợ bóng tối...), đừng cố thuyết phục trực diện "có gì đâu mà sợ" — thử xây sự dũng cảm ở những việc nhỏ khác trong ngày (ba mẹ thử mặc một bộ đồ mình ngại mặc, kể một nỗi sợ của chính mình cho con nghe). Khi "dũng cảm" trở thành chuyện bình thường ở nhà, nỗi sợ cụ thể ban đầu thường tự nhẹ đi, không cần đối đầu trực diện.' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>😔 Khi con thất vọng, thua cuộc</h4>' +
+        '<div class="body-text">Bản năng của ba mẹ là muốn con đỡ buồn càng nhanh càng tốt — nhưng thất vọng là điều không thể tránh khỏi cả đời, chỉ có thể chuẩn bị cho con năng lực đi qua nó.</div>' +
+        '<div class="practice-example">' +
+          '<div class="plabel">2 bước thử làm</div>' +
+          '1) Cho phép con buồn, ở bên cạnh: "Mẹ biết con rất buồn vì thua, con cứ buồn, mẹ ngồi đây với con." 2) Khi cảm xúc đã lắng, cùng con nhìn lại và thử tiếp — không né tránh. Nếu ba mẹ bỏ cuộc ngay lúc khó ("thôi mình đừng chơi trò này nữa"), con sẽ học đúng điều ngược lại với kiên trì.' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>🌟 Khi con khoe một việc tốt</h4>' +
+        '<div class="body-text">Đây là tình huống nhiều ba mẹ lúng túng: khen con thì con dễ quen làm việc tốt chỉ để được khen; phớt lờ thì con cảm thấy bị phủ nhận. Có một cách khác: đón nhận niềm vui của con, rồi hướng con nhìn vào bên trong.</div>' +
+        '<div class="practice-example">' +
+          '<div class="plabel">Thử hỏi con câu này</div>' +
+          'Khi con khoe, thử hỏi: "Con thấy vui không?" Sau khi con gật đầu, nói tiếp: "Đó là phần thưởng trong lương tâm của con đó — con làm đúng nên con có được niềm vui đó." Rồi vui lây cùng con, thay vì làm người đứng ra ban phát lời khen.' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>🧸 Khi con giành hoặc lấy đồ của người khác</h4>' +
+        '<div class="body-text">Không đồng ý với một hành động của con không có nghĩa là phải phủ nhận cảm xúc đứng sau nó — hai điều này tách riêng được.</div>' +
+        '<div class="practice-example">' +
+          '<div class="plabel">Mẫu câu thử dùng</div>' +
+          '"Mẹ không đồng ý với việc con vừa lấy đồ của bạn mà chưa xin phép. Nhưng mẹ hiểu con đang rất muốn chơi món đó — con có thể buồn một chút, mẹ ở đây với con." Con vẫn được phép buồn, chỉ có hành động cần sửa, không phải cảm xúc.' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>🌙 Khi con không chịu ngủ đúng giờ</h4>' +
+        '<div class="body-text">Trước khi kết luận con "lì" hay "vô lý", thử nhìn theo góc của con: ngủ là cơ chế phục hồi khi năng lượng cạn — nếu ban ngày con chưa vận động đủ hoặc chưa ra nắng đủ, tối con thật sự chưa buồn ngủ, dù giờ giấc đó không đúng như ba mẹ mong.</div>' +
+        '<div class="practice-example">' +
+          '<div class="plabel">Cách áp dụng</div>' +
+          'Thay vì ép ngủ hoặc quát, thử tăng vận động và thời gian ra nắng vào ban ngày trước — nhịp ngủ thường tự điều chỉnh theo sau, không cần đối đầu đúng vào giờ đi ngủ.' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>📱 Khi con đòi xem điện thoại/tablet</h4>' +
+        '<div class="body-text">Cấm hẳn công nghệ thường chỉ tạo ra 2 kết quả: con càng tò mò hơn vì không tin lời ba mẹ, hoặc con nghe lời nhưng lớn lên lại không giỏi công nghệ — trong khi công nghệ tự nó không xấu, chỉ có cách dùng đúng hay sai.</div>' +
+        '<div class="practice-example">' +
+          '<div class="plabel">Cách áp dụng</div>' +
+          'Thay vì chỉ đếm giờ, thử phân rõ 3 mục đích mỗi lần cầm thiết bị: giao tiếp (gọi video ông bà), học tập (tra cứu, xem kênh giáo dục), giải trí (có giờ riêng, biết rõ đang giải trí). Ba mẹ cũng nói rõ mục đích khi cầm điện thoại trước mặt con — con sẽ dần học cách tự nhận biết mình đang dùng công nghệ để làm gì.' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>🗣️ 3 câu ba mẹ nên tránh nói</h4>' +
+        '<div class="body-text">Một lỗi rất dễ mắc dù ba mẹ đã hiểu đúng phương pháp: lấy mình hoặc người khác làm chuẩn để so sánh, thay vì hướng dẫn con. Ba kiểu so sánh phổ biến nhất:</div>' +
+        '<ul class="action-list" style="margin-top:12px;">' +
+          '<li><span class="num">1</span><span>So sánh con với chính ba mẹ: "Ba/mẹ làm gương cả trăm lần rồi sao con không học?"</span></li>' +
+          '<li><span class="num">2</span><span>So sánh con với bạn khác: "Sao con không được như bạn A?"</span></li>' +
+          '<li><span class="num">3</span><span>So sánh con bây giờ với con lúc trước: "Hồi đó con ngoan vậy mà giờ..."</span></li>' +
+        '</ul>' +
+        '<div class="mislead-box"><div class="box-label">💭 Điều đáng nhớ</div>Trẻ con nhớ một khoảnh khắc tổn thương sâu và lâu hơn rất nhiều lần so với những khoảnh khắc được khen. Một câu nói lỡ lời lúc giận có thể xoá sạch cả một năm động viên — không cần hoàn hảo, chỉ cần khi lỡ lời, quay lại xin lỗi con sớm nhất có thể.</div>' +
+      '</div>' +
+
+      '<div class="companion-item">' +
+        '<h4>😤 Khi ba mẹ sắp mất bình tĩnh</h4>' +
+        '<div class="body-text">Bực tức luôn xuất phát từ việc thấy hành động của người khác vô lý — nhưng mỗi người sống trong một góc nhìn riêng, và gần như mọi hành vi đều hợp lý theo đúng góc nhìn của người đó, kể cả khi nhìn từ ngoài thấy rất khó hiểu.</div>' +
+        '<div class="practice-example">' +
+          '<div class="plabel">Ví dụ áp dụng ngay</div>' +
+          'Con đổ nước ra sàn — phản ứng đầu tiên dễ là "con bày việc cho mẹ dọn". Nhưng nhìn từ góc của con: con chỉ sống trong hiện tại, chưa có khái niệm "ai sẽ dọn". Chỉ cần nhớ điều này, cơn bực thường dịu đi rất nhanh — không cần cố kiềm, vì kiềm chỉ là "đậy nắp nồi nước sôi", để dành bùng nổ vào lúc khác.' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="philosophy-note">Đây là những gợi ý minh hoạ, không phải kịch bản phải nói đúng từng chữ — mỗi con, mỗi tình huống một khác. Ba mẹ cứ linh hoạt theo đúng hoàn cảnh của nhà mình, miễn giữ tinh thần tôn trọng và lắng nghe con. Và nếu ba mẹ đã có cách hay hơn phù hợp với con mình, cứ tiếp tục dùng cách đó — đây không phải là cách duy nhất.</div>';
 
     showScreen("screen-final");
     state.screen = "final";
