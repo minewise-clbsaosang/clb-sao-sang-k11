@@ -1,0 +1,537 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:calc(52px + env(safe-area-inset-top,0px))}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ngôi Sao Nhỏ, Sức Mạnh To</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+  :root{
+    --cream:#FFF4DC;
+    --paper:#FFFFFF;
+    --ink:#3A2E1F;
+    --ink-soft:#8A7554;
+    --gold:#FFB627;
+    --gold-dark:#E8890C;
+    --gold-tint:#FFEFC7;
+    --indigo:#4A4FA0;
+    --indigo-tint:#E6E7F5;
+    --teal:#22B8A6;
+    --teal-tint:#DFF7F2;
+    --purple:#8B5FBF;
+    --purple-tint:#EFE5FA;
+    --pink:#FF6F91;
+    --pink-tint:#FFE6EC;
+    --border:#F5DFA6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;color:var(--ink);font-family:'Nunito',system-ui,sans-serif;
+    background-color:var(--cream);
+    background-image:
+      radial-gradient(circle, var(--gold) 1.6px, transparent 1.6px),
+      radial-gradient(circle, var(--teal) 1.4px, transparent 1.4px),
+      radial-gradient(circle, var(--pink) 1.3px, transparent 1.3px);
+    background-size:120px 120px, 90px 90px, 150px 150px;
+    background-position:0 0, 40px 60px, 90px 10px;
+    background-attachment:fixed;
+    padding-bottom:70px;
+  }
+  h1,h2,h3{font-family:'Baloo 2','Nunito',sans-serif;margin:0;text-wrap:balance;}
+  a{color:inherit;}
+  .section{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:36px;scroll-margin-top:52px;}
+  .section.tight{padding-block:24px;}
+  [hidden]{display:none!important;}
+
+  /* SUBNAV */
+  .subnav{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:2px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .subnav::-webkit-scrollbar{display:none;}
+  .subnav-inner{display:flex;gap:4px;padding:10px 12px;max-width:720px;margin:0 auto;min-width:max-content;}
+  .subnav a{flex-shrink:0;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13.5px;color:var(--ink-soft);text-decoration:none;padding:8px 14px;border-radius:999px;transition:background .15s,color .15s;}
+  .subnav a.active{background:var(--gold-tint);color:var(--gold-dark);}
+
+  /* HERO */
+  .hero{background:linear-gradient(180deg,var(--gold-tint) 0%,var(--cream) 100%);padding-block:32px 20px;}
+  .hero-inner{max-width:720px;margin:0 auto;padding-inline:16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .eyebrow{font-size:12.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold-dark);font-weight:800;}
+  .hero h1{font-size:clamp(32px,8vw,48px);color:var(--gold-dark);line-height:1.1;}
+  .hero .sub{font-size:16.5px;color:var(--ink-soft);font-weight:700;max-width:480px;line-height:1.55;}
+  .mascot-row{display:flex;gap:-10px;justify-content:center;margin:12px 0;}
+  .mascot-row img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:4px solid var(--paper);box-shadow:0 4px 0 rgba(0,0,0,.06);}
+  .mascot-row img:first-child{margin-right:-16px;transform:rotate(-6deg);}
+  .mascot-row img:last-child{margin-left:-16px;transform:rotate(6deg);}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--paper);border:2px solid var(--gold);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:800;color:var(--gold-dark);margin-top:6px;}
+  .hero-price{margin-top:14px;font-family:'Baloo 2',sans-serif;}
+  .hero-price s{color:var(--ink-soft);font-size:18px;margin-right:8px;font-weight:600;}
+  .hero-price b{font-size:32px;color:var(--gold-dark);}
+  .hero-deadline{font-size:12.5px;color:var(--ink-soft);font-weight:700;}
+
+  button.btn,a.btn{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--gold-dark);border:none;border-radius:16px;padding:16px 28px;cursor:pointer;box-shadow:0 4px 0 #a5620a;text-decoration:none;display:inline-block;transition:transform .1s;}
+  a.btn:active,button.btn:active{transform:translateY(4px);box-shadow:none;}
+  .btn-wrap{margin-top:16px;}
+  .btn-note{font-size:11.5px;color:var(--ink-soft);font-weight:700;margin-top:8px;}
+
+  /* PAIN SECTION */
+  .pain-list{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+  .pain-item{background:var(--paper);border:2px solid var(--border);border-radius:16px;padding:14px 16px;font-size:14.5px;font-weight:700;line-height:1.5;display:flex;gap:10px;align-items:flex-start;}
+  .pain-item .mark{color:var(--pink);flex-shrink:0;font-size:17px;}
+  .pain-item > span:last-child{min-width:0;}
+  .pain-close{font-size:15px;font-weight:700;color:var(--ink);text-align:center;margin-top:20px;line-height:1.6;}
+  .pain-close b{color:var(--gold-dark);}
+
+  /* INSIGHT / GEM */
+  .gem-box{background:var(--indigo);color:#fff;border-radius:26px;padding:30px 24px;text-align:center;}
+  .gem-box .emoji{font-size:40px;}
+  .gem-box h2{color:#fff;font-size:24px;margin-top:8px;}
+  .gem-box p{font-size:15px;line-height:1.7;opacity:.95;margin-top:12px;font-weight:500;}
+  .term-explain{background:var(--paper);border:2px dashed var(--indigo);border-radius:14px;padding:14px 16px;font-size:12.5px;color:var(--ink-soft);font-weight:600;line-height:1.6;margin-top:14px;}
+  .term-explain b{color:var(--indigo);}
+
+  h2.section-title{font-size:26px;color:var(--gold-dark);text-align:center;}
+  .section-lede{font-size:14.5px;color:var(--ink-soft);text-align:center;font-weight:700;margin-top:8px;max-width:480px;margin-inline:auto;line-height:1.55;}
+
+  /* OVERVIEW FACTS */
+  .facts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px;}
+  .fact-card{background:var(--paper);border:2px solid var(--border);border-radius:18px;padding:16px;text-align:center;}
+  .fact-card .ico{font-size:26px;}
+  .fact-card .label{font-size:11.5px;color:var(--ink-soft);font-weight:800;text-transform:uppercase;letter-spacing:.3px;margin-top:6px;}
+  .fact-card .val{font-size:15px;font-weight:800;margin-top:2px;}
+
+  /* DIFFERENTIATORS */
+  .diff-list{display:flex;flex-direction:column;gap:14px;margin-top:20px;}
+  .diff-card{background:var(--paper);border:2px solid var(--border);border-radius:20px;padding:20px;display:flex;gap:14px;align-items:flex-start;}
+  .diff-card .ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+  .diff-card > div{min-width:0;}
+  .diff-card h3{font-size:16.5px;}
+  .diff-card p{font-size:13.5px;color:var(--ink-soft);margin-top:4px;line-height:1.55;font-weight:600;}
+
+  /* CURRICULUM */
+  .stage-group{margin-top:22px;}
+  .stage-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .stage-head .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .stage-head .m{font-size:11.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--ink-soft);}
+  .stage-head .t{font-size:16.5px;font-weight:800;}
+  .week-row{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;background:var(--paper);border:2px solid var(--border);border-radius:14px;padding:10px 14px;margin-bottom:6px;}
+  .week-row .wn{font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--gold-dark);font-size:14px;flex-shrink:0;min-width:26px;}
+  .week-row .wt{font-size:13.5px;font-weight:700;flex:1 1 160px;min-width:0;line-height:1.4;}
+  .week-row .wd{font-size:11px;color:var(--ink-soft);font-weight:700;flex-shrink:0;margin-left:auto;}
+  .week-row.guest{background:var(--teal-tint);border-color:var(--teal);}
+
+  /* EXPERTS */
+  .expert-grid{display:flex;flex-direction:column;gap:12px;margin-top:20px;}
+  .expert-card{background:var(--teal-tint);border:2px solid var(--teal);border-radius:18px;padding:16px 18px;}
+  .expert-card .w{font-size:11.5px;font-weight:800;color:#1a8c7f;text-transform:uppercase;letter-spacing:.3px;}
+  .expert-card .n{font-size:16px;font-weight:800;margin-top:2px;}
+  .expert-card .d{font-size:13px;color:var(--ink-soft);font-weight:600;margin-top:4px;line-height:1.5;}
+
+  /* TAKEAWAY */
+  .takeaway-card{background:var(--gold-tint);border:2px dashed var(--gold);border-radius:20px;padding:22px;margin-top:20px;}
+  .takeaway-card h3{font-size:17px;color:var(--gold-dark);}
+  .takeaway-card p{font-size:14px;color:var(--ink);margin-top:8px;line-height:1.6;font-weight:600;}
+  .takeaway-card a{color:var(--indigo);font-weight:800;text-decoration:underline;}
+
+  /* PRICING */
+  .price-card{background:var(--paper);border:3px solid var(--gold);border-radius:26px;padding:28px 24px;text-align:center;box-shadow:0 10px 0 var(--gold-tint);}
+  .price-card h3{font-size:20px;}
+  .price-gia-goc{font-size:14px;color:var(--ink-soft);font-weight:700;text-align:center;margin-top:10px;}
+  .price-gia-goc s{font-size:17px;}
+  .price-tiers{display:flex;flex-direction:column;gap:10px;margin-top:12px;}
+  .price-tier{background:var(--cream);border:2px solid var(--border);border-radius:16px;padding:14px 16px;text-align:left;}
+  .price-tier.highlight{border-color:var(--gold);background:var(--gold-tint);}
+  .price-tier .tlabel{font-size:12px;font-weight:800;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.3px;}
+  .price-tier .tval{font-family:'Baloo 2',sans-serif;font-size:24px;color:var(--gold-dark);margin-top:2px;}
+  .price-tier .tcond{font-size:12px;color:var(--ink-soft);font-weight:600;margin-top:2px;}
+  .includes-list{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:8px;text-align:left;}
+  .includes-list li{display:flex;gap:8px;font-size:13.5px;font-weight:700;align-items:flex-start;}
+  .includes-list li .chk{color:var(--teal);flex-shrink:0;}
+  .includes-list li > span:last-child{min-width:0;}
+
+  /* FORM */
+  .form-card{background:var(--paper);border:2px solid var(--border);border-radius:22px;padding:22px;margin-top:22px;}
+  .form-card h3{font-size:19px;color:var(--gold-dark);text-align:center;}
+  .form-card .lede-sm{font-size:13px;color:var(--ink-soft);font-weight:600;text-align:center;margin-top:6px;line-height:1.55;}
+  .form-field{margin-top:16px;}
+  .form-label{font-size:13.5px;font-weight:800;color:var(--ink);display:block;margin-bottom:6px;}
+  .form-label .req{color:var(--pink);}
+  .form-input,.form-textarea{width:100%;font-family:'Nunito',sans-serif;font-size:14.5px;padding:12px 14px;border:2px solid var(--border);border-radius:12px;background:var(--cream);color:var(--ink);font-weight:600;}
+  .form-input:focus,.form-textarea:focus{outline:none;border-color:var(--gold);}
+  .form-textarea{resize:vertical;min-height:70px;font-family:inherit;}
+  .form-radio-group{display:flex;flex-direction:column;gap:8px;}
+  .form-radio-option{display:flex;align-items:center;gap:10px;background:var(--cream);border:2px solid var(--border);border-radius:12px;padding:12px 14px;cursor:pointer;font-size:14px;font-weight:700;}
+  .form-radio-option input{width:18px;height:18px;flex-shrink:0;}
+  .form-tier-preview{background:var(--gold-tint);border:2px dashed var(--gold);border-radius:12px;padding:12px 14px;margin-top:16px;font-size:13.5px;font-weight:700;color:var(--ink);display:none;}
+  .form-tier-preview.show{display:block;}
+  .form-submit-wrap{margin-top:20px;}
+  .success-box{text-align:center;padding:10px 0;}
+  .success-box .ico{font-size:48px;}
+  .success-box h3{font-size:20px;color:var(--gold-dark);margin-top:8px;}
+  .success-box p{font-size:14px;color:var(--ink-soft);font-weight:600;margin-top:8px;line-height:1.6;}
+  .qr-box{background:var(--cream);border:2px solid var(--border);border-radius:18px;padding:18px;margin-top:16px;text-align:center;}
+  .qr-box img{width:200px;max-width:80%;border-radius:12px;}
+  .qr-box .bank-info{font-size:13.5px;font-weight:700;margin-top:10px;line-height:1.6;}
+  .qr-box .bank-note{font-size:12px;color:var(--ink-soft);font-weight:600;margin-top:8px;}
+
+  /* FAQ */
+  .faq-item{background:var(--paper);border:2px solid var(--border);border-radius:16px;padding:4px 18px;margin-top:10px;}
+  .faq-item summary{cursor:pointer;list-style:none;font-weight:800;font-size:14.5px;padding:14px 0;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary .q{min-width:0;}
+  .faq-item summary::after{content:"+";font-size:20px;color:var(--gold-dark);flex-shrink:0;}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item .a{font-size:13.5px;color:var(--ink-soft);font-weight:600;line-height:1.6;padding-bottom:16px;}
+
+  /* FINAL CTA */
+  .final-cta{background:var(--indigo);border-radius:28px;padding:36px 24px;text-align:center;color:#fff;}
+  .final-cta h2{color:#fff;font-size:26px;}
+  .final-cta p{font-size:14.5px;opacity:.95;margin-top:10px;font-weight:600;line-height:1.6;}
+  .final-cta .btn{background:var(--gold);color:var(--ink);box-shadow:0 4px 0 var(--gold-dark);margin-top:16px;}
+  .final-cta .btn:active{box-shadow:none;}
+
+  /* STICKY BAR */
+  .sticky-bar{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:2px solid var(--border);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:50;box-shadow:0 -4px 12px rgba(0,0,0,.06);}
+  .sticky-bar .p{font-family:'Baloo 2',sans-serif;font-size:15px;color:var(--gold-dark);}
+  .sticky-bar .p s{color:var(--ink-soft);font-size:12px;font-weight:600;display:block;}
+  .sticky-bar a.btn{padding:11px 18px;font-size:14px;}
+
+  footer{text-align:center;padding:30px 16px 10px;}
+  .brand-logos{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;margin-bottom:10px;}
+  .brand-logo{height:30px;width:auto;object-fit:contain;}
+  footer .sub{font-size:12px;color:var(--ink-soft);font-weight:600;}
+
+  @media (max-width:420px){
+    .facts-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+
+<nav class="subnav" id="subnav">
+  <div class="subnav-inner">
+    <a href="#gioi-thieu" data-tab="gioi-thieu">Giới thiệu</a>
+    <a href="#chuong-trinh" data-tab="chuong-trinh">Chương trình</a>
+    <a href="#hocphi" data-tab="hocphi">Học phí & Đăng ký</a>
+    <a href="#faq" data-tab="faq">Hỏi đáp</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">CLB Sao Sáng K11 · Minewise</div>
+    <h1>Ngôi Sao Nhỏ,<br>Sức Mạnh To</h1>
+    <div class="mascot-row">
+      <img src="assets/ngoi-sao-sang.jpg" alt="Ngôi Sao Sáng">
+      <img src="assets/tac-ke-hoa.jpg" alt="Tắc Kè Hoa">
+    </div>
+    <div class="sub">10 tuần, mỗi tuần 60 phút — cùng con 4-8 tuổi tìm ra và nuôi lớn "ngôi sao" đang ngủ yên trong tim mình.</div>
+    <div class="hero-badge">🗓 Khai giảng 05/10/2026 · Online qua Zoom</div>
+    <div class="hero-price"><s>1.500.000đ</s><b>Từ 1.000.000đ</b></div>
+    <div class="hero-deadline">Tùy học viên cũ/mới — xem chi tiết học phí bên dưới</div>
+    <div class="btn-wrap"><a class="btn" href="#hocphi">Đăng ký giữ chỗ cho con</a></div>
+    <div class="btn-note">Chỉ nhận 15-20 bé mỗi khóa để mỗi con đều được nhìn thấy và lắng nghe</div>
+  </div>
+</div>
+
+<div class="section tight">
+  <p class="pain-close">Ba mẹ có đang thấy mình trong những điều này không?</p>
+  <div class="pain-list">
+    <div class="pain-item"><span class="mark">✦</span><span>Con lười học, con lì, con hay chống đối — nhưng ba mẹ không chắc <b>vấn đề thật sự nằm ở đâu</b>.</span></div>
+    <div class="pain-item"><span class="mark">✦</span><span>Ba mẹ muốn hiểu con hơn, nhưng nhiều khi trong nhà cũng <b>không biết bắt đầu từ đâu</b>.</span></div>
+    <div class="pain-item"><span class="mark">✦</span><span>Con nhút nhát, ít tự tin — và ba mẹ sợ nếu không có ai giúp, con sẽ <b>cứ thu mình mãi như vậy</b>.</span></div>
+    <div class="pain-item"><span class="mark">✦</span><span>Ba mẹ không muốn ép con chạy theo thành tích — nhưng cũng <b>chưa biết cách nào khác để con vững vàng hơn</b>.</span></div>
+  </div>
+  <p class="pain-close">Nếu có, CLB Sao Sáng được thiết kế chính cho những khoảnh khắc như vậy.</p>
+</div>
+
+<div class="section" id="gioi-thieu">
+  <div class="gem-box">
+    <div class="emoji">💎</div>
+    <h2>Không có đứa trẻ nào vô giá trị — chỉ có giá trị chưa được nhìn thấy</h2>
+    <p>Đó là niềm tin lõi của Minewise: mỗi đứa trẻ là một quặng mỏ, mang trong mình một viên châu ngọc riêng — chỉ cần đủ thời gian, đủ kiên nhẫn, và đúng người đồng hành để khai mở. CLB Sao Sáng không dạy con "ngoan hơn" hay "giỏi hơn" theo một khuôn mẫu — mà giúp con nhận ra sức mạnh, sự tử tế và lòng dũng cảm đã có sẵn trong chính mình.</p>
+  </div>
+  <div class="term-explain">💬 <b>"Quặng mỏ châu ngọc"</b> là cách Minewise ví mỗi đứa trẻ: bên ngoài có thể còn thô ráp, nhút nhát, hay mắc lỗi — nhưng bên trong luôn có một "viên ngọc" (điểm mạnh, giá trị sống) đang chờ được nhìn thấy và mài giũa, không phải chờ "sửa" hay "uốn nắn". Cả khóa học và ebook quà tặng bên dưới đều xoay quanh ẩn dụ này.</div>
+
+  <h2 class="section-title" style="margin-top:32px;">CLB Sao Sáng là gì?</h2>
+  <p class="section-lede">Một hành trình 10 tuần, nơi 2 người bạn Ngôi Sao Sáng và Tắc Kè Hoa cùng con khám phá 1 giá trị sống mới mỗi tuần — qua câu chuyện, trò chơi, và những buổi học thật sự dành cho lứa tuổi 4-8.</p>
+  <div class="facts-grid">
+    <div class="fact-card"><div class="ico">🎂</div><div class="label">Độ tuổi</div><div class="val">4-8 tuổi</div></div>
+    <div class="fact-card"><div class="ico">💻</div><div class="label">Hình thức</div><div class="val">Online qua Zoom</div></div>
+    <div class="fact-card"><div class="ico">⏱</div><div class="label">Thời lượng</div><div class="val">60 phút / tuần</div></div>
+    <div class="fact-card"><div class="ico">📅</div><div class="label">Tổng buổi</div><div class="val">10 buổi / ~2.5 tháng</div></div>
+  </div>
+
+  <h2 class="section-title" style="margin-top:32px;">Điều làm nên CLB Sao Sáng</h2>
+  <p class="section-lede">Không phải một lớp học "dạy đạo đức" — mà là một trải nghiệm được thiết kế riêng để giá trị sống thật sự ở lại trong con.</p>
+  <div class="diff-list">
+    <div class="diff-card">
+      <div class="ico" style="background:var(--gold-tint);">🌟</div>
+      <div><h3>Phụng Sự Châu Ngọc</h3><p>Mỗi buổi, một vài bé được mời chia sẻ điều mình giỏi/thích trước cả nhóm — với 3 cấp độ tham gia khác nhau, để cả những bé nhút nhát nhất cũng có cách riêng để toả sáng, không bị ép phải giống ai.</p></div>
+    </div>
+    <div class="diff-card">
+      <div class="ico" style="background:var(--indigo-tint);">💗</div>
+      <div><h3>Ngôi Sao Trong Tim</h3><p>Sau mỗi hoạt động, con được hỏi: "Ngôi Sao Trong Tim con hôm nay sáng lên hay mờ đi?" — một cách nhẹ nhàng để con tự nhận biết lương tâm mình, không phải chờ người khác khen hay phạt.</p></div>
+    </div>
+    <div class="diff-card">
+      <div class="ico" style="background:var(--teal-tint);">🎬</div>
+      <div><h3>Video giá trị sống mỗi tuần</h3><p>Không phải 10 video rời rạc — mà một mạch truyện xuyên suốt cả mùa, nơi 2 linh vật và một viên đá bí ẩn cùng con lớn lên qua từng tuần, luôn có hài hước, bất ngờ và cả những khoảnh khắc lắng đọng.</p></div>
+    </div>
+    <div class="diff-card">
+      <div class="ico" style="background:var(--pink-tint);">📔</div>
+      <div><h3>Sổ Tay Châu Ngọc riêng cho con</h3><p>Một cuốn sổ tay số hoá, in được tại nhà, để ba mẹ và con cùng ghi lại mỗi tuần — không phải để so sánh với bạn nào, mà để cả nhà nhìn lại hành trình con đã đi.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="chuong-trinh">
+  <h2 class="section-title">Hành trình 10 tuần</h2>
+  <p class="section-lede">3 chặng lớn, mỗi tuần một giá trị sống — bám sát 2 dịp đặc biệt trong mùa: Ngày Nhà Giáo 20/11 và lễ tổng kết cuối khóa.</p>
+
+  <div class="stage-group">
+    <div class="stage-head"><span class="dot" style="background:var(--gold-dark);"></span><span class="m">Tháng 10</span><span class="t">Sức Mạnh Bên Trong</span></div>
+    <div class="week-row"><span class="wn">T1</span><span class="wt">Con Có Một Sức Mạnh Bên Trong</span><span class="wd">05/10</span></div>
+    <div class="week-row"><span class="wn">T2</span><span class="wt">Doanh Nhân Nhí — Tháo Vát & Sáng Tạo</span><span class="wd">12/10</span></div>
+    <div class="week-row guest"><span class="wn">T3</span><span class="wt">🛡️ Khách mời: Diễn giả Trang Hoàng — An toàn học đường</span><span class="wd">19/10</span></div>
+    <div class="week-row"><span class="wn">T4</span><span class="wt">Điều Đẹp Trong Con Không Phải Vẻ Ngoài</span><span class="wd">26/10</span></div>
+  </div>
+
+  <div class="stage-group">
+    <div class="stage-head"><span class="dot" style="background:var(--teal);"></span><span class="m">Tháng 11</span><span class="t">Lan Tỏa Yêu Thương</span></div>
+    <div class="week-row"><span class="wn">T5</span><span class="wt">Nụ Cười Của Con Có Thể Lan Xa</span><span class="wd">02/11</span></div>
+    <div class="week-row"><span class="wn">T6</span><span class="wt">Con Chơi Hết Mình — Nhiệt Tình</span><span class="wd">09/11</span></div>
+    <div class="week-row"><span class="wn">T7</span><span class="wt">Lời Cảm Ơn Gửi Thầy Cô (20/11)</span><span class="wd">16/11</span></div>
+    <div class="week-row guest"><span class="wn">T8</span><span class="wt">🦷 Khách mời: Bác sĩ Liên Tốt Bụng — Răng miệng</span><span class="wd">23/11</span></div>
+  </div>
+
+  <div class="stage-group">
+    <div class="stage-head"><span class="dot" style="background:var(--indigo);"></span><span class="m">Tháng 12</span><span class="t">Tổng Kết & Tỏa Sáng</span></div>
+    <div class="week-row"><span class="wn">T9</span><span class="wt">Con Dám Thử Điều Chưa Từng Làm — Dũng Cảm</span><span class="wd">30/11</span></div>
+    <div class="week-row"><span class="wn">T10</span><span class="wt">🏆 Chứng Nhận Đầu Tiên Của Một Vì Sao Nhỏ</span><span class="wd">07/12</span></div>
+  </div>
+</div>
+
+<div class="section tight">
+  <h2 class="section-title">2 buổi khách mời đặc biệt</h2>
+  <p class="section-lede">Xen giữa hành trình, con được gặp gỡ 2 vị khách mời thật, cách xa nhau để mỗi chủ đề có không gian riêng — chia sẻ những điều rất gần với đời sống hằng ngày của con.</p>
+  <div class="expert-grid">
+    <div class="expert-card">
+      <div class="w">Tuần 3 · 19/10</div>
+      <div class="n">Diễn giả Trang Hoàng</div>
+      <div class="d">Chia sẻ về chủ đề "An toàn học đường" — giúp con nhận biết và tự bảo vệ mình trong những tình huống thường gặp.</div>
+    </div>
+    <div class="expert-card">
+      <div class="w">Tuần 8 · 23/11</div>
+      <div class="n">Bác sĩ Liên Tốt Bụng</div>
+      <div class="d">Chia sẻ về chăm sóc răng miệng — những bí mật nhỏ giúp con tự tin với nụ cười của mình.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="takeaway-card">
+    <h3>🎁 Chưa chắc CLB có hợp với con? Thử miễn phí trước</h3>
+    <p>Trước khi quyết định, ba mẹ có thể làm thử <a href="hanh-trinh.html">Hành Trình Của Nhà Mình</a> — 2 trắc nghiệm nhỏ giúp khám phá "Quặng Mỏ Châu Ngọc" trong con (điểm mạnh/giá trị sống sẵn có) và cách chính ba mẹ đang đồng hành, chỉ mất 8-10 phút, hoàn toàn miễn phí.</p>
+  </div>
+</div>
+
+<div class="section" id="hocphi">
+  <h2 class="section-title">Học phí & Đăng ký</h2>
+  <div class="price-card">
+    <h3>CLB Sao Sáng K11</h3>
+    <div class="price-gia-goc">Giá gốc <s>1.500.000đ</s></div>
+    <div class="price-tiers">
+      <div class="price-tier highlight">
+        <div class="tlabel">Thành viên mới</div>
+        <div class="tval">1.100.000đ</div>
+        <div class="tcond">Nếu đăng ký trước ngày khai giảng 05/10/2026</div>
+      </div>
+      <div class="price-tier">
+        <div class="tlabel">Học viên cũ</div>
+        <div class="tval">1.000.000đ</div>
+        <div class="tcond">Dành cho gia đình đã từng tham gia CLB Sao Sáng</div>
+      </div>
+    </div>
+    <ul class="includes-list">
+      <li><span class="chk">✓</span><span>10 buổi học trực tuyến qua Zoom, 60 phút/tuần</span></li>
+      <li><span class="chk">✓</span><span>1 video giá trị sống độc quyền mỗi tuần</span></li>
+      <li><span class="chk">✓</span><span>Sổ Tay Châu Ngọc riêng cho con, in được tại nhà</span></li>
+      <li><span class="chk">✓</span><span>2 buổi khách mời chuyên gia (an toàn học đường & răng miệng)</span></li>
+      <li><span class="chk">✓</span><span>Chứng nhận hoàn thành cuối khóa</span></li>
+      <li><span class="chk">✓</span><span>Đồng hành cùng nhóm phụ huynh qua Zalo suốt khóa</span></li>
+    </ul>
+  </div>
+
+  <div class="form-card" id="form-dangky">
+    <div id="dangky-form-wrap">
+      <h3>Đăng ký giữ chỗ cho con</h3>
+      <p class="lede-sm">Điền thông tin bên dưới — CLB sẽ liên hệ xác nhận qua SĐT/Zalo trong 1-2 ngày.</p>
+
+      <form id="dangky-form" method="POST" target="hidden_iframe" action="https://script.google.com/macros/s/AKfycbwvAtD5YzGEdsZU3fJq9J_edOGWfGkO5_p9rU8FbU-805JtqK_GSY9Pxj2vj-cie-Jg/exec">
+        <div class="form-field">
+          <label class="form-label" for="hoTenCon">Họ và tên của con <span class="req">*</span></label>
+          <input class="form-input" type="text" id="hoTenCon" name="hoTenCon" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="namSinhCon">Năm sinh của con <span class="req">*</span></label>
+          <input class="form-input" type="text" id="namSinhCon" name="namSinhCon" inputmode="numeric" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="hoTenPhuHuynh">Họ và tên ba/mẹ hoặc người đăng ký <span class="req">*</span></label>
+          <input class="form-input" type="text" id="hoTenPhuHuynh" name="hoTenPhuHuynh" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="sdt">Số điện thoại/Zalo để CLB liên hệ <span class="req">*</span></label>
+          <input class="form-input" type="tel" id="sdt" name="sdt" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="email">Email nhận thông tin khóa học</label>
+          <input class="form-input" type="email" id="email" name="email">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Con đã từng tham gia CLB Sao Sáng chưa? <span class="req">*</span></label>
+          <div class="form-radio-group">
+            <label class="form-radio-option"><input type="radio" name="daThamGia" value="chua" required> Chưa, đây là khóa đầu tiên của con</label>
+            <label class="form-radio-option"><input type="radio" name="daThamGia" value="roi" required> Rồi, con là học viên cũ</label>
+          </div>
+          <div class="form-tier-preview" id="tier-preview"></div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="mongMuon">Ba mẹ mong con có thêm trải nghiệm gì qua khóa học này?</label>
+          <textarea class="form-textarea" id="mongMuon" name="mongMuon"></textarea>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="ghiChu">Có điều gì ba mẹ muốn CLB biết để đồng hành cùng con tốt hơn không?</label>
+          <textarea class="form-textarea" id="ghiChu" name="ghiChu"></textarea>
+        </div>
+        <input type="hidden" id="goiHocPhi" name="goiHocPhi" value="">
+        <input type="hidden" name="loaiForm" value="dang_ky_clb">
+        <div class="form-submit-wrap"><button class="btn" type="submit" style="width:100%;">Gửi đăng ký</button></div>
+      </form>
+    </div>
+
+    <div id="dangky-success" hidden>
+      <div class="success-box">
+        <div class="ico">🌟</div>
+        <h3>Đã nhận được đăng ký của nhà mình!</h3>
+        <p id="success-tier-text"></p>
+        <p>CLB sẽ liên hệ xác nhận qua SĐT/Zalo đã đăng ký trong 1-2 ngày tới. Ba mẹ hoàn tất học phí qua chuyển khoản theo thông tin bên dưới nhé.</p>
+      </div>
+      <div class="qr-box">
+        <img src="assets/payment-qr.png" alt="Mã QR chuyển khoản Techcombank">
+        <div class="bank-info">TECHCOMBANK<br>LƯƠNG THỊ XUÂN THANH<br>8524 2526 2728</div>
+        <div class="bank-note">Vui lòng ghi nội dung chuyển khoản: Tên con - CLB Sao Sáng K11, để CLB đối chiếu nhanh hơn.</div>
+      </div>
+    </div>
+  </div>
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" title="form submit target"></iframe>
+</div>
+
+<div class="section" id="faq">
+  <h2 class="section-title">Câu hỏi thường gặp</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary><span class="q">Con em còn nhút nhát, có tham gia được không?</span></summary>
+      <div class="a">Hoàn toàn được. CLB thiết kế 3 cấp độ "Phụng Sự Châu Ngọc" — từ chỉ cần giơ 1 món đồ lên khoe qua camera, đến quay sẵn video ở nhà, đến tự tin trình bày trực tiếp. Ba mẹ và con cùng chọn cấp độ phù hợp khi đăng ký, không ai bị ép phải ồn ào mới được công nhận.</div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="q">Học online 60 phút mỗi tuần có thật sự hiệu quả không?</span></summary>
+      <div class="a">60 phút được thiết kế đúng nhịp tập trung của lứa 4-8 tuổi — đủ ngắn để con không mệt, đủ dài để có warm-up, video giá trị sống, hoạt động tương tác và phần Phụng Sự Châu Ngọc. Giá trị sống được nuôi dưỡng qua lặp lại nhỏ mỗi tuần, không phải một buổi học dài duy nhất.</div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="q">Con cần chuẩn bị gì trước mỗi buổi học?</span></summary>
+      <div class="a">Một thiết bị có camera/micro (điện thoại, máy tính bảng hoặc laptop) và kết nối Internet ổn định là đủ. Link Zoom cố định sẽ được gửi trước buổi khai giảng.</div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="q">Vì sao có nhiều mức học phí?</span></summary>
+      <div class="a">Giá gốc là 1.500.000đ. Ba mẹ đăng ký mới cho con trước ngày khai giảng 05/10/2026 được mức ưu đãi 1.100.000đ. Gia đình đã từng tham gia CLB Sao Sáng trước đây được mức ưu đãi học viên cũ 1.000.000đ. Form đăng ký sẽ tự hiển thị đúng mức áp dụng cho nhà mình.</div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="q">Con đã học các khóa CLB Sao Sáng trước đây, khóa K11 có gì khác?</span></summary>
+      <div class="a">K11 là khóa đầu tiên áp dụng cấu trúc 3 chủ đích lớn theo mùa (Sức Mạnh Bên Trong → Lan Tỏa Yêu Thương → Tổng Kết & Tỏa Sáng), có mạch truyện video xuyên suốt "Viên Đá Bí Ẩn", và Sổ Tay Châu Ngọc bản số hoá mới — ba mẹ có thể nhắn Zalo để được tư vấn cụ thể hơn nếu con từng tham gia khóa trước.</div>
+    </details>
+  </div>
+</div>
+
+<div class="section">
+  <div class="final-cta">
+    <h2>Sẵn sàng để con tìm ra ngôi sao của riêng mình chưa?</h2>
+    <p>15-20 chỗ mỗi khóa, khai giảng 05/10/2026. Giá ưu đãi chỉ áp dụng tới trước ngày khai giảng.</p>
+    <a class="btn" href="#hocphi">Đăng ký giữ chỗ cho con ngay</a>
+  </div>
+</div>
+
+<footer>
+  <div class="brand-logos">
+    <img class="brand-logo" src="assets/minewise-logo.png" alt="Minewise">
+    <img class="brand-logo" src="assets/vietwise-logo.png" alt="Vietwise">
+  </div>
+  <div class="sub">CLB Sao Sáng · Minewise — Gia Tăng Giá Trị Sống Cùng Con</div>
+</footer>
+
+<div class="sticky-bar">
+  <div class="p">Từ 1.000.000đ<s>1.500.000đ</s></div>
+  <a class="btn" href="#hocphi">Đăng ký ngay</a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Scroll-spy for subnav */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.subnav a'));
+  var targets = tabs.map(function(t){ return document.getElementById(t.getAttribute('data-tab')); });
+  function updateActive(){
+    var pos = window.scrollY + 90;
+    var activeIdx = 0;
+    targets.forEach(function(el, i){
+      if (el && el.offsetTop <= pos) activeIdx = i;
+    });
+    tabs.forEach(function(t, i){ t.classList.toggle('active', i === activeIdx); });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+
+  /* Tier preview + hidden field */
+  var radios = document.querySelectorAll('input[name="daThamGia"]');
+  var preview = document.getElementById('tier-preview');
+  var hiddenTier = document.getElementById('goiHocPhi');
+
+  function computeTier(){
+    var checked = document.querySelector('input[name="daThamGia"]:checked');
+    if (!checked) return null;
+    var deadline = new Date('2026-10-05T00:00:00+07:00');
+    var now = new Date();
+    if (checked.value === 'roi') {
+      return { label: 'Học viên cũ', amount: '1.000.000đ' };
+    }
+    if (now < deadline) {
+      return { label: 'Thành viên mới — đăng ký trước khai giảng', amount: '1.100.000đ' };
+    }
+    return { label: 'Thành viên mới — sau ngày khai giảng', amount: '1.500.000đ' };
+  }
+
+  radios.forEach(function(r){
+    r.addEventListener('change', function(){
+      var tier = computeTier();
+      if (tier) {
+        preview.textContent = 'Học phí áp dụng cho nhà mình: ' + tier.amount + ' (' + tier.label + ')';
+        preview.classList.add('show');
+      }
+    });
+  });
+
+  /* Submit via hidden iframe (works cross-origin to Apps Script Web App) */
+  var formSubmitted = false;
+  var form = document.getElementById('dangky-form');
+  var iframe = document.getElementById('hidden_iframe');
+
+  form.addEventListener('submit', function(){
+    var tier = computeTier();
+    hiddenTier.value = tier ? (tier.label + ' — ' + tier.amount) : '';
+    document.getElementById('success-tier-text').textContent = tier ? ('Mức học phí áp dụng: ' + tier.amount + ' (' + tier.label + ').') : '';
+    formSubmitted = true;
+    /* native submit proceeds to hidden_iframe, page does not navigate */
+  });
+
+  iframe.addEventListener('load', function(){
+    if (!formSubmitted) return;
+    document.getElementById('dangky-form-wrap').hidden = true;
+    document.getElementById('dangky-success').hidden = false;
+    document.getElementById('dangky-success').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+</script>
+
+</body></html>
