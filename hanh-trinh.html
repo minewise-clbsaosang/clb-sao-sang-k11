@@ -108,6 +108,16 @@
   .philosophy-list .ptext b{color:var(--indigo);font-weight:800;}
   .philosophy-note{font-size:12px;color:var(--ink-soft);font-weight:600;line-height:1.55;margin-top:12px;font-style:italic;}
 
+  .practice-section{background:var(--paper);border:2px solid var(--gold);border-radius:20px;padding:20px;}
+  .practice-section h3{font-size:17px;color:var(--gold-dark);display:flex;align-items:center;gap:8px;}
+  .practice-section .body-text{font-size:14px;line-height:1.7;color:var(--ink);margin-top:10px;font-weight:600;}
+  .practice-example{background:var(--cream);border-radius:14px;padding:14px 16px;margin-top:14px;font-size:13.5px;line-height:1.65;font-weight:600;color:var(--ink);}
+  .practice-example .plabel{font-size:11px;font-weight:800;color:var(--gold-dark);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;}
+  .practice-exercise{background:var(--teal-tint);border:2px dashed var(--teal);border-radius:14px;padding:14px 16px;margin-top:12px;font-size:13.5px;line-height:1.65;font-weight:700;color:var(--ink);}
+  .practice-exercise .plabel{font-size:11px;font-weight:800;color:#1a8c7f;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;}
+  .practice-triad{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .practice-triad .body-text{margin-top:0;}
+
   .cta-card{background:var(--gold-tint);border:2px solid var(--gold);border-radius:20px;padding:20px;text-align:center;margin-top:6px;}
   .cta-card .price{font-family:'Baloo 2',sans-serif;font-size:24px;color:var(--gold-dark);margin-top:4px;}
   .cta-card .price s{color:var(--ink-soft);font-size:15px;margin-right:8px;}
@@ -222,22 +232,26 @@
         <div class="article-section" id="section-child"></div>
         <div class="article-section" id="section-parent"></div>
         <div class="combined-box" id="section-combined"></div>
-        <div class="article-section" id="section-principles"></div>
         <div class="philosophy-section" id="section-philosophy"></div>
+        <div class="practice-section" id="section-practice"></div>
+      </div>
+
+      <div class="cta-card">
+        <div style="font-weight:800;font-size:15px;">CLB Sao Sáng K11 — "Ngôi Sao Nhỏ, Sức Mạnh To"</div>
+        <div style="font-size:13px;color:var(--ink-soft);margin-top:4px;font-weight:600;">10 buổi · Giá trị sống mỗi tuần · Sổ Tay Châu Ngọc riêng cho con</div>
+        <div class="price"><s>1.500.000đ</s> Từ 1.000.000đ</div>
+        <div class="deadline">Học viên cũ 1.000.000đ · Thành viên mới 1.100.000đ nếu đăng ký trước khai giảng — xem chi tiết ở trang đăng ký</div>
+        <div style="margin-top:14px;"><a class="btn" href="index.html#hocphi" style="display:block;text-decoration:none;box-sizing:border-box;">Xem chi tiết & Đăng ký CLB Sao Sáng K11</a></div>
       </div>
 
       <div class="optin-card">
         <div id="optin-form-wrap">
-          <h3>💌 Nhận thêm quà tặng & chương trình mới từ Minewise</h3>
-          <p class="lede-sm">Nếu ba mẹ thích cách Minewise đồng hành cùng con, để lại thông tin bên dưới — Minewise sẽ gửi thêm quà tặng, bài viết và chương trình mới phù hợp với con. Không làm phiền, ba mẹ bỏ theo dõi lúc nào cũng được.</p>
+          <h3>💌 Chưa sẵn sàng đăng ký? Cứ giữ liên lạc trước đã</h3>
+          <p class="lede-sm">Để lại thông tin bên dưới — Minewise sẽ gửi thêm quà tặng, bài viết và chương trình mới phù hợp với con, không cần đăng ký CLB ngay. Không làm phiền, ba mẹ bỏ theo dõi lúc nào cũng được.</p>
           <form id="optin-form" method="POST" target="hidden_iframe_optin" action="https://script.google.com/macros/s/AKfycbwvAtD5YzGEdsZU3fJq9J_edOGWfGkO5_p9rU8FbU-805JtqK_GSY9Pxj2vj-cie-Jg/exec">
             <div class="form-field">
               <label class="form-label" for="optin-hoTen">Họ tên ba/mẹ <span class="req">*</span></label>
               <input class="form-input" type="text" id="optin-hoTen" name="hoTenPhuHuynh" required>
-            </div>
-            <div class="form-field">
-              <label class="form-label" for="optin-tenCon">Tên con (nếu ba mẹ muốn Minewise gọi đúng tên con)</label>
-              <input class="form-input" type="text" id="optin-tenCon" name="tenCon">
             </div>
             <div class="form-field">
               <label class="form-label" for="optin-email">Email</label>
@@ -262,13 +276,6 @@
         <iframe name="hidden_iframe_optin" id="hidden_iframe_optin" style="display:none;" title="optin form submit target"></iframe>
       </div>
 
-      <div class="cta-card">
-        <div style="font-weight:800;font-size:15px;">CLB Sao Sáng K11 — "Ngôi Sao Nhỏ, Sức Mạnh To"</div>
-        <div style="font-size:13px;color:var(--ink-soft);margin-top:4px;font-weight:600;">10 buổi · Giá trị sống mỗi tuần · Sổ Tay Châu Ngọc riêng cho con</div>
-        <div class="price"><s>1.500.000đ</s> Từ 1.000.000đ</div>
-        <div class="deadline">Học viên cũ 1.000.000đ · Thành viên mới 1.100.000đ nếu đăng ký trước khai giảng — xem chi tiết ở trang đăng ký</div>
-        <div style="margin-top:14px;"><a class="btn" href="index.html#hocphi" style="display:block;text-decoration:none;box-sizing:border-box;">Xem chi tiết & Đăng ký CLB Sao Sáng K11</a></div>
-      </div>
       <div class="restart-link" id="restart-ask">
         <button type="button" id="restart-btn">Làm lại từ đầu</button>
       </div>
@@ -684,20 +691,13 @@
     save();
   }
 
-  var PRINCIPLES = [
-    "<b>Mỗi đứa trẻ là một quặng mỏ, không phải một sản phẩm lỗi.</b> Giá trị không nằm sẵn trên bề mặt — cần thời gian và sự kiên nhẫn để khai mở, như tìm một viên châu ngọc trong lòng đất.",
-    "<b>So sánh làm mờ châu ngọc, không làm nó sáng hơn.</b> Mỗi bé có một nhịp riêng — nhịp của con không cần giống nhịp của bạn nào khác.",
-    "<b>Ngôi Sao Trong Tim sáng lên từ hành động, không phải từ lời khen suông.</b> Công nhận nỗ lực cụ thể của con quan trọng hơn nhiều so với chỉ khen “giỏi quá”.",
-    "<b>Buông tay đúng lúc cũng là một hình thức yêu thương.</b> Tin tưởng con đủ để con tự vấp ngã và tự đứng lên — đó là món quà, không phải sự lơ là.",
-    "<b>Giá trị sống được nuôi dưỡng qua lặp lại nhỏ mỗi tuần</b>, không phải một bài học lớn duy nhất. Đó cũng là lý do CLB Sao Sáng chọn đồng hành cùng con mỗi tuần, suốt một mùa, thay vì chỉ một buổi học."
-  ];
-
-  var PHILOSOPHY = [
-    "<b>Đồng hành, không đồng hoá.</b> Minewise và Vietwise tin mỗi con là một vì sao riêng, không phải bản sao của ai — vai trò của ba mẹ là giúp con toả sáng theo đúng hình dạng của mình, không phải uốn con theo một khuôn mẫu \"đứa trẻ ngoan\" chung.",
-    "<b>Khiêm nhường mới tự tin, không phải giỏi mới tự tin.</b> Con không cần giỏi nhất mới được tự tin — con chỉ cần được nhìn nhận đúng nỗ lực thật của mình, dù kết quả chưa hoàn hảo.",
+  var ROOTS = [
+    "<b>Mỗi đứa trẻ là một quặng mỏ, không phải một sản phẩm lỗi.</b> Giá trị không nằm sẵn trên bề mặt — cần thời gian và sự kiên nhẫn để khai mở, như tìm một viên châu ngọc trong lòng đất. So sánh chỉ làm mờ châu ngọc, không làm nó sáng hơn: nhịp của con không cần giống nhịp của bạn nào khác.",
+    "<b>Đồng hành, không đồng hoá.</b> Minewise và Vietwise tin mỗi con là một vì sao riêng — vai trò của ba mẹ là giúp con toả sáng theo đúng hình dạng của mình, không phải uốn con theo một khuôn mẫu \"đứa trẻ ngoan\" chung.",
+    "<b>Khiêm nhường mới tự tin, không phải giỏi mới tự tin.</b> Con không cần giỏi nhất mới được tự tin — chỉ cần được nhìn nhận đúng nỗ lực thật của mình. Ngôi Sao Trong Tim sáng lên từ hành động cụ thể, không phải từ lời khen suông.",
     "<b>Công nhận cảm xúc trước, dạy sau.</b> Khi con buồn, giận, hay sợ, điều con cần đầu tiên không phải một bài học đạo lý — mà là được ở cùng cảm xúc đó, trước khi ba mẹ nói tiếp điều gì.",
-    "<b>Học là phải vui.</b> Nếu một hoạt động khiến con né tránh hoặc sợ hãi, đó thường là dấu hiệu cần đổi cách tiếp cận — không phải bằng chứng con \"lười\" hay \"không chịu học\".",
-    "<b>Trải nghiệm thật nuôi dưỡng giá trị sống tốt hơn lời giảng.</b> Một câu chuyện, một trò chơi, một khoảnh khắc thật trong đời sống hằng ngày thường chạm vào con sâu hơn nhiều so với một bài giảng lý thuyết."
+    "<b>Học là phải vui, và buông tay đúng lúc cũng là một hình thức yêu thương.</b> Một hoạt động khiến con né tránh thường là dấu hiệu cần đổi cách tiếp cận, không phải bằng chứng con \"lười\". Tin tưởng con đủ để con tự vấp ngã và tự đứng lên — đó là món quà, không phải sự lơ là.",
+    "<b>Trải nghiệm thật, lặp lại nhỏ mỗi tuần, nuôi dưỡng giá trị sống tốt hơn một bài giảng lớn duy nhất.</b> Đó cũng chính là lý do CLB Sao Sáng chọn đồng hành cùng con mỗi tuần, suốt một mùa, thay vì chỉ một buổi học."
   ];
 
   function firstLower(s){ return s ? s.charAt(0).toLowerCase() + s.slice(1) : s; }
@@ -746,10 +746,11 @@
     renderArticleSection("section-child", "Về con", "💎", state.aResult, GEMS);
     renderArticleSection("section-parent", "Về ba mẹ", "🌤️", state.bResult, STAGES);
 
+    var rc = state.aResult ? buildResultText(state.aResult, GEMS) : null;
+    var rp = state.bResult ? buildResultText(state.bResult, STAGES) : null;
+
     var combinedEl = document.getElementById("section-combined");
-    if (state.aResult && state.bResult) {
-      var rc = buildResultText(state.aResult, GEMS);
-      var rp = buildResultText(state.bResult, STAGES);
+    if (rc && rp) {
       combinedEl.hidden = false;
       combinedEl.innerHTML =
         '<h3>✨ Khi hai điều này gặp nhau</h3>' +
@@ -758,21 +759,33 @@
       combinedEl.hidden = true;
     }
 
-    var principlesEl = document.getElementById("section-principles");
-    principlesEl.innerHTML =
-      '<h3>🌱 5 Điều Minewise Muốn Ba Mẹ Nhớ</h3>' +
-      '<ul class="principles">' + PRINCIPLES.map(function(p, i){
-        return '<li><span class="num">' + (i + 1) + '</span><span class="ptext">' + p + '</span></li>';
-      }).join("") + '</ul>';
-
     var philEl = document.getElementById("section-philosophy");
+    var philIntro = (rc && rp)
+      ? 'Từ kết quả “' + rc.name + '” của con và giai đoạn “' + rp.name + '” của ba mẹ ở trên, đây là những điều gốc rễ hơn mà Minewise và Vietwise tin đúng cho <b>mọi</b> con trong độ tuổi 4-10 — không chỉ riêng con của nhà mình:'
+      : 'Ngoài kết quả trắc nghiệm ở trên, đây là những điều gốc rễ hơn mà Minewise và Vietwise vẫn luôn nhắc ba mẹ, áp dụng cho mọi con trong độ tuổi 4-10, không chỉ riêng con của nhà mình:';
     philEl.innerHTML =
-      '<h3>🧭 Đồng Hành Cùng Con 4-10 Tuổi — Theo Minewise & Vietwise</h3>' +
-      '<div class="body-text">Ngoài kết quả 2 trắc nghiệm trên, đây là vài điều gốc rễ hơn mà Minewise và Vietwise vẫn luôn nhắc ba mẹ, áp dụng được cho mọi con trong độ tuổi 4-10, không chỉ riêng con của nhà mình:</div>' +
-      '<ul class="philosophy-list">' + PHILOSOPHY.map(function(p, i){
+      '<h3>🌱 Gốc Rễ Đằng Sau Mọi Điều Minewise Làm</h3>' +
+      '<div class="body-text">' + philIntro + '</div>' +
+      '<ul class="philosophy-list">' + ROOTS.map(function(p, i){
         return '<li><span class="num">' + (i + 1) + '</span><span class="ptext">' + p + '</span></li>';
       }).join("") + '</ul>' +
       '<div class="philosophy-note">Đây là những nguyên tắc chung, không phải lời khuyên cho tình huống cụ thể của riêng con — mỗi nhà một hoàn cảnh khác nhau, ba mẹ điều chỉnh theo đúng con của mình nhé.</div>';
+
+    var practiceEl = document.getElementById("section-practice");
+    practiceEl.innerHTML =
+      '<h3>🪞 Nhìn Con Sửa Mình — Một Thực Hành Từ VietWise</h3>' +
+      '<div class="body-text">Nguyên tắc cuối cùng ở trên — trải nghiệm thật, lặp lại nhỏ mỗi tuần — nghe thì dễ đồng ý, nhưng áp dụng cụ thể ra sao? VietWise gọi cách áp dụng này là <b>Ẩn Dụ Tấm Gương</b>: phần lớn những gì con thể hiện ra ngoài, kể cả những điều ba mẹ chưa hiểu vì sao, thường đang phản chiếu lại một điều gì đó từ chính ba mẹ — một thói quen, một cách phản ứng, một điều ba mẹ vô tình truyền đạt mà chưa để ý.</div>' +
+      '<div class="practice-example">' +
+        '<div class="plabel">Ví dụ thật từ VietWise</div>' +
+        'Một bé dùng khăn lau mặt của mình để lau tường, ba mẹ vội mắng con nghịch bẩn. Nhưng khi hỏi lại, con trả lời hồn nhiên: "Con lau mặt cho bạn tường." Hoá ra con không nghịch — con đang làm đúng điều ba mẹ vẫn dạy: yêu thương và chăm sóc mọi thứ xung quanh mình, chỉ là con hiểu theo cách ngây thơ của một đứa trẻ. Cái "sai" ban đầu ba mẹ nhìn thấy, thật ra là một cách truyền đạt của ba mẹ chưa đủ rõ, chứ không phải lỗi của con.' +
+      '</div>' +
+      '<div class="body-text">Vì vậy, trước khi kết luận con "hư" hay "sai", VietWise mời ba mẹ dừng lại một nhịp và nhìn vào tấm gương đó trước — không phải để tự trách, mà để hiểu đúng gốc rễ.</div>' +
+      '<div class="practice-exercise">' +
+        '<div class="plabel">Thực hành mỗi tuần</div>' +
+        'Lần tới khi con làm điều gì khiến ba mẹ muốn phản ứng ngay, hãy thử dừng lại vài giây và hỏi con: <b>"Con làm vậy vì sao thế?"</b> — hỏi trước khi kết luận đúng hay sai. Câu trả lời của con thường sẽ cho ba mẹ thấy một góc nhìn khác, và đôi khi, một phần phản chiếu của chính mình.' +
+      '</div>' +
+      '<div class="body-text" style="margin-top:14px;">Gốc rễ của thực hành này chính là 3 Bản Chất Cao Quý mà Vietwise và Minewise vẫn cùng con nuôi dưỡng mỗi tuần trong CLB Sao Sáng: <b>Yêu thương</b> (như hoa thơm, toả ra một cách tự nhiên), <b>Khiêm nhường</b> (như đại dương, luôn thấp hơn mọi dòng sông để đón nhận), và <b>Phụng sự</b> (như mặt trời, cho đi mà không cần được nhìn thấy). Khi ba mẹ thực hành nhìn con sửa mình, đó cũng chính là đang sống ba bản chất này, chứ không chỉ dạy con bằng lời.</div>' +
+      '<div class="body-text" style="margin-top:10px;font-weight:800;">Đây cũng chính là điều CLB Sao Sáng K11 luyện tập cùng con mỗi tuần — không phải một bài giảng một lần, mà một thói quen nhỏ lặp lại đều đặn suốt cả mùa.</div>';
 
     showScreen("screen-final");
     state.screen = "final";
