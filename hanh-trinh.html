@@ -45,13 +45,15 @@
   .intro-meta{display:flex;justify-content:center;gap:18px;font-size:12.5px;color:var(--ink-soft);font-weight:700;margin-top:6px;flex-wrap:wrap;}
   .intro-gift{background:var(--teal-tint);border:2px dashed var(--teal);border-radius:16px;padding:12px 14px;font-size:13px;line-height:1.55;color:var(--ink);font-weight:600;margin-top:14px;}
 
-  button.btn{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--gold-dark);border:none;border-radius:16px;padding:15px 24px;cursor:pointer;box-shadow:0 4px 0 #a5620a;width:100%;transition:transform .1s;}
-  button.btn:hover{background:#c76f0a;}
-  button.btn:active{box-shadow:none;transform:translateY(4px);}
-  button.btn.secondary{background:var(--paper);color:var(--ink);border:2px solid var(--border);box-shadow:0 4px 0 var(--border);}
-  button.btn.secondary:hover{border-color:var(--gold);background:var(--gold-tint);}
-  button.btn.teal{background:var(--teal);box-shadow:0 4px 0 #1a8c7f;}
-  button.btn.teal:hover{background:#1a8c7f;}
+  .btn{display:block;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;color:#fff;background:var(--gold-dark);border:none;border-radius:16px;padding:15px 24px;cursor:pointer;box-shadow:0 4px 0 #a5620a;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;transition:transform .1s;}
+  .btn:hover{background:#c76f0a;}
+  .btn:active{box-shadow:none;transform:translateY(4px);}
+  .btn.secondary{background:var(--paper);color:var(--ink);border:2px solid var(--border);box-shadow:0 4px 0 var(--border);}
+  .btn.secondary:hover{border-color:var(--gold);background:var(--gold-tint);}
+  .btn.teal{background:var(--teal);box-shadow:0 4px 0 #1a8c7f;}
+  .btn.teal:hover{background:#1a8c7f;}
+  button.btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none;}
+  .btn.cta-btn{font-size:17px;padding:17px 24px;}
 
   .progress-row{display:flex;align-items:center;gap:10px;}
   .progress-track{flex:1;height:10px;border-radius:999px;background:var(--gold-tint);border:2px solid var(--border);overflow:hidden;}
@@ -62,10 +64,15 @@
   .q-num{font-size:12.5px;font-weight:800;color:var(--teal);letter-spacing:.5px;text-transform:uppercase;}
   .q-text{font-size:19px;font-weight:800;margin-top:6px;line-height:1.4;}
   .options{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
-  .opt-btn{font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;text-align:left;background:var(--cream);border:2px solid var(--border);border-radius:16px;padding:14px 16px;cursor:pointer;line-height:1.4;transition:border-color .15s,background .15s,transform .1s;}
+  .opt-hint{font-size:12px;color:var(--ink-soft);font-weight:700;margin-top:14px;}
+  .opt-btn{display:flex;align-items:flex-start;gap:12px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;text-align:left;background:var(--cream);border:2px solid var(--border);border-radius:16px;padding:14px 16px;cursor:pointer;line-height:1.4;transition:border-color .15s,background .15s,transform .1s;width:100%;}
   .opt-btn:hover{border-color:var(--gold);background:var(--gold-tint);transform:translateY(-1px);}
   .opt-btn:active{transform:translateY(1px);}
-  @media (prefers-reduced-motion: reduce){.opt-btn,.opt-btn:hover,button.btn{transition:none;transform:none;}}
+  .opt-btn .chk-box{flex-shrink:0;width:20px;height:20px;margin-top:1px;border-radius:6px;border:2px solid var(--border);position:relative;transition:background .15s,border-color .15s;}
+  .opt-btn.selected{border-color:var(--gold);background:var(--gold-tint);}
+  .opt-btn.selected .chk-box{background:var(--gold-dark);border-color:var(--gold-dark);}
+  .opt-btn.selected .chk-box::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800;}
+  @media (prefers-reduced-motion: reduce){.opt-btn,.opt-btn:hover,.btn{transition:none;transform:none;}}
 
   .result-badge{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto;}
   .result-name{font-size:24px;text-align:center;margin-top:14px;color:var(--ink);}
@@ -89,6 +96,10 @@
   .action-list{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;}
   .action-list li{display:flex;gap:10px;font-size:13.5px;line-height:1.55;font-weight:600;background:var(--cream);border-radius:12px;padding:10px 12px;}
   .action-list li .num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;}
+  .mislead-box{background:var(--pink-tint);border:2px dashed var(--pink);border-radius:16px;padding:14px 16px;margin-top:12px;font-size:13.5px;line-height:1.55;font-weight:600;}
+  .mislead-box .box-label{font-size:11.5px;font-weight:800;color:var(--pink);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+  .question-box{background:var(--purple-tint);border:2px dashed var(--purple);border-radius:16px;padding:14px 16px;margin-top:12px;font-size:13.5px;line-height:1.55;font-weight:600;font-style:italic;}
+  .question-box .box-label{font-size:11.5px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-style:normal;}
   .combined-box{background:var(--indigo);color:#fff;border-radius:20px;padding:20px;}
   .combined-box h3{color:#fff;font-size:17px;}
   .combined-box .body-text{color:#fff;opacity:.96;}
@@ -237,11 +248,9 @@
       </div>
 
       <div class="cta-card">
-        <div style="font-weight:800;font-size:15px;">CLB Sao Sáng K11 — "Ngôi Sao Nhỏ, Sức Mạnh To"</div>
-        <div style="font-size:13px;color:var(--ink-soft);margin-top:4px;font-weight:600;">10 buổi · Giá trị sống mỗi tuần · Sổ Tay Châu Ngọc riêng cho con</div>
-        <div class="price"><s>1.500.000đ</s> Từ 1.000.000đ</div>
-        <div class="deadline">Học viên cũ 1.000.000đ · Thành viên mới 1.100.000đ nếu đăng ký trước khai giảng — xem chi tiết ở trang đăng ký</div>
-        <div style="margin-top:14px;"><a class="btn" href="index.html#hocphi" style="display:block;text-decoration:none;box-sizing:border-box;">Xem chi tiết & Đăng ký CLB Sao Sáng K11</a></div>
+        <div style="font-weight:800;font-size:15px;">Muốn tìm hiểu thêm về CLB Sao Sáng K11?</div>
+        <div style="font-size:13px;color:var(--ink-soft);margin-top:6px;font-weight:600;line-height:1.55;">Đây là nơi Minewise áp dụng đúng những điều ở trên cùng con, mỗi tuần suốt một mùa. Không bắt buộc gì cả — chỉ là một gợi ý, nếu ba mẹ thấy phù hợp với nhà mình.</div>
+        <div style="margin-top:16px;"><a class="btn cta-btn" href="index.html#hocphi" style="display:block;text-decoration:none;box-sizing:border-box;">Xem chi tiết CLB Sao Sáng K11 →</a></div>
       </div>
 
       <div class="optin-card">
@@ -298,7 +307,7 @@
 (function(){
   "use strict";
 
-  var STORE_KEY = "hanhtrinhcuanhaminh_quiz_v1";
+  var STORE_KEY = "hanhtrinhcuanhaminh_quiz_v2";
 
   var audioCtx = null;
   function playClick(freq){
@@ -418,7 +427,9 @@
         "Đặt ra 1 “thử thách nhỏ mỗi tuần” cho con — điều gì đó con chưa từng làm, không cần lớn lao.",
         "Khi con thất bại, hỏi “Con học được gì từ lần này?” thay vì “Sao con làm vậy?”",
         "Cho con cơ hội tự sửa lỗi của mình trước khi ba mẹ ra tay giúp."
-      ] },
+      ],
+      mislead: "Dễ bị hiểu lầm là “bướng” hay “liều lĩnh” — nhưng dũng cảm thật sự luôn đi kèm việc con vẫn chịu thử lại theo cách khác, chứ không phải làm liều bất chấp hậu quả.",
+      question: "Lần gần nhất con thử lại sau khi thất bại, ba mẹ đã phản ứng thế nào — có vô tình làm con thấy xấu hổ vì đã sai không?" },
     sangtao: { name: "Châu Ngọc Sáng Tạo", emoji: "💡", color: "teal",
       desc: "Con luôn có một cách nhìn riêng về mọi thứ — không thích làm y hệt người khác, thích tự nghĩ ra cách của mình, dù đôi khi hơi... khác thường. Sự tò mò và tháo vát này chính là hạt giống của một người biết tự tìm đường đi, không đợi ai chỉ sẵn.",
       tip: "Đừng vội sửa “cách làm khác” của con thành “cách đúng” ngay — hỏi con “sao con nghĩ ra cách này vậy?” trước đã.",
@@ -427,7 +438,9 @@
         "Giữ lại 1 góc nhỏ trong nhà để con tự do “chế tạo” mà không sợ bày bừa.",
         "Khi con hỏi “vì sao”, thử hỏi ngược “Con nghĩ vì sao?” trước khi trả lời.",
         "Khen cách con nghĩ ra, không chỉ khen kết quả cuối cùng."
-      ] },
+      ],
+      mislead: "Dễ bị hiểu lầm là “không nghe lời” hay “chống đối” — nhưng cách làm khác của con thường xuất phát từ một ý tưởng riêng, không phải cố tình làm ngược.",
+      question: "Lần gần nhất con làm khác với hướng dẫn, ba mẹ đã hỏi “vì sao con làm vậy” trước, hay sửa ngay thành cách đúng?" },
     amap: { name: "Châu Ngọc Ấm Áp", emoji: "💛", color: "pink",
       desc: "Con là kiểu bạn nhỏ tinh tế với cảm xúc xung quanh — nhận ra ngay khi có ai đó buồn, và thường là người đầu tiên lại gần hỏi han hoặc an ủi. Đây là một loại “thông minh” ít được nhắc tới nhưng vô cùng quý: thông minh cảm xúc.",
       tip: "Thỉnh thoảng hỏi ngược lại con: “Vậy còn con, hôm nay con thấy thế nào?” — để con học cách chăm sóc cảm xúc của chính mình, không chỉ của người khác.",
@@ -436,7 +449,9 @@
         "Dạy con rằng chăm sóc người khác không có nghĩa là quên chăm sóc chính mình.",
         "Hỏi con “Hôm nay có ai làm con vui/buồn không?” để con quen kể chuyện cảm xúc.",
         "Khen ngợi cụ thể mỗi khi con để ý, an ủi người khác — để con biết đó là điểm mạnh của mình."
-      ] },
+      ],
+      mislead: "Dễ bị xem là “quá nhạy cảm” hay “dễ tổn thương” — nhưng khả năng nhận ra cảm xúc người khác sớm như vậy thực ra là một dạng năng lực hiếm, không phải điểm yếu.",
+      question: "Con thường hỏi han cảm xúc của người khác — vậy tuần này đã có ai hỏi ngược lại cảm xúc của con chưa?" },
     nhietHuyet: { name: "Châu Ngọc Nhiệt Huyết", emoji: "🔥", color: "purple",
       desc: "Con là nguồn năng lượng của cả nhóm — vui vẻ, sôi nổi, dễ kết bạn và luôn khiến không khí xung quanh rộn ràng hơn. Ngay cả khi không phải người giỏi nhất, con vẫn khiến mọi người muốn cố gắng hết mình.",
       tip: "Cho con thêm những khoảng “xả năng lượng” đúng nghĩa mỗi ngày (chạy nhảy, vận động) — con sẽ tập trung hơn nhiều ở những lúc cần yên tĩnh.",
@@ -445,7 +460,9 @@
         "Cho con vận động đủ mỗi ngày trước khi cần con ngồi yên học/làm việc.",
         "Đón nhận năng lượng của con thay vì liên tục nhắc “nhỏ tiếng lại”, “ngồi yên đi”.",
         "Tìm 1 hoạt động nhóm để con thoả sức lan toả niềm vui của mình."
-      ] },
+      ],
+      mislead: "Dễ bị dán nhãn “quá ồn ào” hay “không tập trung” — nhưng năng lượng đó, nếu được đón nhận đúng cách, chính là thứ kéo cả nhóm cùng cố gắng.",
+      question: "Ba mẹ có đang dành cho con đủ khoảng “xả năng lượng” mỗi ngày trước khi cần con ngồi yên không?" },
     saulang: { name: "Châu Ngọc Sâu Lắng", emoji: "🌙", color: "indigo",
       desc: "Con không phải kiểu ồn ào nhất trong nhóm — con quan sát kỹ trước khi hành động, và khi con đã tin tưởng ai đó, tình cảm ấy thường rất sâu và bền. Trầm tính không phải là nhút nhát — đó là một cách riêng để hiểu thế giới, chậm mà chắc.",
       tip: "Đừng vội thúc con “nói to lên”, “mạnh dạn lên” — cho con thêm thời gian quan sát trước khi tham gia, con sẽ tự tin hơn theo nhịp riêng của mình.",
@@ -454,7 +471,9 @@
         "Đừng ép con trả lời/tham gia ngay — cho con thời gian quan sát trước.",
         "Tạo không gian riêng yên tĩnh cho con mỗi ngày, dù chỉ 15-20 phút.",
         "Hỏi con bằng câu hỏi mở, kiên nhẫn chờ, thay vì hỏi dồn dập."
-      ] }
+      ],
+      mislead: "Dễ bị hiểu lầm là “nhút nhát” hay “thiếu tự tin” — nhưng im lặng quan sát trước khi hành động là một cách xử lý thông tin, không phải sự sợ hãi.",
+      question: "Ba mẹ có đang cho con đủ thời gian quan sát trước khi kỳ vọng con tham gia ngay không?" }
   };
 
   var QUIZ_B = [
@@ -519,7 +538,9 @@
         "Chọn 1 việc nhỏ mỗi ngày để thử KHÔNG làm thay con, dù chỉ một lần.",
         "Khi muốn nhắc con, thử đếm thầm 10 giây trước đã.",
         "Ghi lại những lần con tự làm được — để chính ba mẹ cũng thấy bằng chứng con đang lớn."
-      ] },
+      ],
+      mislead: "Dễ tự trách mình là “ba mẹ trực thăng” hay “kiểm soát quá” — nhưng đằng sau đó thường chỉ là nỗi sợ con bị tổn thương, một nỗi sợ rất chính đáng của người làm cha mẹ.",
+      question: "Việc ba mẹ vừa làm thay con hôm nay — nếu để con tự làm, điều tệ nhất có thể xảy ra thật sự là gì?" },
     gd2: { name: "Đang Tập Buông Tay", emoji: "🌤️", color: "teal",
       desc: "Ba mẹ đã bắt đầu tập buông tay từng chút một — đây là một hành trình cần rất nhiều can đảm, vì buông tay không có nghĩa là buông xuôi. Ba mẹ đang làm rất tốt rồi.",
       tip: "Chọn 1 việc nhỏ mỗi tuần để con tự làm trọn vẹn từ đầu tới cuối, dù chậm hay chưa hoàn hảo.",
@@ -528,7 +549,9 @@
         "Chọn 1 việc cố định mỗi tuần để con làm trọn vẹn từ đầu tới cuối, không can thiệp giữa chừng.",
         "Khi thấy sốt ruột, tự hỏi: “Đây có phải nguy hiểm thật, hay chỉ là mình đang lo?”",
         "Cho phép con “thất bại nhỏ” và cùng con nhìn lại sau đó, thay vì ngăn từ đầu."
-      ] },
+      ],
+      mislead: "Có lúc ba mẹ tự hỏi liệu mình “buông” đã đủ chưa — nhưng buông tay không phải một điểm đến cố định, mà là một nhịp lùi dần, sai rồi thử lại cũng là một phần bình thường của hành trình này.",
+      question: "Việc nào ba mẹ đang do dự chưa dám để con tự làm trọn vẹn — điều gì đang cản ba mẹ lại?" },
     gd3: { name: "Đồng Hành Tin Tưởng", emoji: "☀️", color: "gold",
       desc: "Ba mẹ đang đồng hành với con bằng sự tin tưởng — điều mà rất nhiều đứa trẻ đang khao khát mà chưa có được. Cứ tiếp tục giữ nhịp này nhé.",
       tip: "Thỉnh thoảng hỏi con “Con nghĩ mẹ/ba nên hỗ trợ gì?” — để con cũng học cách chủ động nhờ giúp đỡ đúng lúc, đúng việc.",
@@ -537,7 +560,9 @@
         "Tiếp tục hỏi con nhiều hơn là nói cho con nghe.",
         "Chia sẻ với những ba mẹ khác cách bạn đang đồng hành — điều này hiếm và rất đáng nhân rộng.",
         "Nhắc bản thân: tin tưởng không có nghĩa là buông lỏng, mà là có mặt đúng lúc con cần."
-      ] }
+      ],
+      mislead: "Dễ bị hiểu lầm là “thả lỏng” hay “ít quan tâm” — nhưng tin tưởng con tự làm không có nghĩa là không có mặt, mà là có mặt đúng lúc con thật sự cần.",
+      question: "Ba mẹ có đang chia sẻ cách đồng hành này với những ba mẹ khác đang loay hoay chưa?" }
   };
 
   var COLOR_MAP = {
@@ -555,10 +580,12 @@
   var state = safeGet(STORE_KEY) || defaultState();
   function save(){ safeSet(STORE_KEY, state); }
 
-  function computeResult(answers, bank, key){
+  function computeResult(answers, bank){
     var counts = {};
     Object.keys(bank).forEach(function(k){ counts[k] = 0; });
-    answers.forEach(function(a){ if (a in counts) counts[a]++; });
+    answers.forEach(function(picked){
+      picked.forEach(function(a){ if (a in counts) counts[a]++; });
+    });
     var max = -1;
     Object.keys(counts).forEach(function(k){ if (counts[k] > max) max = counts[k]; });
     var top = Object.keys(counts).filter(function(k){ return counts[k] === max; });
@@ -574,34 +601,62 @@
     window.scrollTo({ top: 0, behavior: "auto" });
   }
 
-  function renderAQuestion(){
-    var idx = state.aAnswers.length;
-    var q = QUIZ_A[idx];
-    document.getElementById("a-progress-fill").style.width = Math.round((idx / QUIZ_A.length) * 100) + "%";
-    document.getElementById("a-progress-label").textContent = (idx + 1) + "/" + QUIZ_A.length;
-    document.getElementById("a-q-text").textContent = q.text;
-    var opts = document.getElementById("a-options");
-    opts.innerHTML = "";
+  function renderMultiSelectQuestion(opts){
+    var idx = opts.answers.length;
+    var q = opts.quiz[idx];
+    document.getElementById(opts.fillId).style.width = Math.round((idx / opts.quiz.length) * 100) + "%";
+    document.getElementById(opts.labelId).textContent = (idx + 1) + "/" + opts.quiz.length;
+    document.getElementById(opts.textId).textContent = q.text;
+    var container = document.getElementById(opts.optionsId);
+    container.innerHTML = "";
+    var selected = [];
+    var nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "btn" + (opts.btnClass ? " " + opts.btnClass : "");
+    nextBtn.textContent = "Tiếp tục";
+    nextBtn.disabled = true;
     q.options.forEach(function(o){
       var b = document.createElement("button");
       b.type = "button";
       b.className = "opt-btn";
-      b.textContent = o.text;
+      var chk = document.createElement("span");
+      chk.className = "chk-box";
+      var txt = document.createElement("span");
+      txt.textContent = o.text;
+      b.appendChild(chk);
+      b.appendChild(txt);
       b.addEventListener("click", function(){
         playClick();
-        state.aAnswers.push(o.trait);
-        save();
-        if (state.aAnswers.length >= QUIZ_A.length) {
-          finishA();
-        } else {
-          renderAQuestion();
-        }
+        var key = o[opts.field];
+        var i = selected.indexOf(key);
+        if (i === -1) { selected.push(key); b.classList.add("selected"); }
+        else { selected.splice(i, 1); b.classList.remove("selected"); }
+        nextBtn.disabled = selected.length === 0;
       });
-      opts.appendChild(b);
+      container.appendChild(b);
     });
-    showScreen("screen-aq");
-    state.screen = "aq";
+    nextBtn.addEventListener("click", function(){
+      if (selected.length === 0) return;
+      opts.answers.push(selected.slice());
+      save();
+      if (opts.answers.length >= opts.quiz.length) { opts.onFinish(); } else { opts.onNext(); }
+    });
+    container.appendChild(nextBtn);
+    var hint = document.createElement("div");
+    hint.className = "opt-hint";
+    hint.textContent = "Có thể chọn nhiều đáp án cùng lúc, nếu con hợp với hơn 1 câu.";
+    container.insertBefore(hint, nextBtn);
+    showScreen(opts.screenId);
+    state.screen = opts.screenId.replace("screen-", "");
     save();
+  }
+
+  function renderAQuestion(){
+    renderMultiSelectQuestion({
+      answers: state.aAnswers, quiz: QUIZ_A, field: "trait",
+      fillId: "a-progress-fill", labelId: "a-progress-label", textId: "a-q-text", optionsId: "a-options",
+      screenId: "screen-aq", onNext: renderAQuestion, onFinish: finishA
+    });
   }
 
   function finishA(){
@@ -648,33 +703,11 @@
   }
 
   function renderBQuestion(){
-    var idx = state.bAnswers.length;
-    var q = QUIZ_B[idx];
-    document.getElementById("b-progress-fill").style.width = Math.round((idx / QUIZ_B.length) * 100) + "%";
-    document.getElementById("b-progress-label").textContent = (idx + 1) + "/" + QUIZ_B.length;
-    document.getElementById("b-q-text").textContent = q.text;
-    var opts = document.getElementById("b-options");
-    opts.innerHTML = "";
-    q.options.forEach(function(o){
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "opt-btn";
-      b.textContent = o.text;
-      b.addEventListener("click", function(){
-        playClick();
-        state.bAnswers.push(o.stage);
-        save();
-        if (state.bAnswers.length >= QUIZ_B.length) {
-          finishB();
-        } else {
-          renderBQuestion();
-        }
-      });
-      opts.appendChild(b);
+    renderMultiSelectQuestion({
+      answers: state.bAnswers, quiz: QUIZ_B, field: "stage",
+      fillId: "b-progress-fill", labelId: "b-progress-label", textId: "b-q-text", optionsId: "b-options",
+      screenId: "screen-bq", btnClass: "teal", onNext: renderBQuestion, onFinish: finishB
     });
-    showScreen("screen-bq");
-    state.screen = "bq";
-    save();
   }
 
   function finishB(){
@@ -705,7 +738,7 @@
   function buildResultText(res, bank){
     if (res.type === "single") {
       var g = bank[res.keys[0]];
-      return { name: g.name, emoji: g.emoji, color: g.color, desc: g.desc, tip: g.tip, clb: g.clb, actions: g.actions };
+      return { name: g.name, emoji: g.emoji, color: g.color, desc: g.desc, tip: g.tip, clb: g.clb, actions: g.actions, mislead: g.mislead, question: g.question };
     }
     var g1 = bank[res.keys[0]], g2 = bank[res.keys[1]];
     return {
@@ -715,7 +748,9 @@
       desc: g1.desc + " Đồng thời, " + firstLower(g2.desc),
       tip: g1.tip + " " + g2.tip,
       clb: g1.clb,
-      actions: g1.actions.slice(0, 2).concat(g2.actions.slice(0, 1))
+      actions: g1.actions.slice(0, 2).concat(g2.actions.slice(0, 1)),
+      mislead: g1.mislead + " " + firstLower(g2.mislead),
+      question: g1.question
     };
   }
 
@@ -730,6 +765,8 @@
       '<h3>' + icon + ' ' + label + ': ' + r.name + '</h3>' +
       '<div class="body-text">' + r.desc + '</div>' +
       '<ul class="action-list">' + actionsHtml + '</ul>' +
+      '<div class="mislead-box"><div class="box-label">💭 Điều dễ hiểu lầm</div>' + r.mislead + '</div>' +
+      '<div class="question-box"><div class="box-label">❓ Để ba mẹ tự hỏi mình</div>' + r.question + '</div>' +
       '<div class="clb-box" style="margin-top:12px;">' + r.clb + '</div>';
   }
 
@@ -785,7 +822,7 @@
         'Lần tới khi con làm điều gì khiến ba mẹ muốn phản ứng ngay, hãy thử dừng lại vài giây và hỏi con: <b>"Con làm vậy vì sao thế?"</b> — hỏi trước khi kết luận đúng hay sai. Câu trả lời của con thường sẽ cho ba mẹ thấy một góc nhìn khác, và đôi khi, một phần phản chiếu của chính mình.' +
       '</div>' +
       '<div class="body-text" style="margin-top:14px;">Gốc rễ của thực hành này chính là 3 Bản Chất Cao Quý mà Vietwise và Minewise vẫn cùng con nuôi dưỡng mỗi tuần trong CLB Sao Sáng: <b>Yêu thương</b> (như hoa thơm, toả ra một cách tự nhiên), <b>Khiêm nhường</b> (như đại dương, luôn thấp hơn mọi dòng sông để đón nhận), và <b>Phụng sự</b> (như mặt trời, cho đi mà không cần được nhìn thấy). Khi ba mẹ thực hành nhìn con sửa mình, đó cũng chính là đang sống ba bản chất này, chứ không chỉ dạy con bằng lời.</div>' +
-      '<div class="body-text" style="margin-top:10px;font-weight:800;">Đây cũng chính là điều CLB Sao Sáng K11 luyện tập cùng con mỗi tuần — không phải một bài giảng một lần, mà một thói quen nhỏ lặp lại đều đặn suốt cả mùa.</div>';
+      '<div class="body-text" style="margin-top:10px;">Ba mẹ có thể thử ngay tuần này, không cần chờ khoá học nào cả.</div>';
 
     showScreen("screen-final");
     state.screen = "final";
