@@ -157,6 +157,9 @@
   .form-radio-option input{width:18px;height:18px;flex-shrink:0;}
   .form-tier-preview{background:var(--gold-tint);border:2px dashed var(--gold);border-radius:12px;padding:12px 14px;margin-top:16px;font-size:13.5px;font-weight:700;color:var(--ink);display:none;}
   .form-tier-preview.show{display:block;}
+  button.btn:disabled{opacity:.55;cursor:not-allowed;box-shadow:none;}
+  .form-submit-note{font-size:12.5px;color:var(--ink-soft);font-weight:600;text-align:center;margin-top:10px;display:none;line-height:1.5;}
+  .form-submit-note.show{display:block;}
   .form-submit-wrap{margin-top:20px;}
   .success-box{text-align:center;padding:10px 0;}
   .success-box .ico{font-size:48px;}
@@ -401,9 +404,16 @@
           <label class="form-label" for="ghiChu">Có điều gì ba mẹ muốn CLB biết để đồng hành cùng con tốt hơn không?</label>
           <textarea class="form-textarea" id="ghiChu" name="ghiChu"></textarea>
         </div>
+        <div class="form-field">
+          <label class="form-label" for="gioiThieu">Ai đã giới thiệu CLB Sao Sáng đến ba mẹ ạ? (Nếu có)</label>
+          <input class="form-input" type="text" id="gioiThieu" name="gioiThieu">
+        </div>
         <input type="hidden" id="goiHocPhi" name="goiHocPhi" value="">
         <input type="hidden" name="loaiForm" value="dang_ky_clb">
-        <div class="form-submit-wrap"><button class="btn" type="submit" style="width:100%;">Gửi đăng ký</button></div>
+        <div class="form-submit-wrap">
+          <button class="btn" type="submit" id="submit-btn" style="width:100%;">Gửi đăng ký</button>
+          <div class="form-submit-note" id="submit-note"></div>
+        </div>
       </form>
     </div>
 
@@ -528,17 +538,34 @@
   var formSubmitted = false;
   var form = document.getElementById('dangky-form');
   var iframe = document.getElementById('hidden_iframe');
+  var submitBtn = document.getElementById('submit-btn');
+  var submitNote = document.getElementById('submit-note');
+  var submitTimeout = null;
 
   form.addEventListener('submit', function(){
     var tier = computeTier();
     hiddenTier.value = tier ? (tier.label + ' — ' + tier.amount) : '';
     document.getElementById('success-tier-text').textContent = tier ? ('Mức học phí áp dụng: ' + tier.amount + ' (' + tier.label + ').') : '';
     formSubmitted = true;
+    /* Khóa nút + báo đang xử lý ngay lập tức — tránh phụ huynh tưởng chưa bấm được rồi bấm lại nhiều lần, gây trùng dòng đăng ký */
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Đang gửi...';
+    submitNote.textContent = 'Đang gửi đăng ký, vui lòng đợi trong giây lát (có thể mất 5-10 giây)... Đừng bấm lại nhé 🙏';
+    submitNote.classList.add('show');
+    if (submitTimeout) { clearTimeout(submitTimeout); }
+    submitTimeout = setTimeout(function(){
+      if (document.getElementById('dangky-success').hidden) {
+        submitNote.textContent = 'Việc gửi đang lâu hơn bình thường. Nếu ba mẹ chắc chắn đã bấm gửi, KHÔNG cần gửi lại — đăng ký có thể đã được ghi nhận, CLB sẽ liên hệ xác nhận. Muốn chắc chắn hơn, có thể bấm nút bên dưới để gửi lại, hoặc nhắn Zalo CLB.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Gửi lại đăng ký';
+      }
+    }, 15000);
     /* native submit proceeds to hidden_iframe, page does not navigate */
   });
 
   iframe.addEventListener('load', function(){
     if (!formSubmitted) return;
+    if (submitTimeout) { clearTimeout(submitTimeout); submitTimeout = null; }
     document.getElementById('dangky-form-wrap').hidden = true;
     document.getElementById('dangky-success').hidden = false;
     document.getElementById('dangky-success').scrollIntoView({ behavior: 'smooth', block: 'start' });
