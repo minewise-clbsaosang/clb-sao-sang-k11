@@ -1,0 +1,368 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Đăng Ký Phụng Sự Châu Ngọc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap">
+<style>
+/* Layout: một cột kiểu phiếu đăng ký trên nền kem ấm (đồng bộ Sales Page CLB Sao Sáng); mỗi nhóm câu hỏi là một "trang phiếu" có số thứ tự vì phụ huynh điền lần lượt */
+:root{
+  color-scheme: light;
+  --cream:#FFF4DC;
+  --paper:#FFFFFF;
+  --ink:#2B2550;
+  --ink-soft:#6E6890;
+  --gold:#FFB627;
+  --gold-deep:#E8890C;
+  --gold-tint:#FFEFC7;
+  --indigo:#4A4FA0;
+  --indigo-tint:#E6E7F5;
+  --teal:#1FA898;
+  --teal-tint:#DFF7F2;
+  --pink:#FF6F91;
+  --line:#E8DDC2;
+  --err:#C8394F;
+  --font-display:"Baloo 2","Nunito",system-ui,sans-serif;
+  --font-body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+body{background:var(--cream);color:var(--ink);font-family:var(--font-body);font-size:16.5px;line-height:1.55}
+.wrap{max-width:620px;margin:0 auto;padding-inline:16px;padding-block:20px 56px}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.15}
+a{color:var(--indigo)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;margin-bottom:18px}
+.eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+.hero h1{font-size:clamp(30px,8vw,42px);font-weight:800;margin-top:4px}
+.hero h1 span{color:var(--indigo)}
+.hero p{margin:8px 0 0;color:var(--ink-soft);max-width:44ch}
+.mascots{display:flex}
+.mascots span{width:64px;height:64px;border-radius:50%;overflow:hidden;border:3px solid var(--paper);box-shadow:0 4px 12px rgba(43,37,80,.15);background:var(--paper)}
+.mascots span + span{margin-left:-14px}
+.mascots img{width:100%;height:100%;object-fit:cover}
+.mascots .tac img{object-position:50% 18%}
+
+/* thông tin nhanh */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.fact{background:var(--paper);border-radius:16px;padding:10px 12px;border:1.5px solid var(--line)}
+.fact b{display:block;font-family:var(--font-display);font-size:22px;color:var(--indigo);line-height:1.1}
+.fact span{font-size:13px;color:var(--ink-soft);font-weight:700}
+
+/* các bước trước buổi */
+.flow{background:var(--indigo);color:var(--paper);border-radius:22px;padding:16px 18px;margin-bottom:22px}
+.flow h2{font-size:20px;margin-bottom:8px}
+.flow ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.flow li b{color:var(--gold)}
+
+/* phiếu */
+form{display:grid;gap:16px}
+fieldset{border:0;margin:0;padding:16px 16px 18px;background:var(--paper);border-radius:22px;box-shadow:0 2px 0 var(--line);display:grid;gap:14px;min-width:0}
+legend{float:left;width:100%;padding:0;display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:800;font-size:20px}
+legend .num{flex:0 0 30px;height:30px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-size:16px}
+legend + *{clear:both}
+.field{display:grid;gap:6px;min-width:0}
+.field > label,.q{font-weight:800;font-size:15.5px}
+.req{color:var(--pink)}
+.help{font-size:13.5px;color:var(--ink-soft);margin:-2px 0 0}
+input[type=text],input[type=tel],select,textarea{width:100%;box-sizing:border-box;border:2px solid var(--line);border-radius:14px;padding:11px 13px;font:inherit;font-size:16px;color:var(--ink);background:var(--paper)}
+textarea{min-height:84px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* lựa chọn dạng thẻ */
+.cards{display:grid;gap:8px}
+.cards.c2{grid-template-columns:1fr 1fr}
+.choice{position:relative;display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:16px;padding:10px 12px;cursor:pointer;background:var(--paper);min-width:0}
+.choice input{position:absolute;opacity:0;pointer-events:none}
+.choice .ico{font-size:24px;line-height:1.2;flex:0 0 auto}
+.choice .t{font-weight:800;font-size:15px;line-height:1.3}
+.choice .d{display:block;font-weight:600;font-size:13.5px;color:var(--ink-soft);margin-top:2px}
+.choice:has(input:checked),.choice.on{border-color:var(--indigo);background:var(--indigo-tint)}
+.choice:has(input:focus-visible){outline:3px solid var(--gold);outline-offset:2px}
+.choice:has(input:checked)::after,.choice.on::after{content:"✓";position:absolute;top:-8px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--indigo);color:var(--paper);font-weight:800;font-size:13px;display:grid;place-items:center}
+.level .tag{display:table;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);background:var(--teal-tint);border-radius:999px;padding:1px 8px;margin-bottom:3px}
+.other-in{margin-top:2px}
+
+.week-meta{font-size:12.5px;color:var(--ink-soft);font-weight:700}
+.week-meta em{font-style:normal;color:var(--gold-deep)}
+
+.commit{display:flex;gap:10px;align-items:flex-start;background:var(--gold-tint);border-radius:16px;padding:12px 14px;font-weight:700;font-size:15px}
+.commit input{width:22px;height:22px;flex:0 0 22px;margin-top:2px;accent-color:var(--indigo)}
+.tips{font-size:14px;color:var(--ink-soft);margin:0;padding-left:18px;display:grid;gap:3px}
+
+.submit-row{display:grid;gap:10px;justify-items:center;text-align:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:15px 30px;font-family:var(--font-display);font-weight:800;font-size:20px;background:var(--gold);color:var(--ink);box-shadow:0 6px 0 var(--gold-deep);cursor:pointer;text-decoration:none}
+.btn:active{transform:translateY(3px);box-shadow:0 3px 0 var(--gold-deep)}
+.btn[disabled]{opacity:.55;cursor:wait}
+.btn.ghost{background:var(--paper);box-shadow:0 0 0 2px var(--line);font-size:17px;padding:11px 20px}
+.note{font-size:14px;color:var(--ink-soft);max-width:46ch}
+.errors{color:var(--err);font-weight:800;font-size:14.5px}
+.invalid{border-color:var(--err)!important}
+.group-invalid .choice{border-color:var(--err)}
+
+/* thành công */
+.success{background:var(--paper);border-radius:24px;padding:22px 20px;text-align:center;display:grid;gap:12px;justify-items:center;box-shadow:0 2px 0 var(--line)}
+.success h2{font-size:28px;color:var(--indigo)}
+.success ol{text-align:left;margin:0;padding-left:20px;display:grid;gap:6px}
+.success b{color:var(--indigo)}
+.foot{text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:26px}
+
+@media (max-width:440px){
+  .facts{grid-template-columns:1fr}
+  .fact{display:flex;align-items:baseline;gap:10px}
+  .fact b{font-size:19px;flex:0 0 92px}
+  .two,.cards.c2{grid-template-columns:1fr}
+  .mascots span{width:52px;height:52px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="eyebrow">CLB Sao Sáng · K11</div>
+      <h1>Đăng Ký <span>Phụng Sự Châu Ngọc</span></h1>
+      <p>Mỗi buổi học, một bạn nhỏ được mời lên chia sẻ điều mình giỏi hoặc mình thích với cả lớp. Đó là món quà bé tặng các bạn, và cũng là lúc "viên châu ngọc" của bé được nhìn thấy.</p>
+    </div>
+    <div class="mascots" aria-hidden="true"><span><img src="assets/ngoi-sao-sang.jpg" alt=""></span><span class="tac"><img src="assets/tac-ke-hoa.jpg" alt=""></span></div>
+  </header>
+
+  <div class="facts">
+    <div class="fact"><b>~15 phút</b><span>cả tiết mục, gồm phần các bạn hỏi và cảm ơn</span></div>
+    <div class="fact"><b>3 cấp độ</b><span>bé nhút nhát vẫn tham gia được</span></div>
+    <div class="fact"><b>Tuần 2–10</b><span>12/10 đến 07/12, tối Thứ Hai</span></div>
+  </div>
+
+  <section class="flow" aria-labelledby="flow-h">
+    <h2 id="flow-h">Sau khi đăng ký, mọi việc diễn ra thế này</h2>
+    <ol>
+      <li>CLB nhắn Zalo <b>xác nhận tuần</b> của bé trong 1–2 ngày.</li>
+      <li>Ba mẹ quay <b>video bé tập thử</b> bằng điện thoại, gửi Zalo CLB <b>chậm nhất Thứ Năm tuần trước</b> buổi phụng sự. Host xem trước để góp ý nhẹ và chuẩn bị cùng bé.</li>
+      <li>Nếu tiết mục cần các bạn chuẩn bị dụng cụ, CLB <b>nhắn cả lớp từ 3 ngày trước</b>.</li>
+      <li>Tối Thứ Hai, bé lên sóng. Sau đó cả lớp hỏi han, cảm ơn và bé được nghe Ngôi Sao Trong Tim của mình.</li>
+    </ol>
+  </section>
+
+  <div id="form-wrap">
+  <form id="phungsu-form" method="POST" target="hidden_iframe" action="https://script.google.com/macros/s/AKfycbwvAtD5YzGEdsZU3fJq9J_edOGWfGkO5_p9rU8FbU-805JtqK_GSY9Pxj2vj-cie-Jg/exec" novalidate>
+    <input type="hidden" name="loaiForm" value="phung_su">
+
+    <fieldset>
+      <legend><span class="num">1</span>Bé và gia đình</legend>
+      <div class="two">
+        <div class="field"><label for="tenCon">Tên gọi của bé <span class="req">*</span></label><input type="text" id="tenCon" name="tenCon" maxlength="40" required autocomplete="off" placeholder="Ví dụ: Bông"></div>
+        <div class="field"><label for="tuoiCon">Tuổi <span class="req">*</span></label>
+          <select id="tuoiCon" name="tuoiCon" required><option value="">Chọn tuổi</option><option>4 tuổi</option><option>5 tuổi</option><option>6 tuổi</option><option>7 tuổi</option><option>8 tuổi</option></select></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="hoTenPhuHuynh">Họ tên ba/mẹ <span class="req">*</span></label><input type="text" id="hoTenPhuHuynh" name="hoTenPhuHuynh" maxlength="60" required autocomplete="name"></div>
+        <div class="field"><label for="sdt">Số Zalo <span class="req">*</span></label><input type="tel" id="sdt" name="sdt" maxlength="15" required autocomplete="tel" inputmode="tel" placeholder="09xx xxx xxx"></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="num">2</span>Bé muốn phụng sự ở cấp độ nào?</legend>
+      <p class="help">Ba mẹ cùng bé chọn ở nhà. Không cấp nào "kém" hơn cấp nào, cả 3 đều được ghi nhận như nhau trong Sổ Tay Châu Ngọc.</p>
+      <div class="cards level" id="g-capDo">
+        <label class="choice"><input type="radio" name="capDo" value="Cấp 1 - Giơ đồ vật, ba mẹ/host nói hộ" required><span class="ico">🧸</span><span><span class="tag">Cấp 1 · Nhẹ nhàng</span><span class="t">Bé giơ đồ vật/sản phẩm lên khoe qua camera</span><span class="d">Ba mẹ hoặc host nói hộ một câu giới thiệu. Hợp với bé rất nhút nhát, lần đầu tham gia.</span></span></label>
+        <label class="choice"><input type="radio" name="capDo" value="Cấp 2 - Video quay sẵn ở nhà"><span class="ico">🎬</span><span><span class="tag">Cấp 2 · Trung bình</span><span class="t">Ba mẹ quay sẵn video ở nhà, host phát cho cả lớp xem</span><span class="d">Hợp với bé ngại nói trực tiếp nhưng thoải mái hơn khi không "live". Video tập thử chính là video phát trong buổi.</span></span></label>
+        <label class="choice"><input type="radio" name="capDo" value="Cấp 3 - Bé trình bày trực tiếp"><span class="ico">🌟</span><span><span class="tag">Cấp 3 · Đầy đủ</span><span class="t">Bé tự trình bày trực tiếp trước cả lớp</span><span class="d">Hợp với bé đã tự tin hoặc đã quen CLB.</span></span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="num">3</span>Tiết mục của bé</legend>
+      <div class="field">
+        <span class="q" id="q-hinhThuc">Bé sẽ làm gì? <span class="req">*</span></span>
+        <div class="cards c2" id="g-hinhThuc" role="radiogroup" aria-labelledby="q-hinhThuc">
+          <label class="choice"><input type="radio" name="hinhThuc" value="Biểu diễn" required><span class="ico">🎤</span><span class="t">Biểu diễn<span class="d">Hát, múa, nhạc cụ, võ, ảo thuật…</span></span></label>
+          <label class="choice"><input type="radio" name="hinhThuc" value="Hướng dẫn cả lớp làm cùng"><span class="ico">🧑‍🏫</span><span class="t">Hướng dẫn cả lớp làm cùng<span class="d">Gấp giấy, vẽ, thí nghiệm nhỏ, món ăn đơn giản…</span></span></label>
+          <label class="choice"><input type="radio" name="hinhThuc" value="Kể chuyện, đọc thơ"><span class="ico">📖</span><span class="t">Kể chuyện, đọc thơ<span class="d">Truyện bé thích hoặc bé tự nghĩ ra</span></span></label>
+          <label class="choice"><input type="radio" name="hinhThuc" value="Giới thiệu bộ sưu tập, đồ vật yêu thích"><span class="ico">🧸</span><span class="t">Giới thiệu đồ vật yêu thích<span class="d">Bộ sưu tập, thú bông, cây trồng, thú cưng…</span></span></label>
+          <label class="choice"><input type="radio" name="hinhThuc" value="Đố vui, trò chơi cho cả lớp"><span class="ico">🎲</span><span class="t">Đố vui, trò chơi<span class="d">Bé làm "quản trò" cho cả lớp</span></span></label>
+          <label class="choice"><input type="radio" name="hinhThuc" value="Khoe sản phẩm tự làm"><span class="ico">🎨</span><span class="t">Khoe sản phẩm tự làm<span class="d">Tranh, mô hình, đồ thủ công, lego…</span></span></label>
+        </div>
+        <input type="text" class="other-in" id="hinhThucKhac" name="hinhThucKhac" maxlength="80" placeholder="✏️ Ý khác của bé (ghi vào đây nếu không có trong các ô trên)">
+      </div>
+      <div class="field"><label for="tenTietMuc">Tên tiết mục <span class="req">*</span></label><input type="text" id="tenTietMuc" name="tenTietMuc" maxlength="80" required placeholder="Ví dụ: Gấp con ếch biết nhảy"></div>
+      <div class="field"><label for="moTa">Bé sẽ làm những gì? (vài dòng là đủ)</label><textarea id="moTa" name="moTa" maxlength="500" placeholder="Ví dụ: Bông giới thiệu con ếch đã gấp, rồi hướng dẫn các bạn gấp từng bước, cuối cùng cả lớp thi cho ếch nhảy xa."></textarea></div>
+      <div class="field">
+        <span class="q" id="q-thoiLuong">Phần bé trình bày dài khoảng bao lâu? <span class="req">*</span></span>
+        <p class="help">Cả tiết mục khoảng 15 phút, gồm cả phần các bạn hỏi và cảm ơn bé, nên phần bé trình bày nên gọn trong 10 phút.</p>
+        <div class="cards c2" id="g-thoiLuong" role="radiogroup" aria-labelledby="q-thoiLuong">
+          <label class="choice"><input type="radio" name="thoiLuong" value="Dưới 5 phút" required><span class="ico">⏱️</span><span class="t">Dưới 5 phút</span></label>
+          <label class="choice"><input type="radio" name="thoiLuong" value="5-7 phút"><span class="ico">⏱️</span><span class="t">5–7 phút</span></label>
+          <label class="choice"><input type="radio" name="thoiLuong" value="7-10 phút"><span class="ico">⏱️</span><span class="t">7–10 phút</span></label>
+          <label class="choice"><input type="radio" name="thoiLuong" value="Chưa rõ, nhờ host góp ý"><span class="ico">🤔</span><span class="t">Chưa rõ, nhờ host góp ý</span></label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="num">4</span>Chọn tuần</legend>
+      <p class="help">Mỗi tuần có giới hạn lượt, CLB sẽ xếp theo thứ tự đăng ký và báo lại qua Zalo. Gợi ý: chọn tuần có giá trị sống hợp với tiết mục của bé.</p>
+      <div class="two">
+        <div class="field"><label for="tuanNV1">Nguyện vọng 1 <span class="req">*</span></label><select id="tuanNV1" name="tuanNV1" required></select></div>
+        <div class="field"><label for="tuanNV2">Nguyện vọng 2</label><select id="tuanNV2" name="tuanNV2"></select></div>
+      </div>
+      <div class="week-meta" id="week-meta" aria-live="polite"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="num">5</span>Dụng cụ và hỗ trợ</legend>
+      <div class="field">
+        <span class="q" id="q-dungCu">Các bạn trong lớp có cần chuẩn bị gì để làm cùng bé không? <span class="req">*</span></span>
+        <div class="cards c2" id="g-canDungCu" role="radiogroup" aria-labelledby="q-dungCu">
+          <label class="choice"><input type="radio" name="canDungCu" value="Không cần" required><span class="ico">🙌</span><span class="t">Không cần<span class="d">Các bạn chỉ cần xem và cổ vũ</span></span></label>
+          <label class="choice"><input type="radio" name="canDungCu" value="Có"><span class="ico">✂️</span><span class="t">Có<span class="d">CLB sẽ nhắn cả lớp chuẩn bị trước</span></span></label>
+        </div>
+        <div class="field" id="dungCu-wrap" hidden>
+          <label for="dungCu">Các bạn cần chuẩn bị gì? <span class="req">*</span></label>
+          <textarea id="dungCu" name="dungCu" maxlength="300" placeholder="Ví dụ: 1 tờ giấy màu vuông (15x15cm), bút dạ. Nên là đồ dễ tìm trong nhà."></textarea>
+          <p class="help">Ưu tiên đồ có sẵn trong nhà để bạn nào cũng tham gia được.</p>
+        </div>
+      </div>
+      <div class="field">
+        <span class="q">Bé cần CLB hỗ trợ gì khi lên sóng? (chọn nhiều)</span>
+        <div class="cards c2">
+          <label class="choice"><input type="checkbox" name="hoTro" value="Chiếu hình/slide"><span class="ico">🖼️</span><span class="t">Chiếu hình, slide</span></label>
+          <label class="choice"><input type="checkbox" name="hoTro" value="Phát nhạc nền"><span class="ico">🎵</span><span class="t">Phát nhạc nền</span></label>
+          <label class="choice"><input type="checkbox" name="hoTro" value="Phát video quay sẵn"><span class="ico">🎬</span><span class="t">Phát video quay sẵn</span></label>
+          <label class="choice"><input type="checkbox" name="hoTro" value="Ba mẹ ngồi cạnh hỗ trợ"><span class="ico">🤝</span><span class="t">Ba mẹ ngồi cạnh bé</span></label>
+        </div>
+        <input type="text" class="other-in" id="hoTroKhac" name="hoTroKhac" maxlength="120" placeholder="✏️ Hỗ trợ khác (nếu có)">
+        <input type="hidden" name="hoTroGop" id="hoTroGop">
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="num">6</span>Video tập thử</legend>
+      <ul class="tips">
+        <li>Quay bằng điện thoại là đủ, không cần đẹp, không cần quay lại nhiều lần.</li>
+        <li>Quay ngang, chỗ đủ sáng, nói rõ tiếng. Bé tập đúng như sẽ làm trong buổi.</li>
+        <li>Gửi qua Zalo CLB <b>chậm nhất Thứ Năm tuần trước</b> buổi phụng sự để host kịp xem và chuẩn bị.</li>
+        <li>Video chỉ dùng để chuẩn bị, không đăng công khai nếu chưa hỏi ý gia đình.</li>
+      </ul>
+      <label class="commit" id="g-camKet"><input type="checkbox" id="camKet" name="camKet" value="Đồng ý gửi video tập thử trước Thứ Năm" required><span>Gia đình sẽ gửi video bé tập thử qua Zalo CLB trước Thứ Năm tuần trước buổi phụng sự. <span class="req">*</span></span></label>
+      <div class="field"><label for="ghiChu">Ba mẹ muốn nhắn gì thêm cho host?</label><textarea id="ghiChu" name="ghiChu" maxlength="400" placeholder="Ví dụ: Bé hơi run khi đông người, mong host gọi tên bé trước để bé quen."></textarea></div>
+    </fieldset>
+
+    <div class="submit-row">
+      <div class="errors" id="errors" role="alert"></div>
+      <button type="submit" class="btn" id="submit-btn">Gửi đăng ký phụng sự ✨</button>
+      <p class="note" id="submit-note">Bấm một lần và đợi vài giây nhé.</p>
+    </div>
+  </form>
+  </div>
+
+  <section class="success" id="success" hidden>
+    <div class="mascots" aria-hidden="true"><span><img src="assets/ngoi-sao-sang.jpg" alt=""></span><span class="tac"><img src="assets/tac-ke-hoa.jpg" alt=""></span></div>
+    <h2>CLB đã nhận đăng ký của <span id="success-name">bé</span>!</h2>
+    <p>Cảm ơn ba mẹ đã đồng hành cùng bé tặng món quà này cho cả lớp. Việc tiếp theo:</p>
+    <ol>
+      <li>CLB nhắn Zalo <b>xác nhận tuần</b> trong 1–2 ngày.</li>
+      <li>Gửi <b>video bé tập thử</b> qua Zalo CLB chậm nhất <b>Thứ Năm tuần trước</b> buổi phụng sự.</li>
+      <li>Trong tuần, khi thấy bé tập, ba mẹ thử nói: <b>"Mẹ thấy con đang chuẩn bị món quà cho các bạn đấy."</b></li>
+    </ol>
+    <a class="btn ghost" href="https://zalo.me/g/3gu6pbnydhyyevobgttg" target="_blank" rel="noopener">Mở nhóm Zalo CLB</a>
+  </section>
+
+  <div class="foot">Minewise · CLB Sao Sáng</div>
+</div>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none" title="Gửi đăng ký"></iframe>
+
+<script>
+(function(){
+  var WEEKS = [
+    {v:'Tuần 2 - 12/10', label:'Tuần 2 · Thứ Hai 12/10', gts:'Tháo Vát & Sáng Tạo'},
+    {v:'Tuần 3 - 19/10', label:'Tuần 3 · Thứ Hai 19/10', gts:'Đầy Sức Sống', extra:'buổi có khách mời'},
+    {v:'Tuần 4 - 26/10', label:'Tuần 4 · Thứ Hai 26/10', gts:'Đẹp Người Đẹp Nết'},
+    {v:'Tuần 5 - 02/11', label:'Tuần 5 · Thứ Hai 02/11', gts:'Lan Tỏa Yêu Thương'},
+    {v:'Tuần 6 - 09/11', label:'Tuần 6 · Thứ Hai 09/11', gts:'Nhiệt Tình'},
+    {v:'Tuần 7 - 16/11', label:'Tuần 7 · Thứ Hai 16/11', gts:'Biết Ơn Thầy Cô'},
+    {v:'Tuần 8 - 23/11', label:'Tuần 8 · Thứ Hai 23/11', gts:'Hiếu Kỳ', extra:'buổi có khách mời'},
+    {v:'Tuần 9 - 30/11', label:'Tuần 9 · Thứ Hai 30/11', gts:'Dũng Cảm'},
+    {v:'Tuần 10 - 07/12', label:'Tuần 10 · Thứ Hai 07/12', gts:'Đón Mừng', extra:'lễ tổng kết có ba mẹ dự'}
+  ];
+  var nv1=document.getElementById('tuanNV1'), nv2=document.getElementById('tuanNV2');
+  function fill(sel,first){
+    sel.innerHTML='';
+    var o=document.createElement('option'); o.value=first.v; o.textContent=first.t; sel.appendChild(o);
+    WEEKS.forEach(function(w){var op=document.createElement('option'); op.value=w.v; op.textContent=w.label+' · '+w.gts; sel.appendChild(op);});
+  }
+  fill(nv1,{v:'',t:'Chọn tuần'});
+  fill(nv2,{v:'',t:'Không chọn'});
+  var anyOpt=document.createElement('option'); anyOpt.value='Tuần nào cũng được'; anyOpt.textContent='Tuần nào cũng được'; nv1.appendChild(anyOpt);
+  var meta=document.getElementById('week-meta');
+  function showMeta(){
+    var w=null; for(var i=0;i<WEEKS.length;i++){if(WEEKS[i].v===nv1.value)w=WEEKS[i];}
+    meta.innerHTML = w ? ('Giá trị sống tuần này: <em>'+w.gts+'</em>'+(w.extra?' · '+w.extra:'')) : '';
+  }
+  nv1.addEventListener('change',showMeta);
+
+  /* hiện ô dụng cụ khi chọn "Có" */
+  var dcWrap=document.getElementById('dungCu-wrap'), dc=document.getElementById('dungCu');
+  Array.prototype.forEach.call(document.querySelectorAll('input[name=canDungCu]'),function(r){
+    r.addEventListener('change',function(){ var on=r.value==='Có'&&r.checked; dcWrap.hidden=!on; dc.required=on; if(on)dc.focus(); });
+  });
+
+  /* "Ý khác" ở hình thức: gõ vào thì bỏ chọn ô có sẵn */
+  var hk=document.getElementById('hinhThucKhac');
+  hk.addEventListener('input',function(){ if(hk.value.trim()){Array.prototype.forEach.call(document.querySelectorAll('input[name=hinhThuc]'),function(r){r.checked=false;});} });
+  Array.prototype.forEach.call(document.querySelectorAll('input[name=hinhThuc]'),function(r){ r.addEventListener('change',function(){ if(r.checked) hk.value=''; }); });
+
+  /* đánh dấu thẻ đang chọn (dự phòng cho trình duyệt cũ không hỗ trợ :has) */
+  function syncOn(){Array.prototype.forEach.call(document.querySelectorAll('.choice input'),function(i){i.closest('.choice').classList.toggle('on',i.checked);});}
+  document.addEventListener('change',syncOn); hk.addEventListener('input',syncOn);
+
+  var form=document.getElementById('phungsu-form'), btn=document.getElementById('submit-btn'), note=document.getElementById('submit-note'), errBox=document.getElementById('errors');
+  var iframe=document.getElementById('hidden_iframe');
+  var sent=false, timer=null;
+
+  function checked(name){return !!form.querySelector('input[name="'+name+'"]:checked');}
+  function validate(){
+    var errs=[];
+    Array.prototype.forEach.call(form.querySelectorAll('.invalid'),function(x){x.classList.remove('invalid');});
+    Array.prototype.forEach.call(form.querySelectorAll('.group-invalid'),function(x){x.classList.remove('group-invalid');});
+    function need(id,msg){var e=document.getElementById(id); if(!e.value.trim()){e.classList.add('invalid'); errs.push(msg); return false;} return true;}
+    need('tenCon','tên gọi của bé'); need('tuoiCon','tuổi'); need('hoTenPhuHuynh','họ tên ba/mẹ');
+    var sdt=document.getElementById('sdt'); var digits=sdt.value.replace(/\D/g,'');
+    if(digits.length<9){sdt.classList.add('invalid'); errs.push('số Zalo (ít nhất 9 chữ số)');}
+    if(!checked('capDo')){document.getElementById('g-capDo').classList.add('group-invalid'); errs.push('cấp độ phụng sự');}
+    if(!checked('hinhThuc') && !hk.value.trim()){document.getElementById('g-hinhThuc').classList.add('group-invalid'); hk.classList.add('invalid'); errs.push('bé sẽ làm gì');}
+    need('tenTietMuc','tên tiết mục');
+    if(!checked('thoiLuong')){document.getElementById('g-thoiLuong').classList.add('group-invalid'); errs.push('thời lượng');}
+    need('tuanNV1','tuần nguyện vọng 1');
+    if(!checked('canDungCu')){document.getElementById('g-canDungCu').classList.add('group-invalid'); errs.push('dụng cụ cho các bạn');}
+    else if(!dcWrap.hidden && !dc.value.trim()){dc.classList.add('invalid'); errs.push('danh sách dụng cụ các bạn cần chuẩn bị');}
+    if(!document.getElementById('camKet').checked){document.getElementById('g-camKet').classList.add('invalid'); errs.push('xác nhận gửi video tập thử');}
+    return errs;
+  }
+
+  form.addEventListener('submit',function(ev){
+    var errs=validate();
+    if(errs.length){ev.preventDefault(); errBox.textContent='Ba mẹ bổ sung giúp: '+errs.join(', ')+'.'; var first=form.querySelector('.invalid,.group-invalid'); if(first&&first.scrollIntoView)first.scrollIntoView({behavior:'smooth',block:'center'}); return;}
+    errBox.textContent='';
+    var ht=[]; Array.prototype.forEach.call(form.querySelectorAll('input[name=hoTro]:checked'),function(c){ht.push(c.value);});
+    var hkhac=document.getElementById('hoTroKhac').value.trim(); if(hkhac)ht.push(hkhac);
+    document.getElementById('hoTroGop').value=ht.join('; ');
+    document.getElementById('success-name').textContent='bé '+document.getElementById('tenCon').value.trim();
+    sent=true; btn.disabled=true; btn.textContent='Đang gửi...';
+    note.textContent='Đang gửi, vui lòng đợi vài giây (có thể mất 5-10 giây). Đừng bấm lại nhé 🙏';
+    if(timer)clearTimeout(timer);
+    timer=setTimeout(function(){
+      if(document.getElementById('success').hidden){
+        note.textContent='Việc gửi đang lâu hơn bình thường. Đăng ký có thể đã được ghi nhận, CLB sẽ nhắn xác nhận. Nếu muốn chắc chắn, ba mẹ có thể bấm gửi lại hoặc nhắn Zalo CLB.';
+        btn.disabled=false; btn.textContent='Gửi lại đăng ký';
+      }
+    },15000);
+  });
+  iframe.addEventListener('load',function(){
+    if(!sent)return;
+    if(timer){clearTimeout(timer);timer=null;}
+    document.getElementById('form-wrap').hidden=true;
+    var s=document.getElementById('success'); s.hidden=false; s.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+
+</body></html>
