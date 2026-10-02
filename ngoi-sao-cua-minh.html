@@ -141,7 +141,7 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
   --c:var(--star);
   position:relative;width:100%;max-width:390px;box-sizing:border-box;
   background:
-    radial-gradient(circle at 12% 8%, color-mix(in srgb,var(--c) 22%, transparent) 0 40px, transparent 41px),
+    radial-gradient(circle at 6% 58%, color-mix(in srgb,var(--c) 22%, transparent) 0 40px, transparent 41px),
     radial-gradient(circle at 92% 30%, color-mix(in srgb,var(--teal) 16%, transparent) 0 26px, transparent 27px),
     linear-gradient(180deg,var(--paper) 0%,var(--paper) 70%,var(--paper-2) 100%);
   color:var(--paper-ink);border-radius:28px;padding:14px 16px 16px;
@@ -152,6 +152,9 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
 .card-top{position:relative;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--paper-soft)}
 .card-top .mini{width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid var(--gold)}
 .card-top .mini img{width:100%;height:100%;object-fit:cover}
+.card-top .brandmark{display:flex;align-items:center;gap:6px}
+.card-top .logo{height:40px;width:auto;display:block}
+.intro .logo{height:64px;width:auto;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45))}
 .hero{display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;margin-top:4px}
 .card-star{position:relative;width:140px;height:140px}
 .card-star svg{width:100%;height:100%;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--c) 75%, transparent))}
@@ -223,6 +226,7 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
 (function(){
   var IMG_SAO = 'assets/ngoi-sao-sang.jpg';
   var IMG_TAC = 'assets/tac-ke-hoa.jpg';
+  var IMG_LOGO = 'assets/minewise-logo.png';
   var KEY = 'ngoiSaoCuaMinh_v2';
   var STAR_PTS = '50,6 62.93,34.2 93.75,37.79 70.92,58.8 77.04,89.21 50,74 22.96,89.21 29.08,58.8 6.25,37.79 37.07,34.2';
   var uid = 0;
@@ -384,6 +388,7 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
   function renderIntro(){
     var w=el('section','intro screen-in');
     w.innerHTML=
+      '<img class="logo" src="'+IMG_LOGO+'" alt="Minewise">'+
       '<div class="eyebrow">CLB Sao Sáng · Quà tặng các bạn nhỏ</div>'+
       '<h1>Ngôi Sao <span>Của Mình</span></h1>'+
       '<div class="hero-pair"><div class="hero-star"><img src="'+IMG_SAO+'" alt="Ngôi Sao Sáng"></div><div class="hero-tac"><img src="'+IMG_TAC+'" alt="Tắc Kè Hoa"></div></div>'+
@@ -532,7 +537,7 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
     var starInner = S.photo ? photoStarSvg(col.hex,S.photo)+'<div class="sticker">'+avIcon+'</div>' : starSvg(col.hex,col.hex)+'<div class="emo">'+avIcon+'</div>';
     card.innerHTML=
       '<span class="tape" aria-hidden="true"></span>'+
-      '<div class="card-top"><span>CLB Sao Sáng · K11</span><span class="mini"><img src="'+IMG_SAO+'" alt=""></span></div>'+
+      '<div class="card-top"><span class="brandmark"><img class="logo" src="'+IMG_LOGO+'" alt="Minewise"><span>CLB Sao Sáng · K11</span></span><span class="mini"><img src="'+IMG_SAO+'" alt=""></span></div>'+
       '<div class="hero"><div class="card-star">'+starInner+
         '<span class="spark" style="left:-6px;top:14px">✦</span><span class="spark" style="right:0;top:2px;font-size:13px">✦</span><span class="spark" style="left:2px;bottom:10px;font-size:22px">✧</span></div>'+
         '<div class="who-box"><div class="card-name"></div><div class="card-age"></div><div class="ribbon">Ngôi Sao <b></b></div></div></div>'+
