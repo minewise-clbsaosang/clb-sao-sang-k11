@@ -152,13 +152,23 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
 .card-top{position:relative;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--paper-soft)}
 .card-top .mini{width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid var(--gold)}
 .card-top .mini img{width:100%;height:100%;object-fit:cover}
-.card-top .brandmark{display:flex;align-items:center;gap:6px}
+.card-top .brandmark{display:flex;align-items:center;gap:8px;min-width:0}
+.card-top .checkin{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-transform:none;letter-spacing:0;min-width:0}
+.card-top .checkin .ci{display:inline-block;background:var(--c);color:var(--paper-ink);font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.16em;line-height:1;padding:5px 10px 4px;border-radius:999px;transform:rotate(-3deg);box-shadow:0 2px 0 color-mix(in srgb,var(--paper-ink) 25%, transparent)}
+.card-top .checkin .club{font-family:var(--font-display);font-weight:800;font-size:22px;line-height:1.05;color:var(--paper-ink);white-space:nowrap}
+.card-top .checkin .club b{color:var(--c);-webkit-text-stroke:.6px var(--paper-ink)}
 .card-top .logo{height:40px;width:auto;display:block}
 .intro .logo{height:64px;width:auto;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45))}
 .hero{display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;margin-top:4px}
 .card-star{position:relative;width:140px;height:140px}
 .card-star svg{width:100%;height:100%;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--c) 75%, transparent))}
 .card-star .emo{position:absolute;left:0;right:0;top:46%;transform:translateY(-50%);text-align:center;font-size:50px;line-height:1}
+.card-star .pcircle{position:absolute;left:50%;top:50%;width:106px;height:106px;transform:translate(-50%,-44%);border-radius:50%;border:5px solid var(--white);box-shadow:0 0 0 3px var(--c),0 8px 18px rgba(0,0,0,.28);background-color:var(--paper-2);background-repeat:no-repeat;box-sizing:border-box}
+.photo-pick .frame{position:relative}
+.photo-pick .frame .pcircle{position:absolute;left:50%;top:50%;width:70px;height:70px;transform:translate(-50%,-44%);border-radius:50%;border:3px solid var(--white);box-shadow:0 0 0 2px var(--star),0 4px 10px rgba(0,0,0,.3);background-color:var(--paper-2);background-repeat:no-repeat;box-sizing:border-box}
+.psliders{display:grid;gap:4px;margin-top:10px}
+.psl{display:grid;grid-template-columns:82px 1fr;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ink-soft)}
+.psl input{width:100%;accent-color:var(--gold)}
 .card-star .sticker{position:absolute;right:-2px;bottom:4px;width:44px;height:44px;border-radius:50%;background:var(--white);display:grid;place-items:center;font-size:27px;box-shadow:0 3px 0 color-mix(in srgb,var(--paper-ink) 18%, transparent);transform:rotate(10deg)}
 .spark{position:absolute;color:var(--c);font-size:18px;line-height:1}
 .who-box{min-width:0}
@@ -215,6 +225,8 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
   .grid.c4{grid-template-columns:repeat(3,1fr)}
   .hero{grid-template-columns:110px 1fr}
   .card-star{width:110px;height:110px}
+  .card-star .pcircle{width:84px;height:84px;border-width:4px}
+  .card-top .checkin .club{font-size:19px}
   .card-name{font-size:30px}
 }
 </style>
@@ -305,7 +317,7 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
   var CHOICE_KEYS = ['avatar','likes','strengths','super','laugh','food','place','wish'];
 
   function blank(){
-    var s={step:-1,name:'',age:null,color:null,photo:null,a:{}};
+    var s={step:-1,name:'',age:null,color:null,photo:null,pw:1,ph:1,pz:100,px:50,py:40,a:{}};
     STEPS.forEach(function(st){ if(st.type==='single') s.a[st.key]={sel:null,other:''}; else if(st.type==='multi') s.a[st.key]={sel:[],other:''}; });
     return s;
   }
@@ -313,7 +325,7 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
   try{
     var raw=localStorage.getItem(KEY);
     if(raw){var o=JSON.parse(raw); if(o&&typeof o==='object'){
-      ['step','name','age','color','photo'].forEach(function(k){if(o[k]!==undefined)S[k]=o[k];});
+      ['step','name','age','color','photo','pw','ph','pz','px','py'].forEach(function(k){if(o[k]!==undefined)S[k]=o[k];});
       if(o.a) CHOICE_KEYS.forEach(function(k){ if(o.a[k]){ if(o.a[k].sel!==undefined)S.a[k].sel=o.a[k].sel; if(typeof o.a[k].other==='string')S.a[k].other=o.a[k].other; } });
     }}
   }catch(e){}
@@ -340,6 +352,16 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
     return '<svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="'+STAR_PTS+'" fill="none" stroke="'+hex+'" stroke-width="4" stroke-dasharray="6 5" stroke-linejoin="round"/>'+
       '<text x="50" y="62" text-anchor="middle" font-size="26" fill="'+hex+'">📷</text></svg>';
   }
+  /* ảnh tròn nổi trên ngôi sao: phóng to = background-size, dịch = background-position */
+  function paintPhoto(root){
+    if(!S.photo) return;
+    var land=(S.pw||1)>=(S.ph||1), z=(+S.pz||100);
+    Array.prototype.forEach.call((root||document).querySelectorAll('.pcircle'),function(d){
+      d.style.backgroundImage='url("'+S.photo+'")';
+      d.style.backgroundSize= land ? ('auto '+z+'%') : (z+'% auto');
+      d.style.backgroundPosition=(+S.px)+'% '+(+S.py)+'%';
+    });
+  }
   function curColor(){return find(COLORS,S.color);}
   function setStar(){var c=curColor(); document.documentElement.style.setProperty('--star', c?c.hex:'#FFC93C');}
 
@@ -359,11 +381,10 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
       var img=new Image();
       img.onload=function(){
         try{
-          var s=Math.min(img.width,img.height), N=360;
-          var sx=(img.width-s)/2, sy=img.height>img.width?(img.height-s)*0.3:(img.height-s)/2;
-          var c=document.createElement('canvas'); c.width=c.height=N;
-          c.getContext('2d').drawImage(img,sx,sy,s,s,0,0,N,N);
-          cb(null,c.toDataURL('image/jpeg',.82));
+          var k=Math.min(1,700/Math.max(img.width,img.height));
+          var c=document.createElement('canvas'); c.width=Math.round(img.width*k); c.height=Math.round(img.height*k);
+          c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+          cb(null,c.toDataURL('image/jpeg',.84),c.width,c.height);
         }catch(e){cb('Không đọc được ảnh này, bạn thử ảnh khác nhé.');}
       };
       img.onerror=function(){cb('Không đọc được ảnh này, bạn thử ảnh khác nhé.');};
@@ -410,18 +431,29 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
     wrap.appendChild(el('p','field-label','Ảnh của bạn (không bắt buộc)'));
     var box=el('div','photo-pick');
     var frame=el('div','frame'); var hex=(curColor()||COLORS[0]).hex;
-    frame.innerHTML=S.photo?photoStarSvg(hex,S.photo):emptyFrameSvg('#B8BEE0');
+    frame.innerHTML=S.photo?(starSvg(hex,hex)+'<div class="pcircle"></div>'):emptyFrameSvg('#B8BEE0');
     var txt=el('div','txt');
-    txt.innerHTML='<b>'+(S.photo?'Đẹp quá!':'Chèn ảnh vào ngôi sao')+'</b>'+(S.photo?'Ảnh sẽ nằm trong ngôi sao trên thẻ của bạn.':'Không có ảnh thì thẻ dùng hình con vật bạn chọn.');
+    txt.innerHTML='<b>'+(S.photo?'Đẹp quá!':'Chèn ảnh vào ngôi sao')+'</b>'+(S.photo?'Kéo các thanh bên dưới để mặt bạn nằm giữa khung tròn.':'Không có ảnh thì thẻ dùng hình con vật bạn chọn.');
     var acts=el('div','photo-actions');
     var lab=el('label','pill',S.photo?'🔄 Đổi ảnh':'📷 Chọn ảnh'); lab.setAttribute('for','photo-input');
     var inp=el('input','visually-hidden'); inp.type='file'; inp.accept='image/*'; inp.id='photo-input';
     var msg=el('div','hint'); msg.style.textAlign='left'; msg.style.marginTop='6px';
-    inp.onchange=function(){var f=inp.files&&inp.files[0]; if(!f)return; msg.textContent='Đang xử lý ảnh…'; readPhoto(f,function(err,data){ if(err){msg.textContent=err;return;} S.photo=data; save(); onChange(); });};
+    inp.onchange=function(){var f=inp.files&&inp.files[0]; if(!f)return; msg.textContent='Đang xử lý ảnh…'; readPhoto(f,function(err,data,w,h){ if(err){msg.textContent=err;return;} S.photo=data; S.pw=w||1; S.ph=h||1; S.pz=100; S.px=50; S.py=(h>w)?30:50; save(); onChange(); });};
     acts.appendChild(lab); acts.appendChild(inp);
     if(S.photo){var rm=el('button','pill ghost','Bỏ ảnh'); rm.type='button'; rm.id='photo-remove'; rm.onclick=function(){S.photo=null; save(); onChange();}; acts.appendChild(rm);}
     txt.appendChild(acts); txt.appendChild(msg);
     box.appendChild(frame); box.appendChild(txt); wrap.appendChild(box);
+    if(S.photo){
+      var sl=el('div','psliders');
+      [['pz','Phóng to',100,300],['px','Dịch ngang',0,100],['py','Dịch dọc',0,100]].forEach(function(d){
+        var row=el('label','psl'); row.appendChild(document.createTextNode(d[1]));
+        var r=document.createElement('input'); r.type='range'; r.id='photo-'+d[0]; r.min=d[2]; r.max=d[3]; r.value=S[d[0]];
+        r.oninput=function(){S[d[0]]=+r.value; save(); paintPhoto(wrap);};
+        row.appendChild(r); sl.appendChild(row);
+      });
+      wrap.appendChild(sl);
+      paintPhoto(wrap);
+    }
     return wrap;
   }
 
@@ -534,10 +566,10 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
 
     var w=el('section','result reveal');
     var card=el('article','card'); card.id='star-card';
-    var starInner = S.photo ? photoStarSvg(col.hex,S.photo)+'<div class="sticker">'+avIcon+'</div>' : starSvg(col.hex,col.hex)+'<div class="emo">'+avIcon+'</div>';
+    var starInner = S.photo ? starSvg(col.hex,col.hex)+'<div class="pcircle"></div><div class="sticker">'+avIcon+'</div>' : starSvg(col.hex,col.hex)+'<div class="emo">'+avIcon+'</div>';
     card.innerHTML=
       '<span class="tape" aria-hidden="true"></span>'+
-      '<div class="card-top"><span class="brandmark"><img class="logo" src="'+IMG_LOGO+'" alt="Minewise"><span>CLB Sao Sáng · K11</span></span><span class="mini"><img src="'+IMG_SAO+'" alt=""></span></div>'+
+      '<div class="card-top"><span class="brandmark"><img class="logo" src="'+IMG_LOGO+'" alt="Minewise"><span class="checkin"><span class="ci">CHECK IN</span><span class="club">CLB Sao Sáng <b>K11</b></span></span></span><span class="mini"><img src="'+IMG_SAO+'" alt=""></span></div>'+
       '<div class="hero"><div class="card-star">'+starInner+
         '<span class="spark" style="left:-6px;top:14px">✦</span><span class="spark" style="right:0;top:2px;font-size:13px">✦</span><span class="spark" style="left:2px;bottom:10px;font-size:22px">✧</span></div>'+
         '<div class="who-box"><div class="card-name"></div><div class="card-age"></div><div class="ribbon">Ngôi Sao <b></b></div></div></div>'+
@@ -569,6 +601,7 @@ button:focus-visible,input:focus-visible,label:focus-within{outline:3px solid va
     fr.appendChild(fp); card.appendChild(fr);
     card.appendChild(el('div','card-foot','Minewise · Gia Tăng Giá Trị Sống Cùng Con'));
     w.appendChild(card);
+    paintPhoto(card);
 
     var sh=el('div','share');
     sh.innerHTML='<h3>📸 Chụp lại thẻ này nhé!</h3><p>Nhờ ba mẹ <b>chụp màn hình tấm thẻ</b> rồi gửi vào nhóm Zalo lớp để khoe với các bạn. Xem thử ai thích giống bạn nào!</p>';
