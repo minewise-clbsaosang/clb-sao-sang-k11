@@ -51,6 +51,7 @@ input:focus-visible,textarea:focus-visible,button:focus-visible,.upload:focus-wi
 input[type=range]{width:100%;accent-color:var(--gold)}
 .small-btn{border:0;background:transparent;color:var(--ink-soft);text-decoration:underline;font:inherit;font-size:13.5px;cursor:pointer;justify-self:start;padding:0}
 .note{font-size:13px;color:var(--ink-soft);margin:0}
+.tip{font-size:12.5px;font-weight:700;color:var(--teal)}
 .note b{color:var(--pink)}
 
 .poster-box{display:grid;gap:10px}
@@ -83,7 +84,7 @@ canvas{display:block;width:100%;height:auto;border-radius:10px}
       <section class="card">
         <h2><span class="dot white"></span>Tuần này</h2>
         <label class="f">Chủ đề tuần
-          <textarea id="topic" maxlength="90" placeholder="Ví dụ: Con Dám Thử Điều Chưa Từng Làm"></textarea></label>
+          <textarea id="topic" maxlength="90" rows="2" placeholder="Ví dụ: Con Dám Thử&#10;Điều Chưa Từng Làm"></textarea><span class="tip">Nhấn Enter để tự chọn chỗ xuống dòng (tối đa 3 dòng).</span></label>
         <div class="two">
           <label class="f">Ngày<input type="text" id="date" maxlength="28" placeholder="Thứ Hai, 12/10/2026"></label>
           <label class="f">Giờ<input type="text" id="time" maxlength="20" placeholder="19:30 – 20:30"></label>
@@ -122,7 +123,7 @@ canvas{display:block;width:100%;height:auto;border-radius:10px}
       <section class="card">
         <h2><span class="dot pink"></span>Bé phụng sự <small>Mẫu 2, Mẫu 3</small></h2>
         <label class="f">Tên gọi của bé<input type="text" id="kidName" maxlength="24" placeholder="Ví dụ: Bé Bông"></label>
-        <label class="f">Tên tiết mục (5–6 chữ là đẹp)<input type="text" id="kidAct" maxlength="48" placeholder="Ví dụ: Gấp con ếch biết nhảy"></label>
+        <label class="f">Tên tiết mục (5–6 chữ là đẹp)<textarea id="kidAct" maxlength="60" rows="2" placeholder="Ví dụ: Gấp con ếch&#10;biết nhảy"></textarea><span class="tip">Nhấn Enter để tự chọn chỗ xuống dòng.</span></label>
         <label class="upload"><input type="file" id="photo3" accept="image/*">📷 <span id="up3-t">Ảnh bé hoặc tác phẩm của bé (không bắt buộc)</span></label>
         <div class="sliders">
           <div class="sl">Phóng to<input type="range" id="z3" min="100" max="250" value="100"></div>
@@ -204,7 +205,13 @@ canvas{display:block;width:100%;height:auto;border-radius:10px}
   function font(w,s,fam){ctx.font=w+' '+s+'px '+(fam==='d'?'"Baloo 2"':'Nunito')+', system-ui, sans-serif';}
   function setLS(px){ try{ctx.letterSpacing=px+'px';}catch(e){} }
   function fitSize(text,maxW,start,min,w,fam){var s=start; font(w,s,fam); while(s>min && ctx.measureText(text).width>maxW){s-=2; font(w,s,fam);} return s;}
-  function wrap(text,maxW){var words=text.split(/\s+/), lines=[], cur=''; words.forEach(function(wd){var t=cur?cur+' '+wd:wd; if(ctx.measureText(t).width>maxW && cur){lines.push(cur); cur=wd;} else cur=t;}); if(cur)lines.push(cur); return lines;}
+  function wrapPara(text,maxW){var words=text.trim().split(/\s+/).filter(Boolean), lines=[], cur=''; words.forEach(function(wd){var t=cur?cur+' '+wd:wd; if(ctx.measureText(t).width>maxW && cur){lines.push(cur); cur=wd;} else cur=t;}); if(cur)lines.push(cur); return lines;}
+  /* xuống dòng: ưu tiên chỗ người dùng nhấn Enter, dòng nào quá dài mới tự ngắt thêm */
+  function wrap(text,maxW){var out=[]; String(text).split(/\r?\n/).forEach(function(par){ if(par.trim()) out=out.concat(wrapPara(par,maxW)); }); return out;}
+  function manualCount(text){return String(text).split(/\r?\n/).filter(function(s){return s.trim();}).length;}
+  /* tìm cỡ chữ lớn nhất để khối chữ vừa số dòng cho phép, rồi vẽ căn giữa theo chiều dọc trong vùng top..bottom */
+  function fitBlock(text,maxW,start,min,maxLines,maxH,lhF){lhF=lhF||1.1; var s=start, ls; function hgt(n,sz){return (n-1)*sz*lhF+sz*0.72;} do{ font('800',s,'d'); ls=wrap(text,maxW); s-=2; } while((ls.length>maxLines || hgt(Math.min(ls.length,maxLines),s+2)>maxH) && s>=min); return {lines:ls.slice(0,maxLines), size:s+2};}
+  function drawBlock(b,cx,top,bottom,lhF){ font('800',b.size,'d'); var lh=b.size*(lhF||1.1), cap=b.size*0.72, hgt=(b.lines.length-1)*lh+cap, y0=top+(bottom-top-hgt)/2+cap; ctx.textAlign='center'; b.lines.forEach(function(l,k){ctx.fillText(l,cx,y0+k*lh);}); ctx.textAlign='left'; }
   function seeded(seed){return function(){seed=(seed*16807)%2147483647; return (seed-1)/2147483646;};}
   function coverDraw(img,x,y,w,h,zoom,ox,oy){
     var s=Math.max(w/img.width,h/img.height)*zoom, dw=img.width*s, dh=img.height*s;
@@ -277,12 +284,10 @@ canvas{display:block;width:100%;height:auto;border-radius:10px}
     ctx.save(); ctx.shadowColor='rgba(0,0,0,.35)'; ctx.shadowBlur=30; ctx.shadowOffsetY=10; rr(tx,ty,tw,th,34); ctx.fillStyle=C.cream; ctx.fill(); ctx.restore();
     ctx.fillStyle=C.gold; star(tx+tw-28,ty+18,40,17,0.25); ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle=C.white; ctx.stroke();
     font('800',25,'b'); setLS(4); ctx.fillStyle='#4A4FA0'; ctx.textAlign='center'; ctx.fillText('CHỦ ĐỀ TUẦN NÀY',tx+tw/2,ty+(kidMode?50:58)); setLS(0);
-    var topic=val('topic').trim(); var size=kidMode?58:66, lines;
-    do{ font('800',size,'d'); lines=wrap(topic||'Điền chủ đề tuần này',tw-80); size-=2; } while(lines.length>2 && size>36);
-    if(lines.length>2) lines=lines.slice(0,2);
-    ctx.fillStyle=topic?C.navy:C.ghost; var lh2=size*1.12;
-    var startY=kidMode?(lines.length>1? ty+104 : ty+126):(lines.length>1? ty+128 : ty+150);
-    ctx.textAlign='center'; lines.forEach(function(l,k){ctx.fillText(l,tx+tw/2,startY+k*lh2);}); ctx.textAlign='left';
+    var topic=val('topic').trim(); var tml=manualCount(topic)>2?3:2;
+    var tb=fitBlock(topic||'Điền chủ đề tuần này',tw-80,kidMode?58:66,26,tml,kidMode?114:134,1.08);
+    ctx.fillStyle=topic?C.navy:C.ghost;
+    drawBlock(tb,tx+tw/2,ty+(kidMode?62:74),ty+th-(kidMode?14:20),1.08);
     /* ngày giờ */
     function chip(x,y,w,h,fill,txtColor,icon,text,ph){
       ctx.save(); ctx.shadowColor='rgba(0,0,0,.3)'; ctx.shadowBlur=16; ctx.shadowOffsetY=6; rr(x,y,w,h,h/2); ctx.fillStyle=fill; ctx.fill(); ctx.restore();
@@ -316,10 +321,9 @@ canvas{display:block;width:100%;height:auto;border-radius:10px}
     ctx.fillStyle=C.gold; star(x+26,y+16,38,16,-0.2); ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle=C.white; ctx.stroke();
     ctx.textAlign='center'; font('800',23,'b'); setLS(4); ctx.fillStyle=C.navy;
     ctx.fillText('PHỤNG SỰ CHÂU NGỌC'+(kn?' · '+kn.toUpperCase():''),x+w/2,y+46); setLS(0);
-    var r=actLines('“'+(ka||'Tên tiết mục')+'”',w-80,58,34,2);
+    var kb=fitBlock('“'+(ka||'Tên tiết mục')+'”',w-80,58,24,manualCount(ka)>2?3:2,112,1.06);
     ctx.save(); ctx.shadowColor='rgba(120,20,60,.25)'; ctx.shadowBlur=8; ctx.fillStyle=ka?C.white:'rgba(255,255,255,.65)';
-    var lh=r.size*1.08, sy=r.lines.length>1? y+100 : y+126;
-    r.lines.forEach(function(l,k){ctx.fillText(l,x+w/2,sy+k*lh);}); ctx.restore();
+    drawBlock(kb,x+w/2,y+58,y+h-12,1.06); ctx.restore();
     ctx.textAlign='left';
   }
 
@@ -330,11 +334,9 @@ canvas{display:block;width:100%;height:auto;border-radius:10px}
     ctx.fillStyle=C.pink; rr(x+24,y,w-48,10,5); ctx.fill();
     ctx.textAlign='center'; font('800',20,'b'); setLS(3); ctx.fillStyle='#E0527A'; ctx.fillText('PHỤNG SỰ CHÂU NGỌC',cx,y+42); setLS(0);
     /* ưu tiên 1 dòng chữ to; tên dài mới xuống 2 dòng chữ nhỏ hơn */
-    var txt='“'+(ka||'Tên tiết mục')+'”';
-    var s1=fitSize(txt,w-44,44,30,'800','d'), one=ctx.measureText(txt).width<=w-44;
+    var pb=fitBlock('“'+(ka||'Tên tiết mục')+'”',w-44,44,20,manualCount(ka)>2?3:2,82,1.05);
     ctx.fillStyle=ka?C.navy:C.ghost;
-    if(one){ ctx.fillText(txt,cx,y+104); }
-    else { font('800',30,'d'); var ls=wrap(txt,w-44).slice(0,2); ls.forEach(function(l,k){ctx.fillText(l,cx,y+88+k*34);}); }
+    drawBlock(pb,cx,y+52,y+h-46,1.05);
     font('800',26,'b'); ctx.fillStyle=kn?C.soft:C.ghost; ctx.fillText(kn||'Tên bé',cx,y+h-20);
   }
 
@@ -353,9 +355,9 @@ canvas{display:block;width:100%;height:auto;border-radius:10px}
     ctx.save(); ctx.shadowColor='rgba(0,0,0,.35)'; ctx.shadowBlur=30; ctx.shadowOffsetY=10; rr(ax,ay,aw,ah,34); ctx.fillStyle=C.cream; ctx.fill(); ctx.restore();
     ctx.fillStyle=C.pink; star(ax+aw-28,ay+18,40,17,0.25); ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle=C.white; ctx.stroke();
     ctx.textAlign='center'; font('800',24,'b'); setLS(4); ctx.fillStyle='#4A4FA0'; ctx.fillText('ĐÃ TẶNG CẢ LỚP TIẾT MỤC',ax+aw/2,ay+52); setLS(0);
-    var r=actLines('“'+(ka||'Tên tiết mục')+'”',aw-80,64,38,2);
-    ctx.fillStyle=ka?C.navy:C.ghost; var lh=r.size*1.1, sy=r.lines.length>1? ay+118 : ay+140;
-    r.lines.forEach(function(l,k){ctx.fillText(l,ax+aw/2,sy+k*lh);});
+    var ab=fitBlock('“'+(ka||'Tên tiết mục')+'”',aw-80,64,26,manualCount(ka)>2?3:2,122,1.08);
+    ctx.fillStyle=ka?C.navy:C.ghost;
+    drawBlock(ab,ax+aw/2,ay+68,ay+ah-16,1.08);
     ctx.textAlign='left'; font('800',32,'b'); ctx.fillStyle='#FFF7E3';
     var msg=val('thanks').trim(); var ml=wrap(msg,790).slice(0,3);
     ml.forEach(function(l,k){ctx.fillText(l,92,822+k*46);});
