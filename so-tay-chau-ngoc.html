@@ -146,6 +146,66 @@
   button.btn{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--paper);border:2px solid var(--border);border-radius:14px;padding:11px 22px;cursor:pointer;}
   button.btn:hover{border-color:var(--gold);background:var(--gold-tint);}
 
+  /* Loa doc to + huong dan */
+  .say{flex-shrink:0;width:38px;height:38px;border-radius:50%;border:2px solid var(--teal);background:var(--teal-tint);font-size:18px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;}
+  .say:hover{background:#c5efe7;}
+  .no-tts .say,.no-tts .say-tip{display:none!important;}
+  .q{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;line-height:1.35;}
+  .heart-panel .q{color:#fff;font-size:20px;font-family:'Baloo 2','Nunito',sans-serif;}
+  .heart-panel .say{background:#fff;}
+  .guide{background:var(--paper);border:2px solid var(--teal);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;}
+  .guide h3{font-size:18px;color:#1a8c7f;}
+  .guide ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .guide li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;font-weight:600;line-height:1.45;}
+  .guide li .ic{font-size:20px;line-height:1.2;flex-shrink:0;width:28px;text-align:center;}
+
+  /* Phan con tu cham / phan ba me ghi */
+  .zone{border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;}
+  .kid-zone{background:var(--gold-tint);}
+  .parent-zone{background:var(--cream);border:2px dashed var(--border);}
+  .zone-tag{font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--gold-dark);}
+  .parent-zone .zone-tag{color:var(--ink-soft);}
+  .zone-tag small{text-transform:none;letter-spacing:0;font-weight:700;font-size:12px;}
+  .star-row{display:flex;gap:6px;flex-wrap:wrap;}
+  .star-btn{width:50px;height:50px;border-radius:14px;border:2px solid var(--border);background:var(--paper);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;transition:transform .15s;}
+  .star-btn:active{transform:scale(.92);}
+  .star-btn svg{width:32px;height:32px;}
+  .star-btn svg path{fill:#F1E6C6;stroke:#D9C48E;stroke-width:1.2;transition:fill .15s;}
+  .star-btn.on{border-color:var(--gold);}
+  .star-btn.on svg path{fill:var(--gold);stroke:var(--gold-dark);}
+  .power-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:8px;}
+  .power-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:14px;border:2px solid var(--border);background:var(--paper);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:12.5px;color:var(--ink);}
+  .power-btn .pe{font-size:30px;line-height:1.15;}
+  .power-btn.on{border-color:var(--teal);background:var(--teal-tint);box-shadow:0 3px 0 var(--teal);}
+  .hw-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+  .hw-btn{text-align:center;line-height:1.25;padding:8px 6px;}
+  .hw-btn.on{border-color:var(--gold-dark);background:#fff;box-shadow:0 3px 0 var(--gold-dark);}
+  .hw-btn.on .pe::after{content:" ✔";font-size:16px;color:var(--gold-dark);}
+  .journal-entry summary{flex-wrap:wrap;}
+  .journal-entry summary .mini{font-size:13px;margin-left:auto;letter-spacing:1px;}
+  .journal-entry summary .note + .mini{margin-left:8px;}
+
+  /* Bau troi cua con */
+  .sky{background:linear-gradient(180deg,#1C2759,#2A3470);border-radius:20px;padding:16px 10px 10px;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  @media (max-width:480px){.sky{grid-template-columns:repeat(5,minmax(0,1fr));row-gap:12px;}}
+  .sky-slot{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:66px;}
+  .sky-slot svg path{fill:#FFC93C;}
+  .sky-slot .dim{width:7px;height:7px;border-radius:50%;background:#5A6399;margin-bottom:14px;}
+  .sky-slot span{font-size:11px;font-weight:800;color:#C9CDF0;}
+  .powers-found{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center;}
+  .pf{display:inline-flex;align-items:center;gap:6px;background:var(--teal-tint);border:2px solid var(--teal);border-radius:999px;padding:5px 12px;font-weight:800;font-size:13.5px;}
+  .pf-label{font-size:13px;font-weight:800;color:var(--ink-soft);width:100%;}
+  .pf-empty{font-size:13px;font-weight:600;color:var(--ink-soft);}
+
+  /* Du phong */
+  .backup .toolbar{justify-content:flex-start;}
+  .bk-status{font-size:13.5px;font-weight:700;color:var(--ink-soft);margin-top:10px;line-height:1.5;}
+  .bk-status.warn{color:#B4540A;}
+  .bk-status.ok{color:#1a8c7f;}
+  #bk-code,#restore-code{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;word-break:break-all;margin-top:10px;}
+  .restore{display:flex;flex-direction:column;gap:12px;border-color:var(--teal);}
+  button.link-plain{font:inherit;font-weight:700;font-size:14px;color:var(--indigo);background:none;border:none;text-decoration:underline;cursor:pointer;padding:0;}
+
   footer{text-align:center;padding-top:14px;border-top:2px dashed var(--border);}
   footer .slogan{font-family:'Baloo 2',sans-serif;font-size:19px;color:var(--indigo);font-weight:800;}
   footer .sub{font-size:13px;color:var(--ink-soft);margin-top:4px;font-weight:600;}
@@ -168,7 +228,17 @@
     body{background:#fff;background-image:none;padding:0;font-size:12.5px;}
     .brand-logo{height:20px;}
     .wrap{gap:12px!important;padding-block:6px 16px!important;max-width:none!important;}
-    .banner,.toolbar,.gate,#confetti-canvas{display:none!important;}
+    .banner,.toolbar,.gate,#confetti-canvas,.say,.guide,#backup-card,#restore-panel{display:none!important;}
+    .zone{padding:6px 8px;gap:5px;}
+    .zone-tag{font-size:9px;}
+    .q{font-size:11px;}
+    .star-btn{width:24px;height:24px;border-radius:6px;}
+    .star-btn svg{width:16px;height:16px;}
+    .power-row{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;}
+    .power-btn{padding:3px 2px;font-size:8.5px;border-radius:8px;}
+    .power-btn .pe{font-size:14px;}
+    .hw-row{gap:4px;}
+    .sky-slot{height:44px;}
     .weeks-progress{margin:-2px 0 8px;}
     .weeks-progress-track{height:7px;}
     .weeks-progress-pct{font-size:11px;min-width:28px;}
@@ -224,16 +294,30 @@
       <input type="text" id="reg-name" placeholder="Tên của bé" maxlength="40" autocomplete="off">
       <button type="submit">Bắt đầu sổ tay của con</button>
     </form>
+    <button class="link-plain" id="gate-restore" type="button">Đã có mã dự phòng? Khôi phục sổ tay</button>
+  </div>
+
+  <div class="card restore" id="restore-panel" hidden>
+    <h2 style="font-size:20px;">♻️ Khôi phục sổ tay</h2>
+    <div class="subnote" style="margin:0;">Dán mã dự phòng (bắt đầu bằng <b>SOTAY1:</b>) vào ô dưới, hoặc chọn file dự phòng đã tải về. Sổ tay đang có trên máy này (nếu có) sẽ được thay bằng bản khôi phục.</div>
+    <textarea id="restore-code" rows="4" placeholder="SOTAY1:..."></textarea>
+    <input type="file" id="restore-file" accept=".txt,.json,text/plain,application/json">
+    <div class="toolbar" style="justify-content:flex-start;">
+      <button class="btn" id="restore-go" type="button">Khôi phục</button>
+      <button class="btn" id="restore-cancel" type="button">Đóng</button>
+    </div>
+    <div class="bk-status" id="restore-status"></div>
   </div>
 
   <div id="book" hidden>
     <div class="wrap" style="padding:0;max-width:none;gap:28px;">
 
-      <div class="banner" id="banner-ask">Sổ tay của <strong id="child-name-banner">&nbsp;</strong> — lưu riêng trên máy này ·
+      <div class="banner" id="banner-ask">Sổ tay của <strong id="child-name-banner">&nbsp;</strong>, lưu riêng trên máy này ·
+        <button class="link" id="goto-backup" type="button">💾 lưu dự phòng</button> ·
         <button class="link" id="rename-btn" type="button">đổi tên / dùng cho bé khác</button>
       </div>
       <div class="banner banner-confirm" id="banner-confirm" hidden>
-        <span>Bắt đầu sổ tay mới? Dữ liệu của <strong id="child-name-confirm">&nbsp;</strong> trên máy này sẽ được thay bằng sổ tay mới.</span>
+        <span>Bắt đầu sổ tay mới? Dữ liệu của <strong id="child-name-confirm">&nbsp;</strong> trên máy này sẽ được thay bằng sổ tay mới. Muốn giữ lại thì sao chép mã dự phòng trước nhé.</span>
         <button class="link" id="rename-cancel" type="button">Không, giữ lại</button>
         <button class="link" id="rename-yes" type="button">Có, bắt đầu mới</button>
       </div>
@@ -243,6 +327,16 @@
         <h1 id="child-title">Sổ Tay Châu Ngọc</h1>
         <div class="lede">Hành trình khai mở "viên ngọc" của con — khóa "Ngôi Sao Nhỏ, Sức Mạnh To"</div>
       </header>
+
+      <div class="guide">
+        <h3>Cách dùng sổ tay: bé nào cũng làm được</h3>
+        <ul>
+          <li><span class="ic">👆</span><span><b>Ô có hình</b> (ngôi sao, sức mạnh): con <b>tự chạm</b> để chọn. Ba mẹ không chọn thay, không sửa lại lựa chọn của con.</span></li>
+          <li class="say-tip"><span class="ic">🔊</span><span>Bấm <b>nút loa</b> để nghe đọc câu hỏi. Bé chưa biết chữ vẫn tự hiểu được.</span></li>
+          <li><span class="ic">✍️</span><span><b>Ô chữ</b>: bé biết chữ tự viết. Bé chưa biết chữ thì <b>kể</b>, ba mẹ <b>ghi lại đúng lời con</b>.</span></li>
+          <li><span class="ic">🖍️</span><span><b>Góc Sáng Tạo</b>: in ra để con vẽ.</span></li>
+        </ul>
+      </div>
 
       <div class="row">
         <div class="friend-card star-card">
@@ -256,7 +350,7 @@
       </div>
 
       <div class="heart-panel" id="heart-panel">
-        <h3>Ngôi Sao Trong Tim của con</h3>
+        <div class="q"><button class="say" type="button" aria-label="Nghe đọc" data-say="Mỗi con có một ngôi sao nhỏ sống trong tim mình. Ngôi sao sáng lên khi con làm điều đúng, và luôn có thể sáng lại.">🔊</button><h3>Ngôi Sao Trong Tim của con</h3></div>
         <p>Mỗi con cũng có một ngôi sao nhỏ sống trong tim mình — sáng lên khi con làm điều đúng, và luôn có thể sáng lại. Mỗi tuần, hãy hỏi con: "Ngôi Sao Trong Tim con hôm nay sáng lên hay mờ đi?"</p>
         <div class="heart-glow-note" id="heart-glow-note">✨ Ngôi Sao Trong Tim con đang bắt đầu sáng...</div>
       </div>
@@ -282,21 +376,15 @@
 
       <section>
         <h2><span class="icon-badge"><img class="mascot-photo ring-teal" src="assets/tac-ke-hoa.jpg" alt="" width="30" height="30" style="width:30px;height:30px;"></span> Nhật Ký Từng Buổi Của Con</h2>
-        <div class="subnote">Ba mẹ cùng con điền sau mỗi buổi học — không chỉ buổi con phụng sự, mà buổi nào cũng ghi lại được. Mỗi tuần, con chọn thêm 1 khuôn mặt để tự chấm — không có điểm nào sai, kể cả 🌑 cũng là cả một quặng mỏ còn nguyên sơ để đào.</div>
+        <div class="subnote">Mỗi tuần một ô, điền sau buổi học. Phần trên con tự chạm, phần dưới con kể, ba mẹ ghi. Không có lựa chọn nào sai: 1 ngôi sao cũng quý, vì ngôi sao nào cũng có thể sáng thêm.</div>
         <div class="journal" id="journal-list"></div>
       </section>
 
-      <div class="card" id="overall-rating-card">
-        <h2 style="font-size:22px;">Hành Trình Tích Lũy Của Con</h2>
-        <div class="subnote" id="overall-rating-subnote">Mỗi tuần con tự chấm ở "Nhật Ký" phía trên sẽ tích lũy vào đây, làm Ngôi Sao Trong Tim con sáng dần lên.</div>
-        <div class="rating-row">
-          <div class="rating-num" id="rating-num">–</div>
-          <div class="rating-emoji" id="rating-emoji" aria-hidden="true">✨</div>
-        </div>
-        <div class="weeks-progress" style="margin:8px 0 0;">
-          <div class="weeks-progress-track"><div class="weeks-progress-fill" id="overall-rating-fill" style="background:linear-gradient(90deg,var(--teal) 0%,var(--indigo) 100%);"></div></div>
-          <div class="weeks-progress-pct" id="overall-rating-pct">0/10</div>
-        </div>
+      <div class="card" id="sky-card">
+        <h2 style="font-size:22px;">Bầu Trời Của Con</h2>
+        <div class="subnote" id="sky-subnote">Mỗi tuần con tự chấm sẽ thành một ngôi sao trên bầu trời này.</div>
+        <div class="sky" id="sky"></div>
+        <div class="powers-found" id="powers-found"></div>
       </div>
 
       <section>
@@ -304,16 +392,17 @@
         <div class="subnote">In sổ tay ra và để con tự do vẽ vào khung dưới đây nhé!</div>
         <div class="draw-box"><span class="draw-hint">Vẽ chính con hoặc các bạn của con ở đây</span></div>
         <div class="card" style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+          <div class="zone-tag" style="color:var(--ink-soft);">✍️ Con kể · ba mẹ ghi <small>(bé biết chữ tự viết)</small></div>
           <div>
-            <div class="field-label">Con nhớ tên những bạn nào?</div>
+            <div class="q" style="margin-bottom:6px;"><button class="say" type="button" aria-label="Nghe đọc" data-say="Con nhớ tên những bạn nào trong câu lạc bộ?">🔊</button><span>Con nhớ tên những bạn nào?</span></div>
             <textarea id="q-friends" rows="2" placeholder="Tên các bạn con nhớ..."></textarea>
           </div>
           <div>
-            <div class="field-label">Con thích buổi Phụng Sự Châu Ngọc nào nhất? Vì sao?</div>
+            <div class="q" style="margin-bottom:6px;"><button class="say" type="button" aria-label="Nghe đọc" data-say="Con thích buổi phụng sự châu ngọc nào nhất? Vì sao con thích?">🔊</button><span>Con thích buổi Phụng Sự Châu Ngọc nào nhất? Vì sao?</span></div>
             <textarea id="q-favorite" rows="2" placeholder="Buổi của bạn nào, hay buổi của chính con..."></textarea>
           </div>
           <div>
-            <div class="field-label">Ba mẹ / anh chị em / ông bà đã cùng con tác tạo điều gì?</div>
+            <div class="q" style="margin-bottom:6px;"><button class="say" type="button" aria-label="Nghe đọc" data-say="Ba mẹ, anh chị em, ông bà đã cùng con làm điều gì?">🔊</button><span>Ba mẹ / anh chị em / ông bà đã cùng con tác tạo điều gì?</span></div>
             <textarea id="q-family" rows="2" placeholder="Điều cả nhà đã cùng làm với con..."></textarea>
           </div>
         </div>
@@ -321,7 +410,20 @@
 
       <section>
         <h2>Châu Ngọc Con Đã Khám Phá</h2>
-        <textarea id="gem" rows="3" placeholder="Điều đặc biệt con đã nhận ra về chính mình trong hành trình này..." style="background:var(--paper);padding:16px;border-radius:14px;"></textarea>
+        <div class="q" style="margin-bottom:8px;"><button class="say" type="button" aria-label="Nghe đọc" data-say="Con đã nhận ra điều gì đặc biệt về chính mình? Con kể cho ba mẹ nghe nhé.">🔊</button><span>Con đã nhận ra điều gì đặc biệt về chính mình?</span></div>
+        <textarea id="gem" rows="3" placeholder="Con kể, ba mẹ ghi lại đúng lời con..." style="background:var(--paper);padding:16px;border-radius:14px;"></textarea>
+      </section>
+
+      <section class="card backup" id="backup-card">
+        <h2 style="font-size:22px;">💾 Giữ sổ tay an toàn</h2>
+        <div class="subnote" style="margin:0 0 12px;">Sổ tay lưu ngay trên điện thoại này. Sau mỗi tuần điền xong, ba mẹ bấm <b>"Sao chép mã dự phòng"</b> rồi dán vào Zalo <b>"Cloud của tôi"</b>. Nếu đổi máy hay lỡ xóa, chỉ cần dán mã đó vào ô Khôi phục là sổ tay trở lại đầy đủ.</div>
+        <div class="toolbar">
+          <button class="btn" id="bk-copy" type="button">📋 Sao chép mã dự phòng</button>
+          <button class="btn" id="bk-file" type="button">⬇️ Tải file dự phòng</button>
+          <button class="btn" id="bk-restore-open" type="button">♻️ Khôi phục</button>
+        </div>
+        <textarea id="bk-code" rows="3" readonly hidden></textarea>
+        <div class="bk-status" id="bk-status"></div>
       </section>
 
       <div class="toolbar">
@@ -345,8 +447,11 @@
   "use strict";
 
   var WEEKS = [
-    {id:"w1", label:"TUẦN 1 · 05/10", title:"Sức Mạnh Bên Trong Con"},
-    {id:"w2", label:"TUẦN 2 · 12/10", title:"Doanh Nhân Nhí"},
+    {id:"w1", label:"TUẦN 1 · 05/10", title:"Kết Nối · Khai Giảng", noPowers:true,
+      ask:"Con nhớ Cánh Sao nào? Con thích phần giới thiệu của bạn nào? Ghi đúng lời con kể nhé.",
+      hw:[{e:"⭐", t:"Làm một ngôi sao sáng"}, {e:"👀", t:"Xem lại phần giới thiệu của các bạn"}, {e:"🖐️", t:"Kể lại 5 Cánh Sao con nhớ"}],
+      hwSay:"Việc về nhà tuần này. Một: làm một ngôi sao sáng. Hai: cùng ba mẹ xem lại phần giới thiệu của các bạn. Ba: kể cho ba mẹ nghe năm Cánh Sao, năm quy tắc của lớp mà con nhớ. Làm xong việc nào, con chạm vào hình việc đó nhé."},
+    {id:"w2", label:"TUẦN 2 · 12/10", title:"Sức Mạnh Bên Trong Con"},
     {id:"w3", label:"TUẦN 3 · 19/10", title:"Chủ Đề Do Cô Quyết Định", note:"Cùng Diễn giả Trang Hoàng · An toàn học đường"},
     {id:"w4", label:"TUẦN 4 · 26/10", title:"Điều Đẹp Trong Con"},
     {id:"w5", label:"TUẦN 5 · 02/11", title:"Nụ Cười Lan Xa"},
@@ -356,8 +461,56 @@
     {id:"w9", label:"TUẦN 9 · 30/11", title:"Con Dám Thử Điều Mới"},
     {id:"w10", label:"TUẦN 10 · 07/12", title:"Chứng Nhận Vì Sao Nhỏ"}
   ];
-  var STAR_SVG = '<svg class="star" width="24" height="24" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 1 L15.7 9.6 L24.7 9.6 L17.4 15 L20 23.6 L13 18.2 L6 23.6 L8.6 15 L1.3 9.6 L10.3 9.6 Z"></path></svg>';
+  WEEKS.forEach(function(w, i){ w.date = new Date(2026, 9, 5 + 7 * i); });
+  var STAR_PATH = '<path d="M13 1 L15.7 9.6 L24.7 9.6 L17.4 15 L20 23.6 L13 18.2 L6 23.6 L8.6 15 L1.3 9.6 L10.3 9.6 Z"></path>';
+  var STAR_SVG = '<svg class="star" width="24" height="24" viewBox="0 0 26 26" aria-hidden="true">' + STAR_PATH + '</svg>';
   var STORE_KEY = "sotaychaungoc_v1";
+  var POWERS = [
+    {id:"dungcam", e:"🦁", n:"Dũng cảm"},
+    {id:"kiennhan", e:"⏳", n:"Kiên nhẫn"},
+    {id:"benbi", e:"🧗", n:"Bền bỉ"},
+    {id:"yeuthuong", e:"💛", n:"Yêu thương"},
+    {id:"tute", e:"🤲", n:"Tử tế"},
+    {id:"trungthuc", e:"🙂", n:"Trung thực"},
+    {id:"khac", e:"✨", n:"Tên khác"}
+  ];
+  var POWER_BY_ID = {};
+  POWERS.forEach(function(p){ POWER_BY_ID[p.id] = p; });
+
+  /* Doc to bang giong tieng Viet cua may (neu may khong co giong Viet thi an nut loa) */
+  var ttsOK = ("speechSynthesis" in window) && (typeof SpeechSynthesisUtterance !== "undefined");
+  var viVoice = null;
+  function pickVoice(){
+    try {
+      var vs = window.speechSynthesis.getVoices() || [];
+      viVoice = null;
+      for (var i = 0; i < vs.length; i++) { if (/^vi/i.test(vs[i].lang)) { viVoice = vs[i]; break; } }
+      document.documentElement.classList.toggle("no-tts", vs.length > 0 && !viVoice);
+    } catch (e) {}
+  }
+  if (!ttsOK) {
+    document.documentElement.classList.add("no-tts");
+  } else {
+    pickVoice();
+    try { window.speechSynthesis.addEventListener("voiceschanged", pickVoice); } catch (e) { window.speechSynthesis.onvoiceschanged = pickVoice; }
+  }
+  function speak(text){
+    if (!ttsOK || !text) return;
+    try {
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = "vi-VN";
+      if (viVoice) u.voice = viVoice;
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  document.addEventListener("click", function(e){
+    var b = e.target && e.target.closest ? e.target.closest(".say") : null;
+    if (!b) return;
+    e.preventDefault();
+    speak(b.getAttribute("data-say"));
+  });
 
   function safeGet(key){
     try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : null; } catch (e) { return null; }
@@ -371,16 +524,23 @@
 
   function defaultData(name){
     var w = {}, j = {};
-    WEEKS.forEach(function(x){ w[x.id] = false; j[x.id] = { text: "", served: false, rating: null }; });
-    return { name: name, weeks: w, journal: j, gem: "", qFriends: "", qFavorite: "", qFamily: "", celebrated10: false };
+    WEEKS.forEach(function(x){ w[x.id] = false; j[x.id] = { text: "", served: false, rating: null, powers: [], hw: [] }; });
+    return { name: name, weeks: w, journal: j, gem: "", qFriends: "", qFavorite: "", qFamily: "", celebrated10: false, lastBackup: null };
   }
 
+  /* Bo sung truong moi cho so tay cu, khong xoa du lieu da co */
   function ensureJournalShape(){
+    if (!data.weeks) data.weeks = {};
     if (!data.journal) data.journal = {};
     WEEKS.forEach(function(x){
-      if (!data.journal[x.id]) data.journal[x.id] = { text: "", served: false, rating: null };
+      if (typeof data.weeks[x.id] !== "boolean") data.weeks[x.id] = !!data.weeks[x.id];
+      if (!data.journal[x.id]) data.journal[x.id] = { text: "", served: false, rating: null, powers: [], hw: [] };
       if (typeof data.journal[x.id].rating === "undefined") data.journal[x.id].rating = null;
+      if (!Array.isArray(data.journal[x.id].powers)) data.journal[x.id].powers = [];
+      if (!Array.isArray(data.journal[x.id].hw)) data.journal[x.id].hw = [];
     });
+    if (typeof data.gem !== "string") data.gem = "";
+    if (typeof data.lastBackup !== "number") data.lastBackup = null;
     if (typeof data.qFriends !== "string") data.qFriends = "";
     if (typeof data.qFavorite !== "string") data.qFavorite = "";
     if (typeof data.qFamily !== "string") data.qFamily = "";
@@ -541,70 +701,117 @@
     document.getElementById("child-title").textContent = "Sổ Tay Châu Ngọc Của " + data.name;
   }
 
-  var RATING_EMOJI = ["🌑", "🌑", "🌒", "🌒", "🌓", "🌓", "🌔", "🌔", "🌟", "🌟", "🌟"];
-  var FACE_VALUES = [1, 3, 5, 7, 9];
-  var FACE_EMOJI = ["🌑", "🌒", "🌓", "🌔", "🌟"];
-  function ratingLevelClass(v){
-    if (v <= 3) return "lvl-low";
-    if (v <= 7) return "lvl-mid";
-    return "lvl-high";
+  /* rating luu theo thang cu 1/3/5/7/9 de so tay cu khong mat du lieu; hien thi thanh 1-5 ngoi sao */
+  function starsOf(entry){
+    return entry && entry.rating ? Math.max(1, Math.min(5, Math.round((entry.rating + 1) / 2))) : 0;
   }
-  function updateRatingDisplay(displayText, emojiIndexValue, bump){
-    var numEl = document.getElementById("rating-num");
-    var emojiEl = document.getElementById("rating-emoji");
-    numEl.textContent = displayText;
-    numEl.className = "rating-num " + ratingLevelClass(emojiIndexValue);
-    emojiEl.textContent = RATING_EMOJI[Math.max(0, Math.min(10, Math.round(emojiIndexValue)))];
-    if (bump && !prefersReducedMotion) {
-      emojiEl.classList.add("bump");
-      setTimeout(function(){ emojiEl.classList.remove("bump"); }, 220);
-    }
+  function currentWeekIndex(){
+    var now = new Date(), idx = 0;
+    WEEKS.forEach(function(w, i){ if (now >= w.date) idx = i; });
+    return idx;
   }
-  function renderRating(bump){
-    var agg = computeAggregateRating();
-    var subnoteEl = document.getElementById("overall-rating-subnote");
-    if (agg.count === 0) {
-      document.getElementById("rating-num").textContent = "–";
-      document.getElementById("rating-num").className = "rating-num";
-      document.getElementById("rating-emoji").textContent = "✨";
-      subnoteEl.textContent = "Mỗi tuần con tự chấm ở \"Nhật Ký\" phía trên sẽ tích lũy vào đây, làm Ngôi Sao Trong Tim con sáng dần lên.";
-    } else {
-      var rounded = Math.round(agg.avg * 10) / 10;
-      updateRatingDisplay(rounded, agg.avg, bump);
-      subnoteEl.textContent = "Điểm trung bình từ " + agg.count + "/10 tuần con đã tự chấm.";
-    }
-    document.getElementById("overall-rating-fill").style.width = (agg.count / WEEKS.length * 100) + "%";
-    document.getElementById("overall-rating-pct").textContent = agg.count + "/10";
+  function miniText(entry){
+    var n = starsOf(entry), out = "";
+    for (var i = 0; i < n; i++) out += "⭐";
+    (entry.powers || []).forEach(function(id){ if (POWER_BY_ID[id]) out += POWER_BY_ID[id].e; });
+    if (entry.hw && entry.hw.length) out += " 🏠" + entry.hw.length;
+    return out;
+  }
+
+  function renderSky(){
+    var sky = document.getElementById("sky");
+    var rated = 0;
+    sky.innerHTML = WEEKS.map(function(w, i){
+      var n = starsOf(data.journal[w.id]);
+      var inner;
+      if (n) {
+        rated++;
+        var size = 14 + n * 5;
+        inner = '<svg viewBox="0 0 26 26" aria-hidden="true" style="width:' + size + 'px;height:' + size + 'px;opacity:' + (0.55 + n * 0.09).toFixed(2) + ';filter:drop-shadow(0 0 ' + (n * 2) + 'px rgba(255,201,60,.85))">' + STAR_PATH + '</svg>';
+      } else {
+        inner = '<i class="dim"></i>';
+      }
+      return '<div class="sky-slot" title="' + w.label + '">' + inner + '<span>T' + (i + 1) + '</span></div>';
+    }).join("");
+    document.getElementById("sky-subnote").textContent = rated
+      ? "Con đã tự chấm " + rated + "/10 tuần. Mỗi tuần là một ngôi sao trên bầu trời của con."
+      : "Mỗi tuần con tự chấm ở Nhật Ký sẽ thành một ngôi sao trên bầu trời này.";
+
+    var found = {};
+    WEEKS.forEach(function(w){ (data.journal[w.id].powers || []).forEach(function(id){ found[id] = true; }); });
+    var list = POWERS.filter(function(p){ return found[p.id]; });
+    document.getElementById("powers-found").innerHTML = '<div class="pf-label">Sức mạnh bên trong con đã tìm thấy:</div>' + (list.length
+      ? list.map(function(p){ return '<span class="pf">' + p.e + " " + p.n + "</span>"; }).join("")
+      : '<span class="pf-empty">Chưa có. Mỗi tuần con chạm chọn ở Nhật Ký nhé!</span>');
     updateHeartGlowFromState();
   }
 
-  function renderGem(){
-    document.getElementById("gem").value = data.gem || "";
-    document.getElementById("q-friends").value = data.qFriends || "";
-    document.getElementById("q-favorite").value = data.qFavorite || "";
-    document.getElementById("q-family").value = data.qFamily || "";
+  function paintEntry(wk){
+    var box = document.querySelector('.journal-entry[data-week="' + wk + '"]');
+    if (!box) return;
+    var entry = data.journal[wk];
+    var n = starsOf(entry);
+    box.querySelectorAll(".star-btn").forEach(function(btn){
+      btn.classList.toggle("on", Number(btn.getAttribute("data-n")) <= n);
+      btn.setAttribute("aria-pressed", Number(btn.getAttribute("data-n")) === n ? "true" : "false");
+    });
+    box.querySelectorAll(".power-btn:not(.hw-btn)").forEach(function(btn){
+      var on = entry.powers.indexOf(btn.getAttribute("data-power")) !== -1;
+      btn.classList.toggle("on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    box.querySelectorAll(".hw-btn").forEach(function(btn){
+      var on = entry.hw.indexOf(Number(btn.getAttribute("data-hw"))) !== -1;
+      btn.classList.toggle("on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    var mini = box.querySelector(".mini");
+    if (mini) mini.textContent = miniText(entry);
   }
 
   function renderJournal(){
     var list = document.getElementById("journal-list");
-    list.innerHTML = WEEKS.map(function(w){
-      var entry = data.journal[w.id] || { text: "", served: false, rating: null };
+    var cur = currentWeekIndex();
+    list.innerHTML = WEEKS.map(function(w, i){
+      var entry = data.journal[w.id];
       var noteHtml = w.note ? ('<span class="note">' + w.note + "</span>") : "";
-      var faceButtons = FACE_VALUES.map(function(val, idx){
-        var sel = entry.rating === val ? " selected" : "";
-        return '<button type="button" class="face-btn' + sel + '" data-journal-rating="' + w.id + '" data-rating-value="' + val + '" aria-label="Chấm ' + val + '/10">' + FACE_EMOJI[idx] + "</button>";
+      var starBtns = [1, 2, 3, 4, 5].map(function(n){
+        return '<button type="button" class="star-btn" data-wk="' + w.id + '" data-n="' + n + '" aria-label="' + n + ' ngôi sao"><svg viewBox="0 0 26 26" aria-hidden="true">' + STAR_PATH + "</svg></button>";
       }).join("");
+      var powerBtns = POWERS.map(function(p){
+        return '<button type="button" class="power-btn" data-wk="' + w.id + '" data-power="' + p.id + '"><span class="pe">' + p.e + "</span>" + p.n + "</button>";
+      }).join("");
+      var hwBtns = (w.hw || []).map(function(h, k){
+        return '<button type="button" class="power-btn hw-btn" data-wk="' + w.id + '" data-hw="' + k + '"><span class="pe">' + h.e + "</span>" + h.t + "</button>";
+      }).join("");
+      var powersHtml = w.noPowers ? "" :
+        '<div class="q"><button class="say" type="button" aria-label="Nghe đọc" data-say="Tuần này con đã dùng sức mạnh bên trong nào? Con chạm vào hình. Chọn mấy cái cũng được.">🔊</button><span>Tuần này con đã dùng sức mạnh bên trong nào?</span></div>' +
+        '<div class="power-row">' + powerBtns + "</div>";
+      var hwHtml = !w.hw ? "" :
+        '<div class="q"><button class="say" type="button" aria-label="Nghe đọc" data-say="' + w.hwSay + '">🔊</button><span>🏠 Việc về nhà: làm xong việc nào, con chạm vào việc đó</span></div>' +
+        '<div class="hw-row">' + hwBtns + "</div>";
+      var isOpen = (i === cur) || !!(entry.text || entry.rating || entry.served || entry.powers.length || entry.hw.length);
       return (
-        '<details class="journal-entry" open data-week="' + w.id + '">' +
-          "<summary><span class=\"wk\">" + w.label + '</span><span class="wt">' + w.title + "</span>" + noteHtml + "</summary>" +
+        '<details class="journal-entry"' + (isOpen ? " open" : "") + ' data-week="' + w.id + '">' +
+          "<summary><span class=\"wk\">" + w.label + '</span><span class="wt">' + w.title + "</span>" + noteHtml + '<span class="mini" aria-hidden="true"></span></summary>' +
           '<div class="journal-body">' +
-            '<textarea rows="2" data-journal-text="' + w.id + '" placeholder="Con đã làm gì / nhớ điều gì buổi này? Trong tuần, con đã dùng sức mạnh bên trong nào? Ngôi Sao Trong Tim con sáng lên hay mờ đi?">' + escapeHtml(entry.text) + "</textarea>" +
-            '<label class="served-row"><input type="checkbox" data-journal-served="' + w.id + '"' + (entry.served ? " checked" : "") + "> Buổi này con đã Phụng Sự Châu Ngọc</label>" +
-            '<div class="journal-rating"><div class="journal-rating-label">Tuần này con tự chấm:</div><div class="face-row">' + faceButtons + "</div></div>" +
+            '<div class="zone kid-zone">' +
+              '<div class="zone-tag">👆 Phần con tự chạm</div>' +
+              '<div class="q"><button class="say" type="button" aria-label="Nghe đọc" data-say="Ngôi Sao Trong Tim con tuần này sáng cỡ nào? Con chạm vào các ngôi sao nhé. Một ngôi sao cũng quý.">🔊</button><span>Ngôi Sao Trong Tim con tuần này sáng cỡ nào?</span></div>' +
+              '<div class="star-row">' + starBtns + "</div>" +
+              powersHtml + hwHtml +
+            "</div>" +
+            '<div class="zone parent-zone">' +
+              '<div class="zone-tag">✍️ Con kể · ba mẹ ghi <small>(bé biết chữ tự viết)</small></div>' +
+              '<textarea rows="3" data-journal-text="' + w.id + '" placeholder="' + (w.ask || "Buổi này con nhớ điều gì? Con đã dùng sức mạnh bên trong khi nào, với ai? Ghi đúng lời con kể nhé.") + '">' + escapeHtml(entry.text) + "</textarea>" +
+              '<label class="served-row"><input type="checkbox" data-journal-served="' + w.id + '"' + (entry.served ? " checked" : "") + "> Buổi này con đã Phụng Sự Châu Ngọc</label>" +
+            "</div>" +
           "</div>" +
         "</details>"
       );
     }).join("");
+
+    WEEKS.forEach(function(w){ paintEntry(w.id); });
 
     list.querySelectorAll("textarea[data-journal-text]").forEach(function(ta){
       ta.addEventListener("input", function(){
@@ -620,17 +827,181 @@
         save();
       });
     });
-    list.querySelectorAll("button[data-journal-rating]").forEach(function(btn){
+    list.querySelectorAll(".star-btn").forEach(function(btn){
       btn.addEventListener("click", function(){
-        var wk = btn.getAttribute("data-journal-rating");
-        var val = Number(btn.getAttribute("data-rating-value"));
-        data.journal[wk].rating = (data.journal[wk].rating === val) ? null : val;
+        var wk = btn.getAttribute("data-wk");
+        var n = Number(btn.getAttribute("data-n"));
+        data.journal[wk].rating = n * 2 - 1;
         save();
-        renderJournal();
-        renderRating(true);
+        paintEntry(wk);
+        renderSky();
+        speak(n + " ngôi sao");
+      });
+    });
+    list.querySelectorAll(".hw-btn").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var wk = btn.getAttribute("data-wk");
+        var k = Number(btn.getAttribute("data-hw"));
+        var arr = data.journal[wk].hw;
+        var at = arr.indexOf(k);
+        if (at === -1) { arr.push(k); speak("Con đã làm xong: " + WEEKS.filter(function(x){ return x.id === wk; })[0].hw[k].t); }
+        else arr.splice(at, 1);
+        save();
+        paintEntry(wk);
+      });
+    });
+    list.querySelectorAll(".power-btn:not(.hw-btn)").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var wk = btn.getAttribute("data-wk");
+        var id = btn.getAttribute("data-power");
+        var arr = data.journal[wk].powers;
+        var at = arr.indexOf(id);
+        if (at === -1) {
+          arr.push(id);
+          speak(id === "khac" ? "Sức mạnh tên khác. Con kể cho ba mẹ ghi lại nhé." : POWER_BY_ID[id].n);
+        } else {
+          arr.splice(at, 1);
+        }
+        save();
+        paintEntry(wk);
+        renderSky();
       });
     });
   }
+
+  function renderGem(){
+    document.getElementById("gem").value = data.gem || "";
+    document.getElementById("q-friends").value = data.qFriends || "";
+    document.getElementById("q-favorite").value = data.qFavorite || "";
+    document.getElementById("q-family").value = data.qFamily || "";
+  }
+
+  /* ===== Du phong & khoi phuc ===== */
+  function encodeBackup(){
+    return "SOTAY1:" + btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  }
+  function decodeBackup(text){
+    text = String(text || "").trim();
+    if (text.charAt(0) === "{") return JSON.parse(text);
+    var m = text.match(/SOTAY1:([A-Za-z0-9+\/=\s]+)/);
+    if (!m) throw new Error("bad");
+    return JSON.parse(decodeURIComponent(escape(atob(m[1].replace(/\s+/g, "")))));
+  }
+  function fmtDate(ts){
+    var d = new Date(ts);
+    function p(x){ return (x < 10 ? "0" : "") + x; }
+    return p(d.getDate()) + "/" + p(d.getMonth() + 1) + "/" + d.getFullYear() + " lúc " + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
+  function hasContent(){
+    return WEEKS.some(function(w){
+      var e = data.journal[w.id];
+      return data.weeks[w.id] || e.text || e.rating || e.served || e.powers.length || e.hw.length;
+    }) || !!(data.gem || data.qFriends || data.qFavorite || data.qFamily);
+  }
+  function renderBackupStatus(msg, cls){
+    var el = document.getElementById("bk-status");
+    if (msg) { el.textContent = msg; el.className = "bk-status " + (cls || ""); return; }
+    if (data.lastBackup) {
+      var days = (Date.now() - data.lastBackup) / 86400000;
+      el.textContent = "Lần dự phòng gần nhất: " + fmtDate(data.lastBackup) + (days > 7 ? ". Đã hơn 1 tuần, ba mẹ nhớ sao chép mã mới nhé." : ".");
+      el.className = "bk-status " + (days > 7 ? "warn" : "ok");
+    } else {
+      el.textContent = hasContent() ? "Chưa dự phòng lần nào. Ba mẹ bấm \"Sao chép mã dự phòng\" sau buổi học nhé." : "Chưa dự phòng lần nào.";
+      el.className = "bk-status " + (hasContent() ? "warn" : "");
+    }
+  }
+  function markBackedUp(){
+    data.lastBackup = Date.now();
+    save();
+  }
+  function copyText(text, done){
+    function fallback(){
+      var ta = document.getElementById("bk-code");
+      ta.hidden = false;
+      ta.value = text;
+      ta.focus();
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      done(ok);
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function(){ done(true); }, fallback);
+    } else {
+      fallback();
+    }
+  }
+  document.getElementById("bk-copy").addEventListener("click", function(){
+    var code = encodeBackup();
+    copyText(code, function(ok){
+      if (ok) {
+        markBackedUp();
+        renderBackupStatus("✅ Đã sao chép mã. Mở Zalo, vào \"Cloud của tôi\", giữ ngón tay vào ô chat, chọn Dán rồi Gửi.", "ok");
+      } else {
+        var ta = document.getElementById("bk-code");
+        ta.hidden = false;
+        ta.value = code;
+        markBackedUp();
+        renderBackupStatus("Máy chưa cho sao chép tự động. Ba mẹ giữ ngón tay vào ô mã bên trên, chọn \"Chọn tất cả\" rồi \"Sao chép\" nhé.", "warn");
+      }
+    });
+  });
+  document.getElementById("bk-file").addEventListener("click", function(){
+    try {
+      var blob = new Blob([encodeBackup()], { type: "text/plain;charset=utf-8" });
+      var a = document.createElement("a");
+      var d = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download = "So-tay-Chau-Ngoc-" + (data.name || "be").replace(/[\\\/:*?"<>|]+/g, "") + "-" + d.getDate() + "-" + (d.getMonth() + 1) + ".txt";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+      markBackedUp();
+      renderBackupStatus("✅ Đã tải file dự phòng về máy. Nếu không thấy, ba mẹ dùng nút \"Sao chép mã dự phòng\" thay thế nhé.", "ok");
+    } catch (e) {
+      renderBackupStatus("Máy chưa cho tải file. Ba mẹ dùng nút \"Sao chép mã dự phòng\" nhé.", "warn");
+    }
+  });
+
+  function openRestore(){
+    var panel = document.getElementById("restore-panel");
+    panel.hidden = false;
+    document.getElementById("restore-status").textContent = "";
+    document.getElementById("restore-code").value = "";
+    try { panel.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" }); } catch (e) { panel.scrollIntoView(); }
+  }
+  function applyRestore(obj){
+    if (!obj || typeof obj.name !== "string" || !obj.name || typeof obj.weeks !== "object") throw new Error("bad");
+    data = obj;
+    ensureJournalShape();
+    save();
+    document.getElementById("restore-panel").hidden = true;
+    showBook();
+    renderBackupStatus("✅ Đã khôi phục sổ tay của " + data.name + ".", "ok");
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+  function restoreFail(){
+    var st = document.getElementById("restore-status");
+    st.textContent = "Mã chưa đúng. Hãy dán đủ cả đoạn mã, bắt đầu bằng SOTAY1:";
+    st.className = "bk-status warn";
+  }
+  document.getElementById("gate-restore").addEventListener("click", openRestore);
+  document.getElementById("bk-restore-open").addEventListener("click", openRestore);
+  document.getElementById("restore-cancel").addEventListener("click", function(){ document.getElementById("restore-panel").hidden = true; });
+  document.getElementById("restore-go").addEventListener("click", function(){
+    try { applyRestore(decodeBackup(document.getElementById("restore-code").value)); } catch (e) { restoreFail(); }
+  });
+  document.getElementById("restore-file").addEventListener("change", function(e){
+    var f = e.target.files && e.target.files[0];
+    if (!f) return;
+    var r = new FileReader();
+    r.onload = function(){ try { applyRestore(decodeBackup(r.result)); } catch (err) { restoreFail(); } };
+    r.readAsText(f);
+  });
+  document.getElementById("goto-backup").addEventListener("click", function(){
+    var c = document.getElementById("backup-card");
+    try { c.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" }); } catch (e) { c.scrollIntoView(); }
+  });
 
   function escapeHtml(s){
     return String(s || "").replace(/[&<>"]/g, function(c){
@@ -646,8 +1017,10 @@
     renderWeeks();
     renderSubnote();
     renderJournal();
-    renderRating();
+    renderSky();
     renderGem();
+    renderBackupStatus();
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
   }
 
   function showGate(){
