@@ -1,0 +1,1088 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Sổ Tay Của Con</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+  :root{
+    --cream:#FFF4DC;
+    --paper:#FFFFFF;
+    --ink:#3A2E1F;
+    --ink-soft:#8A7554;
+    --gold:#FFB627;
+    --gold-dark:#E8890C;
+    --gold-tint:#FFEFC7;
+    --indigo:#4A4FA0;
+    --teal:#22B8A6;
+    --teal-tint:#DFF7F2;
+    --purple:#8B5FBF;
+    --pink:#FF6F91;
+    --border:#F5DFA6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;color:var(--ink);font-family:'Nunito',system-ui,sans-serif;padding-inline:16px;
+    background-color:var(--cream);
+    background-image:
+      radial-gradient(circle, var(--gold) 1.6px, transparent 1.6px),
+      radial-gradient(circle, var(--teal) 1.4px, transparent 1.4px),
+      radial-gradient(circle, var(--pink) 1.3px, transparent 1.3px);
+    background-size:120px 120px, 90px 90px, 150px 150px;
+    background-position:0 0, 40px 60px, 90px 10px;
+    background-attachment:fixed;
+  }
+  body::before{content:none;}
+  h1,h2,h3{font-family:'Baloo 2','Nunito',sans-serif;margin:0;text-wrap:balance;}
+  .wrap{max-width:680px;margin:0 auto;padding-block:40px 80px;display:flex;flex-direction:column;gap:28px;}
+  .icon-badge{display:inline-flex;flex-shrink:0;}
+  .mascot-photo{border-radius:50%;object-fit:cover;display:block;flex-shrink:0;}
+  .mascot-photo.ring-gold{border:4px solid var(--gold);box-shadow:0 3px 0 var(--gold-dark);}
+  .mascot-photo.ring-teal{border:4px solid var(--teal);box-shadow:0 3px 0 #1a8c7f;}
+  .icon-badge .mascot-photo{border-width:2px;box-shadow:none;}
+  .brand-logos{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;}
+  .brand-logo{height:34px;width:auto;object-fit:contain;}
+
+  /* Cong dang ky */
+  .gate{background:var(--paper);border:3px solid var(--gold);border-radius:32px;padding:44px 28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;box-shadow:0 10px 0 var(--gold-tint);}
+  .gate svg{margin-bottom:4px;}
+  .gate h1{font-size:30px;color:var(--gold-dark);}
+  .gate p{font-size:15.5px;color:var(--ink-soft);max-width:420px;margin:0;}
+  .gate form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px;width:100%;max-width:380px;}
+  .gate input[type=text]{flex:1;min-width:180px;font-family:'Nunito',sans-serif;font-size:16px;border:2px solid var(--border);border-radius:14px;padding:12px 16px;background:var(--cream);}
+  .gate button{font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:700;color:#fff;background:var(--gold-dark);border:none;border-radius:14px;padding:13px 24px;cursor:pointer;box-shadow:0 4px 0 #a5620a;}
+  .gate button:hover{background:#c76f0a;}
+  .gate button:active{box-shadow:none;transform:translateY(4px);}
+
+  .banner{display:flex;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:700;color:var(--ink-soft);background:var(--paper);border:1px solid var(--border);border-radius:12px;padding:10px 16px;text-align:center;flex-wrap:wrap;}
+  .banner button.link{font:inherit;font-weight:700;color:var(--indigo);background:none;border:none;text-decoration:underline;cursor:pointer;padding:0;}
+  .banner-confirm{border-color:var(--gold);background:var(--gold-tint);}
+  .banner-confirm #rename-yes{color:var(--gold-dark);}
+
+  header{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;}
+  .eyebrow{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dark);font-weight:800;}
+  header h1{font-size:clamp(30px,7vw,44px);color:var(--gold-dark);}
+  .lede{font-size:16.5px;color:var(--ink-soft);max-width:480px;font-weight:600;}
+
+  .row{display:flex;gap:18px;flex-wrap:wrap;}
+  .friend-card{flex:1;min-width:250px;border-radius:26px;padding:22px;display:flex;gap:16px;align-items:center;border:3px solid transparent;}
+  .friend-card.star-card{background:var(--gold-tint);border-color:var(--gold);}
+  .friend-card.chameleon-card{background:var(--teal-tint);border-color:var(--teal);}
+  .friend-card h3{font-size:19px;}
+  .friend-card p{font-size:14px;color:var(--ink-soft);margin:4px 0 0;line-height:1.5;font-weight:600;}
+
+  .heart-panel{background:var(--indigo);border-radius:26px;padding:26px 28px;color:#fff;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;box-shadow:0 0 0 0 rgba(255,182,39,.55);transition:box-shadow 1s ease;}
+  .heart-panel h3{font-size:20px;color:#fff;}
+  .heart-panel p{font-size:14.5px;line-height:1.6;opacity:.96;margin:0;font-weight:500;}
+  .heart-panel .heart-glow-note{font-size:12px;font-weight:800;opacity:.9;margin-top:2px;letter-spacing:.3px;}
+
+  section h2{font-size:24px;margin-bottom:14px;display:flex;align-items:center;gap:10px;color:var(--gold-dark);}
+  .subnote{font-size:13.5px;color:var(--ink-soft);margin:-8px 0 16px;font-weight:600;}
+
+  .stages{display:flex;gap:14px;flex-wrap:wrap;}
+  .stage{flex:1;min-width:200px;background:var(--paper);border:2px dashed var(--border);border-radius:20px;padding:18px;}
+  .stage .m{font-size:12px;font-weight:800;letter-spacing:.5px;}
+  .stage .t{font-size:17.5px;font-weight:700;margin-top:4px;}
+
+  .weeks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;}
+  @media (max-width:480px){.weeks{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}}
+  .week{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:var(--paper);border:2px solid var(--border);border-radius:14px;padding:9px 4px;cursor:pointer;transition:border-color .15s,background .15s,transform .1s;text-align:center;}
+  .week:hover{transform:translateY(-2px);}
+  .week.checked{border-color:var(--gold);background:var(--gold-tint);}
+  .week input[type="checkbox"]{width:16px;height:16px;accent-color:var(--gold-dark);flex-shrink:0;}
+  .week .star{flex-shrink:0;width:15px;height:15px;}
+  .week .star path{fill:var(--border);transition:fill .15s;}
+  .week.checked .star path{fill:var(--gold);}
+  .week .wk{font-size:12px;color:var(--ink);font-weight:800;line-height:1.2;}
+  .week .wd{font-size:9px;color:var(--ink-soft);font-weight:700;}
+  @keyframes weekPop{0%{transform:scale(1);}40%{transform:scale(1.2) rotate(-4deg);}70%{transform:scale(.96) rotate(2deg);}100%{transform:scale(1) rotate(0);}}
+  .week.just-checked{animation:weekPop .45s ease;}
+  @keyframes starTwinkle{0%,100%{opacity:1;}50%{opacity:.5;}}
+  .week.checked .star{animation:starTwinkle 2.4s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){
+    .week.just-checked{animation:none;}
+    .week.checked .star{animation:none;}
+  }
+
+  .weeks-progress{display:flex;align-items:center;gap:10px;margin:-4px 0 14px;}
+  .weeks-progress-track{flex:1;height:11px;border-radius:999px;background:var(--gold-tint);border:2px solid var(--border);overflow:hidden;}
+  .weeks-progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold) 0%,var(--gold-dark) 100%);width:0%;transition:width .55s cubic-bezier(.34,1.56,.64,1);}
+  .weeks-progress-pct{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:14px;color:var(--gold-dark);min-width:38px;text-align:right;}
+  @media (prefers-reduced-motion: reduce){.weeks-progress-fill{transition:none;}}
+
+  .draw-box{border:3px dashed var(--border);border-radius:24px;min-height:260px;background:var(--paper);display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;}
+  .draw-hint{color:var(--ink-soft);font-size:14.5px;font-weight:700;opacity:.55;}
+
+  .card{background:var(--paper);border:2px solid var(--border);border-radius:26px;padding:26px 28px;}
+  .field-label{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:6px;}
+  textarea{width:100%;font-family:'Nunito',sans-serif;border:2px solid var(--border);border-radius:14px;padding:10px 12px;font-size:14.5px;resize:vertical;background:var(--cream);}
+  textarea:focus,input:focus{outline:3px solid var(--teal);outline-offset:1px;}
+
+  .journal{display:flex;flex-direction:column;gap:12px;}
+  .journal-entry{border:2px solid var(--border);border-radius:18px;padding:14px 16px;background:var(--paper);}
+  .journal-entry summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;font-weight:700;}
+  .journal-entry summary::-webkit-details-marker{display:none;}
+  .journal-entry summary .wk{font-size:11.5px;color:var(--ink-soft);font-weight:800;min-width:90px;}
+  .journal-entry summary .wt{font-size:14.5px;}
+  .journal-entry summary .note{font-size:11px;color:var(--teal);font-weight:800;margin-left:auto;}
+  .journal-body{margin-top:12px;display:flex;flex-direction:column;gap:10px;}
+  .served-row{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-soft);font-weight:600;}
+  .served-row input{width:19px;height:19px;accent-color:var(--gold-dark);}
+
+  .journal-rating{display:flex;flex-direction:column;gap:6px;}
+  .journal-rating-label{font-size:12.5px;font-weight:700;color:var(--ink-soft);}
+  .face-row{display:flex;gap:6px;flex-wrap:wrap;}
+  .face-btn{font-size:20px;line-height:1;background:var(--cream);border:2px solid var(--border);border-radius:12px;padding:5px 9px;cursor:pointer;transition:transform .15s ease,border-color .15s,background .15s;}
+  .face-btn:hover{transform:translateY(-2px);}
+  .face-btn.selected{border-color:var(--gold);background:var(--gold-tint);transform:scale(1.15);}
+  @media (prefers-reduced-motion: reduce){.face-btn{transition:none;}.face-btn:hover,.face-btn.selected{transform:none;}}
+
+  .rating-row{display:flex;align-items:center;gap:14px;}
+  .rating-num{font-family:'Baloo 2',sans-serif;font-size:34px;font-weight:800;color:var(--gold-dark);min-width:52px;text-align:center;transition:color .3s ease;}
+  .rating-num.lvl-low{color:var(--indigo);}
+  .rating-num.lvl-mid{color:var(--teal);}
+  .rating-num.lvl-high{color:var(--gold-dark);}
+  .rating-emoji{font-size:32px;line-height:1;min-width:38px;text-align:center;transition:transform .25s ease;}
+  .rating-emoji.bump{transform:scale(1.3);}
+
+  .toolbar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+  button.btn{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--paper);border:2px solid var(--border);border-radius:14px;padding:11px 22px;cursor:pointer;}
+  button.btn:hover{border-color:var(--gold);background:var(--gold-tint);}
+
+  /* Loa doc to + huong dan */
+  .say{flex-shrink:0;width:38px;height:38px;border-radius:50%;border:2px solid var(--teal);background:var(--teal-tint);font-size:18px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;}
+  .say:hover{background:#c5efe7;}
+  .no-tts .say,.no-tts .say-tip{display:none!important;}
+  .q{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;line-height:1.35;}
+  .heart-panel .q{color:#fff;font-size:20px;font-family:'Baloo 2','Nunito',sans-serif;}
+  .heart-panel .say{background:#fff;}
+  .guide{background:var(--paper);border:2px solid var(--teal);border-radius:22px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;}
+  .guide h3{font-size:18px;color:#1a8c7f;}
+  .guide ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .guide li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;font-weight:600;line-height:1.45;}
+  .guide li .ic{font-size:20px;line-height:1.2;flex-shrink:0;width:28px;text-align:center;}
+
+  /* Phan con tu cham / phan ba me ghi */
+  .zone{border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;}
+  .kid-zone{background:var(--gold-tint);}
+  .parent-zone{background:var(--cream);border:2px dashed var(--border);}
+  .zone-tag{font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--gold-dark);}
+  .parent-zone .zone-tag{color:var(--ink-soft);}
+  .zone-tag small{text-transform:none;letter-spacing:0;font-weight:700;font-size:12px;}
+  .star-row{display:flex;gap:6px;flex-wrap:wrap;}
+  .star-btn{width:50px;height:50px;border-radius:14px;border:2px solid var(--border);background:var(--paper);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;transition:transform .15s;}
+  .star-btn:active{transform:scale(.92);}
+  .star-btn svg{width:32px;height:32px;}
+  .star-btn svg path{fill:#F1E6C6;stroke:#D9C48E;stroke-width:1.2;transition:fill .15s;}
+  .star-btn.on{border-color:var(--gold);}
+  .star-btn.on svg path{fill:var(--gold);stroke:var(--gold-dark);}
+  .power-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:8px;}
+  .power-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:14px;border:2px solid var(--border);background:var(--paper);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:12.5px;color:var(--ink);}
+  .power-btn .pe{font-size:30px;line-height:1.15;}
+  .power-btn.on{border-color:var(--teal);background:var(--teal-tint);box-shadow:0 3px 0 var(--teal);}
+  .hw-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+  .hw-btn{text-align:center;line-height:1.25;padding:8px 6px;}
+  .hw-btn.on{border-color:var(--gold-dark);background:#fff;box-shadow:0 3px 0 var(--gold-dark);}
+  .hw-btn.on .pe::after{content:" ✔";font-size:16px;color:var(--gold-dark);}
+  .journal-entry summary{flex-wrap:wrap;}
+  .journal-entry summary .mini{font-size:13px;margin-left:auto;letter-spacing:1px;}
+  .journal-entry summary .note + .mini{margin-left:8px;}
+
+  /* Bau troi cua con */
+  .sky{background:linear-gradient(180deg,#1C2759,#2A3470);border-radius:20px;padding:16px 10px 10px;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  @media (max-width:480px){.sky{grid-template-columns:repeat(5,minmax(0,1fr));row-gap:12px;}}
+  .sky-slot{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:66px;}
+  .sky-slot svg path{fill:#FFC93C;}
+  .sky-slot .dim{width:7px;height:7px;border-radius:50%;background:#5A6399;margin-bottom:14px;}
+  .sky-slot span{font-size:11px;font-weight:800;color:#C9CDF0;}
+  .powers-found{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center;}
+  .pf{display:inline-flex;align-items:center;gap:6px;background:var(--teal-tint);border:2px solid var(--teal);border-radius:999px;padding:5px 12px;font-weight:800;font-size:13.5px;}
+  .pf-label{font-size:13px;font-weight:800;color:var(--ink-soft);width:100%;}
+  .pf-empty{font-size:13px;font-weight:600;color:var(--ink-soft);}
+
+  /* Du phong */
+  .backup .toolbar{justify-content:flex-start;}
+  .bk-status{font-size:13.5px;font-weight:700;color:var(--ink-soft);margin-top:10px;line-height:1.5;}
+  .bk-status.warn{color:#B4540A;}
+  .bk-status.ok{color:#1a8c7f;}
+  #bk-code,#restore-code{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;word-break:break-all;margin-top:10px;}
+  .restore{display:flex;flex-direction:column;gap:12px;border-color:var(--teal);}
+  button.link-plain{font:inherit;font-weight:700;font-size:14px;color:var(--indigo);background:none;border:none;text-decoration:underline;cursor:pointer;padding:0;}
+
+  footer{text-align:center;padding-top:14px;border-top:2px dashed var(--border);}
+  footer .slogan{font-family:'Baloo 2',sans-serif;font-size:19px;color:var(--indigo);font-weight:800;}
+  footer .sub{font-size:13px;color:var(--ink-soft);margin-top:4px;font-weight:600;}
+
+  [hidden]{display:none!important;}
+
+  @media print{
+    @page{
+      size:A4;
+      margin:12mm 12mm 16mm 12mm;
+    }
+    @page{
+      @bottom-center{
+        content:"Trang " counter(page) " / " counter(pages);
+        font-family:'Nunito',sans-serif;
+        font-size:9px;
+        color:#999;
+      }
+    }
+    body{background:#fff;background-image:none;padding:0;font-size:12.5px;}
+    .brand-logo{height:20px;}
+    .wrap{gap:12px!important;padding-block:6px 16px!important;max-width:none!important;}
+    .banner,.toolbar,.gate,#confetti-canvas,.say,.guide,#backup-card,#restore-panel{display:none!important;}
+    .zone{padding:6px 8px;gap:5px;}
+    .zone-tag{font-size:9px;}
+    .q{font-size:11px;}
+    .star-btn{width:24px;height:24px;border-radius:6px;}
+    .star-btn svg{width:16px;height:16px;}
+    .power-row{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;}
+    .power-btn{padding:3px 2px;font-size:8.5px;border-radius:8px;}
+    .power-btn .pe{font-size:14px;}
+    .hw-row{gap:4px;}
+    .sky-slot{height:44px;}
+    .weeks-progress{margin:-2px 0 8px;}
+    .weeks-progress-track{height:7px;}
+    .weeks-progress-pct{font-size:11px;min-width:28px;}
+    .rating-emoji{font-size:22px;}
+    .heart-panel{box-shadow:none!important;}
+    .card,.friend-card,.stage,.week,.journal-entry{border:1px solid #ccc;box-shadow:none;break-inside:avoid;padding:10px 12px;}
+    .heart-panel{background:#fff;color:#000;border:1px solid #ccc;padding:12px 14px;break-inside:avoid;}
+    .heart-panel h3{color:#000;font-size:15px;}
+    .heart-panel p{font-size:12px;}
+    details{display:block!important;}
+    details > *{display:block!important;}
+    header{gap:3px;}
+    header h1{font-size:22px;}
+    .eyebrow{font-size:10.5px;}
+    .lede{font-size:12px;}
+    section h2{font-size:16px;margin-bottom:6px;}
+    .subnote{font-size:11px;margin:-2px 0 6px;}
+    .row{gap:8px;}
+    .friend-card{padding:10px;gap:8px;}
+    .mascot-photo{width:28px!important;height:28px!important;}
+    .friend-card h3{font-size:13px;}
+    .friend-card p{font-size:11px;}
+    .draw-box{min-height:200px;break-inside:avoid;}
+    .stages{gap:6px;}
+    .stage{padding:8px 10px;}
+    .stage .t{font-size:14px;}
+    .weeks{gap:5px;}
+    .week{padding:5px 3px;gap:2px;border-radius:10px;}
+    .week .wk{font-size:10px;}
+    .week .wd{font-size:8px;}
+    .week input[type="checkbox"]{width:12px;height:12px;}
+    .week .star{width:12px;height:12px;}
+    .journal{gap:6px;}
+    .journal-entry summary{gap:6px;}
+    .journal-body{margin-top:6px;gap:6px;}
+    .journal-rating{gap:3px;}
+    .journal-rating-label{font-size:10px;}
+    .face-btn{font-size:13px;padding:2px 5px;border-radius:8px;}
+    textarea{font-size:11px!important;padding:5px 7px!important;min-height:32px;}
+    .card h2{font-size:16px!important;margin-bottom:6px!important;}
+    .rating-row{gap:12px;}
+    .rating-num{font-size:22px;min-width:36px;}
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="gate" id="gate">
+    <img class="mascot-photo ring-gold" src="assets/ngoi-sao-sang.jpg" alt="Ngôi Sao Sáng" width="90" height="90" style="width:90px;height:90px;">
+    <h1>Sổ Tay Châu Ngọc</h1>
+    <p>Đây là sổ tay riêng của con — cho CLB Sao Sáng, khóa "Ngôi Sao Nhỏ, Sức Mạnh To". Nhập tên con để bắt đầu nhé!</p>
+    <form id="reg-form">
+      <input type="text" id="reg-name" placeholder="Tên của bé" maxlength="40" autocomplete="off">
+      <button type="submit">Bắt đầu sổ tay của con</button>
+    </form>
+    <button class="link-plain" id="gate-restore" type="button">Đã có mã dự phòng? Khôi phục sổ tay</button>
+  </div>
+
+  <div class="card restore" id="restore-panel" hidden>
+    <h2 style="font-size:20px;">♻️ Khôi phục sổ tay</h2>
+    <div class="subnote" style="margin:0;">Dán mã dự phòng (bắt đầu bằng <b>SOTAY1:</b>) vào ô dưới, hoặc chọn file dự phòng đã tải về. Sổ tay đang có trên máy này (nếu có) sẽ được thay bằng bản khôi phục.</div>
+    <textarea id="restore-code" rows="4" placeholder="SOTAY1:..."></textarea>
+    <input type="file" id="restore-file" accept=".txt,.json,text/plain,application/json">
+    <div class="toolbar" style="justify-content:flex-start;">
+      <button class="btn" id="restore-go" type="button">Khôi phục</button>
+      <button class="btn" id="restore-cancel" type="button">Đóng</button>
+    </div>
+    <div class="bk-status" id="restore-status"></div>
+  </div>
+
+  <div id="book" hidden>
+    <div class="wrap" style="padding:0;max-width:none;gap:28px;">
+
+      <div class="banner" id="banner-ask">Sổ tay của <strong id="child-name-banner">&nbsp;</strong>, lưu riêng trên máy này ·
+        <button class="link" id="goto-backup" type="button">💾 lưu dự phòng</button> ·
+        <button class="link" id="rename-btn" type="button">đổi tên / dùng cho bé khác</button>
+      </div>
+      <div class="banner banner-confirm" id="banner-confirm" hidden>
+        <span>Bắt đầu sổ tay mới? Dữ liệu của <strong id="child-name-confirm">&nbsp;</strong> trên máy này sẽ được thay bằng sổ tay mới. Muốn giữ lại thì sao chép mã dự phòng trước nhé.</span>
+        <button class="link" id="rename-cancel" type="button">Không, giữ lại</button>
+        <button class="link" id="rename-yes" type="button">Có, bắt đầu mới</button>
+      </div>
+
+      <header>
+        <div class="eyebrow">CLB Sao Sáng · Minewise</div>
+        <h1 id="child-title">Sổ Tay Châu Ngọc</h1>
+        <div class="lede">Hành trình khai mở "viên ngọc" của con — khóa "Ngôi Sao Nhỏ, Sức Mạnh To"</div>
+      </header>
+
+      <div class="guide">
+        <h3>Cách dùng sổ tay: bé nào cũng làm được</h3>
+        <ul>
+          <li><span class="ic">👆</span><span><b>Ô có hình</b> (ngôi sao, sức mạnh): con <b>tự chạm</b> để chọn. Ba mẹ không chọn thay, không sửa lại lựa chọn của con.</span></li>
+          <li class="say-tip"><span class="ic">🔊</span><span>Bấm <b>nút loa</b> để nghe đọc câu hỏi. Bé chưa biết chữ vẫn tự hiểu được.</span></li>
+          <li><span class="ic">✍️</span><span><b>Ô chữ</b>: bé biết chữ tự viết. Bé chưa biết chữ thì <b>kể</b>, ba mẹ <b>ghi lại đúng lời con</b>.</span></li>
+          <li><span class="ic">🖍️</span><span><b>Góc Sáng Tạo</b>: in ra để con vẽ.</span></li>
+        </ul>
+      </div>
+
+      <div class="row">
+        <div class="friend-card star-card">
+          <img class="mascot-photo ring-gold" src="assets/ngoi-sao-sang.jpg" alt="Ngôi Sao Sáng" width="72" height="72" style="width:72px;height:72px;">
+          <div><h3>Ngôi Sao Sáng</h3><p>Luôn nhìn ra "châu ngọc" trong con — người mở đầu mỗi buổi học.</p></div>
+        </div>
+        <div class="friend-card chameleon-card">
+          <img class="mascot-photo ring-teal" src="assets/tac-ke-hoa.jpg" alt="Tắc Kè Hoa" width="72" height="72" style="width:72px;height:72px;">
+          <div><h3>Tắc Kè Hoa</h3><p>Đổi màu để chào đón mỗi bạn nhỏ lên "phụng sự châu ngọc" của mình.</p></div>
+        </div>
+      </div>
+
+      <div class="heart-panel" id="heart-panel">
+        <div class="q"><button class="say" type="button" aria-label="Nghe đọc" data-say="Mỗi con có một ngôi sao nhỏ sống trong tim mình. Ngôi sao sáng lên khi con làm điều đúng, và luôn có thể sáng lại.">🔊</button><h3>Ngôi Sao Trong Tim của con</h3></div>
+        <p>Mỗi con cũng có một ngôi sao nhỏ sống trong tim mình — sáng lên khi con làm điều đúng, và luôn có thể sáng lại. Mỗi tuần, hãy hỏi con: "Ngôi Sao Trong Tim con hôm nay sáng lên hay mờ đi?"</p>
+        <div class="heart-glow-note" id="heart-glow-note">✨ Ngôi Sao Trong Tim con đang bắt đầu sáng...</div>
+      </div>
+
+      <section>
+        <h2>Hành trình 3 chặng</h2>
+        <div class="stages">
+          <div class="stage"><div class="m" style="color:var(--gold-dark);">THÁNG 10</div><div class="t">Sức Mạnh Bên Trong</div></div>
+          <div class="stage"><div class="m" style="color:var(--teal);">THÁNG 11</div><div class="t">Lan Tỏa Yêu Thương</div></div>
+          <div class="stage"><div class="m" style="color:var(--indigo);">THÁNG 12</div><div class="t">Tổng Kết &amp; Tỏa Sáng</div></div>
+        </div>
+      </section>
+
+      <section>
+        <h2><span class="icon-badge"><img class="mascot-photo ring-gold" src="assets/ngoi-sao-sang.jpg" alt="" width="30" height="30" style="width:30px;height:30px;"></span> 10 Tuần Hành Trình Của Con</h2>
+        <div class="subnote" id="weeks-subnote">Đang tải...</div>
+        <div class="weeks-progress">
+          <div class="weeks-progress-track"><div class="weeks-progress-fill" id="weeks-progress-fill"></div></div>
+          <div class="weeks-progress-pct" id="weeks-progress-pct">0%</div>
+        </div>
+        <div class="weeks" id="weeks-grid"></div>
+      </section>
+
+      <section>
+        <h2><span class="icon-badge"><img class="mascot-photo ring-teal" src="assets/tac-ke-hoa.jpg" alt="" width="30" height="30" style="width:30px;height:30px;"></span> Nhật Ký Từng Buổi Của Con</h2>
+        <div class="subnote">Mỗi tuần một ô, điền sau buổi học. Phần trên con tự chạm, phần dưới con kể, ba mẹ ghi. Không có lựa chọn nào sai: 1 ngôi sao cũng quý, vì ngôi sao nào cũng có thể sáng thêm.</div>
+        <div class="journal" id="journal-list"></div>
+      </section>
+
+      <div class="card" id="sky-card">
+        <h2 style="font-size:22px;">Bầu Trời Của Con</h2>
+        <div class="subnote" id="sky-subnote">Mỗi tuần con tự chấm sẽ thành một ngôi sao trên bầu trời này.</div>
+        <div class="sky" id="sky"></div>
+        <div class="powers-found" id="powers-found"></div>
+      </div>
+
+      <section>
+        <h2>Góc Sáng Tạo Của Con</h2>
+        <div class="subnote">In sổ tay ra và để con tự do vẽ vào khung dưới đây nhé!</div>
+        <div class="draw-box"><span class="draw-hint">Vẽ chính con hoặc các bạn của con ở đây</span></div>
+        <div class="card" style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+          <div class="zone-tag" style="color:var(--ink-soft);">✍️ Con kể · ba mẹ ghi <small>(bé biết chữ tự viết)</small></div>
+          <div>
+            <div class="q" style="margin-bottom:6px;"><button class="say" type="button" aria-label="Nghe đọc" data-say="Con nhớ tên những bạn nào trong câu lạc bộ?">🔊</button><span>Con nhớ tên những bạn nào?</span></div>
+            <textarea id="q-friends" rows="2" placeholder="Tên các bạn con nhớ..."></textarea>
+          </div>
+          <div>
+            <div class="q" style="margin-bottom:6px;"><button class="say" type="button" aria-label="Nghe đọc" data-say="Con thích buổi phụng sự châu ngọc nào nhất? Vì sao con thích?">🔊</button><span>Con thích buổi Phụng Sự Châu Ngọc nào nhất? Vì sao?</span></div>
+            <textarea id="q-favorite" rows="2" placeholder="Buổi của bạn nào, hay buổi của chính con..."></textarea>
+          </div>
+          <div>
+            <div class="q" style="margin-bottom:6px;"><button class="say" type="button" aria-label="Nghe đọc" data-say="Ba mẹ, anh chị em, ông bà đã cùng con làm điều gì?">🔊</button><span>Ba mẹ / anh chị em / ông bà đã cùng con tác tạo điều gì?</span></div>
+            <textarea id="q-family" rows="2" placeholder="Điều cả nhà đã cùng làm với con..."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Châu Ngọc Con Đã Khám Phá</h2>
+        <div class="q" style="margin-bottom:8px;"><button class="say" type="button" aria-label="Nghe đọc" data-say="Con đã nhận ra điều gì đặc biệt về chính mình? Con kể cho ba mẹ nghe nhé.">🔊</button><span>Con đã nhận ra điều gì đặc biệt về chính mình?</span></div>
+        <textarea id="gem" rows="3" placeholder="Con kể, ba mẹ ghi lại đúng lời con..." style="background:var(--paper);padding:16px;border-radius:14px;"></textarea>
+      </section>
+
+      <section class="card backup" id="backup-card">
+        <h2 style="font-size:22px;">💾 Giữ sổ tay an toàn</h2>
+        <div class="subnote" style="margin:0 0 12px;">Sổ tay lưu ngay trên điện thoại này. Sau mỗi tuần điền xong, ba mẹ bấm <b>"Sao chép mã dự phòng"</b> rồi dán vào Zalo <b>"Cloud của tôi"</b>. Nếu đổi máy hay lỡ xóa, chỉ cần dán mã đó vào ô Khôi phục là sổ tay trở lại đầy đủ.</div>
+        <div class="toolbar">
+          <button class="btn" id="bk-copy" type="button">📋 Sao chép mã dự phòng</button>
+          <button class="btn" id="bk-file" type="button">⬇️ Tải file dự phòng</button>
+          <button class="btn" id="bk-restore-open" type="button">♻️ Khôi phục</button>
+        </div>
+        <textarea id="bk-code" rows="3" readonly hidden></textarea>
+        <div class="bk-status" id="bk-status"></div>
+      </section>
+
+      <div class="toolbar">
+        <button class="btn" id="print-btn" type="button">In sổ tay của con</button>
+      </div>
+
+      <footer>
+        <div class="brand-logos">
+          <img class="brand-logo" src="assets/minewise-logo.png" alt="Minewise">
+          <img class="brand-logo" src="assets/vietwise-logo.png" alt="Vietwise">
+        </div>
+        <div class="slogan">Gia Tăng Giá Trị Sống Cùng Con</div>
+        <div class="sub">CLB Sao Sáng · Minewise</div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var WEEKS = [
+    {id:"w1", label:"TUẦN 1 · 05/10", title:"Kết Nối · Khai Giảng", noPowers:true,
+      ask:"Con nhớ Cánh Sao nào? Con thích phần giới thiệu của bạn nào? Ghi đúng lời con kể nhé.",
+      hw:[{e:"⭐", t:"Làm một ngôi sao sáng"}, {e:"👀", t:"Xem lại phần giới thiệu của các bạn"}, {e:"🖐️", t:"Kể lại 5 Cánh Sao con nhớ"}],
+      hwSay:"Việc về nhà tuần này. Một: làm một ngôi sao sáng. Hai: cùng ba mẹ xem lại phần giới thiệu của các bạn. Ba: kể cho ba mẹ nghe năm Cánh Sao, năm quy tắc của lớp mà con nhớ. Làm xong việc nào, con chạm vào hình việc đó nhé."},
+    {id:"w2", label:"TUẦN 2 · 12/10", title:"Sức Mạnh Bên Trong Con"},
+    {id:"w3", label:"TUẦN 3 · 19/10", title:"Chủ Đề Do Cô Quyết Định", note:"Cùng Diễn giả Trang Hoàng · An toàn học đường"},
+    {id:"w4", label:"TUẦN 4 · 26/10", title:"Điều Đẹp Trong Con"},
+    {id:"w5", label:"TUẦN 5 · 02/11", title:"Nụ Cười Lan Xa"},
+    {id:"w6", label:"TUẦN 6 · 09/11", title:"Con Chơi Hết Mình"},
+    {id:"w7", label:"TUẦN 7 · 16/11", title:"Lời Cảm Ơn Gửi Thầy Cô"},
+    {id:"w8", label:"TUẦN 8 · 23/11", title:"Chủ Đề Do Cô Quyết Định", note:"Cùng Bác sĩ Liên Tốt Bụng · Răng miệng"},
+    {id:"w9", label:"TUẦN 9 · 30/11", title:"Con Dám Thử Điều Mới"},
+    {id:"w10", label:"TUẦN 10 · 07/12", title:"Chứng Nhận Vì Sao Nhỏ"}
+  ];
+  WEEKS.forEach(function(w, i){ w.date = new Date(2026, 9, 5 + 7 * i); });
+  var STAR_PATH = '<path d="M13 1 L15.7 9.6 L24.7 9.6 L17.4 15 L20 23.6 L13 18.2 L6 23.6 L8.6 15 L1.3 9.6 L10.3 9.6 Z"></path>';
+  var STAR_SVG = '<svg class="star" width="24" height="24" viewBox="0 0 26 26" aria-hidden="true">' + STAR_PATH + '</svg>';
+  var STORE_KEY = "sotaychaungoc_v1";
+  var POWERS = [
+    {id:"dungcam", e:"🦁", n:"Dũng cảm"},
+    {id:"kiennhan", e:"⏳", n:"Kiên nhẫn"},
+    {id:"benbi", e:"🧗", n:"Bền bỉ"},
+    {id:"yeuthuong", e:"💛", n:"Yêu thương"},
+    {id:"tute", e:"🤲", n:"Tử tế"},
+    {id:"trungthuc", e:"🙂", n:"Trung thực"},
+    {id:"khac", e:"✨", n:"Tên khác"}
+  ];
+  var POWER_BY_ID = {};
+  POWERS.forEach(function(p){ POWER_BY_ID[p.id] = p; });
+
+  /* Doc to bang giong tieng Viet cua may (neu may khong co giong Viet thi an nut loa) */
+  var ttsOK = ("speechSynthesis" in window) && (typeof SpeechSynthesisUtterance !== "undefined");
+  var viVoice = null;
+  function pickVoice(){
+    try {
+      var vs = window.speechSynthesis.getVoices() || [];
+      viVoice = null;
+      for (var i = 0; i < vs.length; i++) { if (/^vi/i.test(vs[i].lang)) { viVoice = vs[i]; break; } }
+      document.documentElement.classList.toggle("no-tts", vs.length > 0 && !viVoice);
+    } catch (e) {}
+  }
+  if (!ttsOK) {
+    document.documentElement.classList.add("no-tts");
+  } else {
+    pickVoice();
+    try { window.speechSynthesis.addEventListener("voiceschanged", pickVoice); } catch (e) { window.speechSynthesis.onvoiceschanged = pickVoice; }
+  }
+  function speak(text){
+    if (!ttsOK || !text) return;
+    try {
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = "vi-VN";
+      if (viVoice) u.voice = viVoice;
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  document.addEventListener("click", function(e){
+    var b = e.target && e.target.closest ? e.target.closest(".say") : null;
+    if (!b) return;
+    e.preventDefault();
+    speak(b.getAttribute("data-say"));
+  });
+
+  function safeGet(key){
+    try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : null; } catch (e) { return null; }
+  }
+  function safeSet(key, val){
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+  }
+  function safeRemove(key){
+    try { localStorage.removeItem(key); } catch (e) {}
+  }
+
+  function defaultData(name){
+    var w = {}, j = {};
+    WEEKS.forEach(function(x){ w[x.id] = false; j[x.id] = { text: "", served: false, rating: null, powers: [], hw: [] }; });
+    return { name: name, weeks: w, journal: j, gem: "", qFriends: "", qFavorite: "", qFamily: "", celebrated10: false, lastBackup: null };
+  }
+
+  /* Bo sung truong moi cho so tay cu, khong xoa du lieu da co */
+  function ensureJournalShape(){
+    if (!data.weeks) data.weeks = {};
+    if (!data.journal) data.journal = {};
+    WEEKS.forEach(function(x){
+      if (typeof data.weeks[x.id] !== "boolean") data.weeks[x.id] = !!data.weeks[x.id];
+      if (!data.journal[x.id]) data.journal[x.id] = { text: "", served: false, rating: null, powers: [], hw: [] };
+      if (typeof data.journal[x.id].rating === "undefined") data.journal[x.id].rating = null;
+      if (!Array.isArray(data.journal[x.id].powers)) data.journal[x.id].powers = [];
+      if (!Array.isArray(data.journal[x.id].hw)) data.journal[x.id].hw = [];
+    });
+    if (typeof data.gem !== "string") data.gem = "";
+    if (typeof data.lastBackup !== "number") data.lastBackup = null;
+    if (typeof data.qFriends !== "string") data.qFriends = "";
+    if (typeof data.qFavorite !== "string") data.qFavorite = "";
+    if (typeof data.qFamily !== "string") data.qFamily = "";
+    if (typeof data.celebrated10 !== "boolean") data.celebrated10 = false;
+  }
+
+  var data = safeGet(STORE_KEY);
+  var lastToggledWeek = null;
+  var prefersReducedMotion = false;
+  try { prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+
+  function save(){ safeSet(STORE_KEY, data); }
+
+  function renderWeeks(){
+    var grid = document.getElementById("weeks-grid");
+    grid.innerHTML = WEEKS.map(function(w, i){
+      var checked = !!data.weeks[w.id];
+      var datePart = w.label.split("·")[1] || "";
+      return (
+        '<label class="week' + (checked ? " checked" : "") + '" data-week="' + w.id + '" title="' + w.label + " · " + w.title + '">' +
+          '<input type="checkbox" id="' + w.id + '"' + (checked ? " checked" : "") + ">" +
+          STAR_SVG +
+          '<div class="wk">T' + (i + 1) + '</div><div class="wd">' + datePart.trim() + "</div>" +
+        "</label>"
+      );
+    }).join("");
+    grid.querySelectorAll("input[type=checkbox]").forEach(function(inp){
+      inp.addEventListener("change", function(){
+        lastToggledWeek = inp.id;
+        data.weeks[inp.id] = inp.checked;
+        save();
+        renderWeeks();
+        renderSubnote();
+      });
+    });
+    if (lastToggledWeek) {
+      var poppedEl = grid.querySelector('[data-week="' + lastToggledWeek + '"]');
+      if (poppedEl && poppedEl.classList.contains("checked") && !prefersReducedMotion) {
+        poppedEl.classList.add("just-checked");
+        poppedEl.addEventListener("animationend", function(){ poppedEl.classList.remove("just-checked"); }, { once: true });
+      }
+      lastToggledWeek = null;
+    }
+  }
+
+  function renderSubnote(){
+    var n = WEEKS.filter(function(w){ return !!data.weeks[w.id]; }).length;
+    var pct = Math.round((n / WEEKS.length) * 100);
+    var subnoteEl = document.getElementById("weeks-subnote");
+    if (n === WEEKS.length) {
+      subnoteEl.textContent = "🎉 Đã đánh dấu 10/10 tuần — con đã hoàn thành cả hành trình!";
+    } else {
+      subnoteEl.textContent = "Đã đánh dấu " + n + "/10 tuần.";
+    }
+    document.getElementById("weeks-progress-fill").style.width = pct + "%";
+    document.getElementById("weeks-progress-pct").textContent = pct + "%";
+    updateHeartGlowFromState();
+    if (n === WEEKS.length && !data.celebrated10) {
+      data.celebrated10 = true;
+      save();
+      burstConfetti();
+    } else if (n < WEEKS.length && data.celebrated10) {
+      data.celebrated10 = false;
+      save();
+    }
+  }
+
+  function computeAggregateRating(){
+    var sum = 0, count = 0;
+    WEEKS.forEach(function(w){
+      var entry = data.journal[w.id];
+      if (entry && entry.rating !== null && typeof entry.rating !== "undefined") {
+        sum += entry.rating;
+        count++;
+      }
+    });
+    return { avg: count ? sum / count : null, count: count };
+  }
+
+  function updateHeartGlowFromState(){
+    var n = WEEKS.filter(function(w){ return !!data.weeks[w.id]; }).length;
+    var attendance = n / WEEKS.length;
+    var agg = computeAggregateRating();
+    var fraction;
+    if (agg.count > 0) {
+      fraction = attendance * 0.35 + (agg.avg / 10) * 0.65;
+    } else {
+      fraction = attendance * 0.35;
+    }
+    updateHeartGlow(fraction);
+  }
+
+  function updateHeartGlow(fraction){
+    var panel = document.getElementById("heart-panel");
+    var note = document.getElementById("heart-glow-note");
+    if (!panel) return;
+    var blur = Math.round(fraction * 44);
+    var spread = Math.round(fraction * 7);
+    panel.style.boxShadow = "0 0 " + blur + "px " + spread + "px rgba(255,182,39," + (0.25 + fraction * 0.45) + ")";
+    if (note) {
+      if (fraction >= 1) note.textContent = "🌟 Ngôi Sao Trong Tim con đang sáng rực rỡ!";
+      else if (fraction >= 0.7) note.textContent = "✨ Ngôi Sao Trong Tim con sáng rõ dần mỗi tuần...";
+      else if (fraction >= 0.3) note.textContent = "✨ Ngôi Sao Trong Tim con đang sáng lên từng chút...";
+      else note.textContent = "✨ Ngôi Sao Trong Tim con đang bắt đầu sáng...";
+    }
+  }
+
+  function burstConfetti(){
+    if (prefersReducedMotion) return;
+    var canvas = document.createElement("canvas");
+    canvas.id = "confetti-canvas";
+    canvas.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;";
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    document.body.appendChild(canvas);
+    var ctx = canvas.getContext("2d");
+    var colors = ["#FFB627", "#22B8A6", "#FF6F91", "#8B5FBF", "#4A4FA0"];
+    var pieces = [];
+    for (var i = 0; i < 60; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * canvas.height * 0.4,
+        w: 6 + Math.random() * 6,
+        h: 8 + Math.random() * 8,
+        color: colors[i % colors.length],
+        speed: 2 + Math.random() * 3,
+        drift: (Math.random() - 0.5) * 2,
+        rot: Math.random() * Math.PI,
+        rotSpeed: (Math.random() - 0.5) * 0.3
+      });
+    }
+    var start = Date.now();
+    function frame(){
+      var elapsed = Date.now() - start;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(function(p){
+        p.y += p.speed;
+        p.x += p.drift;
+        p.rot += p.rotSpeed;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+      if (elapsed < 2200) {
+        requestAnimationFrame(frame);
+      } else {
+        canvas.remove();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function renderHeader(){
+    document.getElementById("child-name-banner").textContent = data.name;
+    document.getElementById("child-title").textContent = "Sổ Tay Châu Ngọc Của " + data.name;
+  }
+
+  /* rating luu theo thang cu 1/3/5/7/9 de so tay cu khong mat du lieu; hien thi thanh 1-5 ngoi sao */
+  function starsOf(entry){
+    return entry && entry.rating ? Math.max(1, Math.min(5, Math.round((entry.rating + 1) / 2))) : 0;
+  }
+  function currentWeekIndex(){
+    var now = new Date(), idx = 0;
+    WEEKS.forEach(function(w, i){ if (now >= w.date) idx = i; });
+    return idx;
+  }
+  function miniText(entry){
+    var n = starsOf(entry), out = "";
+    for (var i = 0; i < n; i++) out += "⭐";
+    (entry.powers || []).forEach(function(id){ if (POWER_BY_ID[id]) out += POWER_BY_ID[id].e; });
+    if (entry.hw && entry.hw.length) out += " 🏠" + entry.hw.length;
+    return out;
+  }
+
+  function renderSky(){
+    var sky = document.getElementById("sky");
+    var rated = 0;
+    sky.innerHTML = WEEKS.map(function(w, i){
+      var n = starsOf(data.journal[w.id]);
+      var inner;
+      if (n) {
+        rated++;
+        var size = 14 + n * 5;
+        inner = '<svg viewBox="0 0 26 26" aria-hidden="true" style="width:' + size + 'px;height:' + size + 'px;opacity:' + (0.55 + n * 0.09).toFixed(2) + ';filter:drop-shadow(0 0 ' + (n * 2) + 'px rgba(255,201,60,.85))">' + STAR_PATH + '</svg>';
+      } else {
+        inner = '<i class="dim"></i>';
+      }
+      return '<div class="sky-slot" title="' + w.label + '">' + inner + '<span>T' + (i + 1) + '</span></div>';
+    }).join("");
+    document.getElementById("sky-subnote").textContent = rated
+      ? "Con đã tự chấm " + rated + "/10 tuần. Mỗi tuần là một ngôi sao trên bầu trời của con."
+      : "Mỗi tuần con tự chấm ở Nhật Ký sẽ thành một ngôi sao trên bầu trời này.";
+
+    var found = {};
+    WEEKS.forEach(function(w){ (data.journal[w.id].powers || []).forEach(function(id){ found[id] = true; }); });
+    var list = POWERS.filter(function(p){ return found[p.id]; });
+    document.getElementById("powers-found").innerHTML = '<div class="pf-label">Sức mạnh bên trong con đã tìm thấy:</div>' + (list.length
+      ? list.map(function(p){ return '<span class="pf">' + p.e + " " + p.n + "</span>"; }).join("")
+      : '<span class="pf-empty">Chưa có. Mỗi tuần con chạm chọn ở Nhật Ký nhé!</span>');
+    updateHeartGlowFromState();
+  }
+
+  function paintEntry(wk){
+    var box = document.querySelector('.journal-entry[data-week="' + wk + '"]');
+    if (!box) return;
+    var entry = data.journal[wk];
+    var n = starsOf(entry);
+    box.querySelectorAll(".star-btn").forEach(function(btn){
+      btn.classList.toggle("on", Number(btn.getAttribute("data-n")) <= n);
+      btn.setAttribute("aria-pressed", Number(btn.getAttribute("data-n")) === n ? "true" : "false");
+    });
+    box.querySelectorAll(".power-btn:not(.hw-btn)").forEach(function(btn){
+      var on = entry.powers.indexOf(btn.getAttribute("data-power")) !== -1;
+      btn.classList.toggle("on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    box.querySelectorAll(".hw-btn").forEach(function(btn){
+      var on = entry.hw.indexOf(Number(btn.getAttribute("data-hw"))) !== -1;
+      btn.classList.toggle("on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    var mini = box.querySelector(".mini");
+    if (mini) mini.textContent = miniText(entry);
+  }
+
+  function renderJournal(){
+    var list = document.getElementById("journal-list");
+    var cur = currentWeekIndex();
+    list.innerHTML = WEEKS.map(function(w, i){
+      var entry = data.journal[w.id];
+      var noteHtml = w.note ? ('<span class="note">' + w.note + "</span>") : "";
+      var starBtns = [1, 2, 3, 4, 5].map(function(n){
+        return '<button type="button" class="star-btn" data-wk="' + w.id + '" data-n="' + n + '" aria-label="' + n + ' ngôi sao"><svg viewBox="0 0 26 26" aria-hidden="true">' + STAR_PATH + "</svg></button>";
+      }).join("");
+      var powerBtns = POWERS.map(function(p){
+        return '<button type="button" class="power-btn" data-wk="' + w.id + '" data-power="' + p.id + '"><span class="pe">' + p.e + "</span>" + p.n + "</button>";
+      }).join("");
+      var hwBtns = (w.hw || []).map(function(h, k){
+        return '<button type="button" class="power-btn hw-btn" data-wk="' + w.id + '" data-hw="' + k + '"><span class="pe">' + h.e + "</span>" + h.t + "</button>";
+      }).join("");
+      var powersHtml = w.noPowers ? "" :
+        '<div class="q"><button class="say" type="button" aria-label="Nghe đọc" data-say="Tuần này con đã dùng sức mạnh bên trong nào? Con chạm vào hình. Chọn mấy cái cũng được.">🔊</button><span>Tuần này con đã dùng sức mạnh bên trong nào?</span></div>' +
+        '<div class="power-row">' + powerBtns + "</div>";
+      var hwHtml = !w.hw ? "" :
+        '<div class="q"><button class="say" type="button" aria-label="Nghe đọc" data-say="' + w.hwSay + '">🔊</button><span>🏠 Việc về nhà: làm xong việc nào, con chạm vào việc đó</span></div>' +
+        '<div class="hw-row">' + hwBtns + "</div>";
+      var isOpen = (i === cur) || !!(entry.text || entry.rating || entry.served || entry.powers.length || entry.hw.length);
+      return (
+        '<details class="journal-entry"' + (isOpen ? " open" : "") + ' data-week="' + w.id + '">' +
+          "<summary><span class=\"wk\">" + w.label + '</span><span class="wt">' + w.title + "</span>" + noteHtml + '<span class="mini" aria-hidden="true"></span></summary>' +
+          '<div class="journal-body">' +
+            '<div class="zone kid-zone">' +
+              '<div class="zone-tag">👆 Phần con tự chạm</div>' +
+              '<div class="q"><button class="say" type="button" aria-label="Nghe đọc" data-say="Ngôi Sao Trong Tim con tuần này sáng cỡ nào? Con chạm vào các ngôi sao nhé. Một ngôi sao cũng quý.">🔊</button><span>Ngôi Sao Trong Tim con tuần này sáng cỡ nào?</span></div>' +
+              '<div class="star-row">' + starBtns + "</div>" +
+              powersHtml + hwHtml +
+            "</div>" +
+            '<div class="zone parent-zone">' +
+              '<div class="zone-tag">✍️ Con kể · ba mẹ ghi <small>(bé biết chữ tự viết)</small></div>' +
+              '<textarea rows="3" data-journal-text="' + w.id + '" placeholder="' + (w.ask || "Buổi này con nhớ điều gì? Con đã dùng sức mạnh bên trong khi nào, với ai? Ghi đúng lời con kể nhé.") + '">' + escapeHtml(entry.text) + "</textarea>" +
+              '<label class="served-row"><input type="checkbox" data-journal-served="' + w.id + '"' + (entry.served ? " checked" : "") + "> Buổi này con đã Phụng Sự Châu Ngọc</label>" +
+            "</div>" +
+          "</div>" +
+        "</details>"
+      );
+    }).join("");
+
+    WEEKS.forEach(function(w){ paintEntry(w.id); });
+
+    list.querySelectorAll("textarea[data-journal-text]").forEach(function(ta){
+      ta.addEventListener("input", function(){
+        var wk = ta.getAttribute("data-journal-text");
+        data.journal[wk].text = ta.value;
+        save();
+      });
+    });
+    list.querySelectorAll("input[data-journal-served]").forEach(function(cb){
+      cb.addEventListener("change", function(){
+        var wk = cb.getAttribute("data-journal-served");
+        data.journal[wk].served = cb.checked;
+        save();
+      });
+    });
+    list.querySelectorAll(".star-btn").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var wk = btn.getAttribute("data-wk");
+        var n = Number(btn.getAttribute("data-n"));
+        data.journal[wk].rating = n * 2 - 1;
+        save();
+        paintEntry(wk);
+        renderSky();
+        speak(n + " ngôi sao");
+      });
+    });
+    list.querySelectorAll(".hw-btn").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var wk = btn.getAttribute("data-wk");
+        var k = Number(btn.getAttribute("data-hw"));
+        var arr = data.journal[wk].hw;
+        var at = arr.indexOf(k);
+        if (at === -1) { arr.push(k); speak("Con đã làm xong: " + WEEKS.filter(function(x){ return x.id === wk; })[0].hw[k].t); }
+        else arr.splice(at, 1);
+        save();
+        paintEntry(wk);
+      });
+    });
+    list.querySelectorAll(".power-btn:not(.hw-btn)").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var wk = btn.getAttribute("data-wk");
+        var id = btn.getAttribute("data-power");
+        var arr = data.journal[wk].powers;
+        var at = arr.indexOf(id);
+        if (at === -1) {
+          arr.push(id);
+          speak(id === "khac" ? "Sức mạnh tên khác. Con kể cho ba mẹ ghi lại nhé." : POWER_BY_ID[id].n);
+        } else {
+          arr.splice(at, 1);
+        }
+        save();
+        paintEntry(wk);
+        renderSky();
+      });
+    });
+  }
+
+  function renderGem(){
+    document.getElementById("gem").value = data.gem || "";
+    document.getElementById("q-friends").value = data.qFriends || "";
+    document.getElementById("q-favorite").value = data.qFavorite || "";
+    document.getElementById("q-family").value = data.qFamily || "";
+  }
+
+  /* ===== Du phong & khoi phuc ===== */
+  function encodeBackup(){
+    return "SOTAY1:" + btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  }
+  function decodeBackup(text){
+    text = String(text || "").trim();
+    if (text.charAt(0) === "{") return JSON.parse(text);
+    var m = text.match(/SOTAY1:([A-Za-z0-9+\/=\s]+)/);
+    if (!m) throw new Error("bad");
+    return JSON.parse(decodeURIComponent(escape(atob(m[1].replace(/\s+/g, "")))));
+  }
+  function fmtDate(ts){
+    var d = new Date(ts);
+    function p(x){ return (x < 10 ? "0" : "") + x; }
+    return p(d.getDate()) + "/" + p(d.getMonth() + 1) + "/" + d.getFullYear() + " lúc " + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
+  function hasContent(){
+    return WEEKS.some(function(w){
+      var e = data.journal[w.id];
+      return data.weeks[w.id] || e.text || e.rating || e.served || e.powers.length || e.hw.length;
+    }) || !!(data.gem || data.qFriends || data.qFavorite || data.qFamily);
+  }
+  function renderBackupStatus(msg, cls){
+    var el = document.getElementById("bk-status");
+    if (msg) { el.textContent = msg; el.className = "bk-status " + (cls || ""); return; }
+    if (data.lastBackup) {
+      var days = (Date.now() - data.lastBackup) / 86400000;
+      el.textContent = "Lần dự phòng gần nhất: " + fmtDate(data.lastBackup) + (days > 7 ? ". Đã hơn 1 tuần, ba mẹ nhớ sao chép mã mới nhé." : ".");
+      el.className = "bk-status " + (days > 7 ? "warn" : "ok");
+    } else {
+      el.textContent = hasContent() ? "Chưa dự phòng lần nào. Ba mẹ bấm \"Sao chép mã dự phòng\" sau buổi học nhé." : "Chưa dự phòng lần nào.";
+      el.className = "bk-status " + (hasContent() ? "warn" : "");
+    }
+  }
+  function markBackedUp(){
+    data.lastBackup = Date.now();
+    save();
+  }
+  function copyText(text, done){
+    function fallback(){
+      var ta = document.getElementById("bk-code");
+      ta.hidden = false;
+      ta.value = text;
+      ta.focus();
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      done(ok);
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function(){ done(true); }, fallback);
+    } else {
+      fallback();
+    }
+  }
+  document.getElementById("bk-copy").addEventListener("click", function(){
+    var code = encodeBackup();
+    copyText(code, function(ok){
+      if (ok) {
+        markBackedUp();
+        renderBackupStatus("✅ Đã sao chép mã. Mở Zalo, vào \"Cloud của tôi\", giữ ngón tay vào ô chat, chọn Dán rồi Gửi.", "ok");
+      } else {
+        var ta = document.getElementById("bk-code");
+        ta.hidden = false;
+        ta.value = code;
+        markBackedUp();
+        renderBackupStatus("Máy chưa cho sao chép tự động. Ba mẹ giữ ngón tay vào ô mã bên trên, chọn \"Chọn tất cả\" rồi \"Sao chép\" nhé.", "warn");
+      }
+    });
+  });
+  document.getElementById("bk-file").addEventListener("click", function(){
+    try {
+      var blob = new Blob([encodeBackup()], { type: "text/plain;charset=utf-8" });
+      var a = document.createElement("a");
+      var d = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download = "So-tay-Chau-Ngoc-" + (data.name || "be").replace(/[\\\/:*?"<>|]+/g, "") + "-" + d.getDate() + "-" + (d.getMonth() + 1) + ".txt";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+      markBackedUp();
+      renderBackupStatus("✅ Đã tải file dự phòng về máy. Nếu không thấy, ba mẹ dùng nút \"Sao chép mã dự phòng\" thay thế nhé.", "ok");
+    } catch (e) {
+      renderBackupStatus("Máy chưa cho tải file. Ba mẹ dùng nút \"Sao chép mã dự phòng\" nhé.", "warn");
+    }
+  });
+
+  function openRestore(){
+    var panel = document.getElementById("restore-panel");
+    panel.hidden = false;
+    document.getElementById("restore-status").textContent = "";
+    document.getElementById("restore-code").value = "";
+    try { panel.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" }); } catch (e) { panel.scrollIntoView(); }
+  }
+  function applyRestore(obj){
+    if (!obj || typeof obj.name !== "string" || !obj.name || typeof obj.weeks !== "object") throw new Error("bad");
+    data = obj;
+    ensureJournalShape();
+    save();
+    document.getElementById("restore-panel").hidden = true;
+    showBook();
+    renderBackupStatus("✅ Đã khôi phục sổ tay của " + data.name + ".", "ok");
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+  function restoreFail(){
+    var st = document.getElementById("restore-status");
+    st.textContent = "Mã chưa đúng. Hãy dán đủ cả đoạn mã, bắt đầu bằng SOTAY1:";
+    st.className = "bk-status warn";
+  }
+  document.getElementById("gate-restore").addEventListener("click", openRestore);
+  document.getElementById("bk-restore-open").addEventListener("click", openRestore);
+  document.getElementById("restore-cancel").addEventListener("click", function(){ document.getElementById("restore-panel").hidden = true; });
+  document.getElementById("restore-go").addEventListener("click", function(){
+    try { applyRestore(decodeBackup(document.getElementById("restore-code").value)); } catch (e) { restoreFail(); }
+  });
+  document.getElementById("restore-file").addEventListener("change", function(e){
+    var f = e.target.files && e.target.files[0];
+    if (!f) return;
+    var r = new FileReader();
+    r.onload = function(){ try { applyRestore(decodeBackup(r.result)); } catch (err) { restoreFail(); } };
+    r.readAsText(f);
+  });
+  document.getElementById("goto-backup").addEventListener("click", function(){
+    var c = document.getElementById("backup-card");
+    try { c.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" }); } catch (e) { c.scrollIntoView(); }
+  });
+
+  function escapeHtml(s){
+    return String(s || "").replace(/[&<>"]/g, function(c){
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  function showBook(){
+    ensureJournalShape();
+    document.getElementById("gate").hidden = true;
+    document.getElementById("book").hidden = false;
+    renderHeader();
+    renderWeeks();
+    renderSubnote();
+    renderJournal();
+    renderSky();
+    renderGem();
+    renderBackupStatus();
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+  }
+
+  function showGate(){
+    document.getElementById("book").hidden = true;
+    document.getElementById("gate").hidden = false;
+    document.getElementById("reg-name").value = "";
+    document.getElementById("reg-name").focus();
+  }
+
+  document.getElementById("reg-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("reg-name").value.trim();
+    if (!name) return;
+    data = defaultData(name);
+    save();
+    showBook();
+  });
+
+  document.getElementById("rename-btn").addEventListener("click", function(){
+    document.getElementById("child-name-confirm").textContent = data.name;
+    document.getElementById("banner-ask").hidden = true;
+    document.getElementById("banner-confirm").hidden = false;
+  });
+
+  document.getElementById("rename-cancel").addEventListener("click", function(){
+    document.getElementById("banner-confirm").hidden = true;
+    document.getElementById("banner-ask").hidden = false;
+  });
+
+  document.getElementById("rename-yes").addEventListener("click", function(){
+    safeRemove(STORE_KEY);
+    data = null;
+    document.getElementById("banner-confirm").hidden = true;
+    document.getElementById("banner-ask").hidden = false;
+    showGate();
+  });
+
+  document.getElementById("gem").addEventListener("input", function(e){
+    data.gem = e.target.value;
+    save();
+  });
+  document.getElementById("q-friends").addEventListener("input", function(e){
+    data.qFriends = e.target.value;
+    save();
+  });
+  document.getElementById("q-favorite").addEventListener("input", function(e){
+    data.qFavorite = e.target.value;
+    save();
+  });
+  document.getElementById("q-family").addEventListener("input", function(e){
+    data.qFamily = e.target.value;
+    save();
+  });
+
+  document.getElementById("print-btn").addEventListener("click", function(){ window.print(); });
+
+  if (data && data.name) {
+    showBook();
+  } else {
+    showGate();
+  }
+})();
+</script>
+
+</body></html>
