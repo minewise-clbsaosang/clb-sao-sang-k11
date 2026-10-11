@@ -33,6 +33,8 @@
   .who{font-weight:900;color:var(--gold-d);}
   .ln-narr{color:#3E3226;font-weight:700;}
   .ln-ask{background:#DFF7F2;border-left:6px solid var(--teal);border-radius:12px;padding:6px 12px;color:#0F6E63;font-weight:800;}
+  .reveal{align-self:flex-start;margin-top:4px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(15px,1.5vw,19px);border:3px dashed var(--teal);background:#fff;color:#0F6E63;border-radius:14px;padding:8px 14px;cursor:pointer;}
+  .reveal:hover{background:var(--teal-t);}
   .ln-chant{background:#FFF0B3;border-left:6px solid var(--gold);border-radius:12px;padding:6px 12px;color:#7A4E00;font-weight:900;}
   .say{flex-shrink:0;width:48px;height:48px;border-radius:50%;border:3px solid var(--teal);background:var(--teal-t);font-size:22px;cursor:pointer;}
   .no-tts .say{display:none!important;}
@@ -456,28 +458,32 @@ S["08"] = { sec: 8, lines: [["", "Voi Con đặt đá, Sóc Nhỏ chèn sỏi. H
 S["09"] = { sec: 10, lines: [["Ngôi Sao Sáng", "Đôi tay khỏe giúp Voi Con nhấc được đá. Nhưng điều giúp Voi Con quay lại, xin lỗi và làm tới cùng là sức mạnh bên trong."]],
   draw: function(){ return forest({sunset: true}) + bridge(5, {chen: true}) + voi(1330, 860, 0.8, {pose:"happy", expr:"smile"}) + soc(1700, 800, 0.85, {pose:"sit", expr:"happy", flip: true}) +
     hearts(1500, 420, 1.4) + hearts(1420, 360, 0.9) + hearts(1580, 350, 1.0) + saoPhoto(260, 190, 72, {glow: 0.8}) + bookFrame(); } };
-function quiz(n, title, body, heart, scene){
+function quiz(n, title, body, heart, scene, hide){
+  hide = hide || 0;
   var s = '<rect width="1920" height="1080" fill="#FFF4DC"/>';
   s += '<rect x="60" y="40" width="1800" height="110" rx="30" fill="#4A4FA0"/><text x="990" y="118" text-anchor="middle" class="b" font-size="64" fill="#fff">Đố nhanh '+n+': tìm cả 2 sức mạnh!</text>' + tkhPhoto(150, 95, 72);
   s += '<rect x="60" y="180" width="1100" height="680" rx="40" fill="#fff" stroke="#F5DFA6" stroke-width="8"/>' + scene;
   s += '<text x="610" y="835" text-anchor="middle" class="b" font-size="48" fill="'+C.ink+'">'+title+'</text>';
-  s += '<rect x="1200" y="180" width="660" height="325" rx="40" fill="#FFE2C7" stroke="#FF9F43" stroke-width="8"/><text x="1530" y="290" text-anchor="middle" class="t" font-size="100">💪</text><text x="1530" y="365" text-anchor="middle" class="t" font-size="38" fill="#B85600">SỨC MẠNH CƠ THỂ</text><text x="1530" y="455" text-anchor="middle" class="b" font-size="58" fill="'+C.ink+'">'+body+'</text>';
-  s += '<rect x="1200" y="535" width="660" height="325" rx="40" fill="#FFF0B3" stroke="#FFC93C" stroke-width="8"/><text x="1530" y="645" text-anchor="middle" class="t" font-size="100">⭐</text><text x="1530" y="720" text-anchor="middle" class="t" font-size="38" fill="#8A5E00">SỨC MẠNH BÊN TRONG</text><text x="1530" y="810" text-anchor="middle" class="b" font-size="54" fill="'+C.ink+'">'+heart+'</text>';
+  s += '<rect x="1200" y="180" width="660" height="325" rx="40" fill="#FFE2C7" stroke="#FF9F43" stroke-width="8"/><text x="1530" y="290" text-anchor="middle" class="t" font-size="100">💪</text><text x="1530" y="365" text-anchor="middle" class="t" font-size="38" fill="#B85600">SỨC MẠNH CƠ THỂ</text>'+(hide >= 2 ? '<text x="1530" y="425" text-anchor="middle" class="b" font-size="46" fill="#B85600">Tay chân làm gì?</text><text x="1530" y="478" text-anchor="middle" class="b" font-size="54" fill="#B85600">❓</text>' : '<text x="1530" y="455" text-anchor="middle" class="b" font-size="58" fill="'+C.ink+'">'+body+'</text>');
+  s += '<rect x="1200" y="535" width="660" height="325" rx="40" fill="#FFF0B3" stroke="#FFC93C" stroke-width="8"/><text x="1530" y="645" text-anchor="middle" class="t" font-size="100">⭐</text><text x="1530" y="720" text-anchor="middle" class="t" font-size="38" fill="#8A5E00">SỨC MẠNH BÊN TRONG</text>'+(hide >= 1 ? '<text x="1530" y="778" text-anchor="middle" class="b" font-size="46" fill="#8A5E00">Trái tim làm gì?</text><text x="1530" y="832" text-anchor="middle" class="b" font-size="54" fill="#8A5E00">❓</text>' : '<text x="1530" y="810" text-anchor="middle" class="b" font-size="54" fill="'+C.ink+'">'+heart+'</text>');
   return s;
 }
 S["10a"] = { sec: 7, lines: [["Tắc Kè Hoa", "Bin ơi, mình đố nè! Buồn ngủ mà vẫn đánh răng: tay chải răng, còn trái tim thì bền bỉ!"]],
-  draw: function(){ return quiz("①", "Buồn ngủ mà vẫn đánh răng", "Tay chải răng", "Bền bỉ",
+  qlines: [["Tắc Kè Hoa", "Bin ơi, mình đố nè! Buồn ngủ mà vẫn đánh răng. Tay chân làm gì? Trái tim làm gì?"]],
+  draw: function(o){ return quiz("①", "Buồn ngủ mà vẫn đánh răng", "Tay chải răng", "Bền bỉ",
     '<rect x="100" y="220" width="1020" height="560" rx="30" fill="url(#night)"/>' + sparkle(250,300,14,"#FFF3C4") + sparkle(900,280,12,"#FFF3C4") + '<circle cx="1000" cy="330" r="50" fill="#FFF3C4"/><circle cx="1020" cy="315" r="44" fill="#3A4A8A"/>' +
-    bin(610, 790, 0.9, {pose:"brush", expr:"yawn"}) + '<rect x="638" y="465" width="90" height="15" rx="7" fill="#4FAFD8" transform="rotate(-20 650 472)"/><text x="760" y="380" class="b" font-size="60" fill="#FFF3C4">z z</text>'); } };
-S["10b"] = { sec: 7, lines: [["Tắc Kè Hoa", "Làm đổ sữa, nói thật với mẹ: miệng nói, còn trái tim thì trung thực và dũng cảm!"]],
-  draw: function(){ return quiz("②", "Làm đổ sữa, nói thật với mẹ", "Miệng nói", "Trung thực, dũng cảm",
-    '<rect x="100" y="640" width="1020" height="140" fill="'+C.floor+'"/>' + '<ellipse cx="380" cy="760" rx="150" ry="34" fill="#fff"/><g transform="translate(330 740) rotate(80)"><rect x="-30" y="-70" width="60" height="100" rx="12" fill="#D8F1FA" stroke="#9BCFE3" stroke-width="5"/></g>' +
-    bin(760, 790, 0.9, {pose:"talk", expr:"sorry"}) + bubble(560, 215, 520, 110, "Mẹ ơi, con làm đổ sữa…", 44, [700, 720, 360])); } };
+    bin(610, 790, 0.9, {pose:"brush", expr:"yawn"}) + '<rect x="638" y="465" width="90" height="15" rx="7" fill="#4FAFD8" transform="rotate(-20 650 472)"/><text x="760" y="380" class="b" font-size="60" fill="#FFF3C4">z z</text>', (o && o.hide) || 0); } };
+S["10b"] = { sec: 7, lines: [["Tắc Kè Hoa", "Làm đổ nước, nói thật với mẹ: miệng nói, còn trái tim thì trung thực và dũng cảm!"]],
+  qlines: [["Tắc Kè Hoa", "Câu thứ hai: làm đổ nước, nói thật với mẹ. Tay chân làm gì? Trái tim làm gì?"]],
+  draw: function(o){ return quiz("②", "Làm đổ nước, nói thật với mẹ", "Miệng nói", "Trung thực, dũng cảm",
+    '<rect x="100" y="640" width="1020" height="140" fill="'+C.floor+'"/>' + '<ellipse cx="380" cy="760" rx="150" ry="34" fill="#BFE6F7" stroke="#8CCFEA" stroke-width="4"/><path d="M300 752 q20 -8 40 0 M410 766 q20 -8 40 0" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/><g transform="translate(330 740) rotate(80)"><rect x="-30" y="-70" width="60" height="100" rx="12" fill="#D8F1FA" stroke="#9BCFE3" stroke-width="5"/></g>' +
+    bin(760, 790, 0.9, {pose:"talk", expr:"sorry"}) + bubble(560, 215, 520, 110, "Mẹ ơi, con làm đổ nước…", 44, [700, 720, 360]), (o && o.hide) || 0); } };
 S["10c"] = { sec: 6, lines: [["Tắc Kè Hoa", "Chờ em chơi xong mới tới lượt mình: ngồi yên chờ, còn trái tim thì kiên nhẫn!"]],
-  draw: function(){ return quiz("③", "Chờ em chơi xong mới tới lượt mình", "Ngồi yên chờ", "Kiên nhẫn",
+  qlines: [["Tắc Kè Hoa", "Câu cuối: chờ em chơi xong mới tới lượt mình. Tay chân làm gì? Trái tim làm gì?"]],
+  draw: function(o){ return quiz("③", "Chờ em chơi xong mới tới lượt mình", "Ngồi yên chờ", "Kiên nhẫn",
     '<rect x="100" y="640" width="1020" height="140" fill="'+C.floor+'"/>' + bin(380, 790, 0.88, {pose:"sit", expr:"smile"}) + bin(830, 790, 0.62, {pose:"talk", expr:"happy", shirt:"#FF8FB1", shorts:"#8B5FBF", hair:"pigtail"}) +
     '<g transform="translate(1000 775)"><rect x="-70" y="-50" width="140" height="50" rx="16" fill="#E2574C"/><circle cx="-40" cy="2" r="18" fill="#333"/><circle cx="40" cy="2" r="18" fill="#333"/></g>' +
-    '<circle cx="560" cy="330" r="60" fill="#fff" stroke="'+C.ink+'" stroke-width="6"/><path d="M560 330 v-34 M560 330 h26" stroke="'+C.ink+'" stroke-width="8" stroke-linecap="round"/>'); } };
+    '<circle cx="560" cy="330" r="60" fill="#fff" stroke="'+C.ink+'" stroke-width="6"/><path d="M560 330 v-34 M560 330 h26" stroke="'+C.ink+'" stroke-width="8" stroke-linecap="round"/>', (o && o.hide) || 0); } };
 S["11"] = { sec: 12, lines: [["Bin", "Tay mình xoay nắp, còn trái tim mình nhắc: bình tĩnh, thử lại!"], ["Ngôi Sao Sáng", "Bin thấy không? Mỗi lần Bin dùng sức mạnh bên trong, mình lại khỏe thêm một chút."]],
   draw: function(){ var s = room() + stoneBox(450, 600, 1, {veins: 1, glow: 1}) + saoPhoto(450, 350, 125, {glow: 1.4});
     for (var i = 0; i < 6; i++) s += sparkle(300 + i*60, 250 + (i%2)*260, 18);
@@ -555,18 +561,24 @@ var TRUYEN = {
   ],
   "10a": [
     ["Tắc Kè Hoa", "Bin ơi, mình đố nè! Tối nay Bin buồn ngủ díp cả mắt, mà vẫn đi đánh răng cho xong."],
-    ["hỏi", "Tay chân của Bin làm gì? Trái tim của Bin làm gì?"],
-    ["kể", "Tay chải răng là sức mạnh cơ thể. Buồn ngủ vẫn làm cho xong là sức mạnh bên trong: bền bỉ!"]
+    ["hỏi", "Tay chân của Bin làm gì?"],
+    ["kể", "Tay chải răng: đó là sức mạnh cơ thể!"],
+    ["hỏi", "Còn trái tim của Bin làm gì?"],
+    ["kể", "Buồn ngủ díp mắt mà vẫn làm cho xong: đó là sức mạnh bên trong, bền bỉ!"]
   ],
   "10b": [
-    ["Tắc Kè Hoa", "Câu thứ hai nè! Bin lỡ tay làm đổ cốc sữa. Ối! Bin hơi sợ, nhưng vẫn chạy đi nói với mẹ: \"Mẹ ơi, con làm đổ sữa.\""],
-    ["hỏi", "Lúc đó, sức mạnh bên trong nào đang giúp Bin?"],
-    ["kể", "Miệng nói là sức mạnh cơ thể. Dám nói thật dù hơi sợ là sức mạnh bên trong: trung thực và dũng cảm!"]
+    ["Tắc Kè Hoa", "Câu thứ hai nè! Bin lỡ tay làm đổ cốc nước ra sàn. Ối! Bin hơi sợ, nhưng vẫn chạy đi nói với mẹ: \"Mẹ ơi, con làm đổ nước.\""],
+    ["hỏi", "Tay chân của Bin làm gì?"],
+    ["kể", "Chân chạy đi, miệng nói với mẹ: đó là sức mạnh cơ thể!"],
+    ["hỏi", "Còn trái tim của Bin làm gì?"],
+    ["kể", "Dám nói thật dù hơi sợ: đó là sức mạnh bên trong, trung thực và dũng cảm!"]
   ],
   "10c": [
     ["Tắc Kè Hoa", "Câu cuối cùng! Em gái đang chơi xe ô tô. Bin cũng muốn chơi lắm, nhưng Bin ngồi chờ em chơi xong."],
-    ["hỏi", "Muốn lắm mà vẫn chờ được, đó là sức mạnh gì nhỉ?"],
-    ["kể", "Ngồi yên chờ là sức mạnh cơ thể. Muốn lắm mà vẫn chờ được là sức mạnh bên trong: kiên nhẫn!"]
+    ["hỏi", "Tay chân của Bin làm gì?"],
+    ["kể", "Ngồi yên một chỗ chờ: đó là sức mạnh cơ thể!"],
+    ["hỏi", "Còn trái tim của Bin làm gì?"],
+    ["kể", "Muốn chơi lắm mà vẫn chờ được: đó là sức mạnh bên trong, kiên nhẫn!"]
   ],
   "11": [
     ["kể", "Nghe xong, Bin cầm lại hũ bánh. Bin không vặn ầm ầm nữa. Bin đặt tay lên ngực…"],
@@ -614,7 +626,7 @@ var AV = {
   sao: '<img src="assets/ngoi-sao-sang.jpg" alt="Ngôi Sao Sáng" style="object-fit:cover;aspect-ratio:1">',
   tkh: '<img src="assets/tac-ke-hoa.jpg" alt="Tắc Kè Hoa" style="object-fit:cover;aspect-ratio:1">'
 };
-function scene(k){ return '<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">'+DEFS+S[k].draw()+'</svg>'; }
+function scene(k, hide){ return '<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">'+DEFS+S[k].draw({hide: hide || 0})+'</svg>'; }
 
 /* ---------- danh sách trang ---------- */
 var ORDER = ["01","02","03","04","05","06","07","08","09","10a","10b","10c","11","12"];
@@ -625,7 +637,35 @@ PAGES.push({type:"game", g:"who"}, {type:"game", g:"order"}, {type:"game", g:"tw
 var cur = 0, pageEl = document.getElementById("page"), linesEl = document.getElementById("lines");
 var speakText = "";
 
-function setCaption(lines, text){
+/* chia lời trang thành các nấc: mỗi nấc kết thúc ở một câu 🤔; phần sau câu hỏi chỉ hiện khi bấm xem tiếp */
+var segs = [], shown = 1, curKey = null;
+function splitSegs(lines){
+  var out = [[]];
+  lines.forEach(function(l){ out[out.length - 1].push(l); if (l[0] === "hỏi" && !/^Gửi ba mẹ/.test(l[1])) out.push([]); });
+  if (!out[out.length - 1].length) out.pop();
+  return out;
+}
+function hiddenLeft(){ return segs.length - shown; }
+function paintStory(){
+  var vis = [];
+  for (var i = 0; i < shown; i++) vis = vis.concat(segs[i]);
+  setCaption(vis, null, true);
+  if (hiddenLeft() > 0) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "reveal"; b.textContent = "👀 Bé trả lời xong rồi, xem tiếp";
+    b.onclick = revealMore; linesEl.appendChild(b);
+  }
+  if (curKey && S[curKey] && S[curKey].qlines) pageEl.innerHTML = scene(curKey, Math.max(0, 2 - (shown - 1)));
+  var nx = document.getElementById("next");
+  if (hiddenLeft() > 0) nx.textContent = "Xem tiếp ▶";
+  else nx.textContent = cur === PAGES.length - 1 ? "Đọc lại ↺" : "Lật trang ▶";
+}
+function revealMore(){
+  if (hiddenLeft() <= 0) return;
+  shown++; SND.ok(); paintStory();
+  var seg = segs[shown - 1];
+  speak(seg.map(function(l){ return (l[0] === "kể" || l[0] === "hỏi" || l[0] === "cùng") ? l[1] : l[0] + ": " + l[1]; }).join(" ... "));
+}
+function setCaption(lines, text, keep){
   linesEl.innerHTML = lines.map(function(l){
     if (l[0] === "kể") return '<div class="ln-narr">' + l[1] + '</div>';
     if (l[0] === "hỏi") return '<div class="ln-ask">🤔 ' + l[1] + '</div>';
@@ -727,7 +767,7 @@ function render(){
   var p = PAGES[cur];
   pageEl.classList.toggle("is-game", p.type === "game" || p.type === "end");
   if (p.type === "cover") cover();
-  else if (p.type === "scene") { pageEl.innerHTML = scene(p.k); setCaption(TRUYEN[p.k] || S[p.k].lines); }
+  else if (p.type === "scene") { curKey = p.k; pageEl.innerHTML = scene(p.k); segs = splitSegs(TRUYEN[p.k] || S[p.k].lines); shown = 1; }
   else if (p.type === "game") {
     if (p.g === "who") gameWho(); else if (p.g === "order") gameOrder(); else if (p.g === "two") gameTwo();
     else if (p.g === "why") gameChoice("Trò 4 · Vì sao cây cầu xây xong?", "Vì sao cuối cùng cây cầu xây xong?",
@@ -743,6 +783,7 @@ function render(){
   document.getElementById("prev").disabled = cur === 0;
   var nx = document.getElementById("next");
   nx.textContent = cur === PAGES.length - 1 ? "Đọc lại ↺" : "Lật trang ▶";
+  if (p.type === "scene") paintStory(); else curKey = null;
   try { localStorage.setItem("tt_tuan2_page", String(cur)); } catch(e){}
 }
 var busy = false;
@@ -757,13 +798,13 @@ function go(dir){
   function swap(){ pageEl.classList.remove(outC); cur = target; render(); pageEl.classList.add(inC); setTimeout(function(){ pageEl.classList.remove(inC); busy = false; }, reduce ? 0 : 330); }
   if (reduce) swap(); else { pageEl.classList.add(outC); setTimeout(swap, 320); }
 }
-document.getElementById("next").onclick = function(){ go(1); };
+document.getElementById("next").onclick = function(){ if (PAGES[cur].type === "scene" && hiddenLeft() > 0) revealMore(); else go(1); };
 document.getElementById("prev").onclick = function(){ go(-1); };
 document.getElementById("say").onclick = function(){ speak(speakText); };
-document.addEventListener("keydown", function(e){ if (e.key === "ArrowRight") go(1); if (e.key === "ArrowLeft") go(-1); });
+document.addEventListener("keydown", function(e){ if (e.key === "ArrowRight") document.getElementById("next").onclick(); if (e.key === "ArrowLeft") go(-1); });
 var sx = null;
 pageEl.addEventListener("touchstart", function(e){ sx = e.touches[0].clientX; }, {passive: true});
-pageEl.addEventListener("touchend", function(e){ if (sx == null) return; var dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 60 && !e.target.closest(".opt")) go(dx < 0 ? 1 : -1); });
+pageEl.addEventListener("touchend", function(e){ if (sx == null) return; var dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 60 && !e.target.closest(".opt")) { if (dx < 0) document.getElementById("next").onclick(); else go(-1); } });
 try { var saved = +localStorage.getItem("tt_tuan2_page"); if (saved > 0 && saved < PAGES.length) cur = saved; } catch(e){}
 render();
 })();
