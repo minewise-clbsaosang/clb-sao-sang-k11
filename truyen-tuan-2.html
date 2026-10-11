@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Truyện Voi Con Và Sóc Nhỏ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800;900&display=swap">
+<style>
+  :root{--night:#1C2759;--night2:#111836;--gold:#FFC93C;--gold-d:#E08A00;--cream:#FFF8E8;--ink:#2E2618;--soft:#7A6648;--teal:#22B8A6;--teal-t:#DFF7F2;--pink:#FF8FB1;--indigo:#4A4FA0;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;min-height:100%;}
+  body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:radial-gradient(900px 500px at 80% 0%,rgba(255,201,60,.18),transparent 70%),linear-gradient(180deg,var(--night),var(--night2));background-attachment:fixed;padding:12px 16px calc(24px + env(safe-area-inset-bottom,0px));}
+  .t{font-family:'Nunito',sans-serif;font-weight:800}
+  .b{font-family:'Baloo 2','Nunito',sans-serif;font-weight:800}
+  .wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  header{display:flex;align-items:center;gap:12px;color:#FFF6E0;}
+  header img{height:44px;}
+  header h1{font-family:'Baloo 2',sans-serif;font-size:clamp(18px,3.4vw,28px);margin:0;line-height:1.1;color:var(--gold);}
+  header .sub{font-size:13px;font-weight:800;color:#C9CDF0;letter-spacing:.5px;}
+  header .sp{flex:1}
+  .icon-btn{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;}
+  .stage{perspective:1800px;}
+  .page{position:relative;width:100%;aspect-ratio:16/9;max-width:100%;border-radius:18px;overflow:hidden;background:#FFF4DC;box-shadow:0 18px 40px rgba(0,0,0,.45);transform-origin:left center;}
+  .page svg{width:100%;height:100%;display:block;}
+  .page.out-next{animation:outNext .32s ease-in forwards;}
+  .page.in-next{animation:inNext .32s ease-out;}
+  .page.out-prev{animation:outPrev .32s ease-in forwards;transform-origin:right center;}
+  .page.in-prev{animation:inPrev .32s ease-out;transform-origin:right center;}
+  @keyframes outNext{to{transform:rotateY(-80deg);opacity:.4}}
+  @keyframes inNext{from{transform:rotateY(70deg);opacity:.4}to{transform:none;opacity:1}}
+  @keyframes outPrev{to{transform:rotateY(80deg);opacity:.4}}
+  @keyframes inPrev{from{transform:rotateY(-70deg);opacity:.4}to{transform:none;opacity:1}}
+  @media (prefers-reduced-motion: reduce){.page.out-next,.page.in-next,.page.out-prev,.page.in-prev{animation:none}}
+  .cap{background:var(--cream);border-radius:18px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;min-height:72px;}
+  .cap .lines{flex:1;display:flex;flex-direction:column;gap:6px;font-size:clamp(15px,2.2vw,20px);line-height:1.4;font-weight:700;}
+  .who{font-weight:900;color:var(--gold-d);}
+  .ln-narr{color:#3E3226;font-weight:700;}
+  .ln-ask{background:#DFF7F2;border-left:6px solid var(--teal);border-radius:12px;padding:6px 12px;color:#0F6E63;font-weight:800;}
+  .ln-chant{background:#FFF0B3;border-left:6px solid var(--gold);border-radius:12px;padding:6px 12px;color:#7A4E00;font-weight:900;}
+  .say{flex-shrink:0;width:48px;height:48px;border-radius:50%;border:3px solid var(--teal);background:var(--teal-t);font-size:22px;cursor:pointer;}
+  .no-tts .say{display:none!important;}
+  nav{display:flex;align-items:center;gap:10px;position:sticky;bottom:0;z-index:5;padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,rgba(17,24,54,0),#111836 35%);}
+  .nav-btn{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(16px,2.6vw,22px);border:none;border-radius:999px;padding:12px 20px;cursor:pointer;background:var(--gold);color:var(--night2);box-shadow:0 4px 0 var(--gold-d);}
+  .nav-btn:active{transform:translateY(3px);box-shadow:none;}
+  .nav-btn[disabled]{opacity:.35;cursor:default;}
+  .nav-btn.prev{background:#FFF6E0;box-shadow:0 4px 0 #C9B88F;}
+  .prog{flex:1;display:flex;flex-direction:column;gap:6px;align-items:center;}
+  .bar{width:100%;height:10px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden;}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),#FF9F43);width:0;transition:width .3s;}
+  .num{color:#C9CDF0;font-weight:800;font-size:13px;}
+  button:focus-visible{outline:3px solid #fff;outline-offset:2px;}
+
+  /* trang trò chơi (HTML) */
+  .game{position:absolute;inset:0;display:flex;flex-direction:column;padding:3.2% 4%;gap:2.4%;background:linear-gradient(180deg,#FFF8E8,#FFEFD0);}
+  .page.is-game{aspect-ratio:auto;}
+  .page.is-game .game{position:relative;inset:auto;min-height:calc(min(1100px,100vw - 32px) * 9 / 16);gap:14px;padding:18px;}
+  @media (max-width:600px){.page.is-game .opts{grid-template-columns:1fr;} .page.is-game .opt{flex-direction:row;justify-content:flex-start;padding:10px 14px;gap:12px;font-size:18px;} .page.is-game .opt svg,.page.is-game .opt img{width:64px;max-height:64px;} .page.is-game .opt .emo{font-size:36px;} .page.is-game .order .opt{flex-direction:column;} .page.is-game .order .opt svg{width:100%;max-height:none;} .page.is-game .two{grid-template-columns:1fr 1fr;} .page.is-game .two .opt{flex-direction:column;justify-content:center;} .page.is-game .end-powers .opt{flex-direction:column;justify-content:center;font-size:14px;padding:8px;}}
+  .game h2{margin:0;font-family:'Baloo 2',sans-serif;font-size:clamp(18px,3.4vw,40px);color:var(--indigo);display:flex;align-items:center;gap:12px;line-height:1.1;}
+  .game h2 img{width:clamp(36px,6vw,70px);height:clamp(36px,6vw,70px);border-radius:50%;object-fit:cover;border:3px solid var(--teal);background:#fff;}
+  .game .q{font-family:'Baloo 2',sans-serif;font-size:clamp(17px,3vw,36px);text-align:center;background:#fff;border:3px solid var(--gold);border-radius:20px;padding:1.2% 2%;}
+  .opts{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3%;align-items:stretch;}
+  .opt{border:4px solid #F5DFA6;background:#fff;border-radius:22px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4%;padding:3%;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(13px,2.3vw,28px);color:var(--ink);transition:transform .15s,opacity .2s,border-color .2s;}
+  .opt svg,.opt img{width:70%;height:auto;max-height:62%;}
+  .opt img{border-radius:50%;}
+  .opt:hover{transform:translateY(-3px);}
+  .opt.ok{border-color:#2FBF71;background:#E6F9EE;}
+  .opt.no{opacity:.35;}
+  .opt .emo{font-size:clamp(28px,6vw,72px);line-height:1;}
+  .fb{text-align:center;font-weight:900;font-size:clamp(14px,2.4vw,26px);min-height:1.4em;color:#13897B;}
+  .fb.try{color:#B4540A;}
+  .shake{animation:shake .35s;}
+  @keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  .order{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:2%;}
+  .order .opt{padding:1.5%;position:relative;}
+  .order .opt svg{width:100%;max-height:none;border-radius:12px;}
+  .order .badge{position:absolute;top:-10px;left:-10px;width:clamp(28px,4vw,50px);height:clamp(28px,4vw,50px);border-radius:50%;background:var(--gold);color:var(--night2);display:none;align-items:center;justify-content:center;font-size:clamp(16px,2.6vw,30px);border:3px solid #fff;}
+  .order .opt.ok .badge{display:flex;}
+  .two{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:3%;}
+  .two .opt{font-size:clamp(14px,2.6vw,32px);}
+  .card-q{font-family:'Baloo 2',sans-serif;font-size:clamp(16px,3vw,36px);text-align:center;background:#fff;border:4px dashed var(--teal);border-radius:20px;padding:2%;}
+  .end-powers{flex:1;min-height:0;display:grid;grid-template-columns:repeat(6,1fr);gap:2%;}
+  @media (max-width:600px){.end-powers{grid-template-columns:repeat(3,1fr);} .order{grid-template-columns:repeat(2,1fr);} .opt svg{max-height:50%;}}
+</style></head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="assets/minewise-logo.png" alt="Minewise">
+    <div><h1>Voi Con và Sóc Nhỏ xây cầu</h1><div class="sub">CLB SAO SÁNG · TUẦN 2 · SỨC MẠNH BÊN TRONG CON</div></div>
+    <span class="sp"></span>
+    <button class="icon-btn" id="mute" type="button" aria-label="Bật/tắt âm thanh">🔔</button>
+  </header>
+  <div class="stage"><div class="page" id="page"></div></div>
+  <div class="cap" id="cap"><div class="lines" id="lines"></div><button class="say" id="say" type="button" aria-label="Nghe đọc">🔊</button></div>
+  <nav>
+    <button class="nav-btn prev" id="prev" type="button">◀ Trước</button>
+    <div class="prog"><div class="bar"><i id="bar"></i></div><div class="num" id="num"></div></div>
+    <button class="nav-btn" id="next" type="button">Lật trang ▶</button>
+  </nav>
+</div>
+<script>window.TT_ASSET = "assets/";</script>
+<script>
+/* Thư viện vẽ truyện tranh CLB Sao Sáng (5 nhân vật cố định). Ngôi Sao Sáng và Tắc Kè Hoa dùng ẢNH THẬT trong assets/. */
+/* ================= bảng màu ================= */
+var C = {
+  ink:"#3A2A20", skin:"#F7C9A3", skinD:"#E9AE84", hair:"#3B2A20", binShirt:"#3FB8AF", binShorts:"#4A6FD0",
+  star:"#FFC93C", starD:"#F2A900", tkh:"#FF9F43", tkhD:"#E07A1F", tkhL:"#FFD199",
+  voi:"#9DB4D6", voiD:"#7E98C0", voiL:"#C9D8EE", soc:"#D9894A", socD:"#B86A2E", socL:"#F3C99A",
+  rock:"#A39C8F", rockD:"#7C766B", water:"#7CC8E8", waterD:"#4FAFD8", grass:"#8CCB6B", grassD:"#6CB04E",
+  wall:"#FDEBD3", floor:"#E8B98A", cheek:"#FF9AA2"
+};
+
+/* ================= khuôn mặt dùng chung ================= */
+function face(expr, r, opt){
+  opt = opt || {};
+  var ex = r*0.36, ey = -r*0.08, s = "";
+  var eye = function(x){ return '<ellipse cx="'+x+'" cy="'+ey+'" rx="'+(r*0.085)+'" ry="'+(r*0.11)+'" fill="'+C.ink+'"/><circle cx="'+(x+r*0.03)+'" cy="'+(ey-r*0.04)+'" r="'+(r*0.03)+'" fill="#fff"/>'; };
+  var closed = function(x, up){ return '<path d="M'+(x-r*0.12)+' '+ey+' Q'+x+' '+(ey+(up?-1:1)*r*0.13)+' '+(x+r*0.12)+' '+ey+'" stroke="'+C.ink+'" stroke-width="'+(r*0.06)+'" fill="none" stroke-linecap="round"/>'; };
+  var cheeks = '<circle cx="'+(-r*0.55)+'" cy="'+(r*0.18)+'" r="'+(r*0.13)+'" fill="'+C.cheek+'" opacity=".55"/><circle cx="'+(r*0.55)+'" cy="'+(r*0.18)+'" r="'+(r*0.13)+'" fill="'+C.cheek+'" opacity=".55"/>';
+  var sw = r*0.055;
+  switch(expr){
+    case "happy":
+      s = closed(-ex,true)+closed(ex,true)+'<path d="M'+(-r*0.28)+' '+(r*0.18)+' Q0 '+(r*0.62)+' '+(r*0.28)+' '+(r*0.18)+' Z" fill="#8A2B2B"/><path d="M'+(-r*0.15)+' '+(r*0.38)+' Q0 '+(r*0.5)+' '+(r*0.15)+' '+(r*0.38)+'" fill="#FF7B8A"/>'; break;
+    case "strain":
+      s = '<path d="M'+(-ex-r*0.13)+' '+(ey-r*0.08)+' L'+(-ex+r*0.1)+' '+ey+' L'+(-ex-r*0.13)+' '+(ey+r*0.08)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
+          '<path d="M'+(ex+r*0.13)+' '+(ey-r*0.08)+' L'+(ex-r*0.1)+' '+ey+' L'+(ex+r*0.13)+' '+(ey+r*0.08)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
+          '<rect x="'+(-r*0.25)+'" y="'+(r*0.22)+'" width="'+(r*0.5)+'" height="'+(r*0.16)+'" rx="'+(r*0.06)+'" fill="#fff" stroke="'+C.ink+'" stroke-width="'+(sw*0.7)+'"/>'+
+          '<path d="M'+(r*0.62)+' '+(-r*0.45)+' q'+(r*0.08)+' '+(r*0.16)+' 0 '+(r*0.2)+' q'+(-r*0.08)+' '+(-r*0.04)+' 0 '+(-r*0.2)+'" fill="#8FD3F4"/>'; cheeks = cheeks.replace(/opacity=".55"/g,'opacity=".9"'); break;
+    case "surprised":
+      s = '<circle cx="'+(-ex)+'" cy="'+ey+'" r="'+(r*0.13)+'" fill="#fff" stroke="'+C.ink+'" stroke-width="'+sw+'"/><circle cx="'+(-ex)+'" cy="'+ey+'" r="'+(r*0.06)+'" fill="'+C.ink+'"/>'+
+          '<circle cx="'+ex+'" cy="'+ey+'" r="'+(r*0.13)+'" fill="#fff" stroke="'+C.ink+'" stroke-width="'+sw+'"/><circle cx="'+ex+'" cy="'+ey+'" r="'+(r*0.06)+'" fill="'+C.ink+'"/>'+
+          '<ellipse cx="0" cy="'+(r*0.33)+'" rx="'+(r*0.12)+'" ry="'+(r*0.15)+'" fill="#8A2B2B"/>'; break;
+    case "angry":
+      s = eye(-ex)+eye(ex)+'<path d="M'+(-ex-r*0.16)+' '+(ey-r*0.26)+' L'+(-ex+r*0.12)+' '+(ey-r*0.14)+'" stroke="'+C.ink+'" stroke-width="'+(sw*1.2)+'" stroke-linecap="round"/><path d="M'+(ex+r*0.16)+' '+(ey-r*0.26)+' L'+(ex-r*0.12)+' '+(ey-r*0.14)+'" stroke="'+C.ink+'" stroke-width="'+(sw*1.2)+'" stroke-linecap="round"/>'+
+          '<path d="M'+(-r*0.2)+' '+(r*0.4)+' Q0 '+(r*0.22)+' '+(r*0.2)+' '+(r*0.4)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" fill="none" stroke-linecap="round"/>'; cheeks = cheeks.replace(/#FF9AA2/g,"#FF6B6B"); break;
+    case "sad":
+      s = eye(-ex)+eye(ex)+'<path d="M'+(-ex-r*0.14)+' '+(ey-r*0.16)+' L'+(-ex+r*0.12)+' '+(ey-r*0.27)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" stroke-linecap="round"/><path d="M'+(ex+r*0.14)+' '+(ey-r*0.16)+' L'+(ex-r*0.12)+' '+(ey-r*0.27)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" stroke-linecap="round"/>'+
+          '<path d="M'+(-r*0.18)+' '+(r*0.4)+' Q0 '+(r*0.26)+' '+(r*0.18)+' '+(r*0.4)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" fill="none" stroke-linecap="round"/>'; break;
+    case "calm":
+      s = closed(-ex,false)+closed(ex,false)+'<path d="M'+(-r*0.15)+' '+(r*0.3)+' Q0 '+(r*0.4)+' '+(r*0.15)+' '+(r*0.3)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" fill="none" stroke-linecap="round"/>'; break;
+    case "sorry":
+      s = '<ellipse cx="'+(-ex)+'" cy="'+(ey+r*0.06)+'" rx="'+(r*0.08)+'" ry="'+(r*0.08)+'" fill="'+C.ink+'"/><ellipse cx="'+ex+'" cy="'+(ey+r*0.06)+'" rx="'+(r*0.08)+'" ry="'+(r*0.08)+'" fill="'+C.ink+'"/>'+
+          '<path d="M'+(-ex-r*0.14)+' '+(ey-r*0.12)+' L'+(-ex+r*0.12)+' '+(ey-r*0.22)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" stroke-linecap="round"/><path d="M'+(ex+r*0.14)+' '+(ey-r*0.12)+' L'+(ex-r*0.12)+' '+(ey-r*0.22)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" stroke-linecap="round"/>'+
+          '<path d="M'+(-r*0.18)+' '+(r*0.34)+' q'+(r*0.09)+' '+(-r*0.07)+' '+(r*0.18)+' 0 t'+(r*0.18)+' 0" stroke="'+C.ink+'" stroke-width="'+sw+'" fill="none" stroke-linecap="round"/>'; cheeks = cheeks.replace(/opacity=".55"/g,'opacity=".95"'); break;
+    case "yawn":
+      s = '<path d="M'+(-ex-r*0.12)+' '+ey+' L'+(-ex+r*0.12)+' '+ey+'" stroke="'+C.ink+'" stroke-width="'+sw+'" stroke-linecap="round"/><path d="M'+(ex-r*0.12)+' '+ey+' L'+(ex+r*0.12)+' '+ey+'" stroke="'+C.ink+'" stroke-width="'+sw+'" stroke-linecap="round"/>'+
+          '<ellipse cx="0" cy="'+(r*0.35)+'" rx="'+(r*0.14)+'" ry="'+(r*0.2)+'" fill="#8A2B2B"/>'; break;
+    case "talk":
+      s = eye(-ex)+eye(ex)+'<path d="M'+(-r*0.2)+' '+(r*0.24)+' Q0 '+(r*0.5)+' '+(r*0.2)+' '+(r*0.24)+' Z" fill="#8A2B2B"/>'; break;
+    default: // smile
+      s = eye(-ex)+eye(ex)+'<path d="M'+(-r*0.24)+' '+(r*0.24)+' Q0 '+(r*0.48)+' '+(r*0.24)+' '+(r*0.24)+'" stroke="'+C.ink+'" stroke-width="'+sw+'" fill="none" stroke-linecap="round"/>';
+  }
+  return cheeks + s;
+}
+function g(x, y, sc, inner, flip){ return '<g transform="translate('+x+' '+y+') scale('+(flip?-sc:sc)+' '+sc+')">'+inner+'</g>'; }
+function limb(x1,y1,x2,y2,col,w){ var mx=(x1+x2)/2+(y2-y1)*0.12, my=(y1+y2)/2-(x2-x1)*0.12; return '<path d="M'+x1+' '+y1+' Q'+mx+' '+my+' '+x2+' '+y2+'" stroke="'+col+'" stroke-width="'+w+'" fill="none" stroke-linecap="round"/>'; }
+
+/* ================= Bin ================= */
+function bin(x, y, sc, o){
+  o = o || {}; var pose = o.pose || "down", ex = o.expr || "smile";
+  var shirt = o.shirt || C.binShirt, shorts = o.shorts || C.binShorts;
+  var H = {
+    down:[[-105,-150],[105,-150]], jar:[[-38,-205],[38,-205]], jarup:[[-105,-150],[120,-470]], wave:[[-105,-150],[150,-430]],
+    cookie:[[-105,-150],[125,-250]], brush:[[-105,-150],[42,-345]], talk:[[-130,-235],[130,-235]], sit:[[-70,-140],[70,-140]], open:[[-60,-205],[130,-300]]
+  }[pose];
+  var s = "";
+  s += '<ellipse cx="0" cy="4" rx="95" ry="14" fill="#000" opacity=".12"/>';
+  s += '<rect x="-48" y="-70" width="30" height="66" rx="12" fill="'+C.skin+'"/><rect x="18" y="-70" width="30" height="66" rx="12" fill="'+C.skin+'"/>';
+  s += '<ellipse cx="-36" cy="-4" rx="30" ry="14" fill="#E2574C"/><ellipse cx="36" cy="-4" rx="30" ry="14" fill="#E2574C"/>';
+  s += '<rect x="-72" y="-150" width="144" height="92" rx="26" fill="'+shorts+'"/>';
+  s += limb(-78,-268,H[0][0],H[0][1],C.skin,34);
+  s += '<rect x="-88" y="-305" width="176" height="180" rx="58" fill="'+shirt+'"/><path d="M-30 -300 Q0 -270 30 -300" stroke="#fff" stroke-width="8" fill="none" opacity=".6"/>';
+  if (o.shirtStar) s += '<path d="M0 -245 l10 21 23 3 -17 16 4 23 -20 -11 -20 11 4 -23 -17 -16 23 -3z" fill="#FFE27A"/>';
+  s += limb(78,-268,H[1][0],H[1][1],C.skin,34);
+  s += '<circle cx="'+H[0][0]+'" cy="'+H[0][1]+'" r="22" fill="'+C.skin+'"/><circle cx="'+H[1][0]+'" cy="'+H[1][1]+'" r="22" fill="'+C.skin+'"/>';
+  s += '<circle cx="-100" cy="-392" r="20" fill="'+C.skinD+'"/><circle cx="100" cy="-392" r="20" fill="'+C.skinD+'"/>';
+  s += '<circle cx="0" cy="-395" r="102" fill="'+C.skin+'"/>';
+  if (o.hair === "pigtail") s += '<circle cx="-112" cy="-440" r="34" fill="'+C.hair+'"/><circle cx="112" cy="-440" r="34" fill="'+C.hair+'"/>';
+  s += '<path d="M-102 -400 Q-108 -505 0 -505 Q108 -505 102 -400 Q80 -455 40 -448 Q20 -470 -10 -452 Q-50 -470 -60 -440 Q-90 -450 -102 -400 Z" fill="'+C.hair+'"/>';
+  s += g(0,-385,1,face(ex,95));
+  return g(x, y, sc, s, o.flip);
+}
+
+/* ================= Voi Con ================= */
+function voi(x, y, sc, o){
+  o = o || {}; var pose = o.pose || "stand", ex = o.expr || "smile";
+  var s = '<ellipse cx="20" cy="6" rx="210" ry="20" fill="#000" opacity=".12"/>';
+  s += '<path d="M-185 -165 q-35 10 -30 45" stroke="'+C.voiD+'" stroke-width="12" fill="none" stroke-linecap="round"/>';
+  var legs = [[-140,0],[-70,0],[40,0],[110,0]];
+  if (pose === "stomp") legs[3] = [125,-60];
+  legs.forEach(function(l, i){ s += '<rect x="'+(l[0]-28)+'" y="'+(l[1]-100)+'" width="56" height="100" rx="24" fill="'+(i<2?C.voiD:C.voi)+'"/><rect x="'+(l[0]-26)+'" y="'+(l[1]-16)+'" width="52" height="14" rx="7" fill="'+C.voiL+'"/>'; });
+  s += '<ellipse cx="-20" cy="-165" rx="185" ry="125" fill="'+C.voi+'"/><ellipse cx="-40" cy="-130" rx="120" ry="60" fill="'+C.voiL+'" opacity=".5"/>';
+  var hy = pose === "sorry" ? -215 : -255;
+  var earDroop = pose === "sorry" ? 30 : 0;
+  s += '<ellipse cx="105" cy="'+(hy+earDroop)+'" rx="85" ry="100" fill="'+C.voiD+'"/><ellipse cx="110" cy="'+(hy+earDroop+5)+'" rx="55" ry="68" fill="#F2B8C6"/>';
+  s += '<circle cx="190" cy="'+hy+'" r="108" fill="'+C.voi+'"/>';
+  var tx = 275, ty = hy + 30, trunk;
+  if (pose === "lift") trunk = 'M'+tx+' '+ty+' C 330 '+(ty-40)+' 360 '+(ty-170)+' 320 '+(ty-240);
+  else if (pose === "happy") trunk = 'M'+tx+' '+ty+' C 340 '+(ty-10)+' 380 '+(ty-90)+' 345 '+(ty-130)+' C 325 '+(ty-150)+' 305 '+(ty-125)+' 322 '+(ty-110);
+  else if (pose === "sorry" || pose === "calm") trunk = 'M'+tx+' '+ty+' C 300 '+(ty+60)+' 300 '+(ty+130)+' 285 '+(ty+170);
+  else trunk = 'M'+tx+' '+ty+' C 320 '+(ty+40)+' 330 '+(ty+110)+' 300 '+(ty+150)+' C 285 '+(ty+170)+' 265 '+(ty+150)+' 280 '+(ty+135);
+  s += '<path d="'+trunk+'" stroke="'+C.voi+'" stroke-width="58" fill="none" stroke-linecap="round"/>';
+  if (pose === "lift" && !o.noRock) s += rock(320, ty-265, 1.15, {});
+  s += g(200, hy-10, 1, face(ex, 80));
+  if (pose === "calm") s += '<path d="M330 '+(hy-90)+' q30 -20 10 -45 q-20 -25 10 -45" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" opacity=".9"/>';
+  return g(x, y, sc, s, o.flip);
+}
+
+/* ================= Sóc Nhỏ ================= */
+function soc(x, y, sc, o){
+  o = o || {}; var pose = o.pose || "stand", ex = o.expr || "smile";
+  var s = '<ellipse cx="-20" cy="4" rx="90" ry="12" fill="#000" opacity=".12"/>';
+  s += '<path d="M-40 -40 C-150 -30 -170 -170 -110 -230 C-60 -280 20 -250 -10 -195 C-35 -150 -95 -170 -80 -210" stroke="'+C.socD+'" stroke-width="78" fill="none" stroke-linecap="round"/>';
+  s += '<path d="M-40 -40 C-150 -30 -170 -170 -110 -230 C-60 -280 20 -250 -10 -195" stroke="'+C.soc+'" stroke-width="44" fill="none" stroke-linecap="round" opacity=".9"/>';
+  if (o.wet) s += '<path d="M-150 -120 l-8 18 M-120 -60 l-6 16 M-70 -260 l-6 16" stroke="'+C.waterD+'" stroke-width="7" stroke-linecap="round"/>';
+  s += '<ellipse cx="-20" cy="-10" rx="22" ry="14" fill="'+C.socD+'"/><ellipse cx="25" cy="-10" rx="22" ry="14" fill="'+C.socD+'"/>';
+  s += '<ellipse cx="0" cy="-75" rx="52" ry="68" fill="'+C.soc+'"/><ellipse cx="6" cy="-66" rx="30" ry="46" fill="'+C.socL+'"/>';
+  var P = {stand:[[-28,-90],[38,-90]], pebble:[[-20,-80],[70,-70]], point:[[-28,-90],[85,-130]], jump:[[-60,-160],[70,-160]], wet:[[-30,-95],[40,-95]], sit:[[-25,-60],[35,-60]]}[pose] || [[-28,-90],[38,-90]];
+  s += limb(-30,-105,P[0][0],P[0][1],C.socD,16)+limb(32,-105,P[1][0],P[1][1],C.socD,16);
+  if (pose === "pebble") s += '<ellipse cx="'+(P[1][0]+12)+'" cy="'+(P[1][1]-2)+'" rx="18" ry="13" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="3"/>';
+  s += '<path d="M-18 -195 l-12 -40 30 22 z" fill="'+C.socD+'"/><path d="M28 -195 l12 -40 -30 22 z" fill="'+C.socD+'"/>';
+  s += '<circle cx="5" cy="-160" r="52" fill="'+C.soc+'"/><ellipse cx="10" cy="-140" rx="30" ry="22" fill="'+C.socL+'"/><circle cx="10" cy="-150" r="7" fill="'+C.ink+'"/>';
+  s += g(5, -168, 1, face(ex, 48));
+  if (o.wet) s += '<path d="M-30 -225 q8 16 0 22 q-8 -6 0 -22 M45 -230 q8 16 0 22 q-8 -6 0 -22" fill="'+C.water+'"/>';
+  return g(x, y, sc, s, o.flip);
+}
+
+/* ================= Ngôi Sao Sáng ================= */
+function starPath(R, r){ var p=[]; for(var i=0;i<10;i++){var a=-Math.PI/2+i*Math.PI/5, rr=i%2?r:R; p.push((rr*Math.cos(a)).toFixed(1)+","+(rr*Math.sin(a)).toFixed(1));} return p.join(" "); }
+function sao(x, y, sc, o){
+  o = o || {}; var glow = o.glow == null ? 1 : o.glow;
+  var s = '<circle r="'+(190+60*glow)+'" fill="url(#glow)" opacity="'+(0.55+0.4*glow)+'"/>';
+  s += '<polygon points="'+starPath(118,56)+'" fill="'+C.star+'" stroke="'+C.star+'" stroke-width="34" stroke-linejoin="round"/>';
+  s += '<polygon points="'+starPath(80,40)+'" fill="#FFE27A" opacity=".55"/>';
+  s += g(0, 8, 1, face(o.expr || "smile", 62));
+  return g(x, y, sc, s);
+}
+function sparkle(x, y, r, col){ return '<path d="M'+x+' '+(y-r)+' Q'+x+' '+y+' '+(x+r)+' '+y+' Q'+x+' '+y+' '+x+' '+(y+r)+' Q'+x+' '+y+' '+(x-r)+' '+y+' Q'+x+' '+y+' '+x+' '+(y-r)+'Z" fill="'+(col||"#FFE27A")+'"/>'; }
+
+/* ================= Tắc Kè Hoa ================= */
+function tkh(x, y, sc, o){
+  o = o || {}; var col = o.col || C.tkh, colD = o.colD || C.tkhD, colL = o.colL || C.tkhL;
+  var s = '<ellipse cx="0" cy="6" rx="130" ry="14" fill="#000" opacity=".12"/>';
+  s += '<path d="M-95 -70 C-190 -60 -210 30 -145 40 C-95 46 -90 -10 -125 -12 C-150 -14 -146 12 -130 10" stroke="'+col+'" stroke-width="30" fill="none" stroke-linecap="round"/>';
+  [[-60,0],[-20,0],[40,0],[80,0]].forEach(function(l){ s += '<path d="M'+l[0]+' -40 q-6 30 -20 42 h28" stroke="'+colD+'" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'; });
+  s += '<ellipse cx="0" cy="-75" rx="115" ry="62" fill="'+col+'"/>';
+  s += '<path d="M-80 -125 q15 -22 30 0 q15 -22 30 0 q15 -22 30 0 q15 -22 30 0" fill="'+colD+'"/>';
+  s += '<circle cx="-40" cy="-70" r="10" fill="'+colL+'"/><circle cx="-5" cy="-55" r="8" fill="'+colL+'"/><circle cx="25" cy="-80" r="9" fill="'+colL+'"/>';
+  s += '<ellipse cx="110" cy="-105" rx="70" ry="56" fill="'+col+'"/>';
+  s += '<circle cx="118" cy="-125" r="30" fill="#fff" stroke="'+colD+'" stroke-width="8"/>';
+  var ex = o.expr || "smile";
+  if (ex === "happy") s += '<path d="M104 -125 q14 -14 28 0" stroke="'+C.ink+'" stroke-width="6" fill="none" stroke-linecap="round"/>';
+  else s += '<circle cx="'+(ex==="surprised"?118:124)+'" cy="-124" r="'+(ex==="surprised"?9:12)+'" fill="'+C.ink+'"/><circle cx="128" cy="-130" r="4" fill="#fff"/>';
+  s += ex === "happy" || ex === "talk" ? '<path d="M120 -85 Q150 -60 175 -90 Z" fill="#8A2B2B"/>' : '<path d="M120 -85 Q150 -68 172 -92" stroke="'+C.ink+'" stroke-width="6" fill="none" stroke-linecap="round"/>';
+  s += '<circle cx="150" cy="-100" r="10" fill="'+C.cheek+'" opacity=".6"/>';
+  return g(x, y, sc, s, o.flip);
+}
+
+
+/* ================= ảnh linh vật thật (không vẽ lại) ================= */
+var ASSET = (typeof window !== "undefined" && window.TT_ASSET) || "assets/";
+var _clip = 0;
+function saoPhoto(cx, cy, R, o){
+  o = o || {}; var id = "cps" + (++_clip), k = R / 390, gl = o.glow == null ? 1 : o.glow;
+  var s = '<circle cx="'+cx+'" cy="'+cy+'" r="'+(R*1.9+R*0.5*gl)+'" fill="url(#glow)" opacity="'+(0.5+0.4*gl)+'"/>';
+  s += '<clipPath id="'+id+'"><circle cx="'+cx+'" cy="'+cy+'" r="'+R+'"/></clipPath>';
+  s += '<image href="'+ASSET+'ngoi-sao-sang.jpg" x="'+(cx-775*k)+'" y="'+(cy-415*k)+'" width="'+(1536*k)+'" height="'+(864*k)+'" clip-path="url(#'+id+')" preserveAspectRatio="none"/>';
+  s += '<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#FFC93C" stroke-width="'+(R*0.08)+'"/>';
+  return s;
+}
+function tkhPhoto(cx, cy, R, o){
+  o = o || {}; var id = "cpt" + (++_clip), k = (2.1 * R) / 200;
+  var s = '<circle cx="'+cx+'" cy="'+(cy+R*0.12)+'" r="'+(R*1.02)+'" fill="#000" opacity=".12"/>';
+  s += '<clipPath id="'+id+'"><circle cx="'+cx+'" cy="'+cy+'" r="'+R+'"/></clipPath><circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="#F4FBF8"/>';
+  s += '<image href="'+ASSET+'tac-ke-hoa.jpg" x="'+(cx-75*k)+'" y="'+(cy-100*k)+'" width="'+(146*k)+'" height="'+(223*k)+'" clip-path="url(#'+id+')" preserveAspectRatio="none"/>';
+  s += '<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#22B8A6" stroke-width="'+(R*0.08)+'"/>';
+  return s;
+}
+
+/* ================= đồ vật ================= */
+function rock(x, y, sc, o){
+  o = o || {}; var n = o.veins || 0;
+  var s = '';
+  if (o.glow) s += '<circle r="'+(130+o.glow*30)+'" fill="url(#glow)" opacity="'+(0.5+0.3*Math.min(o.glow,1))+'"/>';
+  s += '<polygon points="-72,0 -84,-48 -45,-92 18,-98 72,-64 84,-14 42,12" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="6" stroke-linejoin="round"/>';
+  s += '<path d="M-50 -60 l18 10 M10 -80 l-6 18 M40 -30 l18 -6 M-20 -20 l-10 12" stroke="'+C.rockD+'" stroke-width="5" stroke-linecap="round"/>';
+  var veins = ['M-55 -40 Q-20 -55 5 -35 Q25 -20 55 -40', 'M-30 -75 Q0 -60 20 -78'];
+  for (var i = 0; i < n && i < veins.length; i++) s += '<path d="'+veins[i]+'" stroke="#FFD54A" stroke-width="9" fill="none" stroke-linecap="round" filter="url(#glowf)"/>';
+  return g(x, y, sc, s);
+}
+function jar(x, y, sc, o){
+  o = o || {};
+  var s = '<rect x="-48" y="-120" width="96" height="120" rx="24" fill="#D8F1FA" opacity=".9" stroke="#9BCFE3" stroke-width="5"/>';
+  s += '<circle cx="-15" cy="-40" r="20" fill="#C98A4B"/><circle cx="18" cy="-62" r="20" fill="#D99A5B"/><circle cx="10" cy="-22" r="18" fill="#C98A4B"/>';
+  s += '<circle cx="-12" cy="-42" r="3" fill="#6B3E1E"/><circle cx="20" cy="-64" r="3" fill="#6B3E1E"/>';
+  if (!o.open) s += '<rect x="-56" y="-142" width="112" height="30" rx="10" fill="#E2574C"/>';
+  return g(x, y, sc, s, false);
+}
+function lid(x, y, sc){ return g(x, y, sc, '<rect x="-56" y="-15" width="112" height="30" rx="10" fill="#E2574C"/>'); }
+function cookie(x, y, sc){ return g(x, y, sc, '<circle r="26" fill="#D99A5B"/><circle cx="-8" cy="-6" r="4" fill="#6B3E1E"/><circle cx="9" cy="5" r="4" fill="#6B3E1E"/><circle cx="2" cy="-12" r="3" fill="#6B3E1E"/>'); }
+function stoneBox(x, y, sc, o){
+  o = o || {};
+  var s = '<rect x="-120" y="-60" width="240" height="70" rx="14" fill="#C98A4B"/><rect x="-120" y="-60" width="240" height="18" rx="9" fill="#B07535"/>';
+  s += '<path d="M-110 -58 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0" fill="#FFB3C1"/>';
+  s += rock(0, -62, 0.75, {veins: o.veins || 0, glow: o.glow || 0});
+  return g(x, y, sc, s);
+}
+
+/* ================= bối cảnh ================= */
+var DEFS = '<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFF6C2" stop-opacity="1"/><stop offset=".5" stop-color="#FFE27A" stop-opacity=".5"/><stop offset="1" stop-color="#FFE27A" stop-opacity="0"/></radialGradient>'+
+  '<filter id="glowf" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'+
+  '<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FDcF5"/><stop offset="1" stop-color="#E8F7FF"/></linearGradient>'+
+  '<linearGradient id="sunset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB37A"/><stop offset="1" stop-color="#FFE7B8"/></linearGradient>'+
+  '<linearGradient id="night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1C2759"/><stop offset="1" stop-color="#3A4A8A"/></linearGradient></defs>';
+function room(o){
+  o = o || {};
+  var s = '<rect width="1920" height="1080" fill="'+C.wall+'"/>';
+  for (var i = 0; i < 14; i++) s += sparkle(120 + (i*137)%1700, 80 + (i*89)%560, 9, "#F6D9A8");
+  s += '<rect x="1300" y="120" width="420" height="340" rx="18" fill="'+(o.night?"url(#night)":"#BFE7F7")+'" stroke="#fff" stroke-width="18"/><path d="M1510 120 v340 M1300 290 h420" stroke="#fff" stroke-width="12"/>';
+  if (o.night) for (var k = 0; k < 8; k++) s += sparkle(1330 + (k*53)%370, 150 + (k*41)%280, 7, "#FFF3C4");
+  s += '<path d="M1270 100 q40 200 0 400 h70 q-30 -200 0 -400z" fill="#FF8FB1"/><path d="M1750 100 q-40 200 0 400 h-70 q30 -200 0 -400z" fill="#FF8FB1"/><rect x="1250" y="88" width="520" height="22" rx="11" fill="#C98A4B"/>';
+  s += '<rect x="0" y="820" width="1920" height="260" fill="'+C.floor+'"/><rect x="0" y="812" width="1920" height="14" fill="#D9A673"/>';
+  s += '<ellipse cx="960" cy="985" rx="420" ry="55" fill="#FFD6A5" opacity=".8"/>';
+  s += '<rect x="170" y="600" width="560" height="32" rx="10" fill="#B07535"/><rect x="200" y="630" width="26" height="200" fill="#9A6630"/><rect x="674" y="630" width="26" height="200" fill="#9A6630"/>';
+  s += '<rect x="260" y="230" width="300" height="200" rx="12" fill="#fff" stroke="#E8C79A" stroke-width="10"/><rect x="275" y="245" width="270" height="170" fill="#D6F0FA"/><rect x="275" y="365" width="270" height="50" fill="#9AD27A"/><rect x="350" y="300" width="110" height="80" fill="#FFB3C1"/><polygon points="335,305 405,250 475,305" fill="#E2574C"/><rect x="392" y="335" width="30" height="45" fill="#B07535"/><circle cx="500" cy="280" r="22" fill="#FFE27A"/>';
+  return s;
+}
+function forest(o){
+  o = o || {};
+  var s = '<rect width="1920" height="1080" fill="'+(o.sunset?"url(#sunset)":"url(#sky)")+'"/>';
+  s += '<circle cx="'+(o.sunset?1500:1650)+'" cy="'+(o.sunset?330:170)+'" r="80" fill="'+(o.sunset?"#FF8F5A":"#FFE27A")+'" opacity=".9"/>';
+  s += '<ellipse cx="300" cy="560" rx="650" ry="220" fill="#B6E39A"/><ellipse cx="1600" cy="580" rx="700" ry="240" fill="#A7DB89"/>';
+  [[150,470,1],[420,430,1.2],[1320,450,1.1],[1620,420,1.3],[1820,470,1]].forEach(function(t){ s += g(t[0], t[1], t[2], '<rect x="-14" y="-10" width="28" height="90" fill="#9A6630"/><circle cx="0" cy="-60" r="70" fill="#6CB04E"/><circle cx="-45" cy="-30" r="50" fill="#7CC05C"/><circle cx="45" cy="-30" r="50" fill="#5FA343"/>'); });
+  s += '<rect x="0" y="560" width="1920" height="520" fill="'+C.grass+'"/>';
+  s += '<path d="M0 760 C400 700 700 820 960 770 C1250 715 1550 820 1920 760 L1920 900 C1550 960 1250 860 960 910 C700 960 400 850 0 910 Z" fill="'+C.water+'"/>';
+  s += '<path d="M120 820 q40 -14 80 0 M600 860 q40 -14 80 0 M1100 830 q40 -14 80 0 M1600 850 q40 -14 80 0" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" opacity=".7"/>';
+  for (var i = 0; i < 12; i++) s += '<circle cx="'+(60+i*165)+'" cy="'+(1010 - (i%3)*20)+'" r="10" fill="'+["#FF8FB1","#FFE27A","#fff"][i%3]+'"/>';
+  return s;
+}
+function bridge(n, total){
+  var s = "", x0 = 520, step = 115;
+  for (var i = 0; i < n; i++) s += '<ellipse cx="'+(x0+i*step)+'" cy="'+(800+ (i%2)*8)+'" rx="62" ry="34" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="5"/><ellipse cx="'+(x0+i*step)+'" cy="'+(770+(i%2)*8)+'" rx="58" ry="28" fill="#B9B2A5"/>';
+  return s;
+}
+function bookFrame(){
+  return '<rect x="0" y="0" width="1920" height="1080" fill="none" stroke="#FFF4DC" stroke-width="60"/><rect x="30" y="30" width="1860" height="1020" rx="30" fill="none" stroke="#E8C79A" stroke-width="8"/>'+
+    sparkle(70,70,22,"#FFC93C")+sparkle(1850,70,22,"#FFC93C")+sparkle(70,1010,22,"#FFC93C")+sparkle(1850,1010,22,"#FFC93C");
+}
+function bubble(x, y, w, h, text, size, tail){
+  var s = '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="34" fill="#fff" stroke="'+C.ink+'" stroke-width="6"/>';
+  if (tail) s += '<path d="M'+tail[0]+' '+(y+h-3)+' L'+tail[1]+' '+tail[2]+' L'+(tail[0]+50)+' '+(y+h-3)+'" fill="#fff" stroke="'+C.ink+'" stroke-width="6" stroke-linejoin="round"/><rect x="'+(tail[0]+4)+'" y="'+(y+h-10)+'" width="44" height="12" fill="#fff"/>';
+  s += '<text x="'+(x+w/2)+'" y="'+(y+h/2+size*0.35)+'" text-anchor="middle" class="b" font-size="'+size+'" fill="'+C.ink+'">'+text+'</text>';
+  return s;
+}
+function splash(x, y, sc){ return g(x, y, sc, '<path d="M-120 0 q-30 -90 10 -150 q10 60 40 40 q0 -80 50 -120 q20 80 50 60 q10 -60 60 -70 q-10 70 20 90 q40 -40 80 -20 q-40 50 -20 170 Z" fill="'+C.water+'" stroke="'+C.waterD+'" stroke-width="6"/>'+[[-140,-170],[-60,-210],[40,-230],[130,-190],[190,-120]].map(function(p){return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="14" fill="'+C.water+'"/>';}).join("")); }
+function hearts(x, y, sc){ return g(x, y, sc, '<path d="M0 30 C-40 0 -30 -40 0 -20 C30 -40 40 0 0 30Z" fill="#FF6F91"/>'); }
+
+/* ================= các cảnh ================= */
+var S = {};
+S["01"] = { sec: 8, lines: [["Bin", "Hự… hự… mình muốn mời hai bạn ăn bánh mà sao không mở được vậy nè!"]],
+  draw: function(){ return room() + stoneBox(450, 600, 1, {}) + bin(1000, 960, 1.05, {pose:"jar", expr:"strain"}) + jar(1000, 790, 1.05, {}) +
+    '<path d="M880 690 q-30 -20 -20 -60 M1120 690 q30 -20 20 -60 M860 760 q-40 0 -50 -30 M1140 760 q40 0 50 -30" stroke="'+C.ink+'" stroke-width="8" fill="none" stroke-linecap="round"/>' +
+    bubble(1180, 360, 360, 130, "Hự… hự…!", 64, [1200, 1080, 600]); } };
+S["02"] = { sec: 10, lines: [["Tắc Kè Hoa", "Bin ơi, tụi mình tới rồi nè! Ồ, Bin làm cả giường cho viên đá luôn. Bin giữ lời hứa ghê!"], ["Ngôi Sao Sáng", "Tụi mình cũng giữ lời: tới hẹn kể Bin nghe một câu chuyện về sức mạnh bên trong rồi."], ["Bin", "Sức mạnh hả? Mình đang cần lắm nè!"]],
+  draw: function(){ return room() + stoneBox(450, 600, 1, {glow: 0.6}) + saoPhoto(450, 360, 115, {glow: 1}) + sparkle(330,300,26)+sparkle(590,280,20)+sparkle(560,470,16) +
+    '<path d="M1510 110 q-10 160 0 250" stroke="#22B8A6" stroke-width="6" stroke-dasharray="14 14" fill="none"/>' + tkhPhoto(1510, 480, 120) +
+    bin(1010, 960, 1.05, {pose:"jarup", expr:"happy"}) + jar(1130, 520, 0.85, {}); } };
+S["03"] = { sec: 4, lines: [["Tắc Kè Hoa", "Ngày xửa ngày xưa…"]],
+  draw: function(){ var s = room({}) + '<rect width="1920" height="1080" fill="#3A2A20" opacity=".35"/>';
+    s += '<path d="M960 300 C760 250 520 260 360 310 L360 900 C520 850 760 840 960 890 Z" fill="#FFF9EC" stroke="#E8C79A" stroke-width="10"/><path d="M960 300 C1160 250 1400 260 1560 310 L1560 900 C1400 850 1160 840 960 890 Z" fill="#FFF4DC" stroke="#E8C79A" stroke-width="10"/><path d="M960 300 V890" stroke="#E8C79A" stroke-width="10"/>';
+    s += '<text x="660" y="560" text-anchor="middle" class="b" font-size="72" fill="'+C.ink+'">Ngày xửa</text><text x="660" y="650" text-anchor="middle" class="b" font-size="72" fill="'+C.ink+'">ngày xưa…</text>';
+    s += g(1260, 640, 1, '<ellipse cx="0" cy="40" rx="200" ry="60" fill="'+C.water+'"/><circle cx="-120" cy="-60" r="60" fill="#6CB04E"/><circle cx="110" cy="-80" r="70" fill="#7CC05C"/>') + voi(1190, 720, 0.38, {}) + soc(1380, 720, 0.42, {});
+    s += tkhPhoto(470, 250, 90) + '<path d="M350 160 q-80 80 0 170 q110 50 170 -40" stroke="#22B8A6" stroke-width="10" fill="none" stroke-dasharray="20 16" stroke-linecap="round"/>';
+    for (var i = 0; i < 10; i++) s += sparkle(380 + i*130, 230 + (i%3)*30, 14 + (i%2)*8);
+    return s; } };
+S["04"] = { sec: 10, lines: [["Voi Con", "Nhìn nè! Mình mạnh nhất rừng!"]],
+  draw: function(){ return forest() + bridge(4) + voi(330, 840, 1.0, {pose:"lift", expr:"happy"}) + soc(980, 700, 0.95, {pose:"stand", expr:"surprised", flip: true}) +
+    bubble(260, 120, 560, 130, "Mình mạnh nhất rừng!", 56, [470, 520, 330]) + bookFrame(); } };
+S["05"] = { sec: 10, lines: [["Voi Con", "Hứ! Mình không chơi nữa!"], ["Sóc Nhỏ", "Phù phù…"]],
+  draw: function(){ var s = forest();
+    [[560,860,-20],[700,890,15],[840,870,-10],[980,900,25]].forEach(function(r){ s += '<g transform="translate('+r[0]+' '+r[1]+') rotate('+r[2]+')"><ellipse rx="62" ry="34" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="5"/></g>'; });
+    s += splash(800, 860, 1.1) + voi(330, 840, 1.0, {pose:"stomp", expr:"angry"}) + soc(1250, 720, 0.95, {pose:"wet", wet: true, expr:"sad", flip: true});
+    s += '<path d="M200 860 l-30 30 M240 870 l-10 40 M470 860 l20 36" stroke="'+C.ink+'" stroke-width="8" stroke-linecap="round"/>';
+    s += bubble(240, 110, 520, 130, "Hứ! Không chơi nữa!", 54, [430, 380, 520]) + bookFrame(); return s; } };
+S["06"] = { sec: 8, lines: [["Sóc Nhỏ", "Không sao, mình xếp lại từ chân cầu nhé. Lần này xếp chậm thôi."]],
+  draw: function(){ return forest() + bridge(2) + '<ellipse cx="760" cy="815" rx="40" ry="22" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="4"/>' +
+    soc(880, 760, 1.15, {pose:"pebble", expr:"smile", flip: true}) + voi(1520, 700, 0.62, {pose:"stand", expr:"sad", flip: true}) +
+    bubble(980, 150, 620, 130, "Mình xếp lại nhé!", 56, [1000, 940, 480]) + bookFrame(); } };
+S["07"] = { sec: 10, lines: [["Voi Con", "Sóc Nhỏ ơi… lúc nãy mình cáu, cho mình xin lỗi nhé. Mình nhấc đá to, bạn chỉ chỗ đặt được không?"]],
+  draw: function(){ return forest() + bridge(3) + voi(520, 860, 1.0, {pose:"sorry", expr:"sorry"}) + soc(1220, 760, 1.05, {pose:"stand", expr:"smile", flip: true}) +
+    '<path d="M760 420 q30 -30 0 -60 q-30 -30 0 -60" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"/>' +
+    bubble(520, 110, 720, 130, "Cho mình xin lỗi nhé…", 56, [700, 720, 440]) + bookFrame(); } };
+S["08"] = { sec: 8, lines: [["", "Voi Con nhấc, Sóc Nhỏ chỉ chỗ. Hai bạn kiên nhẫn từng viên một… và cây cầu đã xong!"]],
+  draw: function(){ var s = forest() + bridge(9) + voi(330, 840, 0.95, {pose:"happy", expr:"happy"}) + soc(1100, 700, 1.0, {pose:"jump", expr:"happy"});
+    for (var i = 0; i < 16; i++) s += sparkle(300 + (i*97)%1300, 150 + (i*61)%360, 14 + (i%3)*6, ["#FFE27A","#FF8FB1","#fff"][i%3]);
+    return s + bookFrame(); } };
+S["09"] = { sec: 10, lines: [["Ngôi Sao Sáng", "Đôi tay khỏe giúp Voi Con nhấc được đá. Nhưng điều giúp Voi Con quay lại, xin lỗi và làm tới cùng là sức mạnh bên trong."]],
+  draw: function(){ return forest({sunset: true}) + bridge(9) + voi(700, 760, 0.85, {pose:"happy", expr:"smile"}) + soc(1120, 690, 0.95, {pose:"sit", expr:"happy", flip: true}) +
+    hearts(960, 360, 1.4) + hearts(880, 300, 0.9) + hearts(1040, 290, 1.0) + saoPhoto(1700, 190, 72, {glow: 0.8}) + bookFrame(); } };
+function quiz(n, title, body, heart, scene){
+  var s = '<rect width="1920" height="1080" fill="#FFF4DC"/>';
+  s += '<rect x="60" y="40" width="1800" height="110" rx="30" fill="#4A4FA0"/><text x="990" y="118" text-anchor="middle" class="b" font-size="64" fill="#fff">Đố nhanh '+n+': tìm cả 2 sức mạnh!</text>' + tkhPhoto(150, 95, 72);
+  s += '<rect x="60" y="180" width="1100" height="680" rx="40" fill="#fff" stroke="#F5DFA6" stroke-width="8"/>' + scene;
+  s += '<text x="610" y="835" text-anchor="middle" class="b" font-size="48" fill="'+C.ink+'">'+title+'</text>';
+  s += '<rect x="1200" y="180" width="660" height="325" rx="40" fill="#FFE2C7" stroke="#FF9F43" stroke-width="8"/><text x="1530" y="290" text-anchor="middle" class="t" font-size="100">💪</text><text x="1530" y="365" text-anchor="middle" class="t" font-size="38" fill="#B85600">SỨC MẠNH CƠ THỂ</text><text x="1530" y="455" text-anchor="middle" class="b" font-size="58" fill="'+C.ink+'">'+body+'</text>';
+  s += '<rect x="1200" y="535" width="660" height="325" rx="40" fill="#FFF0B3" stroke="#FFC93C" stroke-width="8"/><text x="1530" y="645" text-anchor="middle" class="t" font-size="100">⭐</text><text x="1530" y="720" text-anchor="middle" class="t" font-size="38" fill="#8A5E00">SỨC MẠNH BÊN TRONG</text><text x="1530" y="810" text-anchor="middle" class="b" font-size="54" fill="'+C.ink+'">'+heart+'</text>';
+  return s;
+}
+S["10a"] = { sec: 7, lines: [["Tắc Kè Hoa", "Bin ơi, mình đố nè! Buồn ngủ mà vẫn đánh răng: tay chải răng, còn trái tim thì bền bỉ!"]],
+  draw: function(){ return quiz("①", "Buồn ngủ mà vẫn đánh răng", "Tay chải răng", "Bền bỉ",
+    '<rect x="100" y="220" width="1020" height="560" rx="30" fill="url(#night)"/>' + sparkle(250,300,14,"#FFF3C4") + sparkle(900,280,12,"#FFF3C4") + '<circle cx="1000" cy="330" r="50" fill="#FFF3C4"/><circle cx="1020" cy="315" r="44" fill="#3A4A8A"/>' +
+    bin(610, 790, 0.9, {pose:"brush", expr:"yawn"}) + '<rect x="638" y="465" width="90" height="15" rx="7" fill="#4FAFD8" transform="rotate(-20 650 472)"/><text x="760" y="380" class="b" font-size="60" fill="#FFF3C4">z z</text>'); } };
+S["10b"] = { sec: 7, lines: [["Tắc Kè Hoa", "Làm đổ sữa, nói thật với mẹ: miệng nói, còn trái tim thì trung thực và dũng cảm!"]],
+  draw: function(){ return quiz("②", "Làm đổ sữa, nói thật với mẹ", "Miệng nói", "Trung thực, dũng cảm",
+    '<rect x="100" y="640" width="1020" height="140" fill="'+C.floor+'"/>' + '<ellipse cx="380" cy="760" rx="150" ry="34" fill="#fff"/><g transform="translate(330 740) rotate(80)"><rect x="-30" y="-70" width="60" height="100" rx="12" fill="#D8F1FA" stroke="#9BCFE3" stroke-width="5"/></g>' +
+    bin(760, 790, 0.9, {pose:"talk", expr:"sorry"}) + bubble(560, 215, 520, 110, "Mẹ ơi, con làm đổ sữa…", 44, [700, 720, 360])); } };
+S["10c"] = { sec: 6, lines: [["Tắc Kè Hoa", "Chờ em chơi xong mới tới lượt mình: ngồi yên chờ, còn trái tim thì kiên nhẫn!"]],
+  draw: function(){ return quiz("③", "Chờ em chơi xong mới tới lượt mình", "Ngồi yên chờ", "Kiên nhẫn",
+    '<rect x="100" y="640" width="1020" height="140" fill="'+C.floor+'"/>' + bin(380, 790, 0.88, {pose:"sit", expr:"smile"}) + bin(830, 790, 0.62, {pose:"talk", expr:"happy", shirt:"#FF8FB1", shorts:"#8B5FBF", hair:"pigtail"}) +
+    '<g transform="translate(1000 775)"><rect x="-70" y="-50" width="140" height="50" rx="16" fill="#E2574C"/><circle cx="-40" cy="2" r="18" fill="#333"/><circle cx="40" cy="2" r="18" fill="#333"/></g>' +
+    '<circle cx="560" cy="330" r="60" fill="#fff" stroke="'+C.ink+'" stroke-width="6"/><path d="M560 330 v-34 M560 330 h26" stroke="'+C.ink+'" stroke-width="8" stroke-linecap="round"/>'); } };
+S["11"] = { sec: 12, lines: [["Bin", "Tay mình xoay nắp, còn trái tim mình nhắc: bình tĩnh, thử lại!"], ["Ngôi Sao Sáng", "Bin thấy không? Mỗi lần Bin dùng sức mạnh bên trong, mình lại khỏe thêm một chút."]],
+  draw: function(){ var s = room() + stoneBox(450, 600, 1, {veins: 1, glow: 1}) + saoPhoto(450, 350, 125, {glow: 1.4});
+    for (var i = 0; i < 6; i++) s += sparkle(300 + i*60, 250 + (i%2)*260, 18);
+    s += tkhPhoto(1560, 600, 115) + bin(1010, 960, 1.05, {pose:"open", expr:"happy"}) + jar(950, 790, 1.05, {open: true}) + lid(1140, 655, 0.9);
+    return s + bubble(1180, 260, 520, 120, "Mở được rồi!", 60, [1200, 1120, 560]); } };
+S["12"] = { sec: 6, lines: [["Bin", "Hôm nay bạn đã dùng sức mạnh bên trong nào? Kể cho Bin nghe với!"]],
+  draw: function(){ var s = room() + stoneBox(320, 600, 0.8, {veins: 1, glow: 0.8}) + '<rect width="1920" height="1080" fill="#FFF4DC" opacity=".35"/>';
+    s += bin(960, 1180, 1.75, {pose:"cookie", expr:"happy"}) + cookie(1185, 740, 1.6);
+    return s + bubble(1260, 160, 560, 140, "Bạn thì sao?", 66, [1280, 1180, 560]); } };
+
+
+/* Lời truyện tranh Tuần 2 (khác lời video). Loại dòng:
+   ["kể", ...]  lời kể của Tắc Kè Hoa
+   ["hỏi", ...] câu dừng lại hỏi bé (đọc đối thoại)
+   ["cùng", ...] câu cả nhà cùng nói / cùng đếm
+   ["Tên", ...] lời nhân vật */
+var TRUYEN = {
+  cover: [
+    ["kể", "Bin đang giữ một viên đá xù xì. Bên trong viên đá là Ngôi Sao Sáng đang nghỉ cho khỏe lại. Bin hứa giữ đá thật cẩn thận. Còn Ngôi Sao Sáng và Tắc Kè Hoa hứa: tuần nào cũng kể cho Bin nghe một câu chuyện."],
+    ["hỏi", "Gửi ba mẹ và cô: thấy 🤔 thì dừng lại hỏi bé, chờ bé trả lời rồi mới lật trang. Thấy 🗣️ thì cả nhà cùng nói to."]
+  ],
+  "01": [
+    ["kể", "Chiều nay, Bin muốn mời hai người bạn đặc biệt ăn bánh. Bin ôm hũ bánh, vặn thật mạnh."],
+    ["Bin", "Hự! Hự! Hựựự…! Sao cái nắp lì quá vậy nè!"],
+    ["kể", "Mặt Bin đỏ như quả cà chua. Cái nắp vẫn đứng im. Bin bắt đầu thấy bực."],
+    ["hỏi", "Bạn có bao giờ mở một thứ gì đó mãi không được chưa? Lúc đó bạn thấy thế nào?"]
+  ],
+  "02": [
+    ["kể", "Bỗng… viên đá trong hộp khẽ sáng lên. Lấp lánh, lấp lánh! Ngôi Sao Sáng hiện ra. Rồi một bạn nhỏ trượt vèo xuống theo tấm rèm cửa: Tắc Kè Hoa!"],
+    ["Tắc Kè Hoa", "Bin ơi, tụi mình tới rồi nè! Ồ, Bin còn làm cả cái giường êm êm cho viên đá. Bin giữ lời hứa ghê!"],
+    ["Ngôi Sao Sáng", "Tụi mình cũng giữ lời: hôm nay kể Bin nghe một câu chuyện về sức mạnh bên trong."],
+    ["Bin", "Sức mạnh hả? Mình đang cần sức mạnh mở hũ bánh lắm nè!"],
+    ["hỏi", "Theo bạn, sức mạnh bên trong là gì nhỉ?"]
+  ],
+  "03": [
+    ["kể", "Tắc Kè Hoa xoay một vòng… vù vù vù… biến thành một cuốn sách thật to!"],
+    ["Tắc Kè Hoa", "Các bạn ngồi gần lại nhé. Ngày xửa ngày xưa, bên một con suối trong veo, có hai người bạn: Voi Con to ơi là to, và Sóc Nhỏ bé xíu xiu."]
+  ],
+  "04": [
+    ["kể", "Hai bạn muốn xây một cây cầu đá để qua suối chơi. Voi Con dùng cái vòi khỏe nhấc tảng đá to nhất lên. Hự!"],
+    ["Voi Con", "Nhìn nè! Mình mạnh nhất rừng! Một mình mình cũng xây xong cầu!"],
+    ["Sóc Nhỏ", "Oa… bạn khỏe quá! Mình chỉ nhấc được viên sỏi bé tí thôi."],
+    ["kể", "Voi Con xếp đá thật nhanh, nhanh hơn, nhanh hơn nữa… Cây cầu sắp xong rồi. Nhưng mà…"],
+    ["hỏi", "Theo bạn, chuyện gì sắp xảy ra? Lật trang xem nào!"]
+  ],
+  "05": [
+    ["kể", "Lộc cộc… lộc cộc… ÙM! Một viên đá xếp vội bị trượt. Cả cây cầu đổ ào xuống suối!"],
+    ["Voi Con", "Hứ! Cầu gì mà dở thế! Mình không chơi nữa!"],
+    ["kể", "Voi Con bực quá, giậm chân. Rầm! Rầm! Nước bắn tung tóe, ướt sũng cả Sóc Nhỏ."],
+    ["Sóc Nhỏ", "Phù phù… lạnh quá…"],
+    ["hỏi", "Nhìn mặt Voi Con kìa. Bạn đoán Voi Con đang thấy thế nào? Còn Sóc Nhỏ thì sao?"]
+  ],
+  "06": [
+    ["kể", "Sóc Nhỏ lau mặt. Bạn ấy cũng buồn lắm. Nhưng Sóc Nhỏ đặt tay lên ngực, hít một hơi thật sâu…"],
+    ["Sóc Nhỏ", "Hít một hơi… thử lại nào! Mình xếp lại từ chân cầu nhé. Lần này xếp chậm thôi."],
+    ["kể", "Sóc Nhỏ nhặt từng viên sỏi. Cạch… một viên. Cạch… hai viên. Cạch… ba viên!"],
+    ["cùng", "Cùng đếm với Sóc Nhỏ: một, hai, ba!"]
+  ],
+  "07": [
+    ["kể", "Voi Con đứng nhìn. Trong lòng Voi Con có một tiếng nói nhỏ xíu khẽ nhắc: \"Bạn ấy bị ướt là tại mình đó.\""],
+    ["kể", "Voi Con đặt vòi lên ngực, hít một hơi thật sâu…"],
+    ["cùng", "Cùng nói với Voi Con: Hít một hơi… thử lại nào!"],
+    ["Voi Con", "Sóc Nhỏ ơi… lúc nãy mình cáu, làm bạn ướt hết. Cho mình xin lỗi nhé. Mình nhấc đá to, bạn chỉ chỗ đặt cho chắc được không?"],
+    ["Sóc Nhỏ", "Được chứ! Tụi mình làm cùng nhau nha!"]
+  ],
+  "08": [
+    ["kể", "Voi Con nhấc đá to. Sóc Nhỏ chỉ chỗ: bên trái một chút… chút nữa… đúng rồi! Hai bạn làm chậm mà chắc, từng viên, từng viên một."],
+    ["kể", "Và rồi… cây cầu đã xong! Hai bạn nhảy lên cầu: bịch, bịch, bịch! Cầu không rung một chút nào."],
+    ["Voi Con và Sóc Nhỏ", "Yeah! Tụi mình làm được rồi!"]
+  ],
+  "09": [
+    ["kể", "Chiều hôm đó, hai bạn ngồi bên cây cầu, ngắm mặt trời lặn."],
+    ["hỏi", "Theo bạn, điều gì đã giúp hai bạn xây xong cầu?"],
+    ["Ngôi Sao Sáng", "Đôi vòi khỏe giúp Voi Con nhấc được đá. Đó là sức mạnh cơ thể. Nhưng điều giúp Voi Con bình tĩnh lại, dám xin lỗi và làm tới cùng là sức mạnh bên trong. Sức mạnh ấy không nhìn thấy được, nhưng ai cũng thấy việc nó làm."]
+  ],
+  "10a": [
+    ["Tắc Kè Hoa", "Bin ơi, mình đố nè! Tối nay Bin buồn ngủ díp cả mắt, mà vẫn đi đánh răng cho xong."],
+    ["hỏi", "Tay chân của Bin làm gì? Trái tim của Bin làm gì?"],
+    ["kể", "Tay chải răng là sức mạnh cơ thể. Buồn ngủ vẫn làm cho xong là sức mạnh bên trong: bền bỉ!"]
+  ],
+  "10b": [
+    ["Tắc Kè Hoa", "Câu thứ hai nè! Bin lỡ tay làm đổ cốc sữa. Ối! Bin hơi sợ, nhưng vẫn chạy đi nói với mẹ: \"Mẹ ơi, con làm đổ sữa.\""],
+    ["hỏi", "Lúc đó, sức mạnh bên trong nào đang giúp Bin?"],
+    ["kể", "Miệng nói là sức mạnh cơ thể. Dám nói thật dù hơi sợ là sức mạnh bên trong: trung thực và dũng cảm!"]
+  ],
+  "10c": [
+    ["Tắc Kè Hoa", "Câu cuối cùng! Em gái đang chơi xe ô tô. Bin cũng muốn chơi lắm, nhưng Bin ngồi chờ em chơi xong."],
+    ["hỏi", "Muốn lắm mà vẫn chờ được, đó là sức mạnh gì nhỉ?"],
+    ["kể", "Ngồi yên chờ là sức mạnh cơ thể. Muốn lắm mà vẫn chờ được là sức mạnh bên trong: kiên nhẫn!"]
+  ],
+  "11": [
+    ["kể", "Nghe xong, Bin cầm lại hũ bánh. Bin không vặn ầm ầm nữa. Bin đặt tay lên ngực…"],
+    ["cùng", "Cùng nói với Bin: Hít một hơi… thử lại nào!"],
+    ["kể", "Bin xoay nắp thật chậm… từ từ… tách! Nắp mở rồi! Đúng lúc đó, viên đá trong hộp sáng lên một vệt vàng lấp lánh."],
+    ["Bin", "Tay mình xoay nắp, còn trái tim mình nhắc: bình tĩnh, thử lại!"],
+    ["Ngôi Sao Sáng", "Bin thấy không? Mỗi lần Bin dùng sức mạnh bên trong, mình lại khỏe thêm một chút."]
+  ],
+  "12": [
+    ["kể", "Bin mời hai bạn ăn bánh, rồi quay ra hỏi các bạn:"],
+    ["Bin", "Hôm nay bạn đã dùng sức mạnh bên trong nào? Lần sau gặp chuyện khó, bạn nhớ thử nhé!"],
+    ["cùng", "Cả lớp cùng nói: Hít một hơi… thử lại nào!"]
+  ]
+};
+
+</script>
+<script>
+(function(){
+"use strict";
+/* ---------- âm thanh ---------- */
+var muted = false; try { muted = localStorage.getItem("tt_mute") === "1"; } catch(e){}
+var actx = null;
+function tone(f, t0, d, type, vol){ if (muted) return; try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); var o = actx.createOscillator(), g = actx.createGain(); o.type = type || "sine"; o.frequency.value = f; g.gain.setValueAtTime(0, actx.currentTime + t0); g.gain.linearRampToValueAtTime(vol || .18, actx.currentTime + t0 + .02); g.gain.exponentialRampToValueAtTime(.001, actx.currentTime + t0 + d); o.connect(g); g.connect(actx.destination); o.start(actx.currentTime + t0); o.stop(actx.currentTime + t0 + d + .05); } catch(e){} }
+var SND = { flip: function(){ tone(520,0,.08,"triangle",.08); tone(780,.05,.08,"triangle",.06); },
+  ok: function(){ tone(660,0,.15); tone(880,.12,.2); tone(1175,.26,.28); },
+  no: function(){ tone(300,0,.18,"sine",.12); tone(260,.14,.2,"sine",.1); },
+  win: function(){ [523,659,784,1047,1319].forEach(function(f,i){ tone(f, i*.11, .3, "triangle", .15); }); } };
+var muteBtn = document.getElementById("mute");
+function paintMute(){ muteBtn.textContent = muted ? "🔕" : "🔔"; }
+paintMute();
+muteBtn.onclick = function(){ muted = !muted; try { localStorage.setItem("tt_mute", muted ? "1" : "0"); } catch(e){} paintMute(); };
+
+/* ---------- đọc to ---------- */
+var ttsOK = ("speechSynthesis" in window) && (typeof SpeechSynthesisUtterance !== "undefined"), viVoice = null;
+function pickVoice(){ try { var vs = speechSynthesis.getVoices() || []; viVoice = null; for (var i = 0; i < vs.length; i++) if (/^vi/i.test(vs[i].lang)) { viVoice = vs[i]; break; } document.documentElement.classList.toggle("no-tts", vs.length > 0 && !viVoice); } catch(e){} }
+if (!ttsOK) document.documentElement.classList.add("no-tts"); else { pickVoice(); try { speechSynthesis.addEventListener("voiceschanged", pickVoice); } catch(e){ speechSynthesis.onvoiceschanged = pickVoice; } }
+function speak(t){ if (!ttsOK || !t || muted) return; try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(t); u.lang = "vi-VN"; if (viVoice) u.voice = viVoice; u.rate = .92; speechSynthesis.speak(u); } catch(e){} }
+
+/* ---------- hình nhỏ của nhân vật ---------- */
+function svgWrap(vb, inner){ return '<svg viewBox="'+vb+'" xmlns="http://www.w3.org/2000/svg">'+DEFS+inner+'</svg>'; }
+var AV = {
+  voi: svgWrap("-240 -420 610 450", voi(0,0,1,{expr:"smile"})),
+  soc: svgWrap("-200 -300 300 320", soc(0,0,1,{expr:"smile"})),
+  bin: svgWrap("-150 -520 300 545", bin(0,0,1,{expr:"smile"})),
+  sao: '<img src="assets/ngoi-sao-sang.jpg" alt="Ngôi Sao Sáng" style="object-fit:cover;aspect-ratio:1">',
+  tkh: '<img src="assets/tac-ke-hoa.jpg" alt="Tắc Kè Hoa" style="object-fit:cover;aspect-ratio:1">'
+};
+function scene(k){ return '<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">'+DEFS+S[k].draw()+'</svg>'; }
+
+/* ---------- danh sách trang ---------- */
+var ORDER = ["01","02","03","04","05","06","07","08","09","10a","10b","10c","11","12"];
+var PAGES = [{type:"cover"}];
+ORDER.forEach(function(k){ PAGES.push({type:"scene", k:k}); });
+PAGES.push({type:"game", g:"who"}, {type:"game", g:"order"}, {type:"game", g:"two"}, {type:"game", g:"why"}, {type:"game", g:"stone"}, {type:"end"});
+
+var cur = 0, pageEl = document.getElementById("page"), linesEl = document.getElementById("lines");
+var speakText = "";
+
+function setCaption(lines, text){
+  linesEl.innerHTML = lines.map(function(l){
+    if (l[0] === "kể") return '<div class="ln-narr">' + l[1] + '</div>';
+    if (l[0] === "hỏi") return '<div class="ln-ask">🤔 ' + l[1] + '</div>';
+    if (l[0] === "cùng") return '<div class="ln-chant">🗣️ ' + l[1] + '</div>';
+    return '<div>' + (l[0] ? '<span class="who">'+l[0]+':</span> ' : '') + l[1] + '</div>';
+  }).join("");
+  speakText = text || lines.filter(function(l){ return !(l[0] === "hỏi" && /^Gửi ba mẹ/.test(l[1])); }).map(function(l){
+    return (l[0] === "kể" || l[0] === "hỏi" || l[0] === "cùng" || !l[0]) ? l[1] : l[0] + ": " + l[1]; }).join(" ... ");
+}
+
+function cover(){
+  pageEl.innerHTML = '<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">'+DEFS+
+    '<rect width="1920" height="1080" fill="url(#night)"/>' + (function(){ var s=""; for (var i=0;i<40;i++) s += sparkle((i*197)%1900+10, (i*113)%1060+10, 6+(i%4)*3, "#FFF3C4"); return s; })() +
+    saoPhoto(560, 440, 190, {glow: 1.2}) + tkhPhoto(1380, 470, 170) +
+    '<text x="960" y="160" text-anchor="middle" class="b" font-size="54" fill="#C9CDF0">CLB SAO SÁNG · TUẦN 2</text>' +
+    '<text x="960" y="820" text-anchor="middle" class="b" font-size="104" fill="#FFC93C">Voi Con và Sóc Nhỏ xây cầu</text>' +
+    '<text x="960" y="910" text-anchor="middle" class="t" font-size="46" fill="#FFF6E0">Câu chuyện về sức mạnh bên trong</text>' +
+    voi(840, 700, 0.42, {expr:"happy", pose:"happy"}) + soc(1110, 690, 0.48, {expr:"happy", pose:"jump"}) + '</svg>';
+  setCaption(TRUYEN.cover);
+}
+
+/* ---------- trò chơi ---------- */
+function feedback(el, ok, msg){ var fb = pageEl.querySelector(".fb"); fb.textContent = msg; fb.className = "fb" + (ok ? "" : " try"); if (ok) SND.ok(); else { SND.no(); el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake"); } speak(msg); }
+
+function gameWho(){
+  var Qs = [["Nhìn nè! Mình mạnh nhất rừng!", "voi"], ["Không sao, mình xếp lại từ chân cầu nhé.", "soc"], ["Bình tĩnh, thử lại!", "bin"]];
+  var i = 0;
+  function render(){
+    var q = Qs[i];
+    pageEl.innerHTML = '<div class="game"><h2>'+AV.tkh+'Trò 1 · Ai đã nói câu này?</h2><div class="q">"'+q[0]+'"</div>' +
+      '<div class="opts">' + [["voi","Voi Con"],["soc","Sóc Nhỏ"],["bin","Bin"]].map(function(o){ return '<button class="opt" type="button" data-v="'+o[0]+'">'+AV[o[0]]+o[1]+'</button>'; }).join("") + '</div><div class="fb"></div></div>';
+    setCaption([["Câu "+(i+1)+"/3", "Ai đã nói: \""+q[0]+"\""]], "Ai đã nói câu này? " + q[0]);
+    pageEl.querySelectorAll(".opt").forEach(function(b){ b.onclick = function(){
+      if (b.dataset.v === q[1]) { b.classList.add("ok"); feedback(b, true, i < 2 ? "Đúng rồi! Mình sang câu tiếp nhé." : "Bạn nhớ hết rồi! Bấm Lật trang để chơi tiếp.");
+        if (i < 2) setTimeout(function(){ i++; render(); }, 1300); }
+      else { b.classList.add("no"); feedback(b, false, "Chưa đúng, mình thử bạn khác nha!"); }
+    }; });
+  }
+  render();
+}
+function gameOrder(){
+  var right = ["04","05","07","08"], shown = ["07","04","08","05"], step = 0;
+  var names = {"04":"Voi Con khoe sức mạnh","05":"Cây cầu bị sập","07":"Voi Con xin lỗi","08":"Cầu xây xong"};
+  pageEl.innerHTML = '<div class="game"><h2>'+AV.tkh+'Trò 2 · Chuyện gì xảy ra trước?</h2><div class="q">Bấm lần lượt từ chuyện đầu tiên tới chuyện cuối cùng</div>' +
+    '<div class="order">' + shown.map(function(k){ return '<button class="opt" type="button" data-k="'+k+'"><span class="badge b"></span>'+scene(k)+names[k]+'</button>'; }).join("") + '</div><div class="fb"></div></div>';
+  setCaption([["", "Bấm vào bức tranh xảy ra đầu tiên, rồi bức tiếp theo, cho tới bức cuối cùng."]], "Chuyện gì xảy ra trước? Bấm vào bức tranh xảy ra đầu tiên, rồi bức tiếp theo, cho tới bức cuối cùng.");
+  pageEl.querySelectorAll(".opt").forEach(function(b){ b.onclick = function(){
+    if (b.classList.contains("ok")) return;
+    if (b.dataset.k === right[step]) { step++; b.classList.add("ok"); b.querySelector(".badge").textContent = step;
+      feedback(b, true, step < 4 ? "Đúng rồi! Tiếp theo là gì nhỉ?" : "Bạn xếp đúng cả câu chuyện rồi!"); if (step === 4) SND.win(); }
+    else feedback(b, false, "Chưa phải bức này, mình nhìn lại nha!");
+  }; });
+}
+function gameTwo(){
+  var Qs = [["Voi Con dùng vòi khỏe nhấc tảng đá to", "body"], ["Voi Con bình tĩnh, quay lại xin lỗi Sóc Nhỏ", "heart"], ["Sóc Nhỏ không bỏ cuộc, xếp lại từng viên", "heart"], ["Sóc Nhỏ dùng tay nhặt từng viên sỏi", "body"]];
+  var i = 0;
+  function render(){
+    var q = Qs[i];
+    pageEl.innerHTML = '<div class="game"><h2>'+AV.tkh+'Trò 3 · Tìm cả 2 sức mạnh!</h2><div class="card-q">'+q[0]+'</div>' +
+      '<div class="two"><button class="opt" type="button" data-v="body"><span class="emo">💪</span>Sức mạnh cơ thể<small style="font-size:.6em;color:#7A6648">việc tay chân làm</small></button>' +
+      '<button class="opt" type="button" data-v="heart"><span class="emo">⭐</span>Sức mạnh bên trong<small style="font-size:.6em;color:#7A6648">việc trái tim làm</small></button></div><div class="fb"></div></div>';
+    setCaption([["Câu "+(i+1)+"/4", q[0]+". Đây là sức mạnh cơ thể hay sức mạnh bên trong?"]]);
+    pageEl.querySelectorAll(".opt").forEach(function(b){ b.onclick = function(){
+      if (b.dataset.v === q[1]) { b.classList.add("ok"); feedback(b, true, i < 3 ? (q[1]==="body"?"Đúng rồi, đó là việc tay chân làm!":"Đúng rồi, đó là việc trái tim làm!") : "Tuyệt! Việc nào cũng có cả 2 sức mạnh cùng giúp sức.");
+        if (i < 3) setTimeout(function(){ i++; render(); }, 1400); }
+      else { b.classList.add("no"); feedback(b, false, "Mình nghĩ lại nhé: tay chân làm, hay trái tim làm?"); }
+    }; });
+  }
+  render();
+}
+function gameChoice(title, q, opts, okMsg){
+  pageEl.innerHTML = '<div class="game"><h2>'+AV.tkh+title+'</h2><div class="q">'+q+'</div><div class="opts">' +
+    opts.map(function(o, i){ return '<button class="opt" type="button" data-i="'+i+'"><span class="emo">'+o[0]+'</span>'+o[1]+'</button>'; }).join("") + '</div><div class="fb"></div></div>';
+  setCaption([["", q]], q + " " + opts.map(function(o, i){ return "Câu " + (i+1) + ": " + o[1]; }).join(". "));
+  pageEl.querySelectorAll(".opt").forEach(function(b){ b.onclick = function(){
+    var o = opts[+b.dataset.i];
+    if (o[2]) { b.classList.add("ok"); feedback(b, true, okMsg); } else { b.classList.add("no"); feedback(b, false, "Chưa đúng, mình chọn lại nha!"); }
+  }; });
+}
+function endPage(){
+  var P = [["🦁","Dũng cảm"],["⏳","Kiên nhẫn"],["🧗","Bền bỉ"],["💛","Yêu thương"],["🤲","Tử tế"],["🙂","Trung thực"]];
+  pageEl.innerHTML = '<div class="game"><h2>'+AV.tkh+'Hôm nay bạn đã dùng sức mạnh bên trong nào?</h2>' +
+    '<div style="height:clamp(90px,20vw,220px);display:flex;justify-content:center"><svg viewBox="-260 -230 520 280" preserveAspectRatio="xMidYMid meet" style="height:100%;width:100%" id="stoneSvg">'+DEFS+rock(0,0,1.6,{veins:1, glow:0.4})+'</svg></div>' +
+    '<div class="end-powers">' + P.map(function(p){ return '<button class="opt" type="button" data-n="'+p[1]+'"><span class="emo">'+p[0]+'</span>'+p[1]+'</button>'; }).join("") + '</div>' +
+    '<div class="fb">Chạm vào sức mạnh bạn đã dùng. Chọn mấy cái cũng được!</div></div>';
+  setCaption([["Bin", "Hôm nay bạn đã dùng sức mạnh bên trong nào? Chạm vào hình rồi kể cho ba mẹ nghe nhé!"]]);
+  var picked = 0;
+  pageEl.querySelectorAll(".end-powers .opt").forEach(function(b){ b.onclick = function(){
+    if (b.classList.contains("ok")) return; b.classList.add("ok"); picked++;
+    document.getElementById("stoneSvg").innerHTML = DEFS + rock(0,0,1.6,{veins: Math.min(2, 1 + picked), glow: 0.6 + picked*0.25});
+    SND.win(); var fb = pageEl.querySelector(".fb"); fb.className = "fb";
+    fb.textContent = "Viên đá của Bin vừa sáng thêm nhờ sức mạnh " + b.dataset.n.toLowerCase() + " của bạn! Kể cho ba mẹ nghe nhé.";
+    speak(fb.textContent);
+  }; });
+}
+
+/* ---------- lật trang ---------- */
+function render(){
+  var p = PAGES[cur];
+  pageEl.classList.toggle("is-game", p.type === "game" || p.type === "end");
+  if (p.type === "cover") cover();
+  else if (p.type === "scene") { pageEl.innerHTML = scene(p.k); setCaption(TRUYEN[p.k] || S[p.k].lines); }
+  else if (p.type === "game") {
+    if (p.g === "who") gameWho(); else if (p.g === "order") gameOrder(); else if (p.g === "two") gameTwo();
+    else if (p.g === "why") gameChoice("Trò 4 · Vì sao cây cầu xây xong?", "Vì sao cuối cùng cây cầu xây xong?",
+      [["💪","Vì Voi Con mạnh nhất rừng",false],["🤝","Vì hai bạn bình tĩnh, kiên nhẫn làm cùng nhau",true],["🌧️","Vì trời đổ mưa",false]],
+      "Đúng rồi! Cơ bắp thôi chưa đủ. Bình tĩnh, kiên nhẫn và làm cùng nhau mới xây xong cầu.");
+    else gameChoice("Trò 5 · Viên đá của Bin sáng lên khi nào?", "Viên đá của Bin sáng lên một vệt khi nào?",
+      [["😤","Khi Bin bực mình bỏ đi",false],["🍪","Khi Bin bình tĩnh thử lại và mở được hũ bánh",true],["😴","Khi Bin đi ngủ",false]],
+      "Đúng rồi! Mỗi lần Bin dùng sức mạnh bên trong, Ngôi Sao Sáng lại khỏe thêm một chút.");
+  }
+  else endPage();
+  document.getElementById("num").textContent = "Trang " + (cur + 1) + " / " + PAGES.length;
+  document.getElementById("bar").style.width = ((cur + 1) / PAGES.length * 100) + "%";
+  document.getElementById("prev").disabled = cur === 0;
+  var nx = document.getElementById("next");
+  nx.textContent = cur === PAGES.length - 1 ? "Đọc lại ↺" : "Lật trang ▶";
+  try { localStorage.setItem("tt_tuan2_page", String(cur)); } catch(e){}
+}
+var busy = false;
+function go(dir){
+  if (busy) return;
+  var target = dir > 0 ? (cur === PAGES.length - 1 ? 0 : cur + 1) : cur - 1;
+  if (target < 0) return;
+  busy = true; try { speechSynthesis.cancel(); } catch(e){}
+  SND.flip();
+  var reduce = false; try { reduce = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch(e){}
+  var outC = dir > 0 ? "out-next" : "out-prev", inC = dir > 0 ? "in-next" : "in-prev";
+  function swap(){ pageEl.classList.remove(outC); cur = target; render(); pageEl.classList.add(inC); setTimeout(function(){ pageEl.classList.remove(inC); busy = false; }, reduce ? 0 : 330); }
+  if (reduce) swap(); else { pageEl.classList.add(outC); setTimeout(swap, 320); }
+}
+document.getElementById("next").onclick = function(){ go(1); };
+document.getElementById("prev").onclick = function(){ go(-1); };
+document.getElementById("say").onclick = function(){ speak(speakText); };
+document.addEventListener("keydown", function(e){ if (e.key === "ArrowRight") go(1); if (e.key === "ArrowLeft") go(-1); });
+var sx = null;
+pageEl.addEventListener("touchstart", function(e){ sx = e.touches[0].clientX; }, {passive: true});
+pageEl.addEventListener("touchend", function(e){ if (sx == null) return; var dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 60 && !e.target.closest(".opt")) go(dx < 0 ? 1 : -1); });
+try { var saved = +localStorage.getItem("tt_tuan2_page"); if (saved > 0 && saved < PAGES.length) cur = saved; } catch(e){}
+render();
+})();
+</script>
+</body></html>
