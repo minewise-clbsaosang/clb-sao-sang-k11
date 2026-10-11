@@ -204,28 +204,48 @@ function bin(x, y, sc, o){
   return g(x, y, sc, s, o.flip);
 }
 
-/* ================= Voi Con ================= */
+/* ================= Voi Con (vẽ lại 11/10: đầu nhìn thẳng, 2 tai cân đối) ================= */
 function voi(x, y, sc, o){
   o = o || {}; var pose = o.pose || "stand", ex = o.expr || "smile";
-  var s = '<ellipse cx="20" cy="6" rx="210" ry="20" fill="#000" opacity=".12"/>';
-  s += '<path d="M-185 -165 q-35 10 -30 45" stroke="'+C.voiD+'" stroke-width="12" fill="none" stroke-linecap="round"/>';
-  var legs = [[-140,0],[-70,0],[40,0],[110,0]];
-  if (pose === "stomp") legs[3] = [125,-60];
-  legs.forEach(function(l, i){ s += '<rect x="'+(l[0]-28)+'" y="'+(l[1]-100)+'" width="56" height="100" rx="24" fill="'+(i<2?C.voiD:C.voi)+'"/><rect x="'+(l[0]-26)+'" y="'+(l[1]-16)+'" width="52" height="14" rx="7" fill="'+C.voiL+'"/>'; });
-  s += '<ellipse cx="-20" cy="-165" rx="185" ry="125" fill="'+C.voi+'"/><ellipse cx="-40" cy="-130" rx="120" ry="60" fill="'+C.voiL+'" opacity=".5"/>';
-  var hy = pose === "sorry" ? -215 : -255;
-  var earDroop = pose === "sorry" ? 30 : 0;
-  s += '<ellipse cx="105" cy="'+(hy+earDroop)+'" rx="85" ry="100" fill="'+C.voiD+'"/><ellipse cx="110" cy="'+(hy+earDroop+5)+'" rx="55" ry="68" fill="#F2B8C6"/>';
-  s += '<circle cx="190" cy="'+hy+'" r="108" fill="'+C.voi+'"/>';
-  var tx = 275, ty = hy + 30, trunk;
-  if (pose === "lift") trunk = 'M'+tx+' '+ty+' C 330 '+(ty-40)+' 360 '+(ty-170)+' 320 '+(ty-240);
-  else if (pose === "happy") trunk = 'M'+tx+' '+ty+' C 340 '+(ty-10)+' 380 '+(ty-90)+' 345 '+(ty-130)+' C 325 '+(ty-150)+' 305 '+(ty-125)+' 322 '+(ty-110);
-  else if (pose === "sorry" || pose === "calm") trunk = 'M'+tx+' '+ty+' C 300 '+(ty+60)+' 300 '+(ty+130)+' 285 '+(ty+170);
-  else trunk = 'M'+tx+' '+ty+' C 320 '+(ty+40)+' 330 '+(ty+110)+' 300 '+(ty+150)+' C 285 '+(ty+170)+' 265 '+(ty+150)+' 280 '+(ty+135);
-  s += '<path d="'+trunk+'" stroke="'+C.voi+'" stroke-width="58" fill="none" stroke-linecap="round"/>';
-  if (pose === "lift" && !o.noRock) s += rock(320, ty-265, 1.15, {});
-  s += g(200, hy-10, 1, face(ex, 80));
-  if (pose === "calm") s += '<path d="M330 '+(hy-90)+' q30 -20 10 -45 q-20 -25 10 -45" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" opacity=".9"/>';
+  var hy = pose === "sorry" ? -235 : -270, hx = 150;
+  var s = '<ellipse cx="40" cy="6" rx="215" ry="20" fill="#000" opacity=".12"/>';
+  s += '<path d="M-175 -170 q-40 15 -32 55" stroke="'+C.voiD+'" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="-206" cy="-112" r="12" fill="'+C.voiD+'"/>';
+  var legs = [[-130,0,1],[-60,0,1],[40,0,0],[110,0,0]];
+  if (pose === "stomp") legs[3] = [125,-55,0];
+  legs.forEach(function(l){ var col = l[2] ? C.voiD : C.voi;
+    s += '<rect x="'+(l[0]-30)+'" y="'+(l[1]-105)+'" width="60" height="105" rx="28" fill="'+col+'"/>';
+    s += '<ellipse cx="'+(l[0]-14)+'" cy="'+(l[1]-8)+'" rx="9" ry="7" fill="#fff" opacity=".9"/><ellipse cx="'+l[0]+'" cy="'+(l[1]-6)+'" rx="9" ry="7" fill="#fff" opacity=".9"/><ellipse cx="'+(l[0]+14)+'" cy="'+(l[1]-8)+'" rx="9" ry="7" fill="#fff" opacity=".9"/>'; });
+  s += '<ellipse cx="-10" cy="-165" rx="175" ry="122" fill="'+C.voi+'"/><ellipse cx="-20" cy="-120" rx="110" ry="62" fill="'+C.voiL+'" opacity=".55"/>';
+  var rot = pose === "sorry" ? 28 : 12, ery = pose === "sorry" ? 88 : 98;
+  [[-1, hx-112], [1, hx+112]].forEach(function(e){
+    s += '<g transform="translate('+e[1]+' '+(hy+18)+') rotate('+(e[0]*rot)+')"><ellipse rx="82" ry="'+ery+'" fill="'+C.voiD+'"/><ellipse rx="55" ry="'+(ery-28)+'" fill="#F7BFCD"/></g>'; });
+  s += '<circle cx="'+hx+'" cy="'+hy+'" r="118" fill="'+C.voi+'"/>';
+  s += '<path d="M'+(hx-22)+' '+(hy-112)+' q-6 -30 14 -34 q-10 22 8 26 q2 -32 24 -28 q-16 18 2 30" stroke="'+C.voiD+'" stroke-width="9" fill="none" stroke-linecap="round"/>';
+  var chk = ex === "angry" ? "#FF6B6B" : C.cheek;
+  s += '<ellipse cx="'+(hx-62)+'" cy="'+(hy+28)+'" rx="22" ry="15" fill="'+chk+'" opacity=".6"/><ellipse cx="'+(hx+62)+'" cy="'+(hy+28)+'" rx="22" ry="15" fill="'+chk+'" opacity=".6"/>';
+  var ey = hy - 18, exs = [hx-44, hx+44];
+  exs.forEach(function(xx, i){
+    if (ex === "happy") s += '<path d="M'+(xx-16)+' '+ey+' q16 -18 32 0" stroke="'+C.ink+'" stroke-width="7" fill="none" stroke-linecap="round"/>';
+    else if (ex === "calm") s += '<path d="M'+(xx-16)+' '+ey+' q16 14 32 0" stroke="'+C.ink+'" stroke-width="7" fill="none" stroke-linecap="round"/>';
+    else {
+      var dy = ex === "sorry" ? 8 : 0;
+      s += '<ellipse cx="'+xx+'" cy="'+(ey+dy)+'" rx="17" ry="21" fill="'+C.ink+'"/><circle cx="'+(xx+6)+'" cy="'+(ey+dy-8)+'" r="7" fill="#fff"/><circle cx="'+(xx-5)+'" cy="'+(ey+dy+7)+'" r="3.5" fill="#fff"/>';
+    }
+    if (ex === "angry") s += '<path d="M'+(xx + (i ? 22 : -22))+' '+(ey-36)+' L'+(xx + (i ? -10 : 10))+' '+(ey-24)+'" stroke="'+C.ink+'" stroke-width="8" stroke-linecap="round"/>';
+    if (ex === "sorry" || ex === "sad") s += '<path d="M'+(xx + (i ? 20 : -20))+' '+(ey-26)+' L'+(xx + (i ? -8 : 8))+' '+(ey-36)+'" stroke="'+C.ink+'" stroke-width="7" stroke-linecap="round"/>';
+  });
+  if (ex === "happy" || ex === "smile" || ex === "talk") s += '<path d="M'+(hx+28)+' '+(hy+54)+' q14 14 30 0" stroke="'+C.ink+'" stroke-width="6" fill="none" stroke-linecap="round"/>';
+  else if (ex === "angry" || ex === "sad" || ex === "sorry") s += '<path d="M'+(hx+30)+' '+(hy+64)+' q14 -10 28 0" stroke="'+C.ink+'" stroke-width="6" fill="none" stroke-linecap="round"/>';
+  var t0x = hx, t0y = hy + 36, trunk;
+  if (pose === "lift") trunk = 'M'+t0x+' '+t0y+' C'+(t0x+40)+' '+(t0y+40)+' '+(t0x+130)+' '+(t0y-10)+' '+(t0x+150)+' '+(t0y-150);
+  else if (pose === "happy") trunk = 'M'+t0x+' '+t0y+' C'+(t0x+20)+' '+(t0y+70)+' '+(t0x+150)+' '+(t0y+50)+' '+(t0x+165)+' '+(t0y-60)+' C'+(t0x+168)+' '+(t0y-100)+' '+(t0x+134)+' '+(t0y-104)+' '+(t0x+138)+' '+(t0y-72);
+  else if (pose === "sorry" || pose === "calm") trunk = 'M'+t0x+' '+t0y+' C'+(t0x-4)+' '+(t0y+60)+' '+(t0x+4)+' '+(t0y+110)+' '+t0x+' '+(t0y+150);
+  else trunk = 'M'+t0x+' '+t0y+' C'+t0x+' '+(t0y+80)+' '+(t0x+50)+' '+(t0y+120)+' '+(t0x+82)+' '+(t0y+98)+' C'+(t0x+100)+' '+(t0y+84)+' '+(t0x+86)+' '+(t0y+64)+' '+(t0x+72)+' '+(t0y+78);
+  s += '<path d="'+trunk+'" stroke="'+C.voiD+'" stroke-width="54" fill="none" stroke-linecap="round"/>';
+  s += '<path d="'+trunk+'" stroke="'+C.voi+'" stroke-width="44" fill="none" stroke-linecap="round"/>';
+  s += '<path d="M'+(t0x-14)+' '+(t0y+26)+' h28 M'+(t0x-14)+' '+(t0y+46)+' h26" stroke="'+C.voiD+'" stroke-width="4" stroke-linecap="round" opacity=".7"/>';
+  if (pose === "lift" && !o.noRock) s += rock(t0x + 155, t0y - 185, 1.1, {});
+  if (pose === "calm") s += '<path d="M'+(hx+150)+' '+(hy-80)+' q30 -20 10 -45 q-20 -25 10 -45" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" opacity=".9"/>';
   return g(x, y, sc, s, o.flip);
 }
 
@@ -364,13 +384,16 @@ function forest(o){
   for (var i = 0; i < 12; i++) s += '<circle cx="'+(60+i*165)+'" cy="'+(1010 - (i%3)*20)+'" r="10" fill="'+["#FF8FB1","#FFE27A","#fff"][i%3]+'"/>';
   return s;
 }
-function bridge(n){
-  var s = "", xs = [790, 880, 970, 1060, 1150];
+function bridge(n, o){
+  o = o || {}; var s = "", xs = [790, 880, 970, 1060, 1150], tilt = [-7, 6, -9, 5, -6];
   for (var i = 0; i < n && i < 5; i++) {
     var x = xs[i];
+    if (o.chen) [[-44,826],[-24,832],[-2,828],[20,833],[42,826],[-34,812],[34,814]].forEach(function(q){ s += '<ellipse cx="'+(x+q[0])+'" cy="'+q[1]+'" rx="13" ry="9" fill="#8E877B" stroke="'+C.rockD+'" stroke-width="3"/>'; });
+    if (o.wobbly) s += '<g transform="rotate('+tilt[i]+' '+x+' 790)">';
     s += '<rect x="'+(x-50)+'" y="745" width="100" height="78" rx="20" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="5"/>';
     s += '<rect x="'+(x-46)+'" y="742" width="92" height="26" rx="12" fill="#C2BBAE"/>';
     s += '<path d="M'+(x-20)+' 790 l14 8 M'+(x+12)+' 778 l-6 14" stroke="'+C.rockD+'" stroke-width="4" stroke-linecap="round"/>';
+    if (o.wobbly) s += '</g><path d="M'+(x-62)+' 760 q-8 -10 0 -20 M'+(x+62)+' 760 q8 -10 0 -20" stroke="'+C.ink+'" stroke-width="5" fill="none" stroke-linecap="round" opacity=".6"/>';
   }
   return s;
 }
@@ -411,27 +434,27 @@ S["03"] = { sec: 4, lines: [["Tắc Kè Hoa", "Ngày xửa ngày xưa…"]],
     for (var i = 0; i < 10; i++) s += sparkle(380 + i*130, 230 + (i%3)*30, 14 + (i%2)*8);
     return s; } };
 S["04"] = { sec: 10, lines: [["Voi Con", "Nhìn nè! Mình mạnh nhất rừng!"]],
-  draw: function(){ return forest() + bridge(3) + voi(240, 850, 0.9, {pose:"lift", expr:"happy"}) + soc(660, 740, 0.85, {pose:"stand", expr:"surprised", flip: true}) +
+  draw: function(){ return forest() + bridge(3, {wobbly: true}) + voi(240, 850, 0.9, {pose:"lift", expr:"happy"}) + soc(660, 740, 0.85, {pose:"stand", expr:"surprised", flip: true}) +
     bubble(120, 120, 560, 130, "Mình mạnh nhất rừng!", 56, [330, 420, 320]) + bookFrame(); } };
 S["05"] = { sec: 10, lines: [["Voi Con", "Hứ! Mình không chơi nữa!"], ["Sóc Nhỏ", "Phù phù…"]],
   draw: function(){ var s = forest() + fallenStones() + splash(960, 880, 1.0);
     s += voi(250, 850, 0.9, {pose:"stomp", expr:"angry"}) + soc(680, 750, 0.85, {pose:"wet", wet: true, expr:"sad", flip: true});
     s += '<path d="M120 870 l-30 30 M160 880 l-10 40 M390 870 l20 36" stroke="'+C.ink+'" stroke-width="8" stroke-linecap="round"/>';
     s += bubble(120, 110, 560, 130, "Hứ! Không chơi nữa!", 54, [300, 280, 520]) + bookFrame(); return s; } };
-S["06"] = { sec: 8, lines: [["Sóc Nhỏ", "Không sao, mình xếp lại từ chân cầu nhé. Lần này xếp chậm thôi."]],
-  draw: function(){ return forest() + fallenStones().split("</g>").slice(2).join("</g>") + bridge(1) +
+S["06"] = { sec: 8, lines: [["Sóc Nhỏ", "Đá to mình không nhấc được. Nhưng mình chèn sỏi vào chân đá cho khỏi lung lay nhé!"]],
+  draw: function(){ return forest() + fallenStones().split("</g>").slice(2).join("</g>") + bridge(1, {chen: true}) +
     soc(660, 760, 1.0, {pose:"pebble", expr:"smile"}) + voi(250, 760, 0.6, {pose:"stand", expr:"sad"}) +
-    bubble(480, 130, 560, 130, "Mình xếp lại nhé!", 56, [640, 690, 520]) + bookFrame(); } };
-S["07"] = { sec: 10, lines: [["Voi Con", "Sóc Nhỏ ơi… lúc nãy mình cáu, cho mình xin lỗi nhé. Mình nhấc đá to, bạn chỉ chỗ đặt được không?"]],
-  draw: function(){ return forest() + bridge(2) + voi(260, 860, 0.9, {pose:"sorry", expr:"sorry"}) + soc(690, 760, 0.9, {pose:"stand", expr:"smile", flip: true}) +
+    bubble(440, 130, 600, 130, "Mình chèn sỏi nhé!", 56, [640, 690, 520]) + bookFrame(); } };
+S["07"] = { sec: 10, lines: [["Voi Con", "Sóc Nhỏ ơi… lúc nãy mình cáu, cho mình xin lỗi nhé. Mình nhấc đá to, bạn chèn sỏi cho thật chắc nhé?"]],
+  draw: function(){ return forest() + bridge(2, {chen: true}) + voi(260, 860, 0.9, {pose:"sorry", expr:"sorry"}) + soc(690, 760, 0.9, {pose:"stand", expr:"smile", flip: true}) +
     '<path d="M470 470 q30 -30 0 -60 q-30 -30 0 -60" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"/>' +
     bubble(120, 110, 640, 130, "Cho mình xin lỗi nhé…", 56, [330, 380, 450]) + bookFrame(); } };
-S["08"] = { sec: 8, lines: [["", "Voi Con nhấc, Sóc Nhỏ chỉ chỗ. Hai bạn kiên nhẫn từng viên một… và cây cầu đã xong!"]],
-  draw: function(){ var s = forest() + bridge(5) + voi(400, 850, 0.9, {pose:"happy", expr:"happy"}) + soc(1000, 750, 0.9, {pose:"jump", expr:"happy"});
+S["08"] = { sec: 8, lines: [["", "Voi Con đặt đá, Sóc Nhỏ chèn sỏi. Hai bạn kiên nhẫn từng viên một… và cây cầu đã xong, không lung lay chút nào!"]],
+  draw: function(){ var s = forest() + bridge(5, {chen: true}) + voi(400, 850, 0.9, {pose:"happy", expr:"happy"}) + soc(1000, 750, 0.9, {pose:"jump", expr:"happy"});
     for (var i = 0; i < 16; i++) s += sparkle(300 + (i*97)%1300, 150 + (i*61)%360, 14 + (i%3)*6, ["#FFE27A","#FF8FB1","#fff"][i%3]);
     return s + bookFrame(); } };
 S["09"] = { sec: 10, lines: [["Ngôi Sao Sáng", "Đôi tay khỏe giúp Voi Con nhấc được đá. Nhưng điều giúp Voi Con quay lại, xin lỗi và làm tới cùng là sức mạnh bên trong."]],
-  draw: function(){ return forest({sunset: true}) + bridge(5) + voi(1330, 860, 0.8, {pose:"happy", expr:"smile"}) + soc(1700, 800, 0.85, {pose:"sit", expr:"happy", flip: true}) +
+  draw: function(){ return forest({sunset: true}) + bridge(5, {chen: true}) + voi(1330, 860, 0.8, {pose:"happy", expr:"smile"}) + soc(1700, 800, 0.85, {pose:"sit", expr:"happy", flip: true}) +
     hearts(1500, 420, 1.4) + hearts(1420, 360, 0.9) + hearts(1580, 350, 1.0) + saoPhoto(260, 190, 72, {glow: 0.8}) + bookFrame(); } };
 function quiz(n, title, body, heart, scene){
   var s = '<rect width="1920" height="1080" fill="#FFF4DC"/>';
@@ -497,11 +520,11 @@ var TRUYEN = {
     ["kể", "Hai bạn muốn xây một cây cầu đá để qua suối chơi. Voi Con dùng cái vòi khỏe nhấc tảng đá to nhất lên. Hự!"],
     ["Voi Con", "Nhìn nè! Mình mạnh nhất rừng! Một mình mình cũng xây xong cầu!"],
     ["Sóc Nhỏ", "Oa… bạn khỏe quá! Mình chỉ nhấc được viên sỏi bé tí thôi."],
-    ["kể", "Voi Con xếp đá thật nhanh, nhanh hơn, nhanh hơn nữa… Cây cầu sắp xong rồi. Nhưng mà…"],
+    ["kể", "Voi Con xếp đá thật nhanh, đặt viên này chồng lên viên kia, chẳng kịp xem đã chắc chưa… Cây cầu sắp xong rồi. Nhưng mà…"],
     ["hỏi", "Theo bạn, chuyện gì sắp xảy ra? Lật trang xem nào!"]
   ],
   "05": [
-    ["kể", "Lộc cộc… lộc cộc… ÙM! Một viên đá xếp vội bị trượt. Cả cây cầu đổ ào xuống suối!"],
+    ["kể", "Một viên đá kê vội bị lung lay… lộc cộc… lộc cộc… ÙM! Cả cây cầu đổ ào xuống suối!"],
     ["Voi Con", "Hứ! Cầu gì mà dở thế! Mình không chơi nữa!"],
     ["kể", "Voi Con bực quá, giậm chân. Rầm! Rầm! Nước bắn tung tóe, ướt sũng cả Sóc Nhỏ."],
     ["Sóc Nhỏ", "Phù phù… lạnh quá…"],
@@ -509,26 +532,26 @@ var TRUYEN = {
   ],
   "06": [
     ["kể", "Sóc Nhỏ lau mặt. Bạn ấy cũng buồn lắm. Nhưng Sóc Nhỏ đặt tay lên ngực, hít một hơi thật sâu…"],
-    ["Sóc Nhỏ", "Hít một hơi… thử lại nào! Mình xếp lại từ chân cầu nhé. Lần này xếp chậm thôi."],
-    ["kể", "Sóc Nhỏ nhặt từng viên sỏi. Cạch… một viên. Cạch… hai viên. Cạch… ba viên!"],
+    ["Sóc Nhỏ", "Hít một hơi… thử lại nào! Đá to mình không nhấc được. Nhưng mình có thể nhét sỏi vào chân đá cho khỏi lung lay!"],
+    ["kể", "Sóc Nhỏ nhặt từng viên sỏi nhỏ, chèn vào kẽ dưới viên đá đầu tiên. Cạch… một viên. Cạch… hai viên. Cạch… ba viên! Viên đá đứng yên, không lung lay nữa."],
     ["cùng", "Cùng đếm với Sóc Nhỏ: một, hai, ba!"]
   ],
   "07": [
     ["kể", "Voi Con đứng nhìn. Trong lòng Voi Con có một tiếng nói nhỏ xíu khẽ nhắc: \"Bạn ấy bị ướt là tại mình đó.\""],
     ["kể", "Voi Con đặt vòi lên ngực, hít một hơi thật sâu…"],
     ["cùng", "Cùng nói với Voi Con: Hít một hơi… thử lại nào!"],
-    ["Voi Con", "Sóc Nhỏ ơi… lúc nãy mình cáu, làm bạn ướt hết. Cho mình xin lỗi nhé. Mình nhấc đá to, bạn chỉ chỗ đặt cho chắc được không?"],
+    ["Voi Con", "Sóc Nhỏ ơi… lúc nãy mình cáu, làm bạn ướt hết. Cho mình xin lỗi nhé. Mình nhấc đá to, còn bạn chèn sỏi cho thật chắc nhé?"],
     ["Sóc Nhỏ", "Được chứ! Tụi mình làm cùng nhau nha!"]
   ],
   "08": [
-    ["kể", "Voi Con nhấc đá to. Sóc Nhỏ chỉ chỗ: bên trái một chút… chút nữa… đúng rồi! Hai bạn làm chậm mà chắc, từng viên, từng viên một."],
-    ["kể", "Và rồi… cây cầu đã xong! Hai bạn nhảy lên cầu: bịch, bịch, bịch! Cầu không rung một chút nào."],
+    ["kể", "Voi Con đặt đá to. Sóc Nhỏ chèn sỏi vào chân đá: cạch, cạch, cạch! Voi Con lắc thử… không lung lay chút nào! Hai bạn làm chậm mà chắc, từng viên, từng viên một."],
+    ["kể", "Và rồi… cây cầu đã xong! Hai bạn nhảy lên cầu: bịch, bịch, bịch! Cầu đứng vững như núi."],
     ["Voi Con và Sóc Nhỏ", "Yeah! Tụi mình làm được rồi!"]
   ],
   "09": [
     ["kể", "Chiều hôm đó, hai bạn ngồi bên cây cầu, ngắm mặt trời lặn."],
     ["hỏi", "Theo bạn, điều gì đã giúp hai bạn xây xong cầu?"],
-    ["Ngôi Sao Sáng", "Đôi vòi khỏe giúp Voi Con nhấc được đá. Đó là sức mạnh cơ thể. Nhưng điều giúp Voi Con bình tĩnh lại, dám xin lỗi và làm tới cùng là sức mạnh bên trong. Sức mạnh ấy không nhìn thấy được, nhưng ai cũng thấy việc nó làm."]
+    ["Ngôi Sao Sáng", "Đôi vòi khỏe giúp Voi Con nhấc được đá. Đó là sức mạnh cơ thể. Nhưng điều giúp Voi Con bình tĩnh lại, dám xin lỗi và làm tới cùng là sức mạnh bên trong. Sóc Nhỏ không có cái vòi khỏe, nhưng cũng có sức mạnh bên trong: kiên nhẫn chèn từng viên sỏi. Sức mạnh ấy không nhìn thấy được, nhưng ai cũng thấy việc nó làm."]
   ],
   "10a": [
     ["Tắc Kè Hoa", "Bin ơi, mình đố nè! Tối nay Bin buồn ngủ díp cả mắt, mà vẫn đi đánh răng cho xong."],
@@ -628,7 +651,7 @@ function cover(){
 function feedback(el, ok, msg){ var fb = pageEl.querySelector(".fb"); fb.textContent = msg; fb.className = "fb" + (ok ? "" : " try"); if (ok) SND.ok(); else { SND.no(); el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake"); } speak(msg); }
 
 function gameWho(){
-  var Qs = [["Nhìn nè! Mình mạnh nhất rừng!", "voi"], ["Không sao, mình xếp lại từ chân cầu nhé.", "soc"], ["Bình tĩnh, thử lại!", "bin"]];
+  var Qs = [["Nhìn nè! Mình mạnh nhất rừng!", "voi"], ["Đá to mình không nhấc được. Nhưng mình chèn sỏi vào chân đá nhé!", "soc"], ["Bình tĩnh, thử lại!", "bin"]];
   var i = 0;
   function render(){
     var q = Qs[i];
@@ -657,7 +680,7 @@ function gameOrder(){
   }; });
 }
 function gameTwo(){
-  var Qs = [["Voi Con dùng vòi khỏe nhấc tảng đá to", "body"], ["Voi Con bình tĩnh, quay lại xin lỗi Sóc Nhỏ", "heart"], ["Sóc Nhỏ không bỏ cuộc, xếp lại từng viên", "heart"], ["Sóc Nhỏ dùng tay nhặt từng viên sỏi", "body"]];
+  var Qs = [["Voi Con dùng vòi khỏe nhấc tảng đá to", "body"], ["Voi Con bình tĩnh, quay lại xin lỗi Sóc Nhỏ", "heart"], ["Sóc Nhỏ không bỏ cuộc, kiên nhẫn chèn từng viên sỏi", "heart"], ["Sóc Nhỏ dùng tay nhét sỏi vào chân đá", "body"]];
   var i = 0;
   function render(){
     var q = Qs[i];
@@ -708,8 +731,8 @@ function render(){
   else if (p.type === "game") {
     if (p.g === "who") gameWho(); else if (p.g === "order") gameOrder(); else if (p.g === "two") gameTwo();
     else if (p.g === "why") gameChoice("Trò 4 · Vì sao cây cầu xây xong?", "Vì sao cuối cùng cây cầu xây xong?",
-      [["💪","Vì Voi Con mạnh nhất rừng",false],["🤝","Vì hai bạn bình tĩnh, kiên nhẫn làm cùng nhau",true],["🌧️","Vì trời đổ mưa",false]],
-      "Đúng rồi! Cơ bắp thôi chưa đủ. Bình tĩnh, kiên nhẫn và làm cùng nhau mới xây xong cầu.");
+      [["💪","Vì Voi Con mạnh nhất rừng",false],["🤝","Vì hai bạn bình tĩnh làm cùng nhau: Voi Con đặt đá, Sóc Nhỏ chèn sỏi",true],["🌧️","Vì trời đổ mưa",false]],
+      "Đúng rồi! Cơ bắp thôi chưa đủ. Bình tĩnh, kiên nhẫn và mỗi bạn làm phần mình giỏi mới xây xong cầu.");
     else gameChoice("Trò 5 · Viên đá của Bin sáng lên khi nào?", "Viên đá của Bin sáng lên một vệt khi nào?",
       [["😤","Khi Bin bực mình bỏ đi",false],["🍪","Khi Bin bình tĩnh thử lại và mở được hũ bánh",true],["😴","Khi Bin đi ngủ",false]],
       "Đúng rồi! Mỗi lần Bin dùng sức mạnh bên trong, Ngôi Sao Sáng lại khỏe thêm một chút.");
