@@ -47,6 +47,7 @@
   .num{color:#C9CDF0;font-weight:800;font-size:13px;}
   button:focus-visible{outline:3px solid #fff;outline-offset:2px;}
 
+
   /* trang trò chơi (HTML) */
   .game{position:absolute;inset:0;display:flex;flex-direction:column;padding:3.2% 4%;gap:2.4%;background:linear-gradient(180deg,#FFF8E8,#FFEFD0);}
   .page.is-game{aspect-ratio:auto;}
@@ -77,6 +78,32 @@
   .card-q{font-family:'Baloo 2',sans-serif;font-size:clamp(16px,3vw,36px);text-align:center;background:#fff;border:4px dashed var(--teal);border-radius:20px;padding:2%;}
   .end-powers{flex:1;min-height:0;display:grid;grid-template-columns:repeat(6,1fr);gap:2%;}
   @media (max-width:600px){.end-powers{grid-template-columns:repeat(3,1fr);} .order{grid-template-columns:repeat(2,1fr);} .opt svg{max-height:50%;}}
+
+  /* ===== Màn hình ngang (laptop, máy tính bảng ngang): vừa khít 1 màn hình, không cuộn ===== */
+  @media (min-width:700px) and (orientation:landscape){
+    html,body{height:100%;overflow:hidden;}
+    body{padding:10px 20px 8px;}
+    .wrap{height:100%;max-width:none;display:grid;grid-template-columns:minmax(0,1fr) clamp(280px,27vw,420px);grid-template-rows:auto minmax(0,1fr) auto;gap:10px 14px;}
+    header{grid-column:1 / -1;}
+    nav{grid-column:1 / -1;}
+    header img{height:36px;}
+    header h1{font-size:22px;}
+    .stage{grid-column:1;grid-row:2;min-height:0;min-width:0;container-type:size;display:flex;align-items:center;justify-content:center;}
+    .page,.page.is-game{width:min(100cqw, 100cqh * 16 / 9);aspect-ratio:16/9;height:auto;container-type:inline-size;}
+    .page.is-game .game{position:absolute;inset:0;min-height:0;padding:2.6% 3.4%;gap:2%;}
+    .cap{grid-column:2;grid-row:2;align-self:center;max-height:100%;height:auto;overflow:auto;padding:14px 16px;min-height:0;flex-direction:column;}
+    .cap .say{align-self:flex-end;order:2;}
+    .cap .lines{font-size:clamp(15px,1.45vw,20px);gap:8px;}
+    nav{position:static;background:none;padding:2px 0 0;}
+    .nav-btn{font-size:18px;padding:9px 18px;}
+    .game h2{font-size:3.3cqw;} .game h2 img{width:5.5cqw;height:5.5cqw;}
+    .game .q,.card-q{font-size:2.8cqw;}
+    .opt{font-size:2.2cqw;min-height:0;} .opts,.two,.order,.end-powers{min-height:0;} .opt svg,.opt img{max-height:52%;} .opt .emo{font-size:5.2cqw;} .two .opt{font-size:2.6cqw;}
+    .fb{font-size:2.2cqw;}
+    .order .badge{width:4cqw;height:4cqw;font-size:2.4cqw;}
+    .end-powers .opt{font-size:1.9cqw;}
+    .stone-box{height:22cqw !important;max-height:30%;}
+  }
 </style></head>
 <body>
 <div class="wrap">
@@ -328,15 +355,29 @@ function forest(o){
   s += '<ellipse cx="300" cy="560" rx="650" ry="220" fill="#B6E39A"/><ellipse cx="1600" cy="580" rx="700" ry="240" fill="#A7DB89"/>';
   [[150,470,1],[420,430,1.2],[1320,450,1.1],[1620,420,1.3],[1820,470,1]].forEach(function(t){ s += g(t[0], t[1], t[2], '<rect x="-14" y="-10" width="28" height="90" fill="#9A6630"/><circle cx="0" cy="-60" r="70" fill="#6CB04E"/><circle cx="-45" cy="-30" r="50" fill="#7CC05C"/><circle cx="45" cy="-30" r="50" fill="#5FA343"/>'); });
   s += '<rect x="0" y="560" width="1920" height="520" fill="'+C.grass+'"/>';
-  s += '<path d="M0 760 C400 700 700 820 960 770 C1250 715 1550 820 1920 760 L1920 900 C1550 960 1250 860 960 910 C700 960 400 850 0 910 Z" fill="'+C.water+'"/>';
-  s += '<path d="M120 820 q40 -14 80 0 M600 860 q40 -14 80 0 M1100 830 q40 -14 80 0 M1600 850 q40 -14 80 0" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" opacity=".7"/>';
+  /* suối chảy dọc giữa tranh: bờ trái và bờ phải */
+  s += '<path d="M880 560 C860 680 800 860 720 1080 L1240 1080 C1150 860 1090 680 1060 560 Z" fill="'+C.water+'"/>';
+  s += '<path d="M880 560 C860 680 800 860 720 1080" stroke="'+C.grassD+'" stroke-width="14" fill="none"/><path d="M1060 560 C1090 680 1150 860 1240 1080" stroke="'+C.grassD+'" stroke-width="14" fill="none"/>';
+  s += '<path d="M940 620 q-10 30 0 60 M1000 700 q-12 34 0 68 M900 900 q-14 36 0 72 M1080 920 q14 36 0 72 M960 1000 q-10 30 0 60" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" opacity=".7"/>';
+  /* bờ bên kia có bụi quả mọng: lý do muốn qua suối */
+  s += g(1560, 700, 1, '<ellipse cx="0" cy="0" rx="150" ry="95" fill="#5FA343"/><ellipse cx="-70" cy="-30" rx="80" ry="65" fill="#6CB04E"/><ellipse cx="70" cy="-40" rx="85" ry="70" fill="#7CC05C"/>' + [[-80,-20],[-30,-60],[20,-10],[60,-55],[100,0],[-110,20],[0,30],[50,25]].map(function(q){ return '<circle cx="'+q[0]+'" cy="'+q[1]+'" r="15" fill="#E2574C"/><circle cx="'+(q[0]-4)+'" cy="'+(q[1]-5)+'" r="4" fill="#fff" opacity=".7"/>'; }).join(""));
   for (var i = 0; i < 12; i++) s += '<circle cx="'+(60+i*165)+'" cy="'+(1010 - (i%3)*20)+'" r="10" fill="'+["#FF8FB1","#FFE27A","#fff"][i%3]+'"/>';
   return s;
 }
-function bridge(n, total){
-  var s = "", x0 = 520, step = 115;
-  for (var i = 0; i < n; i++) s += '<ellipse cx="'+(x0+i*step)+'" cy="'+(800+ (i%2)*8)+'" rx="62" ry="34" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="5"/><ellipse cx="'+(x0+i*step)+'" cy="'+(770+(i%2)*8)+'" rx="58" ry="28" fill="#B9B2A5"/>';
+function bridge(n){
+  var s = "", xs = [790, 880, 970, 1060, 1150];
+  for (var i = 0; i < n && i < 5; i++) {
+    var x = xs[i];
+    s += '<rect x="'+(x-50)+'" y="745" width="100" height="78" rx="20" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="5"/>';
+    s += '<rect x="'+(x-46)+'" y="742" width="92" height="26" rx="12" fill="#C2BBAE"/>';
+    s += '<path d="M'+(x-20)+' 790 l14 8 M'+(x+12)+' 778 l-6 14" stroke="'+C.rockD+'" stroke-width="4" stroke-linecap="round"/>';
+  }
   return s;
+}
+function fallenStones(){
+  return [[820,880,-25],[930,950,18],[1040,900,-12],[1120,990,30],[880,1010,8]].map(function(r){
+    return '<g transform="translate('+r[0]+' '+r[1]+') rotate('+r[2]+')"><rect x="-50" y="-36" width="100" height="72" rx="20" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="5"/></g>';
+  }).join("");
 }
 function bookFrame(){
   return '<rect x="0" y="0" width="1920" height="1080" fill="none" stroke="#FFF4DC" stroke-width="60"/><rect x="30" y="30" width="1860" height="1020" rx="30" fill="none" stroke="#E8C79A" stroke-width="8"/>'+
@@ -370,29 +411,28 @@ S["03"] = { sec: 4, lines: [["Tắc Kè Hoa", "Ngày xửa ngày xưa…"]],
     for (var i = 0; i < 10; i++) s += sparkle(380 + i*130, 230 + (i%3)*30, 14 + (i%2)*8);
     return s; } };
 S["04"] = { sec: 10, lines: [["Voi Con", "Nhìn nè! Mình mạnh nhất rừng!"]],
-  draw: function(){ return forest() + bridge(4) + voi(330, 840, 1.0, {pose:"lift", expr:"happy"}) + soc(980, 700, 0.95, {pose:"stand", expr:"surprised", flip: true}) +
-    bubble(260, 120, 560, 130, "Mình mạnh nhất rừng!", 56, [470, 520, 330]) + bookFrame(); } };
+  draw: function(){ return forest() + bridge(3) + voi(240, 850, 0.9, {pose:"lift", expr:"happy"}) + soc(660, 740, 0.85, {pose:"stand", expr:"surprised", flip: true}) +
+    bubble(120, 120, 560, 130, "Mình mạnh nhất rừng!", 56, [330, 420, 320]) + bookFrame(); } };
 S["05"] = { sec: 10, lines: [["Voi Con", "Hứ! Mình không chơi nữa!"], ["Sóc Nhỏ", "Phù phù…"]],
-  draw: function(){ var s = forest();
-    [[560,860,-20],[700,890,15],[840,870,-10],[980,900,25]].forEach(function(r){ s += '<g transform="translate('+r[0]+' '+r[1]+') rotate('+r[2]+')"><ellipse rx="62" ry="34" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="5"/></g>'; });
-    s += splash(800, 860, 1.1) + voi(330, 840, 1.0, {pose:"stomp", expr:"angry"}) + soc(1250, 720, 0.95, {pose:"wet", wet: true, expr:"sad", flip: true});
-    s += '<path d="M200 860 l-30 30 M240 870 l-10 40 M470 860 l20 36" stroke="'+C.ink+'" stroke-width="8" stroke-linecap="round"/>';
-    s += bubble(240, 110, 520, 130, "Hứ! Không chơi nữa!", 54, [430, 380, 520]) + bookFrame(); return s; } };
+  draw: function(){ var s = forest() + fallenStones() + splash(960, 880, 1.0);
+    s += voi(250, 850, 0.9, {pose:"stomp", expr:"angry"}) + soc(680, 750, 0.85, {pose:"wet", wet: true, expr:"sad", flip: true});
+    s += '<path d="M120 870 l-30 30 M160 880 l-10 40 M390 870 l20 36" stroke="'+C.ink+'" stroke-width="8" stroke-linecap="round"/>';
+    s += bubble(120, 110, 560, 130, "Hứ! Không chơi nữa!", 54, [300, 280, 520]) + bookFrame(); return s; } };
 S["06"] = { sec: 8, lines: [["Sóc Nhỏ", "Không sao, mình xếp lại từ chân cầu nhé. Lần này xếp chậm thôi."]],
-  draw: function(){ return forest() + bridge(2) + '<ellipse cx="760" cy="815" rx="40" ry="22" fill="'+C.rock+'" stroke="'+C.rockD+'" stroke-width="4"/>' +
-    soc(880, 760, 1.15, {pose:"pebble", expr:"smile", flip: true}) + voi(1520, 700, 0.62, {pose:"stand", expr:"sad", flip: true}) +
-    bubble(980, 150, 620, 130, "Mình xếp lại nhé!", 56, [1000, 940, 480]) + bookFrame(); } };
+  draw: function(){ return forest() + fallenStones().split("</g>").slice(2).join("</g>") + bridge(1) +
+    soc(660, 760, 1.0, {pose:"pebble", expr:"smile"}) + voi(250, 760, 0.6, {pose:"stand", expr:"sad"}) +
+    bubble(480, 130, 560, 130, "Mình xếp lại nhé!", 56, [640, 690, 520]) + bookFrame(); } };
 S["07"] = { sec: 10, lines: [["Voi Con", "Sóc Nhỏ ơi… lúc nãy mình cáu, cho mình xin lỗi nhé. Mình nhấc đá to, bạn chỉ chỗ đặt được không?"]],
-  draw: function(){ return forest() + bridge(3) + voi(520, 860, 1.0, {pose:"sorry", expr:"sorry"}) + soc(1220, 760, 1.05, {pose:"stand", expr:"smile", flip: true}) +
-    '<path d="M760 420 q30 -30 0 -60 q-30 -30 0 -60" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"/>' +
-    bubble(520, 110, 720, 130, "Cho mình xin lỗi nhé…", 56, [700, 720, 440]) + bookFrame(); } };
+  draw: function(){ return forest() + bridge(2) + voi(260, 860, 0.9, {pose:"sorry", expr:"sorry"}) + soc(690, 760, 0.9, {pose:"stand", expr:"smile", flip: true}) +
+    '<path d="M470 470 q30 -30 0 -60 q-30 -30 0 -60" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"/>' +
+    bubble(120, 110, 640, 130, "Cho mình xin lỗi nhé…", 56, [330, 380, 450]) + bookFrame(); } };
 S["08"] = { sec: 8, lines: [["", "Voi Con nhấc, Sóc Nhỏ chỉ chỗ. Hai bạn kiên nhẫn từng viên một… và cây cầu đã xong!"]],
-  draw: function(){ var s = forest() + bridge(9) + voi(330, 840, 0.95, {pose:"happy", expr:"happy"}) + soc(1100, 700, 1.0, {pose:"jump", expr:"happy"});
+  draw: function(){ var s = forest() + bridge(5) + voi(400, 850, 0.9, {pose:"happy", expr:"happy"}) + soc(1000, 750, 0.9, {pose:"jump", expr:"happy"});
     for (var i = 0; i < 16; i++) s += sparkle(300 + (i*97)%1300, 150 + (i*61)%360, 14 + (i%3)*6, ["#FFE27A","#FF8FB1","#fff"][i%3]);
     return s + bookFrame(); } };
 S["09"] = { sec: 10, lines: [["Ngôi Sao Sáng", "Đôi tay khỏe giúp Voi Con nhấc được đá. Nhưng điều giúp Voi Con quay lại, xin lỗi và làm tới cùng là sức mạnh bên trong."]],
-  draw: function(){ return forest({sunset: true}) + bridge(9) + voi(700, 760, 0.85, {pose:"happy", expr:"smile"}) + soc(1120, 690, 0.95, {pose:"sit", expr:"happy", flip: true}) +
-    hearts(960, 360, 1.4) + hearts(880, 300, 0.9) + hearts(1040, 290, 1.0) + saoPhoto(1700, 190, 72, {glow: 0.8}) + bookFrame(); } };
+  draw: function(){ return forest({sunset: true}) + bridge(5) + voi(1330, 860, 0.8, {pose:"happy", expr:"smile"}) + soc(1700, 800, 0.85, {pose:"sit", expr:"happy", flip: true}) +
+    hearts(1500, 420, 1.4) + hearts(1420, 360, 0.9) + hearts(1580, 350, 1.0) + saoPhoto(260, 190, 72, {glow: 0.8}) + bookFrame(); } };
 function quiz(n, title, body, heart, scene){
   var s = '<rect width="1920" height="1080" fill="#FFF4DC"/>';
   s += '<rect x="60" y="40" width="1800" height="110" rx="30" fill="#4A4FA0"/><text x="990" y="118" text-anchor="middle" class="b" font-size="64" fill="#fff">Đố nhanh '+n+': tìm cả 2 sức mạnh!</text>' + tkhPhoto(150, 95, 72);
@@ -645,7 +685,7 @@ function gameChoice(title, q, opts, okMsg){
 function endPage(){
   var P = [["🦁","Dũng cảm"],["⏳","Kiên nhẫn"],["🧗","Bền bỉ"],["💛","Yêu thương"],["🤲","Tử tế"],["🙂","Trung thực"]];
   pageEl.innerHTML = '<div class="game"><h2>'+AV.tkh+'Hôm nay bạn đã dùng sức mạnh bên trong nào?</h2>' +
-    '<div style="height:clamp(90px,20vw,220px);display:flex;justify-content:center"><svg viewBox="-260 -230 520 280" preserveAspectRatio="xMidYMid meet" style="height:100%;width:100%" id="stoneSvg">'+DEFS+rock(0,0,1.6,{veins:1, glow:0.4})+'</svg></div>' +
+    '<div class="stone-box" style="height:clamp(90px,20vw,220px);display:flex;justify-content:center"><svg viewBox="-260 -230 520 280" preserveAspectRatio="xMidYMid meet" style="height:100%;width:100%" id="stoneSvg">'+DEFS+rock(0,0,1.6,{veins:1, glow:0.4})+'</svg></div>' +
     '<div class="end-powers">' + P.map(function(p){ return '<button class="opt" type="button" data-n="'+p[1]+'"><span class="emo">'+p[0]+'</span>'+p[1]+'</button>'; }).join("") + '</div>' +
     '<div class="fb">Chạm vào sức mạnh bạn đã dùng. Chọn mấy cái cũng được!</div></div>';
   setCaption([["Bin", "Hôm nay bạn đã dùng sức mạnh bên trong nào? Chạm vào hình rồi kể cho ba mẹ nghe nhé!"]]);
