@@ -203,6 +203,7 @@ function bin(x, y, sc, o){
   if (o.hair === "pigtail") s += '<circle cx="-112" cy="-440" r="34" fill="'+C.hair+'"/><circle cx="112" cy="-440" r="34" fill="'+C.hair+'"/>';
   s += '<path d="M-102 -400 Q-108 -505 0 -505 Q108 -505 102 -400 Q80 -455 40 -448 Q20 -470 -10 -452 Q-50 -470 -60 -440 Q-90 -450 -102 -400 Z" fill="'+C.hair+'"/>';
   if (o.messy) s += '<path d="M-70 -480 l-34 -58 52 34 z M-22 -500 l-4 -66 30 52 z M30 -500 l30 -60 4 62 z M74 -478 l54 -34 -28 56 z M-100 -430 l-50 -20 46 -12 z" fill="'+C.hair+'"/>';
+  if (o.tuft) s += '<path d="M6 -500 q-18 -46 24 -66 q-8 30 8 64 z" fill="'+C.hair+'"/>';
   if (o.paint) s += '<circle cx="-50" cy="-200" r="14" fill="#FF6F91"/><circle cx="-34" cy="-178" r="7" fill="#FF6F91"/><circle cx="44" cy="-250" r="12" fill="#FFC93C"/><circle cx="30" cy="-160" r="10" fill="#8B5FBF"/><circle cx="58" cy="-150" r="5" fill="#8B5FBF"/>';
   s += g(0,-385,1,face(ex,95));
   return g(x, y, sc, s, o.flip);
@@ -584,7 +585,7 @@ function classroom(){
 
 /* ================= các cảnh Tuần 4 ================= */
 var S2 = S; S = {};
-function binReflect(x, y, sc, expr){ return bin(x, y, sc, {pose:"down", expr: expr, messy: true, paint: true, flip: true}); }
+function binReflect(x, y, sc, expr, neat){ return bin(x, y, sc, neat ? {pose:"down", expr: expr, tuft: true, flip: true} : {pose:"down", expr: expr, messy: true, paint: true, flip: true}); }
 S["01"] = { lines: [["Bin", "Mai chụp ảnh lớp mà mình trông kỳ quá…"]],
   draw: function(){ return room() + stoneBox(450, 600, 1, {veins: 1, glow: 0.3}) +
     mirror(1220, 470, 360, 560, binReflect(1220, 960, 0.9, "sad")) +
@@ -645,12 +646,12 @@ S["09"] = { lines: [["Sóc Nhỏ", "Đuôi mình đẹp nhất khi được dùn
     s += tailUmbrella();
     s += soc(1130, 870, 0.95, {pose:"jump", expr:"happy", flip: true, noTail: true});
     s += voi(300, 870, 0.7, {expr:"happy", wrinkle: true});
-    return s + bubble(560, 110, 1100, 130, "Đuôi mình đẹp nhất khi che cho bạn!", 54, [1000, 1060, 420]) + bookFrame(); } };
+    return s + bubble(560, 110, 1000, 130, "Che cho bạn thì mình làm được!", 54, [1000, 1060, 420]) + bookFrame(); } };
 function rainbowScene(){
   var s = lakeside({after: true, rainbow: true});
   s += g(960, 560, 1, '<rect x="-20" y="0" width="40" height="230" fill="#9A6630"/><ellipse cx="0" cy="-30" rx="420" ry="120" fill="#5FA343"/><ellipse cx="-220" cy="0" rx="200" ry="90" fill="#6CB04E"/><ellipse cx="220" cy="0" rx="200" ry="90" fill="#7CC05C"/>');
   s += '<g opacity=".4" transform="translate(0 1700) scale(1 -1)">' + soc(1230, 860, 0.62, {pose:"sit", expr:"happy", flip: true}) + '</g>';
-  s += voi(700, 860, 0.62, {pose:"happy", expr:"happy", wrinkle: true}) + tkhPhoto(990, 790, 72, {tint: PINK, ring: PINK}) + soc(1230, 860, 0.62, {pose:"sit", expr:"happy", flip: true, wet: true});
+  s += voi(700, 860, 0.62, {pose:"happy", expr:"happy", wrinkle: true}) + tkhPhoto(990, 790, 72, {tint: PINK, ring: PINK}) + soc(1230, 860, 0.62, {pose:"sit", expr:"happy", flip: true}) + sparkle(1290, 700, 16, "#fff") + sparkle(1320, 760, 12, "#FFF3C4");
   return s;
 }
 S["10"] = { lines: [["", "Mưa tạnh. Ba bạn ngồi sát nhau dưới tán lá, cầu vồng hiện ra."]],
@@ -659,26 +660,28 @@ S["10"] = { lines: [["", "Mưa tạnh. Ba bạn ngồi sát nhau dưới tán l�
     return s + bookFrame(); } };
 S["11"] = { lines: [["Ngôi Sao Sáng", "Đuôi của Sóc Nhỏ thật mượt, da của Voi Con thì nhăn nheo. Nhưng điều đẹp nhất hôm ấy là hai trái tim biết lo cho bạn. Đó cũng là một sức mạnh bên trong: tử tế."]],
   draw: function(){ return rainbowScene() + hearts(860, 560, 1.3) + hearts(1120, 600, 1.0) + hearts(990, 520, 1.6) + saoPhoto(250, 190, 72, {glow: 0.9}) + bookFrame(); } };
-S["12"] = { lines: [["Bin", "Tóc rối cũng không sao. Hôm qua mình nhường bút màu cho bạn, chắc đó là điều đẹp của mình!"]],
+S["12"] = { lines: [["Bin", "Áo sạch, tóc gọn, mình làm hết sức rồi. Còn trái tim tử tế thì lúc nào mình cũng làm chủ được!"]],
   draw: function(){ var s = room() + stoneBox(450, 600, 1, {veins: 1, glow: 0.8}) + saoPhoto(450, 360, 100, {glow: 1}) + tkhPhoto(1660, 640, 95, {tint: PINK, ring: PINK});
-    s += mirror(1220, 470, 360, 560, binReflect(1220, 960, 0.9, "happy"), {sparkle: true});
-    s += bin(820, 960, 1.05, {pose:"talk", expr:"happy", messy: true, paint: true}) + hearts(820, 700, 0.9);
-    return s + bubble(60, 110, 720, 130, "Tóc rối cũng không sao!", 56, [560, 700, 470]); } };
+    s += mirror(1220, 470, 360, 560, binReflect(1220, 960, 0.9, "happy", true), {sparkle: true});
+    s += bin(820, 960, 1.05, {pose:"talk", expr:"happy", tuft: true}) + hearts(820, 700, 0.9);
+    return s + bubble(60, 110, 720, 130, "Gọn gàng rồi nè!", 56, [560, 700, 470]); } };
 S["13"] = { lines: [["Bin", "Không sao, mình nhặt cùng bạn nha!"]], qlines: 1,
   draw: function(o){ var q = o && o.hide >= 2;
     var s = classroom() + crayons(1120, 860, 1, true);
     s += bin(1450, 900, 0.78, {pose:"talk", expr:(q ? "sad" : "smile"), shirt:"#FF8FB1", shorts:"#8B5FBF", hair:"pigtail"});
-    if (q) s += bin(700, 960, 0.95, {pose:"down", expr:"surprised", messy: true}) + '<text x="1000" y="700" text-anchor="middle" class="b" font-size="64" fill="#B4540A">Lạch cạch!</text>';
-    else s += bin(840, 1010, 0.95, {pose:"open", expr:"happy", messy: true}) + hearts(1060, 560, 1.0) + '<g transform="translate(965 722) rotate(-30)"><rect x="-30" y="-8" width="60" height="16" rx="5" fill="#4A6FD0"/><path d="M30 -8 l14 8 -14 8z" fill="#4A6FD0"/></g>' + homeInset(1770, 330, 120, 2, 1.2) + bubble(40, 110, 770, 130, "Không sao, mình nhặt cùng bạn nha!", 44, [560, 800, 500]);
+    if (q) s += bin(700, 960, 0.95, {pose:"down", expr:"surprised", tuft: true}) + '<text x="1000" y="700" text-anchor="middle" class="b" font-size="64" fill="#B4540A">Lạch cạch!</text>';
+    else s += bin(840, 1010, 0.95, {pose:"open", expr:"happy", tuft: true}) + hearts(1060, 560, 1.0) + '<g transform="translate(965 722) rotate(-30)"><rect x="-30" y="-8" width="60" height="16" rx="5" fill="#4A6FD0"/><path d="M30 -8 l14 8 -14 8z" fill="#4A6FD0"/></g>' + homeInset(1770, 330, 120, 2, 1.2) + bubble(40, 110, 770, 130, "Không sao, mình nhặt cùng bạn nha!", 44, [560, 800, 500]);
     return s; } };
 S["14"] = { lines: [["Bin", "Điều đẹp bên trong của bạn là gì? Kể cho Bin nghe nha!"]],
   draw: function(){ var s = room() + stoneBox(320, 600, 0.8, {veins: 2, glow: 1}) + '<rect width="1920" height="1080" fill="#FFF4DC" opacity=".35"/>';
-    s += bin(960, 1180, 1.75, {pose:"wave", expr:"happy", messy: true});
+    s += bin(960, 1180, 1.75, {pose:"wave", expr:"happy", tuft: true});
     return s + bubble(1180, 160, 660, 140, "Còn bạn thì sao?", 66, [1220, 1150, 560]); } };
 
 /* Lời truyện tranh Tuần 4 "Điều Đẹp Trong Con" (khác lời video). Loại dòng giống Tuần 2:
    ["kể", ...] lời kể · ["hỏi", ...] câu dừng lại hỏi bé · ["cùng", ...] cả nhà cùng nói · ["Tên", ...] lời nhân vật.
-   Điệp khúc tuần này: "Soi gương, soi gương… điều đẹp nhất ở đâu?" (Bin → Sóc Nhỏ → cả nhà → Bin). */
+   Thông điệp (Sam chốt 26/10): giữ gìn bên ngoài gọn gàng là biết yêu quý bản thân; có những điều mình không chọn được
+   (mưa, bùn, chỏm tóc vểnh, làn da), lúc ấy trái tim tử tế là điều mình luôn làm chủ được. Không dạy "bên ngoài không quan trọng".
+   Câu hỏi lặp lại: "Soi gương, soi gương… điều đẹp nhất ở đâu?" · Câu cả lớp nói: "Gọn gàng bên ngoài, tử tế bên trong!" */
 var TRUYEN = {
   cover: [
     ["kể", "Bin vẫn đang giữ viên đá xù xì. Bên trong là Ngôi Sao Sáng đang nghỉ cho khỏe lại. Lần trước, viên đá đã sáng lên một vệt vàng nhỏ. Hôm nay, Ngôi Sao Sáng và Tắc Kè Hoa lại tới kể chuyện cho Bin nghe."],
@@ -695,17 +698,17 @@ var TRUYEN = {
     ["kể", "Bỗng… viên đá trong hộp khẽ sáng lên. Lấp lánh, lấp lánh! Ngôi Sao Sáng hiện ra. Rồi Tắc Kè Hoa trượt vèo xuống theo tấm rèm, cả người đổi sang màu hồng phấn."],
     ["Tắc Kè Hoa", "Bin ơi, tụi mình tới rồi nè! Hôm nay mình mặc màu hồng đó."],
     ["Bin", "Hai bạn ơi, mai chụp ảnh lớp mà tóc mình rối quá. Điều đẹp nhất là tóc đẹp, áo đẹp phải không?"],
-    ["Ngôi Sao Sáng", "Hôm nay tụi mình kể Bin nghe chuyện về điều đẹp nhất trong mỗi người. Nghe xong, Bin tự trả lời nhé."],
-    ["hỏi", "Còn bạn, bạn nghĩ điều đẹp nhất trong mỗi người là gì?"]
+    ["Ngôi Sao Sáng", "Tóc gọn, áo sạch cũng đẹp lắm chứ! Nhưng hôm nay tụi mình kể Bin nghe về một điều đẹp nữa, điều mà lúc nào mình cũng làm chủ được."],
+    ["hỏi", "Bạn đoán xem, điều đẹp nào mà lúc nào mình cũng làm chủ được?"]
   ],
   "03": [
     ["kể", "Tắc Kè Hoa xoay một vòng… vù vù vù… biến thành một cuốn sách thật to!"],
     ["Tắc Kè Hoa", "Các bạn ngồi gần lại nhé. Ngày xửa ngày xưa, bên một cái hồ trong veo, có ba người bạn: Sóc Nhỏ, Voi Con… và Tắc Kè Hoa nữa!"]
   ],
   "04": [
-    ["kể", "Sáng hôm ấy, Sóc Nhỏ ngồi bên hồ chải bộ đuôi bông. Chải một cái: sột. Chải hai cái: soạt. Bộ đuôi mượt nhất rừng, bông như một đám mây."],
+    ["kể", "Sóc Nhỏ thích giữ mình gọn gàng. Sáng nào bạn ấy cũng ngồi bên hồ chải bộ đuôi bông. Chải một cái: sột. Chải hai cái: soạt. Bộ đuôi mượt mà, bông như một đám mây."],
     ["Sóc Nhỏ", "Đuôi mình hôm nay đẹp ghê! Soi gương, soi gương… điều đẹp nhất ở đâu?"],
-    ["kể", "Mặt hồ là cái gương của Sóc Nhỏ. Đúng lúc ấy, Voi Con lạch bạch đi ngang. Bịch, bịch, bịch! Da Voi Con nhăn nheo, bốn cái chân to lấm lem bùn đất."],
+    ["kể", "Mặt hồ là cái gương của Sóc Nhỏ. Đúng lúc ấy, Voi Con lạch bạch đi ngang. Bịch, bịch, bịch! Da Voi Con nhăn nheo từ lúc mới sinh ra, còn bốn cái chân to thì vừa lội qua bãi bùn."],
     ["kể", "Bỗng phía sau có tiếng ai kêu: \"Oái!\"… Nhưng mà…"],
     ["hỏi", "Theo bạn, chuyện gì sắp xảy ra? Lật trang xem nào!"]
   ],
@@ -726,8 +729,8 @@ var TRUYEN = {
   "07": [
     ["kể", "PHỤTTT! Voi Con phun mạnh quá! Bùn trôi sạch khỏi Tắc Kè Hoa… còn nước thì bay thẳng sang Sóc Nhỏ. Ào! Ướt sũng từ tai tới đuôi!"],
     ["Voi Con", "Ối! Xin lỗi Sóc Nhỏ! Mình không cố ý đâu!"],
-    ["kể", "Bộ đuôi bông mượt nhất rừng giờ dính bết lại, nhỏ nước tong tong. Sóc Nhỏ nhìn cái đuôi, rồi… phì cười."],
-    ["Sóc Nhỏ", "Hì hì, đuôi mình giống cái chổi lau nhà rồi!"]
+    ["kể", "Bộ đuôi bông mượt mà giờ dính bết lại, nhỏ nước tong tong. Sóc Nhỏ nhìn cái đuôi, rồi… phì cười."],
+    ["Sóc Nhỏ", "Hì hì, đuôi mình giống cái chổi lau nhà rồi! Lát nữa mình chải lại là xong."]
   ],
   "08": [
     ["kể", "Đúng lúc ấy, ầm ầm… trời đổ mưa. Lộp độp, lộp độp! Tắc Kè Hoa vừa được rửa sạch, người lạnh run cầm cập."],
@@ -737,36 +740,37 @@ var TRUYEN = {
   ],
   "09": [
     ["kể", "Sóc Nhỏ chạy tới, xòe bộ đuôi bông thật rộng, che lên đầu Tắc Kè Hoa như một chiếc ô. Mưa rơi lộp độp trên đuôi, còn Tắc Kè Hoa thì khô ráo, ấm dần."],
-    ["Tắc Kè Hoa", "Ơ… đuôi của bạn sẽ bẩn mất…"],
-    ["Sóc Nhỏ", "Không sao! Đuôi mình đẹp nhất khi được dùng để che cho bạn!"]
+    ["Tắc Kè Hoa", "Ơ… đuôi của bạn ướt hết mất…"],
+    ["Sóc Nhỏ", "Không sao! Mưa thì mình không ngăn được. Nhưng che cho bạn thì mình làm được!"]
   ],
   "10": [
-    ["kể", "Một lúc sau, mưa tạnh. Ba bạn ngồi sát nhau dưới tán lá. Trên trời hiện ra một chiếc cầu vồng bảy màu."],
-    ["kể", "Sóc Nhỏ ngó xuống mặt hồ. Trong hồ không chỉ có cái đuôi bết nước, mà có ba người bạn đang cười toe."],
+    ["kể", "Một lúc sau, mưa tạnh. Sóc Nhỏ vắt nước, chải lại bộ đuôi cho bông mượt. Voi Con lội xuống hồ rửa sạch bốn cái chân. Tắc Kè Hoa lau mình khô ráo, hồng hào trở lại."],
+    ["kể", "Ba bạn ngồi sát nhau dưới tán lá. Trên trời hiện ra một chiếc cầu vồng bảy màu. Sóc Nhỏ ngó xuống mặt hồ: ba người bạn sạch sẽ, gọn gàng, đang cười toe."],
     ["cùng", "Cùng hỏi mặt hồ nào: Soi gương, soi gương… điều đẹp nhất ở đâu?"]
   ],
   "11": [
-    ["hỏi", "Theo bạn, điều đẹp nhất hôm ấy là gì?"],
-    ["Ngôi Sao Sáng", "Đuôi của Sóc Nhỏ thật mượt, da của Voi Con thì nhăn nheo. Nhưng điều đẹp nhất hôm ấy là hai trái tim biết lo cho bạn: Voi Con nhẹ nhàng nhấc bạn lên, Sóc Nhỏ dám làm ướt đuôi để che mưa cho bạn. Đó cũng là một sức mạnh bên trong: tử tế."]
+    ["hỏi", "Theo bạn, hôm ấy ba bạn đã đẹp ở những điểm nào?"],
+    ["Ngôi Sao Sáng", "Chải đuôi cho mượt, rửa chân cho sạch là đẹp bên ngoài: biết giữ gìn và yêu quý bản thân. Nhưng có những điều mình không chọn được, như cơn mưa bất chợt, vũng bùn trơn trượt, hay làn da nhăn của Voi Con. Lúc ấy, điều mình luôn làm chủ được là trái tim: Voi Con nhẹ nhàng nhấc bạn, Sóc Nhỏ che mưa cho bạn. Đó là sức mạnh bên trong: tử tế."],
+    ["cùng", "Cùng nói nào: Gọn gàng bên ngoài, tử tế bên trong!"]
   ],
   "12": [
-    ["kể", "Tắc Kè Hoa gập sách lại. Bin quay về phía cái gương."],
+    ["kể", "Tắc Kè Hoa gập sách lại. Bin chạy đi thay chiếc áo sạch, chải lại tóc thật gọn. Chỉ còn một chỏm tóc nhỏ vẫn vểnh lên, ấn mãi không chịu nằm."],
     ["cùng", "Cùng nói với Bin: Soi gương, soi gương… điều đẹp nhất ở đâu?"],
-    ["kể", "Lần này Bin không nhìn mái tóc nữa. Bin đặt tay lên ngực và mỉm cười."],
-    ["Bin", "Tóc rối cũng không sao. Hôm qua mình nhường bút màu cho bạn, chắc đó là điều đẹp của mình!"],
-    ["Ngôi Sao Sáng", "Đúng rồi đó. Điều đẹp nhất của Bin ở trong trái tim Bin."]
+    ["kể", "Bin nhìn gương, đặt tay lên ngực và mỉm cười."],
+    ["Bin", "Áo sạch, tóc gọn, mình làm hết sức rồi. Chỏm tóc này không chịu nằm thì thôi. Còn trái tim tử tế thì lúc nào mình cũng làm chủ được!"],
+    ["Ngôi Sao Sáng", "Đúng rồi đó. Bin vừa gọn gàng bên ngoài, vừa tử tế bên trong."]
   ],
   "13": [
-    ["kể", "Hôm sau ở lớp, trước giờ chụp ảnh, bạn ngồi cạnh Bin lỡ tay làm đổ hộp bút màu. Lạch cạch, lạch cạch! Bút lăn khắp sàn. Bạn ấy mếu máo sắp khóc."],
+    ["kể", "Hôm sau ở lớp, Bin mặc áo sạch, tóc chải gọn. Trước giờ chụp ảnh, bạn ngồi cạnh Bin lỡ tay làm đổ hộp bút màu. Lạch cạch, lạch cạch! Bút lăn khắp sàn. Bạn ấy mếu máo sắp khóc."],
     ["hỏi", "Nếu là bạn, bạn sẽ làm gì?"],
-    ["kể", "Bin cúi xuống nhặt giúp từng cây bút. Tóc vẫn rối, mà Bin vẫn cười."],
+    ["kể", "Bin cúi xuống nhặt giúp từng cây bút. Chỏm tóc vẫn vểnh, mà Bin vẫn cười thật tươi."],
     ["Bin", "Không sao, mình nhặt cùng bạn nha!"],
     ["kể", "Cùng lúc đó ở nhà, viên đá trong hộp sáng thêm một vệt vàng lấp lánh."]
   ],
   "14": [
     ["kể", "Tối hôm ấy, Bin kể cho ba mẹ nghe chuyện ở lớp, rồi quay ra hỏi các bạn:"],
-    ["Bin", "Điều đẹp bên trong của bạn là gì? Kể cho Bin nghe nha!"],
-    ["cùng", "Cả lớp cùng nói: Không sao, mình nhặt cùng bạn nha!"]
+    ["Bin", "Bạn giữ mình gọn gàng thế nào? Còn điều đẹp bên trong của bạn là gì? Kể cho Bin nghe nha!"],
+    ["cùng", "Cả lớp cùng nói: Gọn gàng bên ngoài, tử tế bên trong!"]
   ]
 };
 
@@ -858,7 +862,7 @@ function cover(){
     rainbow(960, 700, 560) + saoPhoto(470, 440, 180, {glow: 1.2}) + tkhPhoto(1450, 470, 160, {tint: PINK, ring: PINK}) +
     '<text x="960" y="160" text-anchor="middle" class="b" font-size="54" fill="#C9CDF0">CLB SAO SÁNG · TUẦN 4</text>' +
     '<text x="960" y="840" text-anchor="middle" class="b" font-size="104" fill="#FFC93C">Chiếc đuôi đẹp nhất rừng</text>' +
-    '<text x="960" y="930" text-anchor="middle" class="t" font-size="46" fill="#FFF6E0">Câu chuyện về điều đẹp bên trong</text>' +
+    '<text x="960" y="930" text-anchor="middle" class="t" font-size="46" fill="#FFF6E0">Gọn gàng bên ngoài, tử tế bên trong</text>' +
     voi(820, 700, 0.42, {expr:"happy", pose:"happy", wrinkle: true}) + soc(1090, 690, 0.5, {expr:"happy", pose:"jump"}) + tailSparkles(1090, 690) + '</svg>';
   setCaption(TRUYEN.cover);
 }
@@ -896,7 +900,7 @@ function gameOrder(){
   }; });
 }
 function gameTwo(){
-  var Qs = [["Bộ đuôi bông mượt nhất rừng", "body"], ["Sóc Nhỏ xòe đuôi che mưa cho bạn", "heart"], ["Chiếc áo mới tinh, thơm phức", "body"], ["Bin cúi xuống nhặt bút màu giúp bạn", "heart"]];
+  var Qs = [["Bộ đuôi bông mượt nhất rừng", "body"], ["Sóc Nhỏ xòe đuôi che mưa cho bạn", "heart"], ["Bin thay áo sạch, chải tóc gọn", "body"], ["Bin cúi xuống nhặt bút màu giúp bạn", "heart"]];
   var i = 0;
   function render(){
     var q = Qs[i];
@@ -905,7 +909,7 @@ function gameTwo(){
       '<button class="opt" type="button" data-v="heart"><span class="emo">💖</span>Đẹp bên trong<small style="font-size:.6em;color:#7A6648">việc trái tim làm</small></button></div><div class="fb"></div></div>';
     setCaption([["Câu "+(i+1)+"/4", q[0]+". Đây là đẹp bên ngoài hay đẹp bên trong?"]]);
     pageEl.querySelectorAll(".opt").forEach(function(b){ b.onclick = function(){
-      if (b.dataset.v === q[1]) { b.classList.add("ok"); feedback(b, true, i < 3 ? (q[1]==="body"?"Đúng rồi, mắt mình nhìn thấy cái đẹp này!":"Đúng rồi, đó là việc trái tim làm!") : "Đẹp bên ngoài làm mình vui. Đẹp bên trong làm cả bạn bè cùng ấm áp.");
+      if (b.dataset.v === q[1]) { b.classList.add("ok"); feedback(b, true, i < 3 ? (q[1]==="body"?"Đúng rồi, đó là đẹp bên ngoài. Giữ gìn gọn gàng là biết yêu quý mình!":"Đúng rồi, đó là việc trái tim làm!") : "Đẹp bên ngoài mình giữ gìn. Đẹp bên trong thì lúc nào mình cũng làm chủ được.");
         if (i < 3) setTimeout(function(){ i++; render(); }, 1400); }
       else { b.classList.add("no"); feedback(b, false, "Mình nghĩ lại nhé: mắt nhìn thấy, hay trái tim làm?"); }
     }; });
@@ -927,7 +931,7 @@ function endPage(){
     '<div class="stone-box" style="height:clamp(90px,20vw,220px);display:flex;justify-content:center"><svg viewBox="-260 -230 520 280" preserveAspectRatio="xMidYMid meet" style="height:100%;width:100%" id="stoneSvg">'+DEFS+rock(0,0,1.6,{veins:2, glow:0.5})+'</svg></div>' +
     '<div class="end-powers">' + P.map(function(p){ return '<button class="opt" type="button" data-n="'+p[1]+'"><span class="emo">'+p[0]+'</span>'+p[1]+'</button>'; }).join("") + '</div>' +
     '<div class="fb">Chạm vào điều đẹp bạn có. Chọn mấy cái cũng được!</div></div>';
-  setCaption([["Bin", "Điều đẹp bên trong của bạn là gì? Chạm vào hình rồi kể cho ba mẹ nghe nhé!"], ["hỏi", "Gửi ba mẹ: nói cho con nghe một điều đẹp ba mẹ thấy ở con nhé. Ví dụ: \"Mẹ thấy con hay nhường em.\""]]);
+  setCaption([["Bin", "Điều đẹp bên trong của bạn là gì? Chạm vào hình rồi kể cho ba mẹ nghe nhé!"], ["hỏi", "Gửi ba mẹ: nói cho con nghe một điều đẹp ba mẹ thấy ở con, cả bên ngoài lẫn bên trong nhé. Ví dụ: \"Con tự chải tóc gọn ghê\", \"Mẹ thấy con hay nhường em.\""]]);
   var picked = 0;
   pageEl.querySelectorAll(".end-powers .opt").forEach(function(b){ b.onclick = function(){
     if (b.classList.contains("ok")) return; b.classList.add("ok"); picked++;
@@ -946,11 +950,11 @@ function render(){
   else if (p.type === "scene") { curKey = p.k; pageEl.innerHTML = scene(p.k); segs = splitSegs(TRUYEN[p.k] || S[p.k].lines); shown = 1; }
   else if (p.type === "game") {
     if (p.g === "who") gameWho(); else if (p.g === "order") gameOrder(); else if (p.g === "two") gameTwo();
-    else if (p.g === "why") gameChoice("Trò 4 · Điều đẹp nhất hôm ấy là gì?", "Trong câu chuyện, điều đẹp nhất hôm ấy là gì?",
-      [["🐿️","Bộ đuôi mượt nhất rừng",false],["💞","Hai trái tim biết lo cho bạn",true],["🌈","Chiếc cầu vồng trên trời",false]],
-      "Đúng rồi! Voi Con nhẹ nhàng nhấc bạn, Sóc Nhỏ che mưa cho bạn. Trái tim tử tế là điều đẹp nhất.");
+    else if (p.g === "why") gameChoice("Trò 4 · Điều gì mình làm chủ được?", "Trời đổ mưa, đuôi bị ướt. Lúc ấy Sóc Nhỏ vẫn làm chủ được điều gì?",
+      [["☀️","Làm cho trời hết mưa",false],["💞","Dùng đuôi che mưa cho bạn",true],["🙈","Giữ đuôi không bao giờ bị ướt",false]],
+      "Đúng rồi! Mưa thì mình không ngăn được, nhưng trái tim tử tế thì lúc nào mình cũng làm chủ được.");
     else gameChoice("Trò 5 · Viên đá của Bin sáng thêm khi nào?", "Tuần này, viên đá của Bin sáng thêm một vệt khi nào?",
-      [["🪮","Khi Bin chải tóc thật mượt",false],["🖍️","Khi Bin nhặt bút màu giúp bạn",true],["📸","Khi cả lớp chụp ảnh",false]],
+      [["😴","Khi Bin đi ngủ",false],["🖍️","Khi Bin nhặt bút màu giúp bạn",true],["📸","Khi cả lớp chụp ảnh",false]],
       "Đúng rồi! Mỗi lần Bin sống tử tế, Ngôi Sao Sáng lại khỏe thêm một chút.");
   }
   else endPage();
